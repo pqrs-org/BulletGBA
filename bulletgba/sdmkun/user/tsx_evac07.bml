@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_evac07</filename>
+ <group>KotuAnzenX</group>
+ <title>エヴァッカニア・ドゥームもどき：その７</title>
+ <description>製作順では三番目。最終形態の気違い攻撃です。無論実物は見たことがありません。</description>
+ <capture>レベル１００は人間が避けれるようには作られていません。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <wait>30</wait>
+ <fire>
+  <speed>0</speed>
+  <direction type="absolute">90</direction>
+  <bulletRef label="shooter">
+   <param>-1</param><param>90</param><param>30-$rank*10</param><param>9+$rank*30</param>
+  </bulletRef>
+ </fire>
+ <fire>
+  <speed>0</speed>
+  <direction type="absolute">270</direction>
+  <bulletRef label="shooter">
+   <param>-1</param><param>-90</param><param>30-$rank*10</param><param>9+$rank*30</param>
+  </bulletRef>
+ </fire>
+ <fire>
+  <speed>0</speed>
+  <direction type="absolute">90</direction>
+  <bulletRef label="shooter">
+   <param>1</param><param>90</param><param>24-$rank*10</param><param>12+$rank*45</param>
+  </bulletRef>
+ </fire>
+ <fire>
+  <speed>0</speed>
+  <direction type="absolute">270</direction>
+  <bulletRef label="shooter">
+   <param>1</param><param>-90</param><param>24-$rank*10</param><param>12+$rank*45</param>
+  </bulletRef>
+ </fire>
+ <wait>400+$rank*500</wait>
+</action>
+
+<bullet label="shooter">
+ <action>
+  <fire>
+   <speed>3</speed>
+   <direction type="absolute">$2</direction>
+   <bulletRef label="hari"><param>$1</param></bulletRef>
+  </fire>
+ <repeat><times>$4</times>
+ <action>
+  <wait>$3</wait>
+  <fire>
+   <speed>3</speed>
+   <direction type="sequence">(33-$rank*20)*$1</direction>
+   <bulletRef label="hari"><param>$1</param></bulletRef>
+  </fire>
+ </action>
+ </repeat>
+ <vanish/>
+ </action>
+</bullet>
+
+<bullet label="hari">
+ <action>
+ <repeat><times>100</times>
+ <action>
+  <fire>
+   <speed>1+$rank*2</speed>
+   <direction type="relative">90*$1</direction>
+   <bullet/>
+  </fire>
+ <wait>10-$rank*8</wait>
+ </action>
+ </repeat>
+ </action>
+</bullet>
+
+</bulletml>
+</barrage>

@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>BugPrincessLT_2_middle_boss_1.lua</filename>
+ <group>BugPrincessLT</group>
+ <title>虫姫のロケテから、二面中ボス</title>
+ <description>CAVE新基盤マンセイ。CAVEにもこんなムダ弾が許されるようになりました。しっかり覚えてないですけど。</description>
+ <capture>レベル0がノーマルモード。レベル70あたりがマニアックモードくらいかなあ。</capture>
+ <author>shinichiro.h</author>
+</barrageInfo>
+
+<barrageStyle>
+        <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+theta = 0
+aim = 0
+
+function circle(radius)
+   local turn = getTurn()
+
+   if (turn == 20) then
+      vanish()
+   end
+
+   local c = math.cos(theta+turn/30*math.pi)
+   local s = math.sin(theta+turn/30*math.pi)
+   setPos(150+s*radius, 100+c*radius)
+   fire(math.sin(aim)*3, math.cos(aim)*3)
+end
+
+function top()
+   local turn = getTurn()
+   if (turn > 400) then
+      quit()
+   elseif (math.mod(turn, 100) == 0) then
+      aim = math.pi-getPlayerAngle()
+      theta = math.random() * math.pi * 2
+      local num = math.floor(getRank()*10)
+      for i=0,num do
+         if (getRank() < 0.5) then
+            fire(0, 0, "circle", (5-i)*8)
+         else
+            fire(0, 0, "circle", (num-i)*8)
+         end
+      end
+   end
+end
+]]>
+</lua>
+
+</barrage>

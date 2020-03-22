@@ -1,0 +1,292 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+<filename>
+otk2-ordeal
+</filename>
+<group>
+OtakuTwo
+</group>
+<title>
+オーディール
+</title>
+<description>
+Ordealとは、厳しい試練を意味するのです。言うほど厳しくないかもしれないけど。
+</description>
+<capture>
+モチーフは田鳧第一形態と黄流開幕、かな？攻撃開始時の自機位置とLVと乱数によってはワインダーに押し潰されるので注意。
+</capture>
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+
+
+<action label="top">
+ <fire><direction type="absolute"> 60</direction><speed>2.8</speed><bulletRef label="winder"/></fire>
+ <fire><direction type="absolute">300</direction><speed>2.8</speed><bulletRef label="winder"/></fire>
+ <fire><direction type="absolute">  0</direction><speed>1  </speed><bulletRef label="large"/></fire>
+ <fire><direction type="absolute"> 45</direction><speed>1  </speed><bulletRef label="snipe"/></fire>
+ <fire><direction type="absolute">315</direction><speed>1  </speed><bulletRef label="snipe"/></fire>
+ <fire><direction type="absolute"> 75</direction><speed>2.4</speed><bulletRef label="snipe"/></fire>
+ <fire><direction type="absolute">285</direction><speed>2.4</speed><bulletRef label="snipe"/></fire>
+ <fire><direction type="absolute">120</direction><speed>1.2</speed><bulletRef label="snipe"/></fire>
+ <fire><direction type="absolute">240</direction><speed>1.2</speed><bulletRef label="snipe"/></fire>
+ <accel><vertical>-999</vertical><term>10</term></accel>
+ <wait>30</wait>
+ <accel><vertical>   0</vertical><term>10</term></accel>
+ <fire><direction type="absolute"> 90</direction><speed>2.4</speed><bulletRef label="bara1"/></fire>
+ <fire><direction type="absolute"> 90</direction><speed>0.8</speed><bulletRef label="bara1"/></fire>
+ <fire><direction type="absolute">270</direction><speed>0.8</speed><bulletRef label="bara1"/></fire>
+ <fire><direction type="absolute">270</direction><speed>2.4</speed><bulletRef label="bara1"/></fire>
+ <wait>2000</wait>
+</action>
+
+
+
+<bullet label="bara1">
+ <action>
+  <wait>30</wait>
+  <repeat><times>1+$rank*$rank*2</times>
+   <action>
+    <fire><direction type="absolute"> 90</direction><speed>0.2</speed><bulletRef label="baraw"/></fire>
+    <fire><direction type="absolute">-90</direction><speed>0.2</speed><bulletRef label="baraw"/></fire>
+    <fire><direction type="absolute"> 90</direction><speed>0.2</speed><bulletRef label="barab"/></fire>
+    <fire><direction type="absolute">-90</direction><speed>0.2</speed><bulletRef label="barab"/></fire>
+   </action>
+  </repeat>
+  <vanish/>
+ </action>
+</bullet>
+
+<bullet label="baraw">
+ <action>
+  <wait>30</wait>
+  <changeSpeed>
+   <speed>0</speed>
+   <term>1</term>
+  </changeSpeed>
+  <wait>30</wait>
+  <repeat><times>22</times>
+   <action>
+    <actionRef label="waittime"><param>$rand</param></actionRef>
+   </action>
+  </repeat>
+  <vanish/>
+ </action>
+</bullet>
+
+<bullet label="barab">
+ <action>
+  <wait>30</wait>
+  <fire>
+   <speed>0</speed>
+   <bullet>
+    <action>
+     <changeSpeed>
+      <speed>0</speed>
+      <term>1</term>
+     </changeSpeed>
+     <wait>30</wait>
+     <repeat><times>22</times>
+      <action>
+       <actionRef label="waittime"><param>$rand</param></actionRef>
+      </action>
+     </repeat>
+     <vanish/>
+    </action>
+   </bullet>
+  </fire>
+  <vanish/>
+ </action>
+</bullet>
+
+<action label="waittime">
+ <wait>$1*72</wait>
+ <fire>
+  <direction type="absolute">150+$rand*60</direction>
+  <speed>0.8</speed>
+  <bullet/>
+ </fire>
+ <wait>72-$1*72</wait>
+</action>
+
+
+
+<bullet label="winder">
+ <action>
+  <wait>30</wait>
+  <changeSpeed>
+   <speed>0</speed>
+   <term>1</term>
+  </changeSpeed>
+  <wait>90</wait>
+  <fire><direction type="aim">-5+$rand*10</direction><bullet><action><vanish/></action></bullet></fire>
+  <actionRef label="wwall"><param> 0</param></actionRef>
+  <repeat><times>6</times>
+   <action>
+    <actionRef label="wwall"><param>1.2-$rand*2.4</param></actionRef>
+   </action>
+  </repeat>
+  <vanish/>
+ </action>
+</bullet>
+
+<action label="wwall">
+ <repeat><times>60</times>
+  <action>
+   <fire>
+    <direction type="sequence"> $1*(0.1+$rank*$rank*0.2)</direction>
+    <bulletRef label="wfire"/>
+   </fire>
+   <wait>2</wait>
+  </action>
+ </repeat>
+ <repeat><times>60</times>
+  <action>
+   <fire>
+    <direction type="sequence">-$1*(0.1+$rank*$rank*0.2)</direction>
+    <bulletRef label="wfire"/>
+   </fire>
+   <wait>2</wait>
+  </action>
+ </repeat>
+</action>
+
+<bullet label="wfire">
+ <action>
+  <fire><direction type="relative"> -60+$rank*30</direction><speed>6</speed><bulletRef label="green"/></fire>
+  <fire><direction type="relative"> -20+$rank*10</direction><speed>6</speed><bulletRef label="green"/></fire>
+  <fire><direction type="relative">  20-$rank*10</direction><speed>6</speed><bulletRef label="green"/></fire>
+  <fire><direction type="relative">  60-$rank*30</direction><speed>6</speed><bulletRef label="green"/></fire>
+  <vanish/>
+ </action>
+</bullet>
+
+<bullet label="green">
+ <action>
+  <wait>9999</wait>
+  <fire><bullet/></fire>
+ </action>
+</bullet>
+
+
+
+<bullet label="large">
+ <action>
+  <wait>30</wait>
+  <changeSpeed>
+   <speed>0</speed>
+   <term>1</term>
+  </changeSpeed>
+  <wait>90</wait>
+  <repeat><times>18</times>
+   <action>
+    <wait>45</wait>
+    <actionRef label="lwall"><param>75+$rand*30</param></actionRef>
+    <wait>45</wait>
+   </action>
+  </repeat>
+  <vanish/>
+ </action>
+</bullet>
+
+<action label="lwall">
+ <fire>
+  <direction type="aim">$1</direction>
+  <speed>0.15</speed>
+  <bulletRef label="larrow"><param>-1</param></bulletRef>
+ </fire>
+ <repeat><times>3+$rank*$rank*12</times>
+  <action>
+   <fire>
+    <direction type="sequence">0</direction>
+    <speed type="sequence">0.3</speed>
+    <bulletRef label="larrow"><param>-1</param></bulletRef>
+   </fire>
+  </action>
+ </repeat>
+ <fire>
+  <direction type="aim">$1+180</direction>
+  <speed>0.15</speed>
+  <bulletRef label="larrow"><param> 1</param></bulletRef>
+ </fire>
+ <repeat><times>3+$rank*$rank*12</times>
+  <action>
+   <fire>
+    <direction type="sequence">0</direction>
+    <speed type="sequence">0.3</speed>
+    <bulletRef label="larrow"><param> 1</param></bulletRef>
+   </fire>
+  </action>
+ </repeat>
+</action>
+
+<bullet label="larrow">
+ <action>
+  <wait>5</wait>
+  <fire>
+   <direction type="relative">90*$1</direction>
+   <speed type="relative">0</speed>
+   <bullet>
+    <action>
+     <wait>$rank*10</wait>
+     <fire>
+      <direction type="relative">0</direction>
+      <speed>0.8+$rank*$rank*0.8</speed>
+      <bullet/>
+     </fire>
+     <vanish/>
+    </action>
+   </bullet>
+  </fire>
+  <vanish/>
+ </action>
+</bullet>
+
+
+
+<bullet label="snipe">
+ <action>
+  <wait>30</wait>
+  <changeSpeed>
+   <speed>0</speed>
+   <term>1</term>
+  </changeSpeed>
+  <wait>90</wait>
+  <repeat><times>10</times>
+   <action>
+    <wait>100</wait>
+    <fire>
+     <direction type="aim">-5+$rand*10</direction>
+     <speed>1.2</speed>
+     <bullet><action/></bullet>
+    </fire>
+    <repeat><times>11</times>
+     <action>
+      <wait>4</wait>
+      <fire>
+       <direction type="sequence">0</direction>
+       <speed>1.2</speed>
+       <bullet><action/></bullet>
+      </fire>
+     </action>
+    </repeat>
+   </action>
+  </repeat>
+  <vanish/>
+ </action>
+</bullet>
+
+
+
+</bulletml>
+
+</barrage>

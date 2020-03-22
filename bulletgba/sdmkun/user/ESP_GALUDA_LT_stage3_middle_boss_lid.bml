@@ -1,0 +1,113 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>ESP_GALUDA_LT_stage3_middle_boss_lid</filename>
+ <group>ESP_GALUDA_LT</group>
+ <title>エスプガルーダのロケテから、三面中ボス、蓋</title>
+ <description>二面中ボスだったような気もします。
+ もっと簡単だった気もします</description>
+ <capture>この弾速だと突撃すれば結構いい確率すり抜けますな。</capture>
+</barrageInfo>
+
+<barrageStyle>
+        <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+	<action label="top">
+		<actionRef label="6wayAim"/>
+		<wait>
+			30
+		</wait>
+		<actionRef label="lid"/>
+		<wait>
+			34-$rank*8
+		</wait>
+		<actionRef label="6wayAim"/>
+		<wait>
+			28-$rank*8
+		</wait>
+		<actionRef label="lid"/>
+		<wait>
+			30
+		</wait>
+		<actionRef label="6wayAim"/>
+		<wait>
+			22-$rank*8
+		</wait>
+		<actionRef label="lid"/>
+		<wait>
+			30
+		</wait>
+	</action>
+	<action label="lid">
+		<fire>
+			<direction type="aim">
+				-3.75-$rank*5
+			</direction>
+			<speed>
+				4
+			</speed>
+			<bullet/>
+		</fire>
+		<repeat>
+			<times>
+				15+$rank*20+1
+			</times>
+			<action>
+				<fire>
+					<direction type="sequence">
+						0.5
+					</direction>
+					<speed type="sequence">
+						0
+					</speed>
+					<bullet/>
+				</fire>
+			</action>
+		</repeat>
+	</action>
+	<action label="6wayAim">
+		<repeat>
+			<times>
+				10
+			</times>
+			<action>
+				<wait>
+					2
+				</wait>
+				<fire>
+					<direction type="aim">
+						-25
+					</direction>
+					<speed>
+						3
+					</speed>
+					<bullet/>
+				</fire>
+				<repeat>
+					<times>
+						5
+					</times>
+					<action>
+						<fire>
+							<direction type="sequence">
+								10
+							</direction>
+							<speed type="sequence">
+								0
+							</speed>
+							<bullet/>
+						</fire>
+					</action>
+				</repeat>
+			</action>
+		</repeat>
+	</action>
+</bulletml>
+</barrage>
+

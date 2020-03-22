@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>Original_no_bluff</filename>
+ <group>shinichiro_h</group>
+ <title>ブラフではない</title>
+ <description>赤弾はブラフではないです、ていうか、ヘンな弾幕。</description>
+ <capture>本物と見わける方法は弾幕の量で。</capture>
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml>
+	<action label="top">
+		<repeat>
+			<times>
+				300
+			</times>
+			<action>
+				<wait>
+					2
+				</wait>
+				<fire>
+					<direction type="aim">
+						($rand-0.5)*(150-$rank*90)
+					</direction>
+					<speed>
+						1.5
+					</speed>
+					<bullet/>
+				</fire>
+				<fire>
+					<direction type="aim">
+						($rand-0.5)*(150-$rank*90)
+					</direction>
+					<speed>
+						1.5
+					</speed>
+					<bullet>
+						<action>
+							<wait>
+								90
+							</wait>
+							<changeDirection>
+								<direction type="absolute">
+									180
+								</direction>
+								<term>
+									1
+								</term>
+							</changeDirection>
+						</action>
+					</bullet>
+				</fire>
+			</action>
+		</repeat>
+		<wait>40</wait>
+	</action>
+</bulletml>
+
+</barrage>

@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <action>
+      <action>
+        <fire>
+          <bullet />
+        </fire>
+      </action>
+      <wait>20</wait>
+    </action>
+    <wait>10</wait>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  action { 
+    action {
+      fire bullet;
+    }
+    wait 20;
+  }
+  wait 10;
+}
+-->

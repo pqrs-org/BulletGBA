@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>self-3020</filename>
+ <group>OtakuTwo</group>
+ <title>自分Bulletsmorph　Part02</title>
+ <description>プロギア五面ボスの移動スプリンクラーが、自機狙い弾に変化。</description>
+ <capture>撒かれる弾が画面上に行かない事を祈りつつ、画面最上部でこんこん。</capture>
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <actionRef label="main"><param>180</param><param>$rand</param></actionRef>
+ <actionRef label="main"><param>190</param><param>$rand</param></actionRef>
+ <actionRef label="main"><param>200</param><param>$rand</param></actionRef>
+ <actionRef label="main"><param>210</param><param>$rand</param></actionRef>
+ <actionRef label="main"><param>220</param><param>$rand</param></actionRef>
+ <actionRef label="main"><param>230</param><param>$rand</param></actionRef>
+ <actionRef label="main"><param>240</param><param>$rand</param></actionRef>
+</action>
+
+<action label="main">
+ <fireRef label="seed"><param> $1</param><param> $2</param><param> 1</param></fireRef>
+ <fireRef label="seed"><param>-$1</param><param>-$2</param><param>-1</param></fireRef>
+ <wait>120</wait>
+</action>
+
+<fire label="seed">
+ <direction type="absolute">$1</direction>
+ <speed>2-$rank</speed>
+ <bullet>
+  <action>
+   <fire>
+    <direction type="relative">$2*360</direction>
+    <bulletRef label="aim"/>
+   </fire>
+   <repeat><times>9999</times>
+    <action>
+     <wait>4-$rank*2</wait>
+     <fire>
+      <direction type="sequence">$3*(12-$rank*6)</direction>
+      <bulletRef label="aim"/>
+     </fire>
+    </action>
+   </repeat>
+  </action>
+ </bullet>
+</fire>
+
+<bullet label="aim">
+ <speed>1</speed>
+ <action>
+  <wait>60</wait>
+  <changeSpeed>
+   <speed>0</speed>
+   <term>15</term>
+  </changeSpeed>
+  <wait>20</wait>
+  <fire>
+   <direction type="aim">0</direction>
+   <speed>1</speed>
+   <bullet/>
+  </fire>
+  <repeat><times>1+$rank*$rank*3</times>
+   <action>
+    <fire>
+     <direction type="aim">0</direction>
+     <speed type="sequence">0.2</speed>
+     <bullet/>
+    </fire>
+   </action>
+  </repeat>   
+  <vanish/>
+ </action>
+</bullet>
+
+</bulletml>
+
+</barrage>

@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <group>shinichiro_h</group>
+ <title>InternetWorm</title>
+ <filename>Original_internet_worm</filename>
+ <description>別に時事ネタのつもりではなく。
+ ダメなゲームを作ってたら偶然できました。
+ ダメな弾幕？です。</description>
+ <capture>画面の端を好んで動けば感染が少なくなって安全。</capture>
+</barrageInfo>
+
+<barrageStyles>
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<lua>
+<![CDATA[
+function hoge(generation)
+    if (math.random() < 0.07/generation) then
+        r = getPlayerAngle() + (math.random() - 0.5) * generation
+		if (generation > getRank() * 1.5 + 2 + math.random()) then
+        	fire(math.sin(r), -math.cos(r))
+			vanish()
+		else
+        	fire(math.sin(r), -math.cos(r), "hoge", generation + 1)
+		end
+    end
+end
+
+function top()
+	if (getTurn() > 480+getRank()*120) then
+		quit()
+	elseif (getTurn() == 0) then
+    	r = getPlayerAngle() + math.random() - 0.5
+    	fire(math.sin(r), -math.cos(r), "hoge", 1)
+	end
+end
+]]>
+</lua>
+</barrage>

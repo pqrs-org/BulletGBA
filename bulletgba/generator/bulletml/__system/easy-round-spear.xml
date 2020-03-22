@@ -1,0 +1,189 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="lib_spear">
+    <fire>
+      <direction type="relative">0</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <actionRef label="lib_spear_node" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="relative">0</direction>
+      <speed type="absolute">0.2</speed>
+      <bullet>
+        <actionRef label="lib_spear_node" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="relative">0</direction>
+      <speed type="absolute">0.3</speed>
+      <bullet>
+        <actionRef label="lib_spear_node" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="relative">0</direction>
+      <speed type="absolute">0.4</speed>
+      <bullet>
+        <actionRef label="lib_spear_node" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="relative">0</direction>
+      <speed type="absolute">0.5</speed>
+      <bullet>
+        <actionRef label="lib_spear_node" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="relative">180</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <actionRef label="lib_spear_node" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="relative">180</direction>
+      <speed type="absolute">0.2</speed>
+      <bullet>
+        <actionRef label="lib_spear_node" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="relative">180</direction>
+      <speed type="absolute">0.3</speed>
+      <bullet>
+        <actionRef label="lib_spear_node" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="relative">180</direction>
+      <speed type="absolute">0.4</speed>
+      <bullet>
+        <actionRef label="lib_spear_node" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="relative">180</direction>
+      <speed type="absolute">0.5</speed>
+      <bullet>
+        <actionRef label="lib_spear_node" />
+      </bullet>
+    </fire>
+    <vanish />
+  </action>
+  <action label="lib_spear_node">
+    <wait>60</wait>
+    <changeSpeed>
+      <speed type="sequence">0.2</speed>
+      <term>40</term>
+    </changeSpeed>
+  </action>
+  <action label="top">
+    <fire>
+      <direction type="absolute">90</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <actionRef label="node" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="sequence">180</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <actionRef label="node" />
+      </bullet>
+    </fire>
+    <repeat>
+      <times>17</times>
+      <action>
+        <wait>10</wait>
+        <fire>
+          <direction type="sequence">10</direction>
+          <speed type="absolute">4</speed>
+          <bullet>
+            <actionRef label="node" />
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="sequence">180</direction>
+          <speed type="absolute">4</speed>
+          <bullet>
+            <actionRef label="node" />
+          </bullet>
+        </fire>
+      </action>
+    </repeat>
+    <fire>
+      <direction type="absolute">90</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <actionRef label="node" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="sequence">180</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <actionRef label="node" />
+      </bullet>
+    </fire>
+    <repeat>
+      <times>17</times>
+      <action>
+        <wait>10</wait>
+        <fire>
+          <direction type="sequence">-10</direction>
+          <speed type="absolute">4</speed>
+          <bullet>
+            <actionRef label="node" />
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="sequence">180</direction>
+          <speed type="absolute">4</speed>
+          <bullet>
+            <actionRef label="node" />
+          </bullet>
+        </fire>
+      </action>
+    </repeat>
+  </action>
+  <action label="node">
+    <wait>10</wait>
+    <actionRef label="lib_spear" />
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/spear.bnml"
+
+action top {
+  // right-round
+  fire direction absolute 90 speed absolute 4 bullet actionRef node();
+  fire direction sequence 180 speed absolute 4 bullet actionRef node();
+  repeat 17 action {
+    wait 10;
+    fire direction sequence 10 speed absolute 4 bullet actionRef node();
+    fire direction sequence 180 speed absolute 4 bullet actionRef node();
+  }
+
+  // left-round
+  fire direction absolute 90 speed absolute 4 bullet actionRef node();
+  fire direction sequence 180 speed absolute 4 bullet actionRef node();
+  repeat 17 action {
+    wait 10;
+    fire direction sequence -10 speed absolute 4 bullet actionRef node();
+    fire direction sequence 180 speed absolute 4 bullet actionRef node();
+  }
+}
+
+action node {
+  wait 10;
+  actionRef lib_spear();
+}
+-->

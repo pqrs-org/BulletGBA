@@ -1,0 +1,116 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!-- コメント -->
+
+<barrageInfo>
+ <!-- ファイル名が別の名前になっていると、
+      この名前に従ってファイル名は修正されます。
+      これは必ずつけて下さい。ブラウザから実行する場合、
+      ファイル名が変わっていることが多々あります。 -->
+ <filename>bwda02</filename>
+ <!-- グループ名は data/groups.dat から適切なものを選んでも良いですし、
+      お好きな名前を付けてもらっても結構です。
+	  存在しないグループ名をつけた場合は userグループ扱いになります。
+	  ある程度同じグループの弾幕がたまったら
+	  data/groups.dat に私が追加します。
+   -->
+ <group>bwda</group>
+ <title>Hyper Speed 2</title>
+ <description>高速弾幕シリーズその二。ランダムに散らばった砲台が十字型にレーザーを撃ちます。レベルが上がると砲台の数が増え、レーザーの速度が上がりさらに長くなります。</description>
+ <capture>基本は画面下方で自機の上を見ながら横に逃げる。運が悪いと横方向のレーザーに当たるが。
+各砲台が設置されてから十字レーザーを撃つまでの時間は固定なので慣れれば先読みして避けれなくもないです。</capture>
+</barrageInfo>
+
+<!-- ここで弾の色とか形とかを指定できるようにする予定 -->
+<barrageStyle>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<repeat>
+<times>$rank*5+5</times>
+<actionRef label="main"/>
+
+</repeat>
+<wait>100</wait>
+</action>
+
+<action label="main">
+<repeat>
+<times>$rank*20+5</times>
+<action>
+<fire>
+<direction type="absolute">$rand*360</direction>
+<speed>1</speed>
+<bullet>
+<actionRef label="slowdown"/>
+
+<actionRef label="crossfire"/>
+
+<actionRef label="upbye"/>
+
+</bullet>
+</fire>
+</action>
+</repeat>
+<wait>70</wait>
+</action>
+
+<action label="slowdown">
+<wait>$rand*200</wait>
+<changeSpeed>
+<speed>0</speed>
+<term>5</term>
+</changeSpeed>
+</action>
+
+<action label="crossfire">
+
+<wait>150</wait>
+<repeat>
+<times>5</times>
+<action>
+<bullet>
+<direction type="absolute">0</direction>
+<speed>$rank*5+3</speed>
+</bullet>
+<bullet>
+<direction type="absolute">90</direction>
+<speed>$rank*5+3</speed>
+</bullet>
+<bullet>
+<direction type="absolute">180</direction>
+<speed>$rank*5+3</speed>
+</bullet>
+<bullet>
+<direction type="absolute">270</direction>
+<speed>$rank*5+3</speed>
+</bullet>
+<wait>1</wait>
+</action>
+</repeat>
+</action>
+
+
+<action label="upbye">
+  <changeDirection>
+   <direction type="absolute">0</direction>
+   <term>1</term>
+  </changeDirection>
+
+<changeSpeed>
+<speed>$rank*5+3</speed>
+<term>1</term>
+</changeSpeed>
+</action>
+
+</bulletml>
+
+</barrage>
+

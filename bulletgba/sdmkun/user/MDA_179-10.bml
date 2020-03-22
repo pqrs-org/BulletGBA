@@ -1,0 +1,151 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>MDA_179-10</filename>
+	<group>MDA</group>
+	<title>割とギザギザの道</title>
+	<description>全方位ばら撒き弾と自機狙いです。それくらいしか言えない・・・。</description>
+	<capture>画面隅を大きく動くと楽かと。レベルが上がると白弾の幅が広がり、赤弾の幅と最大速度が（それによって速度の幅も）増す。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml"/>
+</barrageStyle>
+<!-- 本体 -->
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+	<action label="top">
+		<changeDirection>
+			<direction type="absolute">180</direction>
+			<term>1</term>
+		</changeDirection>
+		<changeSpeed>
+			<speed>2</speed>
+			<term>1</term>
+		</changeSpeed>
+		<wait>15</wait>
+		<changeSpeed>
+			<speed>0</speed>
+			<term>1</term>
+		</changeSpeed>
+		<wait>5</wait>
+		<fire>
+			<direction type="absolute">0</direction>
+			<speed>0</speed>
+			<bullet>
+				<actionRef label="seed_wall"><!-- 白弾源 -->
+					<param>23</param><!-- 角度 -->
+					<param>2.1+$rank</param><!-- 弾速 -->
+				</actionRef>
+			</bullet>
+		</fire>
+		<fire>
+			<direction type="absolute">0</direction>
+			<speed>0</speed>
+			<bullet>
+				<actionRef label="seed_ring"/><!-- 赤弾源 -->
+			</bullet>
+		</fire>
+		<wait>360</wait>
+	</action>
+<!-- 白弾 -->
+<!-- wall -->
+	<action label="seed_wall">
+		<fire>
+			<direction type="relative">$1</direction>
+			<speed>$2</speed>
+			<bullet>
+				<actionRef label="shoot_wall"/>
+			</bullet>
+		</fire>
+		<wait>1</wait>
+		<repeat>
+			<times>179</times>
+			<action>
+				<fire>
+					<direction type="sequence">$1</direction>
+					<speed>$2</speed>
+					<bullet>
+						<actionRef label="shoot_wall"/>
+					</bullet>
+				</fire>
+				<wait>1</wait>
+			</action>
+		</repeat>
+		<vanish/>
+	</action>
+<!-- wall2 -->
+	<action label="shoot_wall">
+		<repeat>
+			<times>10</times>
+			<action>
+				<fire>
+					<direction type="relative">90</direction>
+					<speed>2</speed>
+					<bullet/>
+				</fire>
+				<wait>1</wait>
+			</action>
+		</repeat>
+		<vanish/>
+	</action>
+<!-- 赤弾 -->
+<!-- ring -->
+	<action label="seed_ring">
+		<repeat>
+			<times>10</times>
+			<action>
+				<actionRef label="fireCircle"/><!-- param=direction -->
+				<wait>18</wait>
+			</action>
+		</repeat>
+		<vanish/>
+	</action>
+<!-- ring2 -->
+	<action label="fireCircle">
+		<fireRef label="circle"><param>(20*0)</param></fireRef>
+		<fireRef label="circle"><param>(20*1)</param></fireRef>
+		<fireRef label="circle"><param>(20*2)</param></fireRef>
+		<fireRef label="circle"><param>(20*3)</param></fireRef>
+		<fireRef label="circle"><param>(20*4)</param></fireRef>
+		<fireRef label="circle"><param>(20*5)</param></fireRef>
+		<fireRef label="circle"><param>(20*6)</param></fireRef>
+		<fireRef label="circle"><param>(20*7)</param></fireRef>
+		<fireRef label="circle"><param>(20*8)</param></fireRef>
+		<fireRef label="circle"><param>(20*9)</param></fireRef>
+		<fireRef label="circle"><param>(20*10)</param></fireRef>
+		<fireRef label="circle"><param>(20*11)</param></fireRef>
+		<fireRef label="circle"><param>(20*12)</param></fireRef>
+		<fireRef label="circle"><param>(20*13)</param></fireRef>
+		<fireRef label="circle"><param>(20*14)</param></fireRef>
+		<fireRef label="circle"><param>(20*15)</param></fireRef>
+		<fireRef label="circle"><param>(20*16)</param></fireRef>
+		<fireRef label="circle"><param>(20*17)</param></fireRef>
+	</action>
+<!-- ring3 -->
+	<fire label="circle">
+		<direction type="aim">$1</direction>
+		<speed>($rank+0.5)*1.5</speed>
+		<bullet>
+			<action>
+				<wait>5</wait>
+				<fire>
+					<direction type="relative">-1*$1</direction>
+					<speed>(($rand*$rank)*1.5)+1</speed>
+					<bullet>
+						<action/>
+					</bullet>
+				</fire>
+				<vanish/>
+			</action>
+		</bullet>
+	</fire>
+
+
+
+
+</bulletml>
+
+</barrage>

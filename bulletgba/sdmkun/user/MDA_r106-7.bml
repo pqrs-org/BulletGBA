@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>MDA_r106-7</filename>
+	<group>MDA</group>
+	<title>弾数過多106-7</title>
+	<description>何とも言えない妙な弾幕。無駄に弾が多いのが難点です。</description>
+	<capture>右から入って、道が開いた所でちょっと左へ。最後に緑弾に当らないように。レベルが上がると、緑弾が増え、青弾が遅くなります。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+	<changeSpeed>
+		<speed type="absolute">1.75</speed>
+		<term>1</term>
+	</changeSpeed>
+	<changeDirection>
+		<direction type="absolute">180</direction>
+		<term>1</term>
+	</changeDirection>
+	<wait>10</wait>
+	<changeSpeed>
+		<speed type="absolute">0</speed>
+		<term>5</term>
+	</changeSpeed>
+	<wait>10</wait>
+
+	<fire>
+		<direction type="aim">0</direction>
+		<speed>0.2</speed>
+		<bullet>
+			<action>
+				<wait>10</wait>
+				<vanish/>
+			</action>
+		</bullet>
+	</fire>
+	<wait>10</wait>
+	<repeat>
+		<times>4*(12+($rank*9))</times>
+		<action>
+			<fire>
+				<direction type="sequence">106</direction>
+				<speed type="sequence">0.005</speed>
+				<bullet>
+					<actionRef label="seed"/>
+				</bullet>
+			</fire>
+		</action>
+	</repeat>
+	<wait>180</wait>
+</action>
+
+<action label="seed">
+	<wait>50</wait>
+	<changeSpeed>
+		<speed type="relative">1.05</speed>
+		<term>80</term>
+	</changeSpeed>
+	<changeDirection>
+		<direction type="relative">180.01</direction>
+		<term>80</term>
+	</changeDirection>
+	<repeat>
+		<times>100</times>
+		<action>
+			<wait>7</wait>
+			<fireRef label="shoot"/>
+		</action>
+	</repeat>
+</action>
+
+<fire label="shoot">
+	<direction type="relative">180</direction>
+	<speed>1.05*(1.9-($rank*0.6))</speed>
+	<bullet/>
+</fire>
+
+</bulletml>
+
+</barrage>

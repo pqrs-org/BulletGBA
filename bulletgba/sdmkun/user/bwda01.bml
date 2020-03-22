@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!-- コメント -->
+
+<barrageInfo>
+ <!-- ファイル名が別の名前になっていると、
+      この名前に従ってファイル名は修正されます。
+      これは必ずつけて下さい。ブラウザから実行する場合、
+      ファイル名が変わっていることが多々あります。 -->
+ <filename>bwda01</filename>
+ <!-- グループ名は data/groups.dat から適切なものを選んでも良いですし、
+      お好きな名前を付けてもらっても結構です。
+	  存在しないグループ名をつけた場合は userグループ扱いになります。
+	  ある程度同じグループの弾幕がたまったら
+	  data/groups.dat に私が追加します。
+   -->
+ <group>bwda</group>
+ <title>Hyper Speed</title>
+ <description>高速弾幕シリーズその一。爆発後にマシンガン掃射。無駄に弾が多いです。レベルが上がると全体的な弾速とばら撒きの弾数が上がります。一応レベル５０を基準として設計。レベル１００は人外向けです。</description>
+ <capture>マシンガンは狙いが甘いので大きめに逃げたほうがいいです。爆発直後にマシンガンが来た場合は右か左押しっぱなしで。</capture>
+</barrageInfo>
+
+<!-- ここで弾の色とか形とかを指定できるようにする予定 -->
+<barrageStyle>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<actionRef label="bara"></actionRef>
+<actionRef label="maid"></actionRef>
+<wait>50</wait>
+</action>
+
+
+
+
+<action label="bara">
+<repeat>
+<times>($rank*800)+400</times>
+<action>
+ <bullet>
+  <direction type="absolute">$rand*360</direction>
+  <speed>($rank*4)+($rand*5)</speed>
+  </bullet>
+</action>
+<wait>$rand</wait>
+</repeat>
+</action>
+
+<action label="maid">
+
+<wait>$rand*30</wait>
+<repeat>
+<times>100</times>
+<action>
+ <bullet>
+  <direction type="aim">($rand*10)-5</direction>
+  <speed>($rank*10)+($rand*5)</speed>
+ </bullet>
+ <wait>1</wait>
+</action>
+</repeat>
+</action>
+
+</bulletml>
+
+</barrage>
+

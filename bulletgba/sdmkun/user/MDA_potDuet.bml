@@ -1,0 +1,162 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>MDA_potDuet</filename>
+	<group>MDA</group>
+	<title>てきとーデュエット</title>
+	<description>ひとつひとつはしっかりしてるつもりだけど、両者の関連性は考えてません。調整しているうちに見栄えが悪くなりました。</description>
+	<capture>ランクが上がると時間延長の他、回転砲台からの弾が少し速くなり（影響：小）、直線弾は増えて広がります（影響：大）。高ランクでは、画面を（ボスの近くでは急いで）大きく回ってなんとかしています。90ランク超えたあたりから責任持てません。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+	<!-- 本体 -->
+	<action label="top">
+		<!-- 弾源発射：2way砲台 -->
+		<fire>
+			<direction type="aim">0</direction>
+			<speed>0.9</speed><!-- 初速  -->
+			<bullet>
+				<actionRef label="seed">
+					<param>0</param><!-- 最終速 -->
+					<param>210</param><!-- 減速時間 -->
+					<param>2</param><!-- 発射前wait -->
+					<param>45+($rank*50)</param><!-- 発砲セット数 XXX:Rank:時間 -->
+					<param>2</param><!-- 発射中wait(実行値*3) -->
+					<param>0.9+($rank*$rank*0.4)</param><!-- 弾速 XXX:Rank:弾速 -->
+					<param>1.61803398875</param><!-- 弾角度/黄金比？ -->
+			</actionRef>
+			</bullet>
+		</fire>
+		<!-- 発射：自機狙いランダム直線連射弾 -->
+	<wait>60</wait><!-- 発射前wait -->
+		<repeat>
+			<times>10+($rank*20)</times><!-- 弾源セット数 XXX:Rank:時間 -->
+			<actionRef label="straight">
+				<param>1+($rank*5)</param><!-- 弾源数 XXX:Rank:量 -->
+				<param>(4*($rank*$rank*16))*1.61803398875</param><!-- ボス→弾源の幅 XXX:Rank:幅 -->
+				<param>(4*($rank*$rank*16))*1</param><!-- 弾源→子弾の幅 XXX:Rank:幅 -->
+				<param>15</param><!-- 発射中wait -->
+				<param>2-($rank*0.4)</param><!-- 弾源速度 XXX:Rank:距離 -->
+				<param>1+($rank*$rank*0.8)</param><!-- +弾源速度*rand XXX:Rank:距離 -->
+			</actionRef>
+		</repeat>
+		<wait>90</wait><!-- 発射後wait -->
+	</action>
+
+	<!-- 発射：自機狙いランダム直線連射弾 -->
+	<action label="straight">
+		<repeat>
+			<times>$1</times>
+			<action>
+				<fire>
+					<direction type="aim">($2/2)-($rand*$2)</direction>
+					<speed>$5+($rand*$6)</speed>
+					<bullet>
+						<actionRef label="straight-2">
+							<param>$1</param><!-- 弾源数 -->
+							<param>$3</param><!-- 弾源→子弾の幅 -->
+						</actionRef>
+					</bullet>
+				</fire>
+			</action>
+		</repeat>
+		<wait>$4</wait>
+	</action>
+
+	<!-- 自機狙いランダム直線連射弾/弾源発生から消滅まで60f -->
+	<action label="straight-2">
+		<!-- 移動系 -->
+		<wait>1</wait>
+		<changeSpeed>
+			<speed type="absolute">0.1</speed>
+			<term>20</term>
+		</changeSpeed>
+		<wait>21</wait>
+		<changeDirection>
+			<direction type="aim">180-($2/2)+($rand*$2)</direction>
+			<term>1</term>
+		</changeDirection>
+		<wait>3</wait>
+		<changeSpeed>
+			<speed type="sequence">0.05</speed>
+			<term>9999</term>
+		</changeSpeed>
+		<!-- 射撃 -->
+		<repeat>
+			<times>12</times>
+			<action>
+				<fire>
+					<direction type="relative">180</direction>
+					<speed type="relative">0.5</speed>
+					<bullet/>
+				</fire>
+				<wait>3</wait>
+			</action>
+		</repeat>
+		<vanish/>
+	</action>
+
+	<!-- 2way砲台 -->
+	<action label="seed">
+		<changeSpeed>
+			<speed>$1</speed>
+			<term>$2</term>
+		</changeSpeed>
+		<wait>$3</wait>
+		<repeat>
+			<times>$4</times>
+			<actionRef label="2way">
+				<param>$6</param>
+				<param>$7</param>
+				<param>$5</param>
+			</actionRef>
+			<actionRef label="2way">
+				<param>$6*$7</param>
+				<param>$7*$7</param>
+				<param>$5</param>
+			</actionRef>
+			<actionRef label="2way">
+				<param>$6*$7*$7</param>
+				<param>$7*$7*$7</param>
+				<param>$5</param>
+			</actionRef>
+		</repeat>
+		<vanish/>
+	</action>
+
+	<!-- 2way弾 -->
+	<action label="2way">
+		<fire>
+			<speed type="relative">$1</speed>
+			<direction type="sequence">$2*$2</direction>
+			<bullet>
+				<action>
+					<wait>9999</wait>
+					<vanish/>
+				</action>
+			</bullet>
+		</fire>
+		<fire>
+			<speed type="relative">$1</speed>
+			<direction type="sequence">-$2</direction>
+			<bullet>
+				<action>
+					<wait>9999</wait>
+					<vanish/>
+				</action>
+			</bullet>
+		</fire>
+		<wait>$3</wait>
+	</action>
+
+</bulletml>
+
+
+</barrage>

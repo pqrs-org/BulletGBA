@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_evac02</filename>
+ <group>KotuAnzenX</group>
+ <title>エヴァッカニア・ドゥームもどき：その２</title>
+ <description>同じく「たまいぬ弁当」さんの弾幕話を参考に、ワインダー弾も。同じくＬＶ１００が（私の妄想する）再現。ソースを見るといいことがあるかも。</description>
+ <capture>潰されないことと、着弾点を見極めること。ＬＶ１００ではワインダーのリロードが０なので注意。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <repeat><times>2+$rank*6</times>
+ <action>
+ <actionRef label="ohgi-chikage"><param>1</param></actionRef>
+ <wait>60-$rank*60</wait>
+ <actionRef label="ohgi-chikage"><param>-1</param></actionRef>
+ <wait>60-$rank*60</wait>
+ </action>
+ </repeat>
+ <wait>30</wait>
+</action>
+
+<action label="ohgi-chikage">
+ <fire>
+  <speed>0.2</speed>
+  <direction type="absolute">$1*80+$rand*40</direction>
+  <bulletRef label="sg"/>
+ </fire>
+ <repeat><times>4</times>
+ <action>
+ <fire>
+  <speed type="sequence">0</speed>
+  <direction type="sequence">$1*30</direction>
+  <bulletRef label="sg"/>
+ </fire>
+ </action>
+ </repeat>
+ <wait>2</wait>
+ <repeat><times>29</times>
+ <action>
+ <fire>
+  <speed type="sequence">0.2</speed>
+  <direction type="sequence">$1*-119</direction>
+  <bulletRef label="sg"/>
+ </fire>
+ <repeat><times>4</times>
+ <action>
+ <fire>
+  <speed type="sequence">0</speed>
+  <direction type="sequence">$1*30</direction>
+  <bulletRef label="sg"/>
+ </fire>
+ </action>
+ </repeat>
+ <wait>2</wait>
+ </action>
+ </repeat>
+</action>
+
+<bullet label="sg">
+ <action>
+  <wait>14</wait>
+  <changeSpeed>
+   <speed>0.1</speed>
+   <term>1</term>
+  </changeSpeed>
+  <wait>60</wait>
+  <changeSpeed>
+   <speed>2+$rank*2</speed>
+   <term>1</term>
+  </changeSpeed>
+ </action>
+</bullet>
+
+</bulletml>
+</barrage>

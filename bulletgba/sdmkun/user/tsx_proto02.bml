@@ -1,0 +1,117 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_proto02</filename>
+ <group>KotuAnzenX</group>
+ <title>試作品０２：トラファルガ発狂・東方テイスト２</title>
+ <description>逆戻り弾が最大１０度ズレて発射されます。レベルが低いとほとんど変化は見られませんので、レベル１００でお楽しみ下さい。</description>
+ <capture>弾道の微妙なズレから難易度が上がっています。しかし相変わらず完全パターン化可能だったりします。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <changeSpeed>
+  <speed>4</speed>
+  <term>1</term>
+ </changeSpeed>
+ <changeDirection>
+  <direction type="absolute">180</direction>
+  <term>1</term>
+ </changeDirection>
+ <wait>9</wait>
+ <changeSpeed>
+  <speed>0</speed>
+  <term>1</term>
+ </changeSpeed>
+ <wait>1</wait>
+ <fireRef label="spin"><param>90</param></fireRef>
+ <wait>1200</wait>
+</action>
+
+<fire label="spin">
+ <speed>0</speed>
+ <bullet>
+  <action>
+   <fire>
+    <speed type="absolute">4</speed>
+    <direction type="absolute">$1</direction>
+    <bulletRef label="shot"/>
+   </fire>
+   <fire>
+    <speed type="sequence">0</speed>
+    <direction type="sequence">90</direction>
+    <bulletRef label="shot"/>
+   </fire>
+   <fire>
+    <speed type="sequence">0</speed>
+    <direction type="sequence">90</direction>
+    <bulletRef label="shot"/>
+   </fire>
+   <fire>
+    <speed type="sequence">0</speed>
+    <direction type="sequence">90</direction>
+    <bulletRef label="shot"/>
+   </fire>
+   <repeat><times>120</times>
+    <action>
+     <fire>
+      <speed type="absolute">4</speed>
+      <direction type="sequence">90-6.6</direction>
+      <bulletRef label="shot"/>
+     </fire>
+     <fire>
+      <speed type="sequence">0</speed>
+      <direction type="sequence">90</direction>
+      <bulletRef label="shot"/>
+     </fire>
+     <fire>
+      <speed type="sequence">0</speed>
+      <direction type="sequence">90</direction>
+      <bulletRef label="shot"/>
+     </fire>
+     <fire>
+      <speed type="sequence">0</speed>
+      <direction type="sequence">90</direction>
+      <bulletRef label="shot"/>
+     </fire>
+     <wait>10</wait>
+    </action>
+   </repeat>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<bullet label="shot">
+ <action>
+  <changeSpeed>
+   <speed>0.1</speed>
+   <term>40</term>
+  </changeSpeed>
+  <wait>60</wait>
+  <fire>
+   <speed type="relative">0.2</speed>
+   <direction type="relative">170</direction>
+   <bullet/>
+  </fire>
+  <repeat><times>$rank*10</times>
+   <action>
+    <fire>
+     <speed type="sequence">0.2</speed>
+     <direction type="sequence">1</direction>
+     <bullet/>
+    </fire>
+   </action>
+  </repeat>
+  <vanish/>
+ </action>
+</bullet>
+
+</bulletml>
+</barrage>

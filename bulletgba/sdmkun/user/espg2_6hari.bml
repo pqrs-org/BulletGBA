@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+<barrage>
+<barrageInfo>
+ <filename>espg2_6hari</filename>
+ <group>user</group>
+ <title>ガルーダ２ ガッデス第一形態２番目</title>
+ <description>ムズい。まともに避けてるの見たことない。rank100で赤走行。</description>
+ <capture>決めバリア。</capture>
+</barrageInfo>
+<barrageStyles>
+ <bulletLanguage name="lua" />
+</barrageStyles>
+<lua>
+<![CDATA[
+rank=0 dir=0 num=1 width=63 speed=1.5 shootcount=0
+function top()
+	rank=-1+getRank()*2
+	setPos(150,80)
+	local pdir=-(128/math.pi*getPlayerAngle())+192
+	if(math.mod(getTurn(),60)==0) then
+		fire(-8,3,"clorets",-4)
+		fire(8,3,"clorets",4)
+		fire(-6,5,"clorets",-3)
+		fire(6,5,"clorets",3)
+	end
+	if(getTurn()==100) then dir=pdir end
+	if(getTurn()>=100) then
+		if((math.mod(getTurn(),10)==0)or(math.mod(getTurn(),10)==2)) then
+			local angle=-10*(num/2-0.5)
+			for i=1,num do
+				fire(-math.cos(math.pi/128*(angle+dir))*((speed+rank)+0.05),math.sin(math.pi/128*(angle+dir))*((speed+rank)+0.05))
+				fire(-math.cos(math.pi/128*(angle+dir-width))*(speed+rank),math.sin(math.pi/128*(angle+dir-width))*(speed+rank))
+				fire(-math.cos(math.pi/128*(angle+dir+width))*(speed+rank),math.sin(math.pi/128*(angle+dir+width))*(speed+rank))
+				angle=angle+10
+			end
+		end
+		if(math.mod(getTurn(),10)==2) then
+			local d1=math.mod(pdir,256)
+			local d2=math.mod(dir,256)
+			if(d1-128>d2) then d2=d2+256 end
+			if(d1+128<d2) then d2=d2-256 end
+			local bearing=d2-d1
+			if(bearing<-0.5) then dir=dir+1
+			elseif(bearing>0.5) then dir=dir-1 end
+			if(speed<2) then speed=speed+0.05 end
+			shootcount=shootcount+1
+			if((num<14)and(math.mod(shootcount,4)==1)) then num=num+1 end
+			width=width-0.5
+		end
+	end
+	if(width<=30) then quit() end
+end
+function clorets(i)
+	local dir=-(128/math.pi*getPlayerAngle())+192-2+math.random()*4
+	if((getX()<150)and(getTurn()>=5)) then setSpeed(i/10+getTurn()/500,0.4)
+	elseif((getX()>150)and(getTurn()>=5)) then setSpeed(i/10-getTurn()/500,0.4) end
+	if(math.mod(getTurn(),60)>=30) then setSpeed(0,0) end
+	if(math.mod(getTurn(),40)==20) then fire(-math.cos(math.pi/128*dir)*(1.5+rank),math.sin(math.pi/128*dir)*(1.5+rank)) end
+	if((getTurn()==330)or(width<=30)) then vanish() end
+end
+]]>
+</lua>
+</barrage>

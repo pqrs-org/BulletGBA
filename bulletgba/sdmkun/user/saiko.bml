@@ -1,0 +1,109 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../bulletml.dtd">
+<barrage>
+<barrageInfo>
+
+<filename>goku</filename>
+<group>original</group>
+<title>彩符「極彩颱風」もどき</title>
+<description>雰囲気重視で乱数入り乱れ。まあ独特の気持ち悪さはそこそこに表現できたかなと。</description>
+<capture>自機に届く頃には弾の動きも大分落ち着いてるはずなので普通に。</capture>
+
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<repeat>
+<times>500</times>
+<action>
+ <fire>
+  <direction type="absolute">360*$rand</direction>
+  <speed>2</speed>
+  <bulletRef label="wind1"/>
+ </fire>
+ <fire>
+  <direction type="absolute">360*$rand</direction>
+  <speed>2</speed>
+  <bulletRef label="wind2"/>
+  <wait>1</wait>
+  </fire>
+</action>
+</repeat>
+<wait>90</wait>
+</action>
+
+<bullet label="wind1">
+<action>
+ <changeSpeed>
+  <speed>0.5</speed>
+  <term>40</term>
+ </changeSpeed>
+ <changeDirection>
+  <direction type="absolute">360*$rand</direction>
+  <term>40</term>
+ </changeDirection>
+ <wait>40</wait>
+ <fire>
+  <direction type="absolute">0</direction>
+  <speed>0</speed>
+  <bulletRef label="rain1"/>
+ </fire>
+ <vanish/>
+</action>
+</bullet>
+<bullet label="wind2">
+<action>
+ <changeSpeed>
+  <speed>0.5</speed>
+  <term>40</term>
+ </changeSpeed>
+ <changeDirection>
+  <direction type="absolute">-360*$rand</direction>
+  <term>40</term>
+ </changeDirection>
+ <wait>40</wait>
+ <fire>
+  <direction type="absolute">0</direction>
+  <speed>0</speed>
+  <bulletRef label="rain2"/>
+ </fire>
+ <vanish/>
+</action>
+</bullet>
+
+<bullet label="rain1">
+<action>
+ <wait>0</wait>
+ <changeDirection>
+  <direction type="absolute">360*$rand</direction>
+  <term>60*(1+$rand)</term>
+ </changeDirection>
+ <wait>0</wait>
+ <changeSpeed>
+  <speed>1+($rank+$rand)</speed>
+  <term>200+100*($rand-$rank)</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="rain2">
+<action>
+ <wait>0</wait>
+ <changeDirection>
+  <direction type="absolute">-360*$rand</direction>
+  <term>60*(1+$rand)</term>
+ </changeDirection>
+ <wait>0</wait>
+ <changeSpeed>
+  <speed>1+($rank+$rand)</speed>
+  <term>200+100*($rand-$rank)</term>
+ </changeSpeed>
+</action>
+</bullet>
+</bulletml>
+
+</barrage>

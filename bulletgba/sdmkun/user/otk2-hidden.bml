@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>otk2-hidden</filename>
+ <group>OtakuTwo</group>
+ <title>小石隠すにゃ砂利の中</title>
+<description>
+放たれる弾は、理論上では最大4000発ほど。しかし、大半は自機狙い弾の目くらまし。
+</description>
+<capture>
+最初の一発の緑弾と、大量の白弾の中に残る一発の緑弾。これを極少量の移動でかわす。避けるべきは、この二発だけ。
+</capture>
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <fire>
+  <direction type="aim">0</direction>
+  <speed>3</speed>
+  <bulletRef label="bomb1"/>
+ </fire>
+ <wait>240</wait>
+</action>
+
+<bullet label="bomb1">
+ <action>
+  <wait>8</wait>
+  <repeat><times>599+$rank*200</times>
+   <action>
+    <fire>
+     <direction type="relative">5+$rand*350</direction>
+     <speed>0.1+$rand*2.9</speed>
+     <bulletRef label="bomb2"/>
+    </fire>
+   </action>
+  </repeat>
+  <fire>
+   <direction type="relative">-15+$rand*15</direction>
+   <speed>0.5</speed>
+   <bulletRef label="bomb3"/>
+  </fire>
+ </action>
+</bullet>
+
+<bullet label="bomb2">
+ <action>
+  <wait>90-$rand*60</wait>
+  <repeat><times>5</times>
+   <action>
+    <fire>
+     <direction type="aim">5+$rand*350</direction>
+     <speed>1+$rand*2.5</speed>
+     <bullet/>
+    </fire>
+   </action>
+  </repeat>
+  <vanish/>
+ </action>
+</bullet>
+
+<bullet label="bomb3">
+ <action>
+  <wait>90-$rand*45</wait>
+  <fire>
+   <direction type="aim">0</direction>
+   <speed>1+$rank*$rank*$rank*1.5</speed>
+   <bullet>
+    <action>
+     <wait>9999</wait>
+     <fire/>
+    </action>
+   </bullet>
+  </fire>
+  <vanish/>
+ </action>
+</bullet>
+
+</bulletml>
+
+</barrage>

@@ -1,0 +1,307 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+<barrage>
+.
+<barrageInfo>
+	<filename>syusogyoku_EXreimu_Final</filename>
+	<group>Seiho</group>
+	<title>秋霜玉より、「博麗霊夢」最終発狂攻撃</title>
+	<description>
+		秋霜玉のExtraStageラスボス「博麗霊夢」最終発狂攻撃...に似てるかな？
+		弾源の動きがオリジナルと比べてかなりテキトーなので、画面外に出て弾を吐かない、
+		極悪な場所で弾幕ごっこされる時もしばしば...です。
+	</description>
+	<capture>
+		白弾は脅しなので無視、緑弾はアドリブ避け、自機狙いの赤弾だけ意識して最小の動きで避けます。
+		避けるだけなら結構簡単？？？
+	</capture>
+</barrageInfo>
+<barrageStyle>
+	<bulletLanguage name="bulletml" />
+</barrageStyle>
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+<action label="topway">
+	<changeDirection>
+		<direction type="absolute">180</direction>
+		<term>1</term>
+	</changeDirection>
+	<changeSpeed>
+		<speed>2</speed>
+		<term>1</term>
+	</changeSpeed>
+	<wait>16</wait>
+	<changeSpeed>
+		<speed>0</speed>
+		<term>1</term>
+	</changeSpeed>
+	<repeat><times>10</times>
+		<action>
+			<fire>
+				<direction type="absolute">360*$rand</direction>
+				<speed>2.7</speed>
+				<bullet>
+					<action>
+						<wait>30</wait>
+						<changeSpeed>
+							<speed>0.0001</speed>
+							<term>1</term>
+						</changeSpeed>
+						<wait>30</wait>
+						<changeDirection>
+							<direction type="relative">-180-45+90*$rand</direction>
+							<term>1</term>
+						</changeDirection>
+						<changeSpeed>
+							<speed>5</speed>
+							<term>1</term>
+						</changeSpeed>					
+						<wait>10</wait>					
+						<actionRef label="Reimu01"/>	
+						<wait>10</wait>					
+						<actionRef label="Reimu01"/>	
+						<wait>1</wait>					
+						<changeSpeed>
+							<speed>0.0001</speed>
+							<term>1</term>				
+						</changeSpeed>
+						<actionRef label="Reimu02"/>	
+						<wait>10-10*$rank</wait>
+						<changeDirection>
+							<direction type="relative">180-60+120*$rand</direction> 
+							<term>1</term>
+						</changeDirection>
+						<changeSpeed>
+							<speed>5</speed>
+							<term>1</term>
+						</changeSpeed>					
+						<wait>2+3*$rank</wait>			
+						<actionRef label="Reimu03"/>	
+						<wait>2+3*$rank</wait>			
+						<actionRef label="Reimu03"/>	
+						<wait>2+3*$rank</wait>			
+						<actionRef label="Reimu03"/>	
+						<wait>2+3*$rank</wait>			
+						<actionRef label="Reimu03"/>	
+						<wait>2+3*$rank</wait>			
+						<actionRef label="Reimu03"/>	
+						<wait>10</wait>					
+					<vanish/>
+					</action>
+				</bullet>
+			</fire>
+		</action>
+		<wait>150</wait>								
+	</repeat>
+	<wait>200</wait>								
+</action>
+<action label="Reimu01">
+	<fireRef label="bit3">
+		<param>10</param>	
+		<param>10</param>	
+		<param>-1-$rank</param>	
+		<param>-0.12-0.25*$rank</param>	
+	</fireRef>
+</action>
+<action label="Reimu02">
+	<fire>
+		<direction type="aim">90</direction>
+		<speed>3</speed>
+		<bulletRef label="bit1">
+			<param>2</param>		
+			<param>-1</param>		
+		</bulletRef>
+	</fire>
+	<fire>
+		<direction type="aim">-90</direction>
+		<speed>3</speed>
+		<bulletRef label="bit1">
+			<param>2</param>		
+			<param>1</param>		
+		</bulletRef>
+	</fire>
+</action>
+<action label="Reimu03">
+	<fire>
+		<direction type="aim">0</direction>
+		<speed>0</speed>
+		<bulletRef label="bit2">
+			<param>10</param>		
+			<param>6</param>		
+			<param>-3.5-2*$rank</param>		
+			<param>-0.3-0.22*$rank</param>		
+		</bulletRef>
+	</fire>
+</action>
+<bullet label="bit1">
+	<action>
+		<changeSpeed>
+			<speed>0</speed>
+			<term>1</term>
+		</changeSpeed>
+		<wait>$1+10*$rank</wait>
+		<actionRef label="bit1-allrange">
+			<param>4</param>	
+			<param>7</param>	
+			<param>5</param>	
+			<param>$2</param>	
+		</actionRef>
+		<vanish/>
+	</action>
+</bullet>
+<action label="bit1-allrange">
+	<fire>
+		<direction type="aim">(5.8*$rank*$1*$4)+180</direction>	
+		<speed>$2</speed>
+		<bullet/>
+	</fire>
+	<repeat><times>$3</times>
+		<actionRef label="bit1-tazyudan"/>
+	</repeat>
+	<repeat><times>5</times>
+		<actionRef label="bit1-NWay">
+			<param>-$4*$1</param>	
+			<param>$2</param>		
+			<param>$3</param>		
+		</actionRef>
+	</repeat>
+	<wait>1</wait>
+	<repeat><times>(180-5*$1)/8-1</times>
+		<action>
+			<fire>
+				<direction type="sequence">(5*$1*$4)+$4*8</direction>	
+				<speed>$2</speed>
+				<bullet/>
+			</fire>
+			<repeat><times>$3</times>
+				<actionRef label="bit1-tazyudan"/>
+			</repeat>
+			<repeat><times>5</times>
+				<actionRef label="bit1-NWay">
+					<param>-$4*$1</param>	
+					<param>$2</param>		
+					<param>$3</param>		
+				</actionRef>
+			</repeat>
+		</action>
+		<wait>1</wait>
+	</repeat>
+</action>
+<action label="bit1-tazyudan">
+	<fire>
+		<direction type="sequence">0</direction>
+		<speed type="sequence">-0.6</speed>	
+		<bullet/>
+	</fire>
+</action>
+<action label="bit1-NWay">
+	<fire>
+		<direction type="sequence">$1</direction>
+		<speed type="absolute">$2</speed>
+		<bullet/>
+	</fire>
+	<repeat><times>$3</times>
+		<actionRef label="bit1-tazyudan"/>
+	</repeat>
+</action>
+<bullet label="bit2">
+	<action>
+		<fire>
+			<direction type="aim">180</direction>
+			<speed>4</speed>
+			<bulletRef label="bit2-reverse-sub"><param>$1</param><param>$2</param><param>$3</param></bulletRef>
+		</fire>
+		<fireRef label="bit2-reverse"><param>$1</param><param>$2</param><param>$3-1*$4</param></fireRef>
+		<fireRef label="bit2-reverse"><param>$1</param><param>$2</param><param>$3-2*$4</param></fireRef>
+		<fireRef label="bit2-reverse"><param>$1</param><param>$2</param><param>$3-3*$4</param></fireRef>
+		<fireRef label="bit2-reverse"><param>$1</param><param>$2</param><param>$3-4*$4</param></fireRef>
+		<fireRef label="bit2-reverse"><param>$1</param><param>$2</param><param>$3-5*$4</param></fireRef>
+		<fireRef label="bit2-reverse"><param>$1</param><param>$2</param><param>$3-6*$4</param></fireRef>
+		<fireRef label="bit2-reverse"><param>$1</param><param>$2</param><param>$3-7*$4</param></fireRef>
+		<fireRef label="bit2-reverse"><param>$1</param><param>$2</param><param>$3-8*$4</param></fireRef>
+		<fireRef label="bit2-reverse"><param>$1</param><param>$2</param><param>$3-9*$4</param></fireRef>
+		<vanish/>
+	</action>
+</bullet>
+<fire label="bit2-reverse">
+	<direction type="sequence">0</direction>
+	<speed type="sequence">-0.3</speed>
+	<bulletRef label="bit2-reverse-sub">
+		<param>$1</param>	
+		<param>$2</param>	
+		<param>$3</param>	
+	</bulletRef>
+</fire>
+<bullet label="bit2-reverse-sub">
+	<action>
+		<wait>$1</wait>
+		<changeSpeed>
+			<speed>0.001</speed>
+			<term>1</term>
+		</changeSpeed>
+		<wait>$2</wait>
+		<changeSpeed>
+			<speed>$3</speed>
+			<term>1</term>
+		</changeSpeed>
+	</action>
+</bullet>
+<fire label="bit3">
+	<direction type="aim">0</direction>
+	<speed>0</speed>
+	<bullet>
+		<action>
+			<fire>
+				<direction type="aim">180-196/2</direction>
+				<speed>4</speed>
+				<bullet>
+					<actionRef label="bit3-reverse-sub"><param>$1</param><param>$2</param><param>$3-0*$4</param></actionRef>
+				</bullet>
+			</fire>
+			<fireRef label="bit3-reverse"><param>$1</param><param>$2</param><param>$3-1*$4</param></fireRef>
+			<fireRef label="bit3-reverse"><param>$1</param><param>$2</param><param>$3-2*$4</param></fireRef>
+			<fireRef label="bit3-reverse"><param>$1</param><param>$2</param><param>$3-3*$4</param></fireRef>
+			<fireRef label="bit3-reverse"><param>$1</param><param>$2</param><param>$3-4*$4</param></fireRef>
+			<repeat><times>7</times>
+				<action>
+					<fire>
+						<direction type="sequence">196/7</direction>
+						<speed>4</speed>
+						<bullet>
+							<actionRef label="bit3-reverse-sub"><param>$1</param><param>$2</param><param>$3-0*$4</param></actionRef>
+						</bullet>
+					</fire>
+					<fireRef label="bit3-reverse"><param>$1</param><param>$2</param><param>$3-1*$4</param></fireRef>
+					<fireRef label="bit3-reverse"><param>$1</param><param>$2</param><param>$3-2*$4</param></fireRef>
+					<fireRef label="bit3-reverse"><param>$1</param><param>$2</param><param>$3-3*$4</param></fireRef>
+					<fireRef label="bit3-reverse"><param>$1</param><param>$2</param><param>$3-4*$4</param></fireRef>
+				</action>
+			</repeat>
+		<vanish/>
+		</action>
+	</bullet>
+</fire>
+<fire label="bit3-reverse">
+	<direction type="sequence">0</direction>
+	<speed type="sequence">-0.5</speed>
+	<bullet>
+		<actionRef label="bit3-reverse-sub">
+			<param>$1</param>	
+			<param>$2</param>	
+			<param>$3</param>	
+		</actionRef>
+	</bullet>
+</fire>
+<action label="bit3-reverse-sub">
+	<wait>$1</wait>
+	<changeSpeed>
+		<speed>0.001</speed>
+		<term>1</term>
+	</changeSpeed>
+	<wait>$2</wait>
+	<changeSpeed>
+		<speed>$3</speed>
+		<term>1</term>
+	</changeSpeed>
+</action>
+</bulletml>
+</barrage>

@@ -1,0 +1,136 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!-- コメント -->
+
+<barrageInfo>
+ <!-- ファイル名が別の名前になっていると、
+      この名前に従ってファイル名は修正されます。
+      これは必ずつけて下さい。ブラウザから実行する場合、
+      ファイル名が変わっていることが多々あります。 -->
+ <filename>bwda05</filename>
+ <!-- グループ名は data/groups.dat から適切なものを選んでも良いですし、
+      お好きな名前を付けてもらっても結構です。
+	  存在しないグループ名をつけた場合は userグループ扱いになります。
+	  ある程度同じグループの弾幕がたまったら
+	  data/groups.dat に私が追加します。
+   -->
+ <group>bwda</group>
+ <title>Hyper Speed 4</title>
+ <description>高速弾幕シリーズその四。はじめは二本の腕が回転しているだけですが途中で四本になりさらに八本になり最終的には十六本になります。レベルが上がると回転速度があがります。</description>
+ <capture>もう道に沿って回るしかありませんね。十六本状態のときは最後に生えてきた８本に隙間があるのでタイミングを見て逆走してもいいでしょう。ちなみにランダム要素は皆無なので初期位置によって安置になる場所があります。</capture>
+</barrageInfo>
+
+<!-- ここで弾の色とか形とかを指定できるようにする予定 -->
+<barrageStyle>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<actionRef label="spina"></actionRef>
+<actionRef label="spinb"></actionRef>
+<actionRef label="spinc"></actionRef>
+<actionRef label="spind"></actionRef>
+<wait>50</wait>
+<wait>50</wait>
+</action>
+
+
+
+
+<action label="spina">
+<repeat>
+<times>($rank*200+200)</times>
+<action>
+ <bullet>
+  <direction type="sequence">($rank*3)+2</direction>
+  <speed>5</speed>
+  </bullet>
+ <bullet>
+  <direction type="sequence">180</direction>
+  <speed>5</speed>
+  </bullet>
+</action>
+<wait>2</wait>
+</repeat>
+</action>
+
+<action label="spinb">
+<repeat>
+<times>($rank*200+200)</times>
+<action>
+ <bullet>
+  <direction type="sequence">($rank*3)+2</direction>
+  <speed>5</speed>
+  </bullet>
+<repeat>
+<times>3</times>
+<action>
+ <bullet>
+  <direction type="sequence">90</direction>
+  <speed>5</speed>
+  </bullet>
+</action>
+</repeat>
+</action>
+<wait>2</wait>
+</repeat>
+</action>
+
+<action label="spinc">
+<repeat>
+<times>($rank*200+200)</times>
+<action>
+ <bullet>
+  <direction type="sequence">($rank*3)+2</direction>
+  <speed>5</speed>
+  </bullet>
+<repeat>
+<times>7</times>
+<action>
+ <bullet>
+  <direction type="sequence">45</direction>
+  <speed>5</speed>
+  </bullet>
+</action>
+</repeat>
+</action>
+<wait>2</wait>
+</repeat>
+</action>
+
+<action label="spind">
+<repeat>
+<times>($rank*200+200)</times>
+<action>
+ <bullet>
+  <direction type="sequence">($rank*3)+2</direction>
+  <speed>5</speed>
+  </bullet>
+<repeat>
+<times>7</times>
+<action>
+ <bullet>
+  <direction type="sequence">22</direction>
+  <speed>5</speed>
+  </bullet>
+ <bullet>
+  <direction type="sequence">23</direction>
+  <speed>5</speed>
+  </bullet>
+</action>
+</repeat>
+</action>
+<wait>2</wait>
+</repeat>
+</action>
+
+</bulletml>
+
+</barrage>
+

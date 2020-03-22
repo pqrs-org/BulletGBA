@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_proto11</filename>
+ <group>KotuAnzenX</group>
+ <title>試作品１１：アレンジ再セセリ開幕</title>
+ <description>君は、アレンジモードの狂気を見たことがあるか？</description>
+ <capture>魂のガードバリア。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <fireRef label="side"><param>6</param><param>90</param></fireRef>
+ <fireRef label="side"><param>6</param><param>-90</param></fireRef>
+ <fireRef label="side"><param>5</param><param>60</param></fireRef>
+ <fireRef label="side"><param>5</param><param>-60</param></fireRef>
+ <fireRef label="side"><param>4</param><param>30</param></fireRef>
+ <fireRef label="side"><param>4</param><param>-30</param></fireRef>
+ <wait>200+$rank*400</wait>
+</action>
+
+<fire label="side">
+ <speed>$1</speed>
+ <direction type="absolute">$2</direction>
+ <bullet>
+  <action>
+   <wait>9</wait>
+   <changeSpeed>
+    <speed>0</speed>
+    <term>1</term>
+   </changeSpeed>
+   <wait>1</wait>
+   <repeat><times>13+$rank*20</times>
+    <action>
+     <fire>
+      <speed>1</speed>
+      <direction type="absolute">120+$rand*60</direction>
+      <bulletRef label="4way"/>
+     </fire>
+     <repeat><times>2</times>
+      <action>
+       <fire>
+        <speed type="sequence">0</speed>
+        <direction type="sequence">30</direction>
+        <bulletRef label="4way"/>
+       </fire>
+      </action>
+     </repeat>
+    </action>
+    <wait>20</wait>
+   </repeat>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<bullet label="4way">
+ <action>
+  <fireRef label="shot"><param>0</param><param>0</param></fireRef>
+  <fireRef label="shot"><param>0.3</param><param>0</param></fireRef>
+  <fireRef label="shot"><param>0.15</param><param>-4</param></fireRef>
+  <fireRef label="shot"><param>0.15</param><param>4</param></fireRef>
+  <vanish/>
+ </action>
+</bullet>
+
+<fire label="shot">
+ <speed type="relative">$1</speed>
+ <direction type="relative">$2</direction>
+ <bullet/>
+</fire>
+
+</bulletml>
+</barrage>

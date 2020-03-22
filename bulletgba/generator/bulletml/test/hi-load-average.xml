@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <repeat>
+      <times>200</times>
+      <action>
+        <repeat>
+          <times>10</times>
+          <action>
+            <fireRef label="roundFire" />
+          </action>
+        </repeat>
+        <wait>1</wait>
+      </action>
+    </repeat>
+  </action>
+  <fire label="roundFire">
+    <direction type="sequence">5</direction>
+    <bullet />
+  </fire>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 200 action {
+    repeat 10 action {
+      fireRef roundFire();
+    }
+    wait 1;
+  }
+}
+
+fire roundFire direction sequence 5 bullet;
+
+-->

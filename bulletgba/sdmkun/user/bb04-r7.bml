@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>bb04-r7</filename>
+ <group>KotuAnzenX</group>
+ <title>ランダム弾＋７方向弾×４</title>
+ <description>本体から自機をある程度狙うランダム弾、ビットからは自機を正確に狙う７方向弾を発射します。</description>
+ <capture>画面端から回避を始めるのがオススメですが、周りを回るのが一番楽です。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <changeSpeed>
+  <speed>4</speed>
+   <term>1</term>
+ </changeSpeed>
+ <changeDirection>
+  <direction type="absolute">180</direction>
+   <term>1</term>
+ </changeDirection>
+   <wait>10</wait>
+ <changeSpeed>
+  <speed>0</speed>
+   <term>1</term>
+ </changeSpeed>
+ <wait>60</wait>
+  <actionRef label="seed"><param>60</param></actionRef>
+  <actionRef label="seed"><param>300</param></actionRef>
+  <actionRef label="seed"><param>120</param></actionRef>
+  <actionRef label="seed"><param>240</param></actionRef>
+ <wait>25</wait>
+ <repeat>
+  <times>120</times>
+   <action>
+    <fire>
+     <direction type="aim">-40+$rand*80</direction>
+     <speed>0.4+$rank+$rand*0.6</speed>
+     <bullet/>
+    </fire>
+    <fire>
+     <direction type="aim">-40+$rand*80</direction>
+     <speed>0.4+$rank+$rand*0.6</speed>
+     <bullet/>
+    </fire>
+    <fire>
+     <direction type="aim">-40+$rand*80</direction>
+     <speed>0.4+$rank+$rand*0.6</speed>
+     <bullet/>
+    </fire>
+   <wait>3</wait>
+  </action>
+ </repeat>
+ <wait>30</wait>
+</action>
+
+<action label="seed">
+ <fire>
+  <speed>10</speed>
+  <direction type="absolute">$1</direction>
+  <bullet/>
+ </fire>
+ <bulletRef label="stop"></bulletRef>
+</action>
+
+<bullet label="stop">
+ <action>
+  <changeSpeed>
+   <speed>0</speed>
+   <term>5</term>
+  </changeSpeed>
+ <wait>20</wait>
+ <repeat>
+  <times>10</times>
+   <action>
+    <actionRef label="burst"><param>0</param></actionRef>
+    <actionRef label="burst"><param>2</param></actionRef>
+    <actionRef label="burst"><param>4</param></actionRef>
+    <actionRef label="burst"><param>6</param></actionRef>
+    <actionRef label="burst"><param>-2</param></actionRef>
+    <actionRef label="burst"><param>-4</param></actionRef>
+    <actionRef label="burst"><param>-6</param></actionRef>
+    <wait>40</wait>
+   </action>
+ </repeat>
+ <vanish/>
+ </action>
+</bullet>
+
+<action label="burst">
+ <fireRef label="shot"><param>$1</param><param>1+$rank</param></fireRef>
+</action>
+
+<fire label="shot">
+ <speed>$2</speed>
+ <direction type="aim">$1</direction>
+ <bullet/>
+</fire>
+
+</bulletml>
+</barrage>

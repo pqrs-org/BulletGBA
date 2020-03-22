@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="lib_laser_with_backfire">
+    <repeat>
+      <times>$1</times>
+      <action>
+        <fire>
+          <direction type="relative">0</direction>
+          <speed type="absolute">2</speed>
+          <bullet>
+            <action>
+              <repeat>
+                <times>3</times>
+                <action>
+                  <wait>20</wait>
+                  <fire>
+                    <direction type="relative">180-30</direction>
+                    <speed type="absolute">0.5</speed>
+                    <bullet>
+                      <actionRef label="lib_laser_with_backfire_backfire" />
+                    </bullet>
+                  </fire>
+                  <fire>
+                    <direction type="relative">180+30</direction>
+                    <speed type="absolute">0.5</speed>
+                    <bullet>
+                      <actionRef label="lib_laser_with_backfire_backfire" />
+                    </bullet>
+                  </fire>
+                </action>
+              </repeat>
+            </action>
+          </bullet>
+        </fire>
+        <wait>3</wait>
+      </action>
+    </repeat>
+    <vanish />
+  </action>
+  <action label="lib_laser_with_backfire_backfire">
+    <wait>60</wait>
+    <changeDirection>
+      <direction type="aim">0+10-20*$rand</direction>
+      <term>1</term>
+    </changeDirection>
+    <changeSpeed>
+      <speed type="sequence">0.1</speed>
+      <term>30</term>
+    </changeSpeed>
+  </action>
+  <action label="top">
+    <repeat>
+      <times>5</times>
+      <action>
+        <repeat>
+          <times>20</times>
+          <action>
+            <fire form="root">
+              <direction type="absolute">360*$rand</direction>
+              <speed type="absolute">0.1</speed>
+              <bullet>
+                <actionRef label="lib_laser_with_backfire">
+                  <param>10</param>
+                </actionRef>
+              </bullet>
+            </fire>
+            <wait>2</wait>
+          </action>
+        </repeat>
+        <wait>120</wait>
+      </action>
+    </repeat>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/laser-with-backfire.bnml"
+
+action top {
+  repeat 5 action {
+    repeat 20 action {
+      fire form root direction absolute 360 * $rand speed absolute 0.1 bullet actionRef lib_laser_with_backfire(10);
+      wait 2;
+    }
+    wait 120;
+  }
+}
+-->

@@ -1,0 +1,143 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>bb11-sp</filename>
+ <group>KotuAnzenX</group>
+ <title>ラスボスっぽい弾幕３－罪と罰－</title>
+ <description>名前だけは仰々しいです。題名の元ネタはインスピを受けたニンテンドウ６４のゲームより。</description>
+ <capture>ワインダーを辿りながらビームを回避。自機狙いは甘いのでビームはあまり当たりません。レベルを上げるとワインダーがきつくなるので、一気に難しくなります。ちなみに上に逃げるのはおすすめ出来ません。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <actionRef label="side"><param>4</param></actionRef>
+ <actionRef label="side"><param>2</param></actionRef>
+ <actionRef label="side"><param>-2</param></actionRef>
+ <actionRef label="side"><param>-4</param></actionRef>
+ <wait>60</wait>
+ <repeat><times>60+$rank*20</times>
+ <action>
+ <fire>
+  <speed>2</speed>
+  <direction type="absolute">$rand*360</direction>
+  <bulletRef label="stop2"/>
+ </fire>
+ <wait>10</wait>
+ </action>
+ </repeat>
+ <wait>120</wait>
+</action>
+
+<bullet label="stop2">
+ <action>
+  <wait>15</wait>
+  <changeSpeed>
+   <speed>0</speed>
+   <term>1</term>
+  </changeSpeed>
+  <actionRef label="beam"/>
+ </action>
+</bullet>
+
+<action label="beam">
+ <wait>30</wait>
+  <fire>
+   <speed>1+$rank</speed>
+   <direction type="aim">-30+$rand*60</direction>
+   <bullet/>
+  </fire>
+ <wait>6-$rank*3</wait>
+ <repeat><times>2+$rank*7</times>
+ <action>
+ <fire>
+  <speed>1+$rank</speed>
+  <direction type="sequence">0</direction>
+  <bullet/>
+ </fire>
+  <wait>6-$rank*3</wait>
+ </action>
+ </repeat>
+ <vanish/>
+</action>
+
+<action label="side">
+ <fire>
+  <speed>$1</speed>
+  <direction type="absolute">90</direction>
+  <bulletRef label="stop"/>
+ </fire>
+</action>
+
+<bullet label="stop">
+ <action>
+  <changeSpeed>
+   <speed>0</speed>
+   <term>30</term>
+  </changeSpeed>
+ <actionRef label="winder"/>
+ </action>
+</bullet>
+
+<action label="winder">
+ <wait>30</wait>
+ <fire>
+  <speed>1</speed>
+  <direction type="absolute">180</direction>
+  <bullet/>
+ </fire>
+ <wait>6</wait>
+ <repeat><times>8</times>
+ <action>
+  <fire>
+   <speed>1</speed>
+   <direction type="sequence">1+$rank*3</direction>
+   <bullet/>
+  </fire>
+  <wait>6</wait>
+ </action>
+ </repeat>
+ <repeat><times>4</times>
+ <action>
+ <repeat><times>16</times>
+ <action>
+  <fire>
+   <speed>1</speed>
+   <direction type="sequence">-1-$rank*3</direction>
+   <bullet/>
+  </fire>
+  <wait>6</wait>
+ </action>
+ </repeat>
+ <repeat><times>16</times>
+ <action>
+  <fire>
+   <speed>1</speed>
+   <direction type="sequence">1+$rank*3</direction>
+   <bullet/>
+  </fire>
+  <wait>6</wait>
+ </action>
+ </repeat>
+ </action>
+ </repeat>
+ <repeat><times>8</times>
+ <action>
+  <fire>
+   <speed>1</speed>
+   <direction type="sequence">-1-$rank*3</direction>
+   <bullet/>
+  </fire>
+  <wait>6</wait>
+ </action>
+ </repeat>
+ <vanish/>
+</action>
+
+</bulletml>
+</barrage>

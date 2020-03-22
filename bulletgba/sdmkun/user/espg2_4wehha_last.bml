@@ -1,0 +1,100 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>espg2_4wehha_last</filename>
+ <group>user</group>
+ <title>エスプガルーダ２　４ボス発狂（パーツ全破壊）</title>
+ <description>何で追加されたパーツが撃つ弾と同じのが真ん中から出るんだ！というツッコミは無しで。</description>
+ <capture>知らん</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml" />
+</barrageStyle>
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+	<changeDirection>
+		<direction type="absolute">180</direction>
+		<term>1</term>
+	</changeDirection>
+	<changeSpeed>
+		<speed type="absolute">0.8</speed>
+		<term>20</term>
+	</changeSpeed>
+	<wait>24</wait>
+	<changeSpeed>
+		<speed type="absolute">0</speed>
+		<term>30</term>
+	</changeSpeed>
+	<wait>30</wait>
+	<fire>
+		<direction type="absolute">0</direction>
+		<speed type="absolute">0</speed>
+		<bulletRef label="sub">
+		</bulletRef>
+	</fire>
+	<repeat><times>12</times><action>
+		<repeat><times>5</times><action>
+			<wait>10</wait>
+			<fire><direction type="aim">-60</direction><speed type="absolute">0.7</speed><bullet/></fire>
+			<fire><direction type="sequence">30</direction><speed type="absolute">0.7</speed><bullet/></fire>
+			<fire><direction type="sequence">30</direction><speed type="absolute">0.7</speed><bullet/></fire>
+			<fire><direction type="sequence">30</direction><speed type="absolute">0.7</speed><bullet/></fire>
+			<fire><direction type="sequence">30</direction><speed type="absolute">0.7</speed><bullet/></fire>
+		</action></repeat>
+		<wait>40</wait>
+	</action></repeat>
+	<wait>100</wait>
+</action>
+
+<bullet label="sub">
+	<action>
+		<wait>70</wait>
+		<repeat><times>10</times><action>
+			<fire><direction type="absolute">-360/16</direction><speed type="absolute">2</speed><bulletRef label="light"></bulletRef></fire>
+			<fire><direction type="absolute"> 360/16</direction><speed type="absolute">2</speed><bulletRef label="light"></bulletRef></fire>
+			<fire><direction type="absolute">-360/16*3</direction><speed type="absolute">2</speed><bulletRef label="light"></bulletRef></fire>
+			<fire><direction type="absolute"> 360/16*3</direction><speed type="absolute">2</speed><bulletRef label="light"></bulletRef></fire>
+			<fire><direction type="absolute">-360/16*5</direction><speed type="absolute">2</speed><bulletRef label="light"></bulletRef></fire>
+			<fire><direction type="absolute"> 360/16*5</direction><speed type="absolute">2</speed><bulletRef label="light"></bulletRef></fire>
+			<fire><direction type="absolute">-360/16*7</direction><speed type="absolute">2</speed><bulletRef label="light"></bulletRef></fire>
+			<fire><direction type="absolute"> 360/16*7</direction><speed type="absolute">2</speed><bulletRef label="light"></bulletRef></fire>
+			<wait>100</wait>
+		</action></repeat>
+		<vanish/>
+	</action>
+</bullet>
+
+<bullet label="light">
+	<action>
+		<wait>3</wait>
+		<repeat><times>9999</times><action>
+			<fire><direction type="relative">-4+$rand*8</direction><speed type="absolute">0.01</speed><bulletRef label="bullet"></bulletRef></fire>
+			<wait>15</wait>
+		</action></repeat>
+	</action>
+</bullet>
+
+<bullet label="bullet">
+	<action>
+		<changeSpeed>
+			<speed type="absolute">1.3</speed>
+			<term>50</term>
+		</changeSpeed>
+		<fire><direction type="relative">-90</direction><speed type="absolute">0.8</speed><bullet/></fire>
+		<fire><direction type="relative"> 90</direction><speed type="absolute">0.8</speed><bullet/></fire>
+		<repeat><times>7</times><action>
+			<wait>4</wait>
+			<fire><direction type="relative">-90</direction><speed type="sequence">0.04</speed><bullet/></fire>
+			<fire><direction type="relative"> 90</direction><speed type="sequence">0</speed><bullet/></fire>
+		</action></repeat>
+		<wait>9999</wait>
+	</action>
+</bullet>
+
+</bulletml>
+</barrage>

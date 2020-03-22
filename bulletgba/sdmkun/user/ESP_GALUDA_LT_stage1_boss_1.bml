@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>ESP_GALUDA_LT_stage1_boss_1</filename>
+ <group>ESP_GALUDA_LT</group>
+ <title>エスプガルーダのロケテから、一面ボスの攻撃</title>
+ <description>少し難しくしすぎたけど、だいたいこんな感じでしょ。</description>
+ <capture>あらかじめ左右のどちらかで道を探しておくと楽。</capture>
+</barrageInfo>
+
+<barrageStyle>
+        <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+	<action label="top">
+		<repeat>
+			<times>
+				20+$rank*40
+			</times>
+			<action>
+				<wait>
+					1
+				</wait>
+				<repeat>
+					<times>
+						3
+					</times>
+					<action>
+						<fire>
+							<direction type="aim">
+								-50+$rand*100
+							</direction>
+							<speed>
+								1.7
+							</speed>
+							<bullet/>
+						</fire>
+					</action>
+				</repeat>
+			</action>
+		</repeat>
+		<fire>
+			<direction type="absolute">
+				90
+			</direction>
+			<speed>
+				5
+			</speed>
+			<bullet>
+				<action>
+					<changeDirection>
+						<direction type="sequence">
+							24
+						</direction>
+						<term>
+							9999
+						</term>
+					</changeDirection>
+					<repeat>
+						<times>
+							10+$rank*40
+						</times>
+						<action>
+							<wait>
+								1.5-$rank+$rand
+							</wait>
+							<fire>
+								<direction type="aim">
+									(-8+$rand*16)*$rank+4+$rand*8
+								</direction>
+								<speed>
+									2+$rank*0.8
+								</speed>
+								<bullet/>
+							</fire>
+						</action>
+					</repeat>
+					<vanish/>
+				</action>
+			</bullet>
+		</fire>
+	</action>
+</bulletml>
+</barrage>
+

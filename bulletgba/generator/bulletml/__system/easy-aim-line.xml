@@ -1,0 +1,184 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="lib_line">
+    <fire>
+      <direction type="relative">0</direction>
+      <speed type="absolute">$2</speed>
+      <bullet />
+    </fire>
+    <repeat>
+      <times>$1</times>
+      <action>
+        <fire>
+          <direction type="relative">0</direction>
+          <speed type="sequence">0.1</speed>
+          <bullet />
+        </fire>
+      </action>
+    </repeat>
+    <vanish />
+  </action>
+  <action label="top">
+    <fire form="root">
+      <direction type="absolute">90</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>10</wait>
+          <changeSpeed>
+            <speed type="absolute">0</speed>
+            <term>1</term>
+          </changeSpeed>
+          <repeat>
+            <times>10</times>
+            <action>
+              <fire>
+                <direction type="absolute">180-20</direction>
+                <speed type="absolute">0.1</speed>
+                <bullet>
+                  <actionRef label="fireLineBlock" />
+                </bullet>
+              </fire>
+              <wait>90</wait>
+            </action>
+          </repeat>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire form="root">
+      <direction type="absolute">270</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>10</wait>
+          <changeSpeed>
+            <speed type="absolute">0</speed>
+            <term>1</term>
+          </changeSpeed>
+          <repeat>
+            <times>10</times>
+            <action>
+              <fire>
+                <direction type="absolute">180+20</direction>
+                <speed type="absolute">0.1</speed>
+                <bullet>
+                  <actionRef label="fireLineBlock" />
+                </bullet>
+              </fire>
+              <wait>90</wait>
+            </action>
+          </repeat>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <repeat>
+      <times>10</times>
+      <action>
+        <fire>
+          <direction type="aim">0</direction>
+          <speed type="absolute">0.1</speed>
+          <bullet>
+            <actionRef label="fireLineBlock" />
+          </bullet>
+        </fire>
+        <wait>90</wait>
+      </action>
+    </repeat>
+  </action>
+  <action label="fireLineBlock">
+    <fire form="root">
+      <direction type="relative">0</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <actionRef label="lib_line">
+          <param>10</param>
+          <param>1</param>
+        </actionRef>
+      </bullet>
+    </fire>
+    <fire form="root">
+      <direction type="relative">2</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <actionRef label="lib_line">
+          <param>10</param>
+          <param>1</param>
+        </actionRef>
+      </bullet>
+    </fire>
+    <fire form="root">
+      <direction type="relative">-2</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <actionRef label="lib_line">
+          <param>10</param>
+          <param>1</param>
+        </actionRef>
+      </bullet>
+    </fire>
+    <fire form="root">
+      <direction type="relative">4</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <actionRef label="lib_line">
+          <param>10</param>
+          <param>1</param>
+        </actionRef>
+      </bullet>
+    </fire>
+    <fire form="root">
+      <direction type="relative">-4</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <actionRef label="lib_line">
+          <param>10</param>
+          <param>1</param>
+        </actionRef>
+      </bullet>
+    </fire>
+    <vanish />
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/line.bnml"
+
+action top {
+  fire form root direction absolute 90 speed absolute 4 bullet action {
+    wait 10;
+    changeSpeed absolute 0 term 1;
+    repeat 10 action {
+      fire direction absolute 180 - 20 speed absolute 0.1 bullet actionRef fireLineBlock();
+      wait 90;
+    }
+    vanish;
+  }
+  fire form root direction absolute 270 speed absolute 4 bullet action {
+    wait 10;
+    changeSpeed absolute 0 term 1;
+    repeat 10 action {
+      fire direction absolute 180 + 20 speed absolute 0.1 bullet actionRef fireLineBlock();
+      wait 90;
+    }
+    vanish;
+  }
+  repeat 10 action {
+    fire direction aim 0 speed absolute 0.1 bullet actionRef fireLineBlock();
+    wait 90;
+  }
+}
+
+action fireLineBlock {
+  fire form root direction relative 0 speed absolute 0.1 bullet actionRef lib_line(10, 1);
+  fire form root direction relative 2 speed absolute 0.1 bullet actionRef lib_line(10, 1);
+  fire form root direction relative -2 speed absolute 0.1 bullet actionRef lib_line(10, 1);
+  fire form root direction relative 4 speed absolute 0.1 bullet actionRef lib_line(10, 1);
+  fire form root direction relative -4 speed absolute 0.1 bullet actionRef lib_line(10, 1);
+  vanish;
+}
+-->

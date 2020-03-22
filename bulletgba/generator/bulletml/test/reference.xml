@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <repeat>
+      <times>100</times>
+      <actionRef label="sample">
+        <param>50</param>
+        <param>20</param>
+      </actionRef>
+    </repeat>
+  </action>
+  <fire label="firesample">
+    <direction type="absolute">$2</direction>
+    <speed>$1</speed>
+    <bullet />
+  </fire>
+  <action label="sample">
+    <fireRef label="firesample">
+      <param>$2</param>
+      <param>$1</param>
+    </fireRef>
+    <wait>10</wait>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 100 actionRef sample(50, 20);
+}
+
+fire firesample direction absolute $2 speed $1 bullet;
+
+action sample {
+  fireRef firesample($2, $1);
+  wait 10;
+}
+-->

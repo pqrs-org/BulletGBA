@@ -1,0 +1,61 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 20 action {
+    fire direction aim -30 speed absolute 1 bullet actionRef crossHoming();
+    fire direction aim 30 speed absolute 1 bullet actionRef crossHoming();
+    fire direction aim -60 speed absolute 1 bullet actionRef crossHoming();
+    fire direction aim 60 speed absolute 1 bullet actionRef crossHoming();
+
+    fire direction aim 120 speed absolute 1 bullet actionRef crossHoming();
+    fire direction aim -120 speed absolute 1 bullet actionRef crossHoming();
+
+    wait 20;
+  }
+  repeat 10 action {
+    fire direction aim -30 speed absolute 1 bullet actionRef crossOnly();
+    fire direction aim 30 speed absolute 1 bullet actionRef crossOnly();
+    fire direction aim -60 speed absolute 1 bullet actionRef crossOnly();
+    fire direction aim 60 speed absolute 1 bullet actionRef crossOnly();
+
+    fire direction aim 120 speed absolute 1 bullet actionRef crossOnly();
+    fire direction aim -120 speed absolute 1 bullet actionRef crossOnly();
+
+    wait 20;
+  }
+}
+
+action crossHoming {
+  fire direction relative 0 speed absolute 1 bullet actionRef homing();
+  repeat 10 action {
+    fire direction relative 0 speed sequence 0.3 bullet actionRef homing();
+  }
+  vanish;
+}
+
+action homing {
+  wait 10;
+  changeSpeed absolute 0.1 term 1;
+  wait 40;
+  changeSpeed absolute 2 term 1;
+  wait 10;
+  fire direction aim 0 speed absolute 1 bullet action {
+    changeSpeed sequence 0.1 term 60;
+  }
+}
+
+action crossOnly {
+  fire direction relative 0 speed absolute 1 bullet actionRef crossOnlyNode();
+  repeat 10 action {
+    fire direction relative 0 speed sequence 0.3 bullet actionRef crossOnlyNode();
+  }
+  vanish;
+}
+
+action crossOnlyNode {
+  wait 10;
+  changeSpeed absolute 0.1 term 1;
+  wait 40;
+  changeSpeed absolute 2 term 1;
+}

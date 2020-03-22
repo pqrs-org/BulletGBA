@@ -1,0 +1,105 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+2003/8/4 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* traveler-gunner
+* pattern matching
+* save your honor
+-->
+
+<barrageInfo>
+  <filename>persuader</filename>
+  <group>Oohara</group>
+  <title>説得者</title>
+  <description>読んでもいない小説を元ネタにするのはどうかと思いましたが、それでも。パターンマッチングがどれほど有効かも疑問です。直前のキー入力だけ見ても同等の効果が得られるのでは。</description>
+  <capture>弾は自機の移動先をねらっています。外周を大きく回るとよいです。すばやい方向転換が要求されます。弾源に密着してぐるぐるも有効ですが、密着があまいと死にます。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+id = 0
+pattern = {}
+
+function persuader()
+  local turn = getTurn()
+  local x = getPlayerX()-4
+  local y = getPlayerY()-4
+  local dx = getPlayerSpeedX()
+  local dy = getPlayerSpeedY()
+  local myx = getX()-4
+  local myy = getY()-4
+  local dir = getPlayerAngle()
+  local i = 0
+  local j = 0
+  local score = 0
+  local best = 0
+  local aimx = 0
+  local aimy = 0
+  local targetx = x
+  local targety = y
+  local speed = 1.0 + getRank() * 1.0
+  local distance = math.sqrt((x - myx)^2 + (y - myy)^2)
+  local time = distance / speed
+  if (turn > 900) then
+    vanish()
+  end
+  pattern[id] = {}
+  pattern[id][0] = dx
+  pattern[id][1] = dy
+  if (math.mod(turn, 21 - 15 * getRank()) >= 1.0) then
+    id = id + 1
+    return
+  end
+  if (id < 50) then
+    fire(speed * math.sin(dir), -speed * math.cos(dir))
+  else
+    i = id - 1
+    best = -999
+    while ((i >= 30) and (i >= id - 330)) do
+      j = 0
+      score = 0
+      while j <= 30 do
+        if (pattern[i - j][0] ~= pattern[id - j][0]) then
+          score = score - 1
+        end
+        if (pattern[i - j][1] ~= pattern[id - j][1]) then
+          score = score - 1
+        end
+        j = j + 1
+      end
+      if score > best then
+        aimx = pattern[i][0]
+        aimy = pattern[i][1]
+        best = score
+      end
+      i = i - 1
+    end
+    targetx = x + time * aimx
+    targety = y + time * aimy
+    distance = math.sqrt((targetx - myx)^2 + (targety - myy)^2)
+    fire(speed * (targetx - myx) / distance, speed * (targety - myy) /distance)
+    setSpeed(0.7* (targetx - myx) / distance, 0.7 * (targety - myy) / distance)
+  end
+  id = id + 1
+end
+
+function top()
+  local turn = getTurn()
+  if (turn > 950) then
+    quit()
+  end
+  if (turn == 10) then
+    fire(0, 0, "persuader")
+  end
+end
+]]>
+</lua>
+
+</barrage>

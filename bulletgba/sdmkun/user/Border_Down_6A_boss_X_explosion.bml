@@ -1,0 +1,187 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>Border_Down_6A_boss_X_explosion</filename>
+	<group>Misc</group>
+	<title>ボーダーダウン「ミスフォーチュンロートス」Ｘ炸裂</title>
+	<description>ボダソ6Aボス、ミスフォーチュンロートスの攻撃から、特に「弾幕っぽい」やつを。弾幕くんで普通に再現するとあんまり難しくないです。</description>
+	<capture>あまり前に出ない。原作だと色々破壊できるのですが…。ランクアップで3wayの前後間隔が開きます。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+	<repeat>
+		<times>3</times>
+		<actionRef label="fluu_range"><param>1</param></actionRef>
+		<actionRef label="fluu_range"><param>2</param></actionRef>
+		<wait>60</wait>
+		<actionRef label="3w"><param>1</param></actionRef>
+		<actionRef label="3w"><param>2</param></actionRef>
+		<actionRef label="x"><param>1</param></actionRef>
+		<actionRef label="x"><param>2</param></actionRef>
+		<wait>200</wait>
+	</repeat>
+	<wait>110</wait>
+</action>
+
+<!-- フルレンジショット -->
+<action label="fluu_range">
+	<fire>
+		<direction type="absolute">90+(180*$1)</direction>
+		<speed>2.7</speed>
+		<bullet>
+			<action>
+				<wait>20</wait>
+				<changeSpeed>
+					<speed>0</speed>
+					<term>9</term>
+				</changeSpeed>
+				<wait>15</wait>
+				<repeat>
+					<times>5</times>
+					<action>
+						<fire>
+							<direction type="absolute">180</direction>
+							<speed>1</speed>
+							<bullet>
+								<actionRef label="curve">
+									<param>0.1</param>
+									<param>30</param>
+									<param>10</param>
+								</actionRef>
+								<actionRef label="curve">
+									<param>3.9</param>
+									<param>50</param>
+									<param>32</param>
+								</actionRef>
+							</bullet>
+						</fire>
+						<wait>2</wait>
+					</action>
+				</repeat>
+				<vanish/>
+			</action>
+		</bullet>
+	</fire>
+</action>
+
+<action label="curve">
+	<wait>1</wait>
+	<changeSpeed>
+		<speed>$1</speed>
+		<term>$2</term>
+	</changeSpeed>
+	<repeat>
+		<times>$3</times>
+		<action>
+			<changeDirection>
+				<direction type="aim">0</direction>
+				<term>4</term>
+			</changeDirection>
+			<wait>2</wait>
+		</action>
+	</repeat>
+</action>
+
+<!-- ３way -->
+<action label="3w">
+	<fire>
+		<direction type="absolute">90+(180*$1)</direction>
+		<speed>0.8</speed>
+		<bullet>
+			<action>
+				<wait>20</wait>
+				<changeSpeed>
+					<speed>0</speed>
+					<term>9</term>
+				</changeSpeed>
+				<wait>15</wait>
+				<actionRef label="3w_seed"><param>10</param></actionRef>
+				<actionRef label="3w_seed"><param>0</param></actionRef>
+				<actionRef label="3w_seed"><param>-10</param></actionRef>
+				<vanish/>
+			</action>
+		</bullet>
+	</fire>
+</action>
+
+<action label="3w_seed">
+	<fireRef label="3w_shoot"><param>$1</param><param>0.8+($rank*$rank*0.4)</param></fireRef>
+	<fireRef label="3w_shoot"><param>$1</param><param>0.8+($rank*$rank*1.0)</param></fireRef>
+	<fireRef label="3w_shoot"><param>$1</param><param>0.8+($rank*$rank*1.6)</param></fireRef>
+</action>
+
+<fire label="3w_shoot">
+	<direction type="aim">$1</direction>
+	<speed>$2</speed>
+	<bullet/>
+</fire>
+
+<!-- Ｘ方向炸裂弾 -->
+<action label="x">
+	<fire>
+		<direction type="absolute">90+(180*$1)</direction>
+		<speed>2.5</speed>
+		<bullet>
+			<action>
+				<wait>20</wait>
+				<changeSpeed>
+					<speed>0</speed>
+					<term>9</term>
+				</changeSpeed>
+				<wait>15</wait>
+				<fireRef label="x_seed"><param>1</param></fireRef>
+				<fireRef label="x_seed"><param>2</param></fireRef>
+				<fireRef label="x_seed"><param>3</param></fireRef>
+				<fireRef label="x_seed"><param>4</param></fireRef>
+				<fireRef label="x_seed"><param>5</param></fireRef>
+				<fireRef label="x_seed"><param>6</param></fireRef>
+				<fireRef label="x_seed"><param>7</param></fireRef>
+				<fireRef label="x_seed"><param>8</param></fireRef>
+				<fireRef label="x_seed"><param>9</param></fireRef>
+				<fireRef label="x_seed"><param>10</param></fireRef>
+				<vanish/>
+			</action>
+		</bullet>
+	</fire>
+</action>
+
+<fire label="x_seed">
+	<direction type="absolute">180</direction>
+	<speed>($1*0.29)-0.2</speed>
+	<bullet>
+		<action>
+			<wait>110-($1*5)</wait>
+			<fireRef label="x_shoot"><param>45</param></fireRef>
+			<fireRef label="x_shoot"><param>135</param></fireRef>
+			<fireRef label="x_shoot"><param>225</param></fireRef>
+			<fireRef label="x_shoot"><param>315</param></fireRef>
+			<vanish/>
+		</action>
+	</bullet>
+</fire>
+
+<fire label="x_shoot">
+	<direction type="absolute">$1</direction>
+	<speed>1.8</speed>
+	<bullet>
+		<action>
+			<changeDirection>
+				<direction type="relative">0</direction>
+				<term>1</term>
+			</changeDirection>
+		</action>
+	</bullet>
+</fire>
+
+</bulletml>
+
+</barrage>

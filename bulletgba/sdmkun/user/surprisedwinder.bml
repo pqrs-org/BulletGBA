@@ -1,0 +1,108 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+  <filename>surprisedwinder</filename>
+  <group>user</group>
+  <title>びっくりワインダー</title>
+  <description>恐らく自機ばかり見なくなった中級者が一番死にやすいワインダー。長い上に１発ネタですが。</description>
+  <capture>弾源からの発射角度は変わらないので自機の周囲だけに集中しましょう。少なくとも初期位置付近から始めれば逃げ道が無くなることはないはずです。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+--#####
+OFFSETX, OFFSETY=0,0
+XYSCALE=1
+--#####
+FINISH=2400
+topturn=0
+sinW=0
+aimAngle={0,0}
+wayAngle=1.571796327
+rankAngle=0.262
+drot=0
+
+function top()
+	topturn=getTurn()
+	if topturn==0 then
+		fire( math.sin(getPlayerAngle() )*2, -math.cos(getPlayerAngle() )*2, "calibrateBullet" )
+	elseif topturn>FINISH+30 then
+		quit()
+	elseif topturn==5 then
+		fire( 5, 0, "windShooter", 1 )
+		fire( -5, 0, "windShooter", 2 )
+		rankAngle=0.40143-getRank()*0.17453
+	elseif topturn>20 then
+		if wayAngle>rankAngle then
+			wayAngle=wayAngle-0.0174533
+		end
+		
+		if drot<0 and topturn>2100 then drot=drot+0.0001
+		elseif drot>-0.018 and topturn>1600 then drot=drot-0.0001
+		elseif drot<0.018 and topturn>1350 then drot=drot+0.0001
+		elseif sinW>-2 and topturn>1150 then sinW=sinW-0.02
+		elseif sinW<2 and topturn>950 then sinW=sinW+0.02
+		elseif drot<0 and topturn>750 then drot=drot+0.00015
+		elseif drot>-0.02 and topturn>350 then drot=drot-0.00015
+		elseif drot<0.02 and topturn>150 then drot=drot+0.00015 end
+		
+	end
+	
+end
+
+function windShooter(id)
+	if getTurn()==10 then setSpeed( 0, 0 )
+	elseif topturn>FINISH then vanish()
+	elseif getTurn()>10 then
+		if math.mod(topturn, 3)==0 then
+			if wayAngle>rankAngle then
+				aimAngle[id]=getPlayerAngle()
+			end
+			local  angle=aimAngle[id]-wayAngle*1.5
+			for i=0, 3 do
+				fire(  math.sin(i*wayAngle+angle)*3, math.cos(i*wayAngle+angle)*(-3), "windMove")
+			end
+		end
+	end
+end
+
+function windMove()
+	local t=math.cos( math.rad( getTurn()*12) )*sinW
+	local c, s=math.cos( drot/(1+getTurn()*0.005 ) ), math.sin( drot/(1+getTurn()*0.005 ) )
+	
+	local c, s=math.cos( drot ), math.sin( drot )
+	setSpeed( getSpeedX()*c-getSpeedY()*s, getSpeedY()*c+getSpeedX()*s )
+	
+	setPos( getX()+OFFSETX-getSpeedY()*t, getY()+OFFSETY+getSpeedX()*t )
+end
+
+-- #####
+calibrateTmpY=0,0
+function calibrateBullet()
+	if getTurn()==0 then
+		setSpeed( 0, 1 )
+		calibrateTmpY=getY()
+	elseif getTurn()==1 then
+		setSpeed( 0, 0 )
+		OFFSETX, OFFSETY=getX(), getY()
+		XYSCALE=getY()-calibrateTmpY
+		setPos( getX(), getY() )
+	elseif getTurn()==2 then
+		OFFSETX, OFFSETY=OFFSETX-getX(), OFFSETY-getY()
+	else
+		--print( OFFSETX, OFFSETY, XYSCALE )
+		vanish()
+	end
+end
+
+]]>
+</lua>
+
+</barrage>

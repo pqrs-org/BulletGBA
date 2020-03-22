@@ -1,0 +1,30 @@
+#ifndef GENERATED_356d9537f4c76bacb19d3e8b71c490fb_HPP 
+#define GENERATED_356d9537f4c76bacb19d3e8b71c490fb_HPP 
+
+#include "bullet.hpp" 
+
+void stepfunc_b9f3746024faf71a948d02a3f58cba12_453664efe648d4db0911641f01088dec(BulletInfo *p); 
+void stepfunc_1f186e91fa55d9c42305340884928987_453664efe648d4db0911641f01088dec(BulletInfo *p); 
+void stepfunc_072d6d603745bc8b6403f2a6ab31af34_453664efe648d4db0911641f01088dec(BulletInfo *p); 
+void stepfunc_edd4eded834ca85474c0972aff7e7e2e_453664efe648d4db0911641f01088dec(BulletInfo *p); 
+void stepfunc_dae2cf81747ffb5070f05c8837b1d568_453664efe648d4db0911641f01088dec(BulletInfo *p); 
+void stepfunc_ee0dab4a1825377c0e8dc5b409a33ca1_453664efe648d4db0911641f01088dec(BulletInfo *p); 
+void stepfunc_48335121df3ff5225f00d637f2b62596_453664efe648d4db0911641f01088dec(BulletInfo *p); 
+void stepfunc_9b430a7980e20571ea346ca2eb0f5bc9_453664efe648d4db0911641f01088dec(BulletInfo *p); 
+void stepfunc_39e1d54543c5392325160f44703596c8_453664efe648d4db0911641f01088dec(BulletInfo *p); 
+void stepfunc_8fbbf57fe58d66c7a7911abadf6d1b53_453664efe648d4db0911641f01088dec(BulletInfo *p); 
+void stepfunc_8fff89501dcb48caade16bb16deb7b61_453664efe648d4db0911641f01088dec(BulletInfo *p); 
+
+
+extern const BulletStepFunc bullet_7502edb549f706fb6f43a0edc65b3eb5_453664efe648d4db0911641f01088dec[]; 
+const unsigned int bullet_7502edb549f706fb6f43a0edc65b3eb5_453664efe648d4db0911641f01088dec_size = 25; 
+extern const BulletStepFunc bullet_39c343f2416180aa52dc5499ab6c5285_453664efe648d4db0911641f01088dec[]; 
+const unsigned int bullet_39c343f2416180aa52dc5499ab6c5285_453664efe648d4db0911641f01088dec_size = 3; 
+extern const BulletStepFunc bullet_26c1fe128c1835a8099ed53d18ff7022_453664efe648d4db0911641f01088dec[]; 
+const unsigned int bullet_26c1fe128c1835a8099ed53d18ff7022_453664efe648d4db0911641f01088dec_size = 4; 
+extern const BulletStepFunc bullet_8dcb3ceead25724d619ba0e405b9a513_453664efe648d4db0911641f01088dec[]; 
+const unsigned int bullet_8dcb3ceead25724d619ba0e405b9a513_453664efe648d4db0911641f01088dec_size = 57; 
+
+
+#endif 
+

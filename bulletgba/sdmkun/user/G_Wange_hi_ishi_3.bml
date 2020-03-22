@@ -1,0 +1,220 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+idea by G-Wange (http://cgp.s5.xrea.com/gw/youko.html)
+bml written on 2003/8/15 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* red carpet
+* ready to nuke
+* be curious
+-->
+
+<barrageInfo>
+  <filename>G_Wange_hi_ishi_3</filename>
+  <group>G-Wange</group>
+  <title>G-わんげラスボス案、緋石その三</title>
+  <description>原案では全弾自機狙いのようですが、白い弾幕くんでそうするとこんこん避けで終わってしまうので、かなり脚色してあります。左右ビットからの弾は赤デカ戦車弾のつもりです。</description>
+  <capture>画面中央からはじめて下向きにこんこん避け。もちろん横にも適宜動くこと。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+    <fire>
+      <bulletRef label="dummy"/>
+    </fire>
+
+  <wait>100</wait>
+
+  <repeat> <times>20</times> <action>
+    <fire>
+      <direction type="absolute">-90 + 180 * $rand</direction>
+      <speed>3.0 * $rand</speed>
+      <bulletRef label="aim">
+        <param>0</param>
+        <param>1.3</param>
+      </bulletRef>
+    </fire>
+    <wait>10</wait>
+
+  </action> </repeat>
+
+  <wait>400 - 300 * $rank</wait>
+
+</action>
+
+<bullet label="dummy">
+<direction type="absolute">0</direction>
+<speed>0.0</speed>
+<action>
+
+  <repeat> <times>15</times> <action>
+    <fire>
+      <direction type="absolute">-90 + 180 * $rand</direction>
+      <speed>2.0 * $rand</speed>
+      <bulletRef label="11way">
+        <param>13</param>
+        <param>0.4 + 0.3 * $rank</param>
+      </bulletRef>
+    </fire>
+
+    <fire>
+      <direction type="absolute">-90</direction>
+      <speed>2.0</speed>
+      <bulletRef label="tank"/>
+    </fire>
+
+    <wait>10</wait>
+
+    <fire>
+      <direction type="absolute">-90 + 180 * $rand</direction>
+      <speed>2.0 * $rand</speed>
+      <bulletRef label="12way">
+        <param>13</param>
+        <param>0.4 + 0.3 * $rank</param>
+      </bulletRef>
+    </fire>
+
+    <fire>
+      <direction type="absolute">90</direction>
+      <speed>2.0</speed>
+      <bulletRef label="tank"/>
+    </fire>
+
+    <wait>10</wait>
+
+  </action> </repeat>
+
+  <vanish/>
+
+</action>
+</bullet>
+
+<bullet label="aim">
+<action>
+
+  <wait>10</wait>
+  <changeSpeed>
+    <speed>0.0</speed>
+    <term>1</term>
+  </changeSpeed>
+  <wait>5</wait>
+
+  <fire>
+    <direction type="aim">0</direction>
+    <speed>$2</speed>
+    <bullet/>
+  </fire>
+  <wait>5</wait>
+  <repeat> <times>4</times> <action>
+    <fire>
+      <direction type="sequence">$1</direction>
+      <speed type="sequence">0.0</speed>
+      <bullet/>
+    </fire>
+    <wait>5</wait>
+  </action> </repeat>
+
+  <vanish/>
+
+</action>
+</bullet>
+
+<bullet label="tank">
+<action>
+
+  <wait>30</wait>
+  <changeDirection>
+    <direction type="absolute">180</direction>
+    <term>1</term>
+  </changeDirection>
+  <wait>5</wait>
+
+  <repeat> <times>999</times> <action>
+    <fire>
+      <direction type="aim">0</direction>
+      <speed>0.4 + 0.9 * $rank</speed>
+      <bullet/>
+    </fire>
+    <wait>200 - 180 * $rank</wait>
+  </action> </repeat>
+
+</action>
+</bullet>
+
+<bullet label="11way">
+<action>
+
+  <wait>10</wait>
+
+  <fire>
+    <direction type="aim">$1 * (-5)</direction>
+    <speed>$2 + 1.0</speed>
+    <bullet/>
+  </fire>
+  <repeat> <times>5</times> <action>
+    <fire>
+      <direction type="sequence">$1</direction>
+      <speed type="sequence">-0.2</speed>
+      <bullet/>
+    </fire>
+  </action> </repeat>
+  <repeat> <times>5</times> <action>
+    <fire>
+      <direction type="sequence">$1</direction>
+      <speed type="sequence">0.2</speed>
+      <bullet/>
+    </fire>
+  </action> </repeat>
+
+  <vanish/>
+
+</action>
+</bullet>
+
+<bullet label="12way">
+<action>
+
+  <wait>10</wait>
+
+  <fire>
+    <direction type="aim">$1 * (-5.5)</direction>
+    <speed>$2</speed>
+    <bullet/>
+  </fire>
+  <repeat> <times>5</times> <action>
+    <fire>
+      <direction type="sequence">$1</direction>
+      <speed type="sequence">0.2</speed>
+      <bullet/>
+    </fire>
+  </action> </repeat>
+  <fire>
+    <direction type="sequence">$1</direction>
+    <speed type="sequence">0.0</speed>
+    <bullet/>
+  </fire>
+  <repeat> <times>5</times> <action>
+    <fire>
+      <direction type="sequence">$1</direction>
+      <speed type="sequence">-0.2</speed>
+      <bullet/>
+    </fire>
+  </action> </repeat>
+
+  <vanish/>
+
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

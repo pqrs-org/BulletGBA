@@ -1,0 +1,153 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="lib_spread">
+    <fire>
+      <direction type="aim">0</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <action>
+          <wait>1</wait>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <repeat>
+      <times>20</times>
+      <action>
+        <fire>
+          <direction type="sequence">18</direction>
+          <speed type="absolute">3</speed>
+          <bullet>
+            <action>
+              <wait>3</wait>
+              <changeSpeed>
+                <speed type="absolute">0.2</speed>
+                <term>1</term>
+              </changeSpeed>
+              <wait>20</wait>
+              <changeSpeed>
+                <speed type="absolute">$1</speed>
+                <term>1</term>
+              </changeSpeed>
+            </action>
+          </bullet>
+        </fire>
+      </action>
+    </repeat>
+  </action>
+  <action label="top">
+    <actionRef label="mebius">
+      <param>2</param>
+    </actionRef>
+    <actionRef label="mebius">
+      <param>-2</param>
+    </actionRef>
+  </action>
+  <action label="mebius">
+    <fire form="root">
+      <direction type="absolute">0</direction>
+      <speed type="absolute">1</speed>
+      <bullet>
+        <action>
+          <repeat>
+            <times>3</times>
+            <action>
+              <changeDirection>
+                <direction type="sequence">$1</direction>
+                <term>45*4</term>
+              </changeDirection>
+              <repeat>
+                <times>4</times>
+                <action>
+                  <fire form="root">
+                    <direction type="aim">0</direction>
+                    <speed type="absolute">2</speed>
+                    <bullet>
+                      <action>
+                        <fire form="small">
+                          <direction type="aim">0</direction>
+                          <speed type="absolute">2</speed>
+                          <bullet />
+                        </fire>
+                        <actionRef label="lib_spread">
+                          <param>1</param>
+                        </actionRef>
+                        <vanish />
+                      </action>
+                    </bullet>
+                  </fire>
+                  <wait>45</wait>
+                </action>
+              </repeat>
+              <changeDirection>
+                <direction type="sequence">-$1</direction>
+                <term>45*4</term>
+              </changeDirection>
+              <repeat>
+                <times>4</times>
+                <action>
+                  <fire form="root">
+                    <direction type="aim">0</direction>
+                    <speed type="absolute">2</speed>
+                    <bullet>
+                      <action>
+                        <fire form="small">
+                          <direction type="aim">0</direction>
+                          <speed type="absolute">2</speed>
+                          <bullet />
+                        </fire>
+                        <actionRef label="lib_spread">
+                          <param>1</param>
+                        </actionRef>
+                        <vanish />
+                      </action>
+                    </bullet>
+                  </fire>
+                  <wait>45</wait>
+                </action>
+              </repeat>
+            </action>
+          </repeat>
+        </action>
+      </bullet>
+    </fire>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/spread.bnml"
+
+action top {
+  actionRef mebius(2);
+  actionRef mebius(-2);
+}
+
+// $1: direction
+action mebius {
+  fire form root direction absolute 0 speed absolute 1 bullet action {
+    repeat 3 action {
+      changeDirection sequence $1 term 45 * 4;
+      repeat 4 action {
+        fire form root direction aim 0 speed absolute 2 bullet action {
+          fire form small direction aim 0 speed absolute 2 bullet;
+          actionRef lib_spread(1);
+          vanish;
+        }
+        wait 45;
+      }
+      changeDirection sequence - $1 term 45 * 4;
+      repeat 4 action {
+        fire form root direction aim 0 speed absolute 2 bullet action {
+          fire form small direction aim 0 speed absolute 2 bullet;
+          actionRef lib_spread(1);
+          vanish;
+        }
+        wait 45;
+      }
+    }
+  }
+}
+-->

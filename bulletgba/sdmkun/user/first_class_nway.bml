@@ -1,0 +1,126 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+2004/3/11 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* recollection
+* friendship
+* particle effect
+-->
+
+<barrageInfo>
+  <filename>first_class_nway</filename>
+  <group>Oohara</group>
+  <title>一級Nウェイ</title>
+  <description>古典弾幕。雷電DXとか。</description>
+  <capture>全弾同時に発射させるとわかりますが、固定Nウェイをふたつ並べてあるだけです。発射方向は真下から微妙にずれています。</capture>
+  <author>Oohara_Yuuma</author>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+  <fire>
+    <direction type="absolute">90</direction>
+    <speed>1.0</speed>
+    <bulletRef label="bit">
+      <param>1</param>
+      <param>1</param>
+      <param>1.7 + 1.0 * $rank</param>
+    </bulletRef>
+  </fire>
+  <fire>
+    <direction type="absolute">90</direction>
+    <speed>1.0</speed>
+    <bulletRef label="bit">
+      <param>-1</param>
+      <param>-1</param>
+      <param>1.7 + 1.0 * $rank</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <direction type="absolute">-90</direction>
+    <speed>1.0</speed>
+    <bulletRef label="bit">
+      <param>1</param>
+      <param>1</param>
+      <param>1.7 + 1.0 * $rank</param>
+    </bulletRef>
+  </fire>
+  <fire>
+    <direction type="absolute">-90</direction>
+    <speed>1.0</speed>
+    <bulletRef label="bit">
+      <param>-1</param>
+      <param>-1</param>
+      <param>1.7 + 1.0 * $rank</param>
+    </bulletRef>
+  </fire>
+
+  <wait>600</wait>
+
+</action>
+
+<bullet label="bit">
+<action>
+
+  <wait>20</wait>
+  <changeSpeed>
+    <speed>0.0</speed>
+    <term>1</term>
+  </changeSpeed>
+  <wait>5</wait>
+
+  <fire>
+    <direction type="absolute">88 * $1</direction>
+    <speed>$3</speed>
+    <bulletRef label="dummy"/>
+  </fire>
+  <wait>15</wait>
+  <repeat><times>35</times><action>
+    <fire>
+      <direction type="sequence">5 * $2</direction>
+      <speed type="sequence">0.0</speed>
+      <bulletRef label="dummy"/>
+    </fire>
+    <wait>15</wait>
+  </action></repeat>
+
+  <vanish/>
+
+</action>
+</bullet>
+
+<bullet label="dummy">
+<action>
+
+  <fire>
+    <direction type="relative">0</direction>
+    <speed type="relative">0</speed>
+    <bullet/>
+  </fire>
+  <repeat><times>2 + 7 * $rank</times><action>
+    <fire>
+      <direction type="sequence">0</direction>
+      <speed type="sequence">0.1</speed>
+      <bullet/>
+    </fire>
+  </action></repeat>
+
+  <vanish/>
+
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

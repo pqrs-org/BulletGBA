@@ -1,0 +1,122 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+2004/3/11 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* lightning fast
+* fabricate it
+* red stone-like
+-->
+
+<barrageInfo>
+  <filename>innovation_nway</filename>
+  <group>Oohara</group>
+  <title>破天荒Nウェイ</title>
+  <description>天荒とは世界創造以前の混沌のこと。それを破るとはすなわちだれもやらなかったことをなしとげること。というわけで、某リアル緋石の発狂弾幕を再現しようとした失敗作。</description>
+  <capture>第3波だけ偶数way、残りが奇数wayですが、本体のまわりを回ったほうが楽です。第1波終了直後に反転するのがコツ。</capture>
+  <author>Oohara_Yuuma</author>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+  <actionRef label="roll">
+    <param>-60</param>
+    <param>2</param>
+    <param>60</param>
+  </actionRef>
+  <actionRef label="roll">
+    <param>50</param>
+    <param>-2</param>
+    <param>50</param>
+  </actionRef>
+
+  <actionRef label="roll">
+    <param>-25</param>
+    <param>2</param>
+    <param>25</param>
+  </actionRef>
+  <actionRef label="roll">
+    <param>24</param>
+    <param>-2</param>
+    <param>24</param>
+  </actionRef>
+
+  <actionRef label="roll">
+    <param>-20</param>
+    <param>2</param>
+    <param>20</param>
+  </actionRef>
+  <actionRef label="roll">
+    <param>20</param>
+    <param>-2</param>
+    <param>20</param>
+  </actionRef>
+
+  <actionRef label="roll">
+    <param>-10</param>
+    <param>2</param>
+    <param>10</param>
+  </actionRef>
+  <actionRef label="roll">
+    <param>8</param>
+    <param>-2</param>
+    <param>8</param>
+  </actionRef>
+
+  <actionRef label="roll">
+    <param>-6</param>
+    <param>2</param>
+    <param>6</param>
+  </actionRef>
+  <actionRef label="roll">
+    <param>4</param>
+    <param>-2</param>
+    <param>4</param>
+  </actionRef>
+
+  <repeat><times>20 + 30 * $rank</times><action>
+    <fire>
+      <direction type="aim">0</direction>
+      <speed>0.7 + 2.0 * $rank</speed>
+      <bullet/>
+    </fire>
+    <wait>2</wait>
+  </action></repeat>
+
+  <wait>200 - 100 * $rank</wait>
+
+</action>
+
+<action label="roll">
+
+  <fire>
+    <direction type="aim">$1</direction>
+    <speed>0.7 + 2.0 * $rank</speed>
+    <bullet/>
+  </fire>
+  <wait>1</wait>
+  <repeat><times>$3</times><action>
+    <fire>
+      <direction type="sequence">$2</direction>
+      <speed type="sequence">0.0</speed>
+      <bullet/>
+    </fire>
+    <wait>1</wait>
+  </action></repeat>
+
+  <wait>1 + (1.0 - $rank) * $3</wait>
+
+</action>
+
+</bulletml>
+
+</barrage>

@@ -1,0 +1,116 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+2003/7/7 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* instinctive evasion
+* Q and D life
+* YARS
+-->
+
+<barrageInfo>
+  <filename>my_boom</filename>
+  <group>Oohara</group>
+  <title>マイブーム</title>
+  <description>今日は七夕、弾幕に願いを書いて笹につるすのです。</description>
+  <capture>かなり甘口なので適当にやっても何とかなると思います。詠唱中にうしろに回りこむのが最も楽でしょう。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+  <repeat> <times>3 + 5 * $rank</times><action>
+    <fire>
+      <direction type="absolute">-80 + 160 * $rand</direction>
+      <speed>0.4 + 0.2 * $rand</speed>
+      <bulletRef label="bit1"/>
+    </fire>
+  </action></repeat>
+
+  <wait>400</wait>
+
+</action>
+
+<bullet label="bit1">
+<action>
+
+  <wait>30 + 10 * $rand</wait>
+
+  <fire>
+    <direction type="relative">-30 + 60 * $rand - 15</direction>
+    <speed>0.4 + 0.2 * $rand</speed>
+    <bulletRef label="bit0"/>
+  </fire>
+  <repeat> <times>3</times><action>
+    <fire>
+      <direction type="sequence">0</direction>
+      <speed type="sequence">0.1</speed>
+      <bulletRef label="bit0"/>
+    </fire>
+  </action></repeat>
+
+  <fire>
+    <direction type="relative">-30 + 60 * $rand + 15</direction>
+    <speed>0.4 + 0.2 * $rand</speed>
+    <bulletRef label="bit0"/>
+  </fire>
+  <repeat> <times>3</times><action>
+    <fire>
+      <direction type="sequence">0</direction>
+      <speed type="sequence">0.1</speed>
+      <bulletRef label="bit0"/>
+    </fire>
+  </action></repeat>
+
+  <vanish/>
+
+</action>
+</bullet>
+
+<bullet label="bit0">
+<action>
+
+  <wait>30 + 10 * $rand</wait>
+
+  <fire>
+    <direction type="absolute">150 + 60 * $rand</direction>
+    <speed>0.4 + 0.3 * $rand</speed>
+    <bullet/>
+  </fire>
+  <repeat> <times>2 + 2 * $rank</times><action>
+    <fire>
+      <direction type="sequence">2 + 2 * $rand</direction>
+      <speed type="sequence">0.1</speed>
+      <bullet/>
+    </fire>
+  </action></repeat>
+
+  <fire>
+    <direction type="absolute">150 + 60 * $rand</direction>
+    <speed>0.4 + 0.3 * $rand</speed>
+    <bullet/>
+  </fire>
+  <repeat> <times>2 + 2 * $rank</times><action>
+    <fire>
+      <direction type="sequence">-(2 + 2 * $rand)</direction>
+      <speed type="sequence">0.1</speed>
+      <bullet/>
+    </fire>
+  </action></repeat>
+
+  <vanish/>
+
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

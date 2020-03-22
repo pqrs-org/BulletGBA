@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <repeat>
+      <times>3</times>
+      <action>
+        <fire>
+          <direction type="aim">-70</direction>
+          <speed type="absolute">1</speed>
+          <bullet>
+            <actionRef label="changespeed" />
+          </bullet>
+        </fire>
+        <actionRef label="line" />
+        <repeat>
+          <times>14</times>
+          <action>
+            <fire>
+              <direction type="sequence">10</direction>
+              <speed type="absolute">1</speed>
+              <bullet>
+                <actionRef label="changespeed" />
+              </bullet>
+            </fire>
+            <actionRef label="line" />
+          </action>
+        </repeat>
+        <wait>10</wait>
+      </action>
+    </repeat>
+  </action>
+  <action label="changespeed">
+    <changeSpeed>
+      <speed type="sequence">0.2</speed>
+      <term>10</term>
+    </changeSpeed>
+  </action>
+  <action label="line">
+    <repeat>
+      <times>5</times>
+      <action>
+        <fire>
+          <direction type="sequence">0</direction>
+          <speed type="sequence">0.2</speed>
+          <bullet>
+            <actionRef label="changespeed" />
+          </bullet>
+        </fire>
+      </action>
+    </repeat>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 3 action {
+    fire direction aim -70 speed absolute 1 bullet actionRef changespeed();
+    actionRef line();
+    repeat 14 action {
+      fire direction sequence 10 speed absolute 1 bullet actionRef changespeed();
+      actionRef line();
+    }
+    wait 10;
+  }
+}
+
+action changespeed {
+  changeSpeed sequence 0.2 term 10;
+}
+
+action line {
+  repeat 5 action {
+    fire direction sequence 0 speed sequence 0.2 bullet actionRef changespeed();
+  }
+}
+-->

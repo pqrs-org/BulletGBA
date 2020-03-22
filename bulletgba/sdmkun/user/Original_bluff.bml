@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>Original_bluff</filename>
+ <group>shinichiro_h</group>
+ <title>ブラフ</title>
+ <description>赤弾はブラフです、が、惑わされます。</description>
+ <capture>この手のやつは射角が狭いと敵本体の周りを周れますが、
+ ブラフ弾がそれをできなくしてくれてます。</capture>
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml>
+	<action label="top">
+		<repeat>
+			<times>
+				300
+			</times>
+			<action>
+				<wait>
+					1
+				</wait>
+				<fire>
+					<direction type="aim">
+						($rand-0.5)*(150-$rank*90)
+					</direction>
+					<speed>
+						1.5
+					</speed>
+					<bullet/>
+				</fire>
+				<fire>
+					<direction type="aim">
+						($rand-0.5)*(150-$rank*90)
+					</direction>
+					<speed>
+						1.5
+					</speed>
+					<bullet>
+						<action>
+							<wait>
+								90
+							</wait>
+							<changeDirection>
+								<direction type="absolute">
+									0
+								</direction>
+								<term>
+									1
+								</term>
+							</changeDirection>
+						</action>
+					</bullet>
+				</fire>
+			</action>
+		</repeat>
+		<wait>40</wait>
+	</action>
+</bulletml>
+
+</barrage>

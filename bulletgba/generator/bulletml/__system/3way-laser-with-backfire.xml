@@ -1,0 +1,163 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="lib_laser_with_backfire">
+    <repeat>
+      <times>$1</times>
+      <action>
+        <fire>
+          <direction type="relative">0</direction>
+          <speed type="absolute">2</speed>
+          <bullet>
+            <action>
+              <repeat>
+                <times>3</times>
+                <action>
+                  <wait>20</wait>
+                  <fire>
+                    <direction type="relative">180-30</direction>
+                    <speed type="absolute">0.5</speed>
+                    <bullet>
+                      <actionRef label="lib_laser_with_backfire_backfire" />
+                    </bullet>
+                  </fire>
+                  <fire>
+                    <direction type="relative">180+30</direction>
+                    <speed type="absolute">0.5</speed>
+                    <bullet>
+                      <actionRef label="lib_laser_with_backfire_backfire" />
+                    </bullet>
+                  </fire>
+                </action>
+              </repeat>
+            </action>
+          </bullet>
+        </fire>
+        <wait>3</wait>
+      </action>
+    </repeat>
+    <vanish />
+  </action>
+  <action label="lib_laser_with_backfire_backfire">
+    <wait>60</wait>
+    <changeDirection>
+      <direction type="aim">0+10-20*$rand</direction>
+      <term>1</term>
+    </changeDirection>
+    <changeSpeed>
+      <speed type="sequence">0.1</speed>
+      <term>30</term>
+    </changeSpeed>
+  </action>
+  <action label="top">
+    <actionRef label="fire3way">
+      <param>0</param>
+    </actionRef>
+    <wait>90</wait>
+    <actionRef label="fire3way">
+      <param>-30</param>
+    </actionRef>
+    <actionRef label="fire3way">
+      <param>30</param>
+    </actionRef>
+    <wait>90</wait>
+    <actionRef label="fire3way">
+      <param>0</param>
+    </actionRef>
+    <wait>90</wait>
+    <actionRef label="fire3way">
+      <param>-60</param>
+    </actionRef>
+    <actionRef label="fire3way">
+      <param>60</param>
+    </actionRef>
+    <wait>90</wait>
+    <actionRef label="fire3way">
+      <param>-60</param>
+    </actionRef>
+    <wait>20</wait>
+    <actionRef label="fire3way">
+      <param>-30</param>
+    </actionRef>
+    <wait>20</wait>
+    <actionRef label="fire3way">
+      <param>0</param>
+    </actionRef>
+    <wait>20</wait>
+    <actionRef label="fire3way">
+      <param>30</param>
+    </actionRef>
+    <wait>20</wait>
+    <actionRef label="fire3way">
+      <param>60</param>
+    </actionRef>
+  </action>
+  <action label="fire3way">
+    <fire form="root">
+      <direction type="aim">0+$1</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <actionRef label="lib_laser_with_backfire">
+          <param>10</param>
+        </actionRef>
+      </bullet>
+    </fire>
+    <fire form="root">
+      <direction type="aim">-10+$1</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <actionRef label="lib_laser_with_backfire">
+          <param>10</param>
+        </actionRef>
+      </bullet>
+    </fire>
+    <fire form="root">
+      <direction type="aim">10+$1</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <actionRef label="lib_laser_with_backfire">
+          <param>10</param>
+        </actionRef>
+      </bullet>
+    </fire>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/laser-with-backfire.bnml"
+
+action top {
+  actionRef fire3way(0);
+  wait 90;
+
+  actionRef fire3way(-30);
+  actionRef fire3way(30);
+  wait 90;
+
+  actionRef fire3way(0);
+  wait 90;
+
+  actionRef fire3way(-60);
+  actionRef fire3way(60);
+  wait 90;
+
+  actionRef fire3way(-60);
+  wait 20;
+  actionRef fire3way(-30);
+  wait 20;
+  actionRef fire3way(0);
+  wait 20;
+  actionRef fire3way(30);
+  wait 20;
+  actionRef fire3way(60);
+}
+
+// $1: base-direction
+action fire3way {
+  fire form root direction aim 0 + $1 speed absolute 0.1 bullet actionRef lib_laser_with_backfire(10);
+  fire form root direction aim -10 + $1 speed absolute 0.1 bullet actionRef lib_laser_with_backfire(10);
+  fire form root direction aim 10 + $1 speed absolute 0.1 bullet actionRef lib_laser_with_backfire(10);
+}
+-->

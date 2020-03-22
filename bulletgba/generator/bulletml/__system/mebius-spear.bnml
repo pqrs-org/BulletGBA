@@ -1,0 +1,28 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/spear.bnml"
+
+action top {
+  actionRef mebius(2);
+  actionRef mebius(-2);
+}
+
+// $1: direction
+action mebius {
+  fire form root direction absolute 0 speed absolute 1 bullet action {
+    repeat 5 action {
+      changeDirection sequence $1 term 45 * 4;
+      repeat 45 action {
+        fire form small direction aim 0 speed absolute 0.1 bullet actionRef lib_spear();
+        wait 4;
+      }
+      changeDirection sequence - $1 term 45 * 4;
+      repeat 45 action {
+        fire form small direction aim 0 speed absolute 0.1 bullet actionRef lib_spear();
+        wait 4;
+      }
+    }
+    vanish;
+  }
+}

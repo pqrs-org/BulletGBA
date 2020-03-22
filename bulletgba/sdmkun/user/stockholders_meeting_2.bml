@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+2003/10/7 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* green earth
+* be profitable
+* here we go
+-->
+
+<barrageInfo>
+  <filename>stockholders_meeting_2</filename>
+  <group>Oohara</group>
+  <title>株主総会その二</title>
+  <description>「わかるだろう、今のままがいいのだ。株主中心で、株主のためにある会社が。すべては出資者である株主に支配され、顧客も開発者も従う。それでいままでうまくいってきた。それを、なぜ今になって壊す?」</description>
+  <capture>画面上か下か、おすきなほうで避けてください。画面下だと上下からはさまれ、しかも赤弾の動きが読みづらいです。画面上だと緑弾には当たりませんが、赤弾を全弾最高速でくらいます。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+    <fire>
+      <direction type="absolute">0</direction>
+      <speed>0.6</speed>
+      <bulletRef label="more"/>
+    </fire>
+    <wait>3</wait>
+  <repeat><times>100</times><action>
+    <fire>
+      <direction type="sequence">17</direction>
+      <speed type="sequence">0</speed>
+      <bulletRef label="more"/>
+    </fire>
+    <wait>3</wait>
+  </action></repeat>
+  <repeat><times>100</times><action>
+    <fire>
+      <direction type="sequence">-17</direction>
+      <speed type="sequence">0</speed>
+      <bulletRef label="more"/>
+    </fire>
+    <wait>3</wait>
+  </action></repeat>
+
+    <wait>300</wait>
+
+</action>
+
+<bullet label="more">
+<action>
+  <accel>
+    <vertical>4</vertical>
+    <term>600</term>
+  </accel>
+
+  <wait>150 - 50 * $rank</wait>
+  <repeat><times>200</times><action>
+    <fire>
+      <direction type="relative">45</direction>
+      <speed>0.6</speed>
+      <bulletRef label="back"/>
+    </fire>
+    <wait>60 - 30 * $rank</wait>
+    <fire>
+      <direction type="relative">-45</direction>
+      <speed>0.6</speed>
+      <bulletRef label="back"/>
+    </fire>
+    <wait>60 - 30 * $rank</wait>
+  </action></repeat>
+
+</action>
+</bullet>
+
+<bullet label="back">
+<action>
+  <accel>
+    <vertical>-4</vertical>
+    <term>600</term>
+  </accel>
+</action>
+</bullet>
+
+</bulletml>
+</barrage>

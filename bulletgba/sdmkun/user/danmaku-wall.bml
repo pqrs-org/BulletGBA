@@ -1,0 +1,123 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>danmaku-wall</filename>
+	<group>user</group>
+	<title>弾幕の壁</title>
+	<description>ケツイ真ボスっぽい弾幕を目指してみました。レベル100は人外向けになってます。</description>
+	<capture>緑弾から吐き出される壁に気を取られていると横殴り弾の突撃を食らって死にます。時間が経つにつれ発射間隔がどんどん短くなりキチガイっぷりを堪能できます。そのためレベル0でも最終的にはかなり難しくなります。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <changeDirection>
+  <direction type="absolute">180</direction>
+  <term>1</term>
+ </changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>1</term>
+ </changeSpeed>
+  <wait>10</wait>
+ <changeSpeed>
+  <speed>0</speed>
+  <term>1</term>
+ </changeSpeed>
+ <wait>5</wait>
+  <actionRef label="shot"><param>150-$rank*70</param></actionRef>
+  <actionRef label="shot"><param>140-$rank*65</param></actionRef>
+  <actionRef label="shot"><param>130-$rank*60</param></actionRef>
+  <actionRef label="shot"><param>120-$rank*55</param></actionRef>
+  <actionRef label="shot"><param>110-$rank*50</param></actionRef>
+  <actionRef label="shot"><param>100-$rank*45</param></actionRef>
+  <actionRef label="shot"><param>90-$rank*40</param></actionRef>
+  <actionRef label="shot"><param>80-$rank*35</param></actionRef>
+  <actionRef label="shot"><param>70-$rank*30</param></actionRef>
+  <actionRef label="shot"><param>60-$rank*25</param></actionRef>
+  <actionRef label="shot"><param>50-$rank*20</param></actionRef>
+  <actionRef label="shot"><param>40-$rank*15</param></actionRef>
+  <actionRef label="shot"><param>30-$rank*10</param></actionRef>
+</action>
+
+<action label="shot">
+ <fire>
+  <direction type="sequence">9</direction>
+  <speed>1</speed>
+  <bulletRef label="change"><param>170</param></bulletRef>
+ </fire>
+ <repeat><times>4</times>
+  <action>
+   <fire>
+    <direction type="sequence">72</direction>
+    <speed type="sequence">0</speed>
+    <bulletRef label="change"><param>170</param></bulletRef>
+   </fire>
+  </action>
+ </repeat>
+ <wait>$1</wait>
+ <fire>
+  <direction type="sequence">9</direction>
+  <speed>1</speed>
+  <bulletRef label="change"><param>-170</param></bulletRef>
+ </fire>
+ <repeat><times>4</times>
+  <action>
+   <fire>
+    <direction type="sequence">72</direction>
+    <speed type="sequence">0</speed>
+    <bulletRef label="change"><param>-170</param></bulletRef>
+   </fire>
+  </action>
+ </repeat>
+ <wait>$1</wait>
+ <fire>
+  <direction type="sequence">9</direction>
+  <speed>1</speed>
+  <bulletRef label="change"><param>0</param></bulletRef>
+ </fire>
+ <repeat><times>4</times>
+  <action>
+   <fire>
+    <direction type="sequence">72</direction>
+    <speed type="sequence">0</speed>
+    <bulletRef label="change"><param>0</param></bulletRef>
+   </fire>
+  </action>
+ </repeat>
+ <wait>$1</wait>
+</action>
+
+<bullet label="change">
+ <action>
+  <changeDirection>
+   <direction type="relative">$1</direction>
+   <term>250</term>
+  </changeDirection>
+  <repeat><times>9999</times>
+   <action>
+    <fire>
+     <direction type="relative">90</direction>
+     <speed>0.6</speed>
+     <bullet/>
+    </fire>
+    <fire>
+     <direction type="relative">-90</direction>
+     <speed type="sequence">0</speed>
+     <bullet/>
+    </fire>
+    <wait>12-$rank*6</wait>
+   </action>
+  </repeat>
+ </action>
+</bullet>
+
+</bulletml>
+</barrage>

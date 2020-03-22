@@ -1,0 +1,23 @@
+■  リファレンス弾幕
+
+・  厳密に左右対象でないと非対称になる弾幕
+        Tenmado/3_boss_2
+
+・  重めな弾幕
+        Original/extinction (処理落ち 758 フレーム程度)
+
+        Original/dandecrazy (一瞬で 512 発突破。 処理落ちは特に無し)。
+
+・  弾数が限界突破
+        test/grid
+
+・  ヘビ花火みたいな
+        Kotuanzenx/tsx proto05
+
+・  正確に十字
+        Bwda/bwda02
+        Kotuanzenx/tsx hx
+
+・  最後にストール
+        Esp rade/round 123 boss pelaboy ...
+        mda/mda potduet

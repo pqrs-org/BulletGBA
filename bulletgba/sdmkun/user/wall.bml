@@ -1,0 +1,253 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+<filename>wall</filename>
+ <group>user</group>
+ <title>壁避け</title>
+ <description>一定パターンで降ってくる壁を避ける。レベルが上がると邪魔が入る。</description>
+ <capture></capture>
+</barrageInfo>
+
+<barrageStyles>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<!-- CDATA とかいうのは大事なおまじないです。 -->
+<lua>
+<![CDATA[
+a = 0
+b = 0
+a1 = 1
+a2 = 1
+a3 = 1
+a4 = 1
+a5 = 1
+a6 = 1
+endtime = 700
+pi = 3.141592
+std = pi/180
+
+function cal(p,q,r)
+	rr = r*std
+	pp = (p/math.sqrt(p^2+q^2))*math.cos(rr)-(q/math.sqrt(p^2+q^2))*math.sin(rr)
+	qq = (q/math.sqrt(p^2+q^2))*math.cos(rr)+(p/math.sqrt(p^2+q^2))*math.sin(rr)
+	return pp,qq
+end
+
+function top()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	bosx = getX() - 4
+	bosy = getY() - 4
+	t = getTurn()
+	if(t > endtime)then
+	quit()
+	elseif(1 > t)then
+	fire(0,0,"wallmaker")
+	end
+	
+	-- 以下、壁配置指定。 --
+
+	if(t == 121 or t == 421)then
+	a1 = 1
+	a2 = 1
+	a4 = 1
+	a5 = 1
+	elseif(t == 151 or t == 451)then
+	a1 = 1
+	a6 = 1
+	a3 = 1
+	a5 = 1
+	elseif(t == 181 or t == 481)then
+	a2 = 1
+	a3 = 1
+	a6 = 1
+	a5 = 1
+	elseif(t == 211 or t == 511)then
+	a1 = 1
+	a2 = 1
+	a4 = 1
+	a5 = 1
+	elseif(t == 241 or t == 541)then
+	a1 = 1
+	a3 = 1
+	a5 = 1
+	a6 = 1
+	elseif(t == 271 or t == 571)then
+	a2 = 1
+	a4 = 1
+	a5 = 1
+	a6 = 1
+	elseif(t == 301 or t == 601)then
+	a1 = 1
+	a2 = 1
+	a3 = 1
+	a5 = 1
+	elseif(t == 331 or t == 631)then
+	a1 = 1
+	a3 = 1
+	a4 = 1
+	a6 = 1
+	elseif(t == 361 or t == 661)then
+	a1 = 1
+	a2 = 1
+	a4 = 1
+	a5 = 1
+	elseif(t == 391 or t == 691)then
+	a1 = 1
+	a2 = 1
+	a3 = 1
+	a4 = 1
+	a6 = 1
+	elseif(t > 120)then
+	a1 = 0
+	a2 = 0
+	a3 = 0
+	a4 = 0
+	a5 = 0
+	a6 = 0
+	end
+end
+
+function wallmaker()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	max = getMaxX()
+	x1 = getX() - 4
+	y1 = getY() - 4
+	prvx1 = getSpeedX()
+	prvy1 = getSpeedY()
+	if(t < 2)then
+	setPos(max-2,2)
+	setSpeed(-4,0)
+	end
+	if(t > 1)then
+	if(x1 > 5*max/6)then
+	if(a1 > 0)then
+	fire(0,0,"vwall")
+	a1 = 0
+	end
+	fire(0, 0, "hwall1")
+	elseif(x1 > 4*max/6)then
+	if(a2 > 0)then
+	fire(0,0,"vwalls")
+	a2 = 0
+	end
+	fire(0, 0, "hwall2")
+	elseif(x1 > 3*max/6)then
+	if(a3 > 0)then
+	fire(0,0,"vwalls")
+	a3 = 0
+	end
+	fire(0, 0, "hwall3")
+	elseif(x1 > 2*max/6)then
+	if(a4 > 0)then
+	fire(0,0,"vwalls")
+	a4 = 0
+	end
+	fire(0, 0, "hwall4")
+	elseif(x1 > 1*max/6)then
+	if(a5 > 0)then
+	fire(0,0,"vwalls")
+	a5 = 0
+	end
+	fire(0, 0, "hwall5")
+	elseif(x1 > 1)then
+	if(a6 > 0)then
+	fire(0,0,"vwalls")
+	a6 = 0
+	end
+	fire(0, 0, "hwall6")
+	end
+	
+	if(x1 < 2)then
+	fire(0, 0, "vwall")
+	end
+	end
+end
+
+function hwall1()
+	if(t > endtime)then
+	vanish()
+	end
+	if(a1 > 0)then
+	fire(0,2)
+	end
+end
+function hwall2()
+	if(t > endtime)then
+	vanish()
+	end
+	if(a2 > 0)then
+	fire(0,2)
+	end
+end
+function hwall3()
+	if(t > endtime)then
+	vanish()
+	end
+	if(a3 > 0)then
+	fire(0,2)
+	end
+end
+function hwall4()
+	if(t > endtime)then
+	vanish()
+	end
+	if(a4 > 0)then
+	fire(0,2)
+	end
+end
+function hwall5()
+	if(t > endtime)then
+	vanish()
+	end
+	if(a5 > 0)then
+	fire(0,2)
+	end
+end
+function hwall6()
+	if(t > endtime)then
+	vanish()
+	end
+	if(a6 > 0)then
+	fire(0,2)
+	end
+end
+function vwall()
+	wallturn = getTurn()
+	if(t > endtime)then
+	vanish()
+	elseif(t > 60 and math.cos(t*180*std) > 0.9)then
+	fire(0,1.8)
+	end
+end
+function vwalls()
+	wallturn = getTurn()
+	local rank = getRank()
+	if(t > endtime)then
+	vanish()
+	end
+	if(rank > 0.8)then
+	if(t > 60 and math.cos(t*360*math.random()*std) > 0.99)then
+	fire(0,1.5)
+	fire(0,2.2)
+	end
+	elseif(rank > 0.6)then
+	if(t > 60 and math.cos(t*600*math.random()*std) > 0.99)then
+	fire(0,1.8)
+	end
+	elseif(rank > 0.4)then
+	if(t > 60 and math.cos(t*2000*math.random()*std) > 0.99)then
+	fire(0,2)
+	end
+	end
+end
+]]>
+</lua>
+
+</barrage>

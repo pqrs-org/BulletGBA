@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+<filename>random</filename>
+<group>AAAAAgokumaru</group>
+<title>ランダム誘導弾</title>
+<description>適当にいじってたらできた物。レベルが上がると難易度が飛躍的に上がります。ちょっと手抜き（ぉ</description>
+<capture>レベルが上がるとスピードがかなり速くなります。
+あと大きく避けるのがポイントです。スペシャルモードでrankが100になるとあぼーんしますｗ</capture>
+</barrageInfo>
+<barrageStyle>
+<bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+
+<action label="top">
+<repeat><times>5</times>
+<action>
+ <fire>
+  <direction>$rand*360</direction>
+  <bulletRef label="hmglsr"/>
+ </fire>
+ <repeat><times>20+$rank*80</times>
+ <action>
+  <wait>4-$rank*3</wait>
+  <fire>
+   <direction type="sequence">10+$rank*30</direction>
+   <bulletRef label="hmglsr"/>
+  </fire>
+ </action>
+ </repeat>
+ <wait>0</wait>
+</action>
+</repeat>
+<wait>0</wait>
+</action>
+
+<bullet label="hmglsr">
+<speed>0.1</speed>
+<action>
+<changeSpeed>
+ <speed>0.5+$rank*2</speed>
+ <term>30</term>
+</changeSpeed>
+<wait>$rand*100</wait>
+<changeSpeed>
+ <speed>0.5+$rank*3</speed>
+ <term>5</term>
+</changeSpeed>
+</action>
+<action>
+<repeat><times>10+$rank*5</times>
+<action>
+ <changeDirection>
+  <direction type="aim">0</direction>
+  <term>10-$rank*5</term>
+ </changeDirection>
+ <wait>5</wait>
+</action>
+</repeat>
+</action>
+</bullet>
+
+</bulletml>
+</barrage>

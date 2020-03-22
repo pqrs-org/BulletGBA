@@ -1,0 +1,33 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 5 action {
+    actionRef fire5way(180);
+    actionRef fire5way(180 - 30);
+    actionRef fire5way(180 + 30);
+    actionRef fire5way(180 - 60);
+    actionRef fire5way(180 + 60);
+    wait 60;
+  }
+}
+
+// $1: first direction
+action fire5way {
+  fire direction absolute $1 speed absolute 1 bullet action {
+    wait 30;
+
+    fire direction aim 0 speed absolute 0.1 bullet action {
+      repeat 10 action {
+        fire direction relative 0 + 5 * $rand speed absolute 1 bullet;
+        fire direction relative 30 + 5 * $rand speed absolute 1 bullet;
+        fire direction relative -30 + 5 * $rand speed absolute 1 bullet;
+        fire direction relative 60 + 5 * $rand speed absolute 1 bullet;
+        fire direction relative -60 + 5 * $rand speed absolute 1 bullet;
+        wait 5;
+      }
+      vanish;
+    }
+    vanish;
+  }
+}

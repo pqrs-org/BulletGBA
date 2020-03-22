@@ -1,0 +1,81 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_proto06</filename>
+ <group>KotuAnzenX</group>
+ <title>試作品０６：スフィンクス炸裂弾</title>
+ <description>初心者殺しの悪名高いケツイ２面ボスの炸裂弾。雰囲気重視のため安置とかがあります。</description>
+ <capture>上に逃げれば逃げるほど楽になり、一番上は完全に安置となります。正攻法で避ける場合は素早く炸裂弾を潜り抜けて次に備えましょう。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <fireRef label="bomb"><param>1</param></fireRef>
+ <wait>120</wait>
+ <fireRef label="bomb"><param>-1</param></fireRef>
+ <wait>100</wait>
+ <fireRef label="bomb"><param>1</param></fireRef>
+ <wait>80</wait>
+ <fireRef label="bomb"><param>-1</param></fireRef>
+ <wait>60</wait>
+ <fireRef label="bomb"><param>1</param></fireRef>
+ <wait>120</wait>
+</action>
+
+<fire label="bomb">
+ <speed>3</speed>
+ <direction type="absolute">155*$1</direction>
+ <bullet>
+  <action>
+   <wait>60</wait>
+   <changeSpeed>
+    <speed>3</speed>
+    <term>1</term>
+   </changeSpeed>
+   <changeDirection>
+    <direction type="absolute">0</direction>
+    <term>1</term>
+   </changeDirection>
+   <repeat><times>20</times>
+    <action>
+     <fire>
+      <speed>0.1</speed>
+      <direction type="absolute">180</direction>
+      <bullet>
+       <action>
+        <changeSpeed>
+         <speed>4</speed>
+         <term>60</term>
+        </changeSpeed>
+       </action>
+      </bullet>
+     </fire>
+     <fire>
+      <speed>1+$rank*1.5</speed>
+      <direction type="absolute">200*$1</direction>
+      <bullet/>
+     </fire>
+     <repeat><times>7</times>
+      <action>
+       <fire>
+        <speed type="sequence">0</speed>
+        <direction type="sequence">10*$1</direction>
+        <bullet/>
+       </fire>
+      </action>
+     </repeat>
+     <wait>6</wait>
+    </action>
+   </repeat>
+  </action>
+ </bullet>
+</fire>
+
+</bulletml>
+</barrage>

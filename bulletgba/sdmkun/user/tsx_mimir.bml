@@ -1,0 +1,108 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_mimir</filename>
+ <group>KotuAnzenX</group>
+ <title>縦横ミーミル蟻黒弾</title>
+ <description>式神の城２の４面中ボス「ミーミル」みたく左右から壁が迫ってきます。さらに本体からも上下を遮断する壁を張るので「本体の周囲を回って回避」が不可能となっています。</description>
+ <capture>壁に衝突しない範囲で切り返しながら、ちまちまとアリスクローン弾を回避。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <fireRef label="wall"><param>1</param></fireRef>
+ <fireRef label="wall"><param>-1</param></fireRef>
+ <wait>60</wait>
+ <fireRef label="yokow"/>
+ <repeat><times>150+$rank*150</times>
+  <action>
+   <fire>
+    <speed>6</speed>
+    <direction type="absolute">$rand*360</direction>
+    <bullet>
+     <action>
+      <wait>10</wait>
+      <changeDirection>
+       <direction type="aim">-5+$rand*10</direction>
+       <term>1</term>
+      </changeDirection>
+      <changeSpeed>
+       <speed>1+$rank*1.5</speed>
+       <term>1</term>
+      </changeSpeed>
+     </action>
+    </bullet>
+   </fire>
+   <wait>2</wait>
+  </action>
+ </repeat>
+</action>
+
+<fire label="yokow">
+ <speed>0</speed>
+ <bullet>
+  <action>
+   <repeat><times>300+$rank*300</times>
+    <action>
+     <fire>
+      <speed>2</speed>
+      <direction type="absolute">90</direction>
+      <bullet/>
+     </fire>
+     <fire>
+      <speed>2</speed>
+      <direction type="sequence">180</direction>
+      <bullet/>
+     </fire>
+     <wait>1</wait>
+    </action>
+   </repeat>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<fire label="wall">
+ <speed>1.4</speed>
+ <direction type="absolute">90*$1</direction>
+ <bullet>
+  <action>
+   <wait>60</wait>
+   <changeSpeed>
+    <speed>0.1</speed>
+    <term>1</term>
+   </changeSpeed>
+   <changeDirection>
+    <direction type="absolute">-90*$1</direction>
+    <term>1</term>
+   </changeDirection>
+   <wait>1</wait>
+   <repeat><times>300+$rank*300</times>
+    <action>
+     <fire>
+      <speed>2</speed>
+      <direction type="absolute">0</direction>
+      <bullet/>
+     </fire>
+     <fire>
+      <speed>2</speed>
+      <direction type="sequence">180</direction>
+      <bullet/>
+     </fire>
+     <wait>1</wait>
+    </action>
+   </repeat>
+   <wait>60</wait>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+</bulletml>
+</barrage>

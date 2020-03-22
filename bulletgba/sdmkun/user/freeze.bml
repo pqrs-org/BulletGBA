@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+<filename>freeze</filename>
+ <group>user</group>
+ <title>パーフェクトフリーズちっくに固定してvol.2</title>
+ <description>弾幕ではない。</description>
+ <capture></capture>
+</barrageInfo>
+
+<barrageStyles>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<!-- CDATA とかいうのは大事なおまじないです。 -->
+<lua>
+<![CDATA[
+dir = 0
+cnt = 0
+j = 0
+k = 0
+pi = 3.141592
+std = pi/180
+
+function change()
+	local rank = getRank()
+	local rand = math.random()
+	local turn = getTurn()
+	local aim = getPlayerAngle() - pi/2
+	t = time
+	if(turn > 1000) then
+	setSpeed(math.cos(aim+(-pi+2*rand*pi))*(0.3+1.2*math.random()), math.sin(aim+(-pi+2*rand*pi))*(0.3+1.2*math.random()))
+	quit()
+	elseif(t > 800) then
+	setSpeed(math.cos(aim+(-pi+2*rand*pi)/2)*0.4, math.sin(aim+(-pi+2*rand*pi)/2)*0.4)
+	elseif (t > 500) then
+	setSpeed(0,0)
+	end	
+end
+
+function top()
+	local trn = getTurn()
+	local rank = getRank()
+	if(trn == 10) then
+	fire(0, 0, "topping")
+	elseif(trn == 1700+rank*200) then
+	quit()
+	end
+end
+
+function topping()
+	local turn = getTurn()
+	local rank = getRank()
+	local rand = math.random()
+	local aim = getPlayerAngle() - pi/2
+	local xsp = getPlayerSpeedX()
+	if (k > 300+rank*1500) then
+	vanish()
+	
+	elseif (turn > 10 and cnt > 1) then
+			time = k
+			sp = (0.7+rank*2)*math.random()
+			fire(math.cos(360*rand*std)*sp, math.sin(360*rand*std)*sp, "change", time)
+			cnt = 0	
+	end
+	cnt = cnt + 1
+	k = k + 1	
+end
+]]>
+</lua>
+
+</barrage>

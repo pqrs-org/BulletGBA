@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <group>(/A_A)/</group>
+ <filename>winderhatena</filename>
+ <title>ワインダー？</title>
+ <description>ワインダ～を改造してたらできました。スペシャルにすると面白いですよ</description>
+ <capture>ワインダーは50lv以下。50lv以上はばらまき弾？</capture>
+</barrageInfo>
+
+<barrageStyles>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<!-- CDATA とかいうのは大事なおまじないです。 -->
+<lua>
+<![CDATA[
+angle = 0
+
+function top()
+	angle = angle*(getRank()*720)/360
+	local y=angle+1
+        fire(math.sin(math.pi/180*angle),-math.cos(math.pi/180*angle))
+        fire(math.sin(math.pi/180*(angle+90)),-math.cos(math.pi/180*(angle+90)))
+        fire(math.sin(math.pi/180*(angle+180)),-math.cos(math.pi/180*(angle+180)))
+        fire(math.sin(math.pi/180*(angle+270)),-math.cos(math.pi/180*(angle+270)))
+	angle=y
+end
+]]>
+</lua>
+
+</barrage>

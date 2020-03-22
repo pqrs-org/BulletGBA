@@ -1,0 +1,293 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <repeat>
+      <times>3</times>
+      <action>
+        <actionRef label="main">
+          <param>20</param>
+        </actionRef>
+        <actionRef label="main">
+          <param>10</param>
+        </actionRef>
+        <actionRef label="main">
+          <param>5</param>
+        </actionRef>
+      </action>
+    </repeat>
+  </action>
+  <action label="main">
+    <repeat>
+      <times>5</times>
+      <action>
+        <fire>
+          <speed>0</speed>
+          <bullet>
+            <action>
+              <wait>30</wait>
+              <fireRef label="5way">
+                <param>30</param>
+              </fireRef>
+              <fireRef label="5way">
+                <param>-30</param>
+              </fireRef>
+              <wait>10</wait>
+              <vanish />
+            </action>
+          </bullet>
+        </fire>
+        <wait>$1</wait>
+        <actionRef label="fixed4way" />
+        <actionRef label="4way" />
+        <wait>$1</wait>
+        <actionRef label="fixed4way" />
+        <actionRef label="4way" />
+        <wait>$1</wait>
+      </action>
+    </repeat>
+  </action>
+  <fire label="5way">
+    <direction>$1</direction>
+    <speed>0.5</speed>
+    <bullet>
+      <action>
+        <wait>30</wait>
+        <repeat>
+          <times>15</times>
+          <action>
+            <fire>
+              <direction type="aim">0+$rand*2</direction>
+              <speed>2</speed>
+              <bullet />
+            </fire>
+            <fire>
+              <direction type="aim">20+$rand*2</direction>
+              <speed>2</speed>
+              <bullet />
+            </fire>
+            <fire>
+              <direction type="aim">40+$rand*2</direction>
+              <speed>2</speed>
+              <bullet />
+            </fire>
+            <fire>
+              <direction type="aim">-20+$rand*2</direction>
+              <speed>2</speed>
+              <bullet />
+            </fire>
+            <fire>
+              <direction type="aim">-40+$rand*2</direction>
+              <speed>2</speed>
+              <bullet />
+            </fire>
+            <wait>4</wait>
+          </action>
+        </repeat>
+        <vanish />
+      </action>
+    </bullet>
+  </fire>
+  <action label="4way">
+    <fire>
+      <direction type="absolute">-30</direction>
+      <speed>1</speed>
+      <bullet>
+        <action>
+          <wait>30</wait>
+          <actionRef label="straightAim">
+            <param>5</param>
+            <param>3</param>
+          </actionRef>
+          <actionRef label="straightAim">
+            <param>10</param>
+            <param>3</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="absolute">30</direction>
+      <speed>1</speed>
+      <bullet>
+        <action>
+          <wait>30</wait>
+          <actionRef label="straightAim">
+            <param>-5</param>
+            <param>3</param>
+          </actionRef>
+          <actionRef label="straightAim">
+            <param>-10</param>
+            <param>3</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+  </action>
+  <action label="fixed4way">
+    <fire>
+      <direction type="absolute">30</direction>
+      <speed>1</speed>
+      <bullet>
+        <action>
+          <wait>30</wait>
+          <actionRef label="straight">
+            <param>180-45</param>
+            <param>2</param>
+          </actionRef>
+          <actionRef label="straight">
+            <param>180-60</param>
+            <param>2</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="absolute">-30</direction>
+      <speed>1</speed>
+      <bullet>
+        <action>
+          <wait>30</wait>
+          <actionRef label="straight">
+            <param>180+45</param>
+            <param>2</param>
+          </actionRef>
+          <actionRef label="straight">
+            <param>180+60</param>
+            <param>2</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+  </action>
+  <action label="straight">
+    <fire>
+      <direction type="absolute">$1</direction>
+      <speed>$2</speed>
+      <bullet />
+    </fire>
+    <repeat>
+      <times>5</times>
+      <action>
+        <fire>
+          <direction type="absolute">$1</direction>
+          <speed type="sequence">0.2</speed>
+          <bullet />
+        </fire>
+      </action>
+    </repeat>
+  </action>
+  <action label="straightAim">
+    <fire>
+      <direction type="aim">$1</direction>
+      <speed>$2</speed>
+      <bullet />
+    </fire>
+    <repeat>
+      <times>5</times>
+      <action>
+        <fire>
+          <direction type="aim">$1</direction>
+          <speed type="sequence">0.2</speed>
+          <bullet />
+        </fire>
+      </action>
+    </repeat>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 3 action {
+    actionRef main(20);
+    actionRef main(10);
+    actionRef main(5);
+  }
+}
+
+// $1: wait
+action main {
+  repeat 5 action {
+    fire speed 0 bullet action {
+      wait 30;
+      fireRef 5way(30);
+      fireRef 5way(-30);
+      wait 10;
+      vanish;
+    }
+    wait $1;
+    actionRef fixed4way;
+    actionRef 4way;
+    wait $1;
+    actionRef fixed4way;
+    actionRef 4way;
+
+    wait $1;
+  }
+}
+
+fire 5way direction $1 speed 0.5 bullet action {
+  wait 30;
+  repeat 15 action {
+    fire direction aim 0 + $rand * 2 speed 2 bullet;
+    fire direction aim 20 + $rand * 2 speed 2 bullet;
+    fire direction aim 40 + $rand * 2 speed 2 bullet;
+    fire direction aim -20 + $rand * 2 speed 2 bullet;
+    fire direction aim -40 + $rand * 2 speed 2 bullet;
+    wait 4;
+  }
+  vanish;
+}
+
+action 4way {
+  fire direction absolute -30 speed 1 bullet action {
+    wait 30;
+    actionRef straightAim(5, 3);
+    actionRef straightAim(10, 3);
+    vanish;
+  }
+  fire direction absolute 30 speed 1 bullet action {
+    wait 30;
+    actionRef straightAim(-5, 3);
+    actionRef straightAim(-10, 3);
+    vanish;
+  }
+}
+
+action fixed4way {
+  fire direction absolute 30 speed 1 bullet action {
+    wait 30;
+    actionRef straight(180 - 45, 2);
+    actionRef straight(180 - 60, 2);
+    vanish;
+  }
+  fire direction absolute -30 speed 1 bullet action {
+    wait 30;
+    actionRef straight(180 + 45, 2);
+    actionRef straight(180 + 60, 2);
+    vanish;
+  }
+}
+
+// $1: direction, $2: speed
+action straight {
+  fire direction absolute $1 speed $2 bullet;
+  repeat 5 action {
+    fire direction absolute $1 speed sequence 0.2 bullet;
+  }
+}
+
+// $1: direction, $2: speed
+action straightAim {
+  fire direction aim $1 speed $2 bullet;
+  repeat 5 action {
+    fire direction aim $1 speed sequence 0.2 bullet;
+  }
+}
+-->

@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>bb09-ohka</filename>
+ <group>KotuAnzenX</group>
+ <title>÷‰Ô’e–‹</title>
+ <description>‚Î‚çT‚«’e‚ª•ûŒü“]Š·‚·‚éŒ™‚È’e–‹‚Å‚·B</description>
+ <capture>ƒŒƒxƒ‹‚ª’á‚¯‚ê‚Î’e–‹‚ª“¦‚°‰ñ‚è‚Ü‚·BƒŒƒxƒ‹‚ª‚‚­‚È‚Á‚½ê‡A•ûŒü“]Š·‚·‚é’e‚ğ—U“±‚·‚é‚±‚Æ‚ÆA’·ŠÔ‚Ì’e–‹‚É‘Ï‚¦‚éW’†—Í‚ª‘åØ‚Å‚·B</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <repeat><times>250+$rank*750</times>
+  <action>
+   <repeat><times>2</times>
+    <action>
+     <fire>
+      <speed>0.3+$rand*0.3</speed>
+      <direction type="absolute">$rand*360</direction>
+      <bulletRef label="change"></bulletRef>
+     </fire>
+    </action>
+   </repeat>
+   <wait>1</wait>
+  </action>
+ </repeat>
+ <wait>600-$rank*400</wait>
+</action>
+
+<bullet label="change">
+ <action>
+  <wait>$rand*360</wait>
+   <changeDirection>
+    <direction type="aim">-180+(90*$rank)+$rand*(360-180*$rank)</direction>
+    <term>1</term>
+   </changeDirection>
+   <changeSpeed>
+    <speed>0.3+$rand*0.3</speed>
+    <term>1</term>
+   </changeSpeed>
+  <wait>$rand*360</wait>
+   <changeDirection>
+    <direction type="aim">-90+(45*$rank)+$rand*(180-90*$rank)</direction>
+    <term>1</term>
+   </changeDirection>
+   <changeSpeed>
+    <speed>0.3+$rand*0.3</speed>
+    <term>1</term>
+   </changeSpeed>
+  <wait>$rand*360</wait>
+   <changeDirection>
+    <direction type="aim">-45+(22.5*$rank)+$rand*(90-450*$rank)</direction>
+    <term>1</term>
+   </changeDirection>
+   <changeSpeed>
+    <speed>0.3+$rand*0.3</speed>
+    <term>1</term>
+   </changeSpeed>
+ </action>
+</bullet>
+
+</bulletml>
+</barrage>

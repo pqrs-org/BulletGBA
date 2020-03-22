@@ -1,0 +1,90 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 3 action {
+    actionRef main(20);
+    actionRef main(10);
+    actionRef main(5);
+  }
+}
+
+// $1: wait
+action main {
+  repeat 5 action {
+    fire speed 0 bullet action {
+      wait 30;
+      fireRef 5way(30);
+      fireRef 5way(-30);
+      wait 10;
+      vanish;
+    }
+    wait $1;
+    actionRef fixed4way;
+    actionRef 4way;
+    wait $1;
+    actionRef fixed4way;
+    actionRef 4way;
+
+    wait $1;
+  }
+}
+
+fire 5way direction $1 speed 0.5 bullet action {
+  wait 30;
+  repeat 15 action {
+    fire direction aim 0 + $rand * 2 speed 2 bullet;
+    fire direction aim 20 + $rand * 2 speed 2 bullet;
+    fire direction aim 40 + $rand * 2 speed 2 bullet;
+    fire direction aim -20 + $rand * 2 speed 2 bullet;
+    fire direction aim -40 + $rand * 2 speed 2 bullet;
+    wait 4;
+  }
+  vanish;
+}
+
+action 4way {
+  fire direction absolute -30 speed 1 bullet action {
+    wait 30;
+    actionRef straightAim(5, 3);
+    actionRef straightAim(10, 3);
+    vanish;
+  }
+  fire direction absolute 30 speed 1 bullet action {
+    wait 30;
+    actionRef straightAim(-5, 3);
+    actionRef straightAim(-10, 3);
+    vanish;
+  }
+}
+
+action fixed4way {
+  fire direction absolute 30 speed 1 bullet action {
+    wait 30;
+    actionRef straight(180 - 45, 2);
+    actionRef straight(180 - 60, 2);
+    vanish;
+  }
+  fire direction absolute -30 speed 1 bullet action {
+    wait 30;
+    actionRef straight(180 + 45, 2);
+    actionRef straight(180 + 60, 2);
+    vanish;
+  }
+}
+
+// $1: direction, $2: speed
+action straight {
+  fire direction absolute $1 speed $2 bullet;
+  repeat 5 action {
+    fire direction absolute $1 speed sequence 0.2 bullet;
+  }
+}
+
+// $1: direction, $2: speed
+action straightAim {
+  fire direction aim $1 speed $2 bullet;
+  repeat 5 action {
+    fire direction aim $1 speed sequence 0.2 bullet;
+  }
+}

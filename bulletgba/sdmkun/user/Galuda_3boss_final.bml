@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+  <filename>Galuda_3boss_final</filename>
+  <group>user</group>
+  <title>ガルーダ３ボス発狂</title>
+  <description>ランク80以下が通常、80より大きいとアレンジ。そして90より大きいとアレンジ覚聖。</description>
+  <capture>画面端からチョンチョン避け。適当なところで切り返し。ただアレンジは切り返しが至難の技ですが。</capture>
+  <author>Pentan</author>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+PI2=6.283185307
+daim=0.15
+aimX=1
+onerot=900
+oneseq=onerot*1.5
+tcangle=0
+tdangle=-PI2/onerot
+noffset=1000
+
+function top()
+	local turn=getTurn()
+	local way=math.floor(3+getRank()*7.5)
+	daim=PI2*0.25/(way*2)
+	if turn>oneseq*3 then
+		if turn>oneseq*3+180 then quit() end
+	elseif math.mod( turn, 12 )==0 then
+		local seqangle=PI2/way*0.25
+		for i=-way, way do
+			local angle=tcangle+i*seqangle
+			fire( math.sin( angle )*2.5, -math.cos( angle )*1.0, "changeDir", noffset+i )
+		end
+	end
+	
+	if math.mod( turn, oneseq )==onerot then aimX=-aimX end
+	
+	if math.mod( turn, oneseq )==0 then
+		tdangle=-tdangle
+	end
+	tcangle=tcangle+tdangle
+end
+
+function changeDir( n )
+	if getTurn()>30 then
+		n=(n-noffset)
+		for i=0, getRank()*1.11 do
+			local bspd=1.5-i*0.3
+			aim=n*daim*aimX+getPlayerAngle()
+			fire( math.sin(aim)*bspd, -math.cos(aim)*bspd )
+			if getRank()>0.8 then
+				aim=(n-3)*daim*aimX+getPlayerAngle()
+				fire( math.sin(aim)*bspd, -math.cos(aim)*bspd )
+				aim=(n+3)*daim*aimX+getPlayerAngle()
+				fire( math.sin(aim)*bspd, -math.cos(aim)*bspd )
+			end
+		end
+		vanish()
+	end
+end
+
+]]>
+</lua>
+
+</barrage>

@@ -1,0 +1,51 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 5 action {
+    fire form root direction absolute 270 speed absolute 4 bullet action {
+      wait 10;
+      changeDirection absolute 180 term 1;
+      changeSpeed absolute 0.2 term 1;
+      wait 1;
+      changeDirection sequence 1 term 1;
+      actionRef fireHorizontalLine(270);
+      vanish;
+    }
+    fire form root direction absolute 90 speed absolute 4 bullet action {
+      wait 10;
+      changeDirection absolute 180 term 1;
+      changeSpeed absolute 0.1 term 1;
+      wait 1;
+      changeDirection sequence -1 term 1;
+      actionRef fireHorizontalLine(90);
+      vanish;
+    }
+    wait 300;
+  }
+}
+
+// $1: direction
+action fireHorizontalLine {
+  repeat 5 action {
+    fire form small direction relative 0 speed absolute 2 bullet action {
+      repeat 5 action {
+        repeat 20 action {
+          // dummy
+          fire form middle direction relative $1 speed absolute 0.1 bullet action {
+            vanish;
+          }
+          repeat 5 action {
+            fire form middle direction relative $1 speed sequence 0.1 bullet action {
+              wait 20;
+              changeSpeed sequence 0.1 term 60;
+            }
+          }
+          wait 10;
+        }
+        wait 20;
+      }
+    }
+    wait 120;
+  }
+}

@@ -1,0 +1,35 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/spread.bnml"
+
+action top {
+  actionRef mebius(2);
+  actionRef mebius(-2);
+}
+
+// $1: direction
+action mebius {
+  fire form root direction absolute 0 speed absolute 1 bullet action {
+    repeat 3 action {
+      changeDirection sequence $1 term 45 * 4;
+      repeat 4 action {
+        fire form root direction aim 0 speed absolute 2 bullet action {
+          fire form small direction aim 0 speed absolute 2 bullet;
+          actionRef lib_spread(1);
+          vanish;
+        }
+        wait 45;
+      }
+      changeDirection sequence - $1 term 45 * 4;
+      repeat 4 action {
+        fire form root direction aim 0 speed absolute 2 bullet action {
+          fire form small direction aim 0 speed absolute 2 bullet;
+          actionRef lib_spread(1);
+          vanish;
+        }
+        wait 45;
+      }
+    }
+  }
+}

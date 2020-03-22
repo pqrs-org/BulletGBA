@@ -1,0 +1,103 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../bulletml.dtd">
+<barrage>
+<barrageInfo>
+
+<filename>dandecrazy</filename>
+<group>original</group>
+<title>式神の城Ⅱダンデオン発狂の様な物</title>
+<description>6WAY回転盾が16WAY全方位弾を撃つ。実際のゲームではボムで荒稼ぎ。（玖珂光太郎の場合</description>
+<capture>普通によく見て。ボムがあれば楽なのにね。</capture>
+
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+
+<action label="top">
+<repeat><times>6</times>
+<action>
+
+<repeat><times>1</times>
+ <action>
+  <fire>
+   <direction type="aim">-50</direction>
+   <speed>1.5+$rank</speed>
+   <bulletRef label="tate"/>
+  </fire>
+  <wait>0</wait>
+  </action>
+ </repeat>
+
+ <repeat><times>5</times>
+ <action>
+  <fire>
+   <direction type="sequence">20</direction>
+   <speed>1.5+$rank</speed>
+   <bulletRef label="tate"/>
+  </fire>
+  <wait>0</wait>
+ </action>
+ </repeat>
+</action>
+<wait>120-20*$rank</wait>
+</repeat>
+</action>
+<bullet label="tate">
+<action>
+
+<wait>25+10*$rank</wait>
+ <fire>
+  <direction type="absolute">360*$rand</direction>
+  <speed>1.5</speed>
+  <bullet/>
+ </fire>
+<repeat><times>15</times>
+<action>
+<fire>
+  <direction type="sequence">22.5</direction>
+  <speed>1.5</speed>
+  <bullet/>
+</fire>
+</action>
+</repeat>
+
+<repeat><times>16</times>
+<action>
+<fire>
+  <direction type="sequence">22.5</direction>
+  <speed>1.3</speed>
+  <bullet/>
+</fire>
+</action>
+</repeat>
+
+<repeat><times>16</times>
+<action>
+<fire>
+  <direction type="sequence">22.5</direction>
+  <speed>1.1</speed>
+  <bullet/>
+</fire>
+</action>
+</repeat>
+
+<repeat><times>16</times>
+<action>
+<fire>
+  <direction type="sequence">22.5</direction>
+  <speed>0.9</speed>
+  <bullet/>
+</fire>
+</action>
+</repeat>
+
+</action>
+</bullet>
+</bulletml>
+
+</barrage>

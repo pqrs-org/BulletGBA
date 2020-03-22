@@ -1,0 +1,30 @@
+#ifndef GENERATED_56733daa34f60d231df479bc9bcddff8_HPP 
+#define GENERATED_56733daa34f60d231df479bc9bcddff8_HPP 
+
+#include "bullet.hpp" 
+
+void stepfunc_3d96ffb925ca1ff7d71ef8155601f8ca_bb7206d81d7903d0a47b98acd1edb8ab(BulletInfo *p); 
+void stepfunc_80a3f3ce269b3654325f8ae9ddf44581_bb7206d81d7903d0a47b98acd1edb8ab(BulletInfo *p); 
+void stepfunc_caa19af4a0c498de1b91b3339d619e2c_bb7206d81d7903d0a47b98acd1edb8ab(BulletInfo *p); 
+void stepfunc_9a262eab9bee9a27b0f4b6d72eb6d017_bb7206d81d7903d0a47b98acd1edb8ab(BulletInfo *p); 
+void stepfunc_d63f935eaeadb4a3f83557ae10cc6a28_bb7206d81d7903d0a47b98acd1edb8ab(BulletInfo *p); 
+void stepfunc_13a9dc4eca9c93b68a76b64c5ede90d0_bb7206d81d7903d0a47b98acd1edb8ab(BulletInfo *p); 
+void stepfunc_cb47d0400bbea534b100974d792e3f8f_bb7206d81d7903d0a47b98acd1edb8ab(BulletInfo *p); 
+void stepfunc_56980be7a17bf9ac5b57ce4c1741d81b_bb7206d81d7903d0a47b98acd1edb8ab(BulletInfo *p); 
+void stepfunc_833dc7729b47c087f85b774ce2c1f890_bb7206d81d7903d0a47b98acd1edb8ab(BulletInfo *p); 
+void stepfunc_e06e1b181d60d055f4ea764229c2dbcd_bb7206d81d7903d0a47b98acd1edb8ab(BulletInfo *p); 
+void stepfunc_8a90fbb388a2f428014ad33edad90b06_bb7206d81d7903d0a47b98acd1edb8ab(BulletInfo *p); 
+
+
+extern const BulletStepFunc bullet_7954be327fd56d04b0e5e40eee8f13a6_bb7206d81d7903d0a47b98acd1edb8ab[]; 
+const unsigned int bullet_7954be327fd56d04b0e5e40eee8f13a6_bb7206d81d7903d0a47b98acd1edb8ab_size = 12; 
+extern const BulletStepFunc bullet_a429745494ad6ec16e7da75df794178a_bb7206d81d7903d0a47b98acd1edb8ab[]; 
+const unsigned int bullet_a429745494ad6ec16e7da75df794178a_bb7206d81d7903d0a47b98acd1edb8ab_size = 11; 
+extern const BulletStepFunc bullet_6b80c89615d074fe41a23ed6173d333b_bb7206d81d7903d0a47b98acd1edb8ab[]; 
+const unsigned int bullet_6b80c89615d074fe41a23ed6173d333b_bb7206d81d7903d0a47b98acd1edb8ab_size = 3; 
+extern const BulletStepFunc bullet_ba856a9ed17a7569addd94ca12fee8d2_bb7206d81d7903d0a47b98acd1edb8ab[]; 
+const unsigned int bullet_ba856a9ed17a7569addd94ca12fee8d2_bb7206d81d7903d0a47b98acd1edb8ab_size = 8; 
+
+
+#endif 
+

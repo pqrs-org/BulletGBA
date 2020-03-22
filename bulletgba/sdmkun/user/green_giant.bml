@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>green_giant</filename>
+ <group>user</group>
+ <title>グリーンジャイアント</title>
+ <description>大概は弟の方が出来が良いとか言いますが。</description>
+ <capture>上のほうを見て押し潰されないように。手元ばかり見てると詰まる可能性が。</capture>
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<repeat><times>50</times>
+<action>
+<wait>16-6*$rank</wait>
+<fire>
+	<direction type="aim">20-46*$rand</direction>
+	<speed>2+$rank</speed>
+	<bulletRef label="seed"/>
+</fire>
+<repeat><times>4</times>
+<action>
+	<fire>
+		<direction type="sequence">3/2</direction>
+		<speed>2+$rank</speed>
+		<bulletRef label="seed"/>
+	</fire>
+</action>
+</repeat>
+
+</action>
+</repeat>
+<wait>100</wait>
+</action>
+
+<bullet label="seed">
+<action>
+
+<wait>20</wait>
+ <fire>
+  <direction type="relative">180</direction>
+  <speed>2.5</speed>
+  <bulletRef label="mago"/>
+ </fire>
+
+
+</action>
+
+</bullet>
+
+<bullet label="mago">
+<action>
+
+<wait>1</wait>
+
+	<changeSpeed>
+		<speed>0.3</speed>
+		<term>60</term>
+	</changeSpeed>
+<wait>80</wait>
+ <fire>
+  <direction type="relative">180</direction>
+  <speed>0.01</speed>
+  <bulletRef label="himago"/>
+ </fire>
+<wait>1</wait>
+<vanish/>
+</action>
+</bullet>
+
+<bullet label="himago">
+<action>
+	<changeSpeed>
+		<speed>3+$rank</speed>
+		<term>120+60*$rank</term>
+	</changeSpeed>
+
+</action>
+</bullet>
+
+</bulletml>
+</barrage>

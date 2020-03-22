@@ -1,0 +1,117 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>wheel_30</filename>
+	<group>MDA</group>
+	<title>輪が30ほど</title>
+	<description>bpo-ALの副産物。輪弾（擬似大型弾）を高速で撃つと当り判定が小さくても雷電っぽいテイストが出ると思うのですがどうでしょうか。</description>
+	<capture>歪んではいますが奇数弾は中心が自機狙いです。3Wayと2Wayは後半の5Wayから間引いたものです。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+	<actionRef label="seed"><param>260</param><param>2</param></actionRef>
+	<actionRef label="seed"><param>220</param><param>0</param></actionRef>
+	<actionRef label="seed"><param>180</param><param>-2</param></actionRef>
+	<wait>30</wait>
+	<actionRef label="seed"><param>180</param><param>2</param></actionRef>
+	<actionRef label="seed"><param>140</param><param>0</param></actionRef>
+	<actionRef label="seed"><param>100</param><param>-2</param></actionRef>
+	<wait>30</wait>
+	<actionRef label="seed"><param>240</param><param>-1</param></actionRef>
+	<actionRef label="seed"><param>200</param><param>1</param></actionRef>
+	<wait>30</wait>
+	<actionRef label="seed"><param>160</param><param>-1</param></actionRef>
+	<actionRef label="seed"><param>120</param><param>1</param></actionRef>
+	<wait>60</wait>
+	<actionRef label="seed"><param>260</param><param>2</param></actionRef>
+	<actionRef label="seed"><param>240</param><param>1</param></actionRef>
+	<actionRef label="seed"><param>220</param><param>0</param></actionRef>
+	<actionRef label="seed"><param>200</param><param>-1</param></actionRef>
+	<actionRef label="seed"><param>180</param><param>-2</param></actionRef>
+	<wait>40</wait>
+	<actionRef label="seed"><param>180</param><param>2</param></actionRef>
+	<actionRef label="seed"><param>160</param><param>1</param></actionRef>
+	<actionRef label="seed"><param>140</param><param>0</param></actionRef>
+	<actionRef label="seed"><param>120</param><param>-1</param></actionRef>
+	<actionRef label="seed"><param>100</param><param>-2</param></actionRef>
+	<wait>40</wait>
+	<actionRef label="seed"><param>260</param><param>-2</param></actionRef>
+	<actionRef label="seed"><param>240</param><param>-1</param></actionRef>
+	<actionRef label="seed"><param>220</param><param>0</param></actionRef>
+	<actionRef label="seed"><param>200</param><param>1</param></actionRef>
+	<actionRef label="seed"><param>180</param><param>2</param></actionRef>
+	<wait>40</wait>
+	<actionRef label="seed"><param>180</param><param>-2</param></actionRef>
+	<actionRef label="seed"><param>160</param><param>-1</param></actionRef>
+	<actionRef label="seed"><param>140</param><param>0</param></actionRef>
+	<actionRef label="seed"><param>120</param><param>1</param></actionRef>
+	<actionRef label="seed"><param>100</param><param>2</param></actionRef>
+	<wait>45</wait>
+</action>
+
+<action label="seed">
+	<fire>
+		<direction type="absolute">$1</direction>
+		<speed>3</speed>
+		<bullet>
+			<action>
+				<changeSpeed>
+					<speed>0</speed>
+					<term>30</term>
+				</changeSpeed>
+				<wait>30</wait>
+				<actionRef label="fireCircle"><param>$2*(23-10*$rank)</param></actionRef>
+				<vanish/>
+			</action>
+		</bullet>
+	</fire>
+</action>
+
+<action label="fireCircle">
+	<fireRef label="circle"><param>$1</param><param>0</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*1)</param>	<param>(-20*1)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*2)</param>	<param>(-20*2)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*3)</param>	<param>(-20*3)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*4)</param>	<param>(-20*4)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*5)</param>	<param>(-20*5)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*6)</param>	<param>(-20*6)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*7)</param>	<param>(-20*7)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*8)</param>	<param>(-20*8)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*9)</param>	<param>(-20*9)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*10)</param>	<param>(-20*10)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*11)</param>	<param>(-20*11)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*12)</param>	<param>(-20*12)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*13)</param>	<param>(-20*13)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*14)</param>	<param>(-20*14)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*15)</param>	<param>(-20*15)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*16)</param>	<param>(-20*16)</param></fireRef>
+	<fireRef label="circle"><param>$1+(20*17)</param>	<param>(-20*17)</param></fireRef>
+</action>
+
+<fire label="circle">
+	<direction type="aim">$1</direction>
+	<speed>2.1</speed>
+	<bullet>
+		<action>
+			<wait>6</wait>
+			<fire>
+				<direction type="relative">$2</direction>
+				<speed>2.1+($rank*2)</speed>
+				<bullet/>
+			</fire>
+		</action>
+	</bullet>
+</fire>
+
+</bulletml>
+
+</barrage>

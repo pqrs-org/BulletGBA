@@ -1,0 +1,121 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_aka-kasuri</filename>
+ <group>KotuAnzenX</group>
+ <title>赤の絣</title>
+ <description>BulletMLでは意外に作りづらい、自機の真横を垂直に通過する弾。自機方向を算出し、そこから９０度ターンしてすぐに９０度元に戻す。SinCosTanで角度を求めるLuaではこんな面倒なことをしなくていいはずです。自機狙い１３ＷＡＹとセットにしてみました。</description>
+ <capture>大きく避けると青弾で事故りやすく、横にコンコン避けをすると赤弾に直撃します。よって初期位置から縦方向にコンコン避けが正解です。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <fireRef label="13way"><param>1</param></fireRef>
+ <fireRef label="13way"><param>-1</param></fireRef>
+ <wait>10</wait>
+ <fireRef label="side1"><param>1</param></fireRef>
+ <fireRef label="side1"><param>-1</param></fireRef>
+ <wait>400</wait>
+</action>
+
+<fire label="13way">
+ <speed>6</speed>
+ <direction type="absolute">90*$1</direction>
+ <bullet>
+  <action>
+   <wait>9</wait>
+   <changeSpeed>
+    <speed>0</speed>
+    <term>1</term>
+   </changeSpeed>
+   <wait>1</wait>
+   <repeat><times>10+$rank*30</times>
+    <action>
+     <fire>
+      <speed>1+$rank</speed>
+      <direction type="aim">60</direction>
+      <bullet/>
+     </fire>
+     <repeat><times>12</times>
+      <action>
+       <fire>
+        <speed type="sequence">0</speed>
+        <direction type="sequence">-10</direction>
+        <bullet/>
+       </fire>
+      </action>
+     </repeat>
+     <wait>30-$rank*20</wait>
+    </action>
+   </repeat>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<fire label="side1">
+ <speed>0</speed>
+ <bullet>
+  <action>
+   <repeat><times>10</times>
+    <action>
+     <fireRef label="side2"><param>$1</param></fireRef>
+     <wait>3</wait>
+     <repeat><times>9</times>
+      <action>
+       <fireRef label="side3"><param>$1</param></fireRef>
+       <wait>3</wait>
+      </action>
+     </repeat>
+     <wait>10</wait>
+    </action>
+   </repeat>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<fire label="side2">
+ <speed>1+$rank*2</speed>
+ <direction type="aim">0</direction>
+ <bullet>
+  <action>
+   <changeDirection>
+    <direction type="relative">90*$1</direction>
+    <term>1</term>
+   </changeDirection>
+   <wait>5-$rank*3</wait>
+   <changeDirection>
+    <direction type="relative">-90*$1</direction>
+    <term>1</term>
+   </changeDirection>
+  </action>
+ </bullet>
+</fire>
+
+<fire label="side3">
+ <speed>1+$rank*2</speed>
+ <direction type="sequence">0</direction>
+ <bullet>
+  <action>
+   <changeDirection>
+    <direction type="relative">90*$1</direction>
+    <term>1</term>
+   </changeDirection>
+   <wait>5-$rank*3</wait>
+   <changeDirection>
+    <direction type="relative">-90*$1</direction>
+    <term>1</term>
+   </changeDirection>
+  </action>
+ </bullet>
+</fire>
+
+</bulletml>
+</barrage>

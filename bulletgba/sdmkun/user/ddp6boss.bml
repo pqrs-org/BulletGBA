@@ -1,0 +1,913 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>ddp6boss</filename>
+ <group>Dodonpachi</group>
+ <title>怒首領蜂６ボスまるごと</title>
+ <description>１周クリアを目指すプレイヤーをことごとく葬ってきたやつ。ランク８０以上で２週目モード。</description>
+ <capture>誰かこいつの攻略法おしえてくれ。</capture>
+</barrageInfo>
+
+<barrageStyles>
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<lua>
+<![CDATA[
+
+----------------------------------
+-- 汎用
+----------------------------------
+function getVectorX(dir, speed)
+	dir = dir + 64
+	return -math.cos(math.pi/128*dir)*speed
+end
+
+function getVectorY(dir, speed)
+	dir = dir + 64
+	return math.sin(math.pi/128*dir)*speed
+end
+
+function getAngle(x1, y1, x2, y2)
+	local tempx = x1-x2
+	local tempy = y1-y2
+	return (math.atan2(tempy, -tempx)*128/math.pi)+64
+end
+
+function getDistance(x, y, px, py)
+	return math.sqrt((x-px)^2+(y-py)^2)
+end
+
+function getPlayerAngle2(seido)
+	local dir
+	
+	dir = 128/math.pi * getPlayerAngle()
+	dir = -dir+128
+	dir = math.floor((dir / (256/seido)) +0.5) * (256/seido)
+	
+	return dir
+end
+
+function setSpeed2(dir, speed)
+	setSpeed(getVectorX(dir, speed), getVectorY(dir, speed))
+	return
+end
+
+----------------------------------
+-- ショット
+----------------------------------
+function shot(dir, speed)
+	fire(getVectorX(dir, speed*rank), getVectorY(dir, speed*rank))
+	return
+end
+
+function shot2(dir, speed)
+	fire(dir, speed, "shot2_sub")
+	return
+end
+
+function shot2_sub()
+	shot(getSpeedX(), getSpeedY())
+	setSpeed(0, 0)
+	vanish()
+	return
+end
+
+function shot3(dir, speed)
+	fire(getVectorX(dir, speed), getVectorY(dir, speed), "shot3_sub")
+	return
+end
+
+function shot3_sub()
+end
+
+function way(num, dir, speed, width)
+	num = math.floor(num)
+	local angle = -width*(num/2-0.5)
+	for i=1,num do
+		shot(angle+dir, speed)
+		angle = angle + width
+	end
+	
+	return
+end
+
+function way2(num, dir, speed, width)
+	num = math.floor(num)
+	local angle = -width*(num/2-0.5)
+	for i=1,num do
+		shot2(angle+dir, speed)
+		angle = angle + width
+	end
+	
+	return
+end
+
+function round(num, dir, speed)
+	num = math.floor(num)
+	for i=1,num do
+		shot(dir, speed)
+		dir = dir + 256/num
+	end
+	
+	return
+end
+
+----------------------------------
+-- メイン
+----------------------------------
+parentx = 0
+parenty = 0
+
+cnt = 0
+
+rank = 1
+loop = 1
+
+action = function()end
+
+movedir = 0
+movespeed = 0
+point_x = 0
+point_y = 0
+
+wait = 0
+
+subl_aim = 0
+subr_aim = 0
+
+hplow = false
+
+function changeAction(func)
+	cnt = -1
+	
+	movedir = 128
+	movespeed = 0
+	setSpeed(0, 0)
+	
+	action = func
+	return
+end
+
+function top()
+	if(getTurn()==30) then
+		changeAction(act_3way)
+		point_x = 150
+		point_y = 60
+		
+		loop = 1
+		if(getRank() >= 0.8) then loop = 2 end
+		if(getRank() == 0.0) then loop = 3 end
+	end
+	
+	parentx = getX()
+	parenty = getY()
+	
+	rank = getRank() / 2.5 + 0.8
+	
+	if(wait > 0)then
+		act_wait()
+		wait = wait - 1
+	else
+		action()
+		cnt = cnt + 1
+	end
+	
+	--本体の当たり判定
+	for i=0,10 do
+		fire(-50+i*5, 30, "hitarea")
+		fire(i*5, 30, "hitarea")
+		fire(-50, 30-i*5, "hitarea")
+		fire( 50, 30-i*5, "hitarea")
+		
+		fire(-130+i*8, 15, "hitarea")
+		fire(-130+i*9,-35, "hitarea")
+		fire(-130, 10-i*4, "hitarea")
+		
+		fire(130-i*8, 15, "hitarea")
+		fire(130-i*9,-35, "hitarea")
+		fire(130, 10-i*4, "hitarea")
+	end
+	
+	return
+end
+
+function hitarea()
+	if(getTurn()==0) then
+		setPos(parentx+getSpeedX(), parenty+getSpeedY())
+		setSpeed(0, 0)
+	else
+		vanish()
+	end
+	
+	return
+end
+
+function act_wait()
+	setPos((getX()*21+point_x)/22, (getY()*21+point_y)/22)
+	
+	return
+end
+
+----------------------------------
+-- ３ウェイはさみうち
+----------------------------------
+way_width = 0
+way_scaling = 0
+way_speed = 0
+
+function act_3way()
+	if(cnt==0) then
+		fire(0, 0, "sub_3way_l")
+		fire(0, 0, "sub_3way_r")
+		point_x = 150
+		point_y = 60
+	end
+	
+	if(cnt<=200) then
+		if(math.mod(cnt, 100) == 0) then
+			way_width = 40
+			way_scaling = -4
+			way_speed = 2.4
+		end
+	else
+		if(math.mod(cnt, 100) == 0) then
+			way_width = 20
+			way_scaling = -2
+			way_speed = 2.4
+		end
+	end
+	
+	if(math.mod(cnt, 100) > 28) then
+		if(math.mod(cnt, 8) == 6) then
+			way_width = way_width + way_scaling
+			way_speed = way_speed - 0.05
+		end
+	end
+	
+	--移動
+	if(math.mod(cnt, 240) == 110) then
+		point_x = 150 - 40 + math.random()*80
+		point_y = 160 + math.random()*20
+		movedir = getAngle(getX(), getY(), point_x, point_y)
+	elseif(math.mod(cnt, 240) == 230) then
+		point_x = 150 - 40 + math.random()*80
+		point_y = 80 - math.random()*20
+		movedir = getAngle(getX(), getY(), point_x, point_y)
+	end
+	
+	if(getDistance(getX(), getY(), point_x, point_y) > 30) then
+		if(movespeed < 0.7) then
+			movespeed = movespeed+0.03
+		end
+	else
+		if(movespeed > 0) then
+			movespeed = movespeed/1.05
+		end
+	end
+	
+	setSpeed2(movedir, movespeed)
+	
+	if(hplow==false) then
+		if(cnt==589) then
+			changeAction(act_guruguru)
+		end
+	else
+		if(cnt==229) then
+			changeAction(act_last)
+			wait = 80
+			point_x = 150
+			point_y = 120
+		end
+	end
+	
+	return
+end
+
+function sub_3way_l()
+	setPos(parentx-80, parenty-45)
+	
+	if(math.mod(cnt, 100) > 28) then
+		if(math.mod(cnt, 100) == 29) then
+			subl_aim = getPlayerAngle2(32)
+		end
+		
+		if(math.mod(cnt, 8) == 7) then
+			if(loop == 1) then
+				way2(3, subl_aim, way_speed, way_width)
+			elseif(loop == 2) then
+				way2(3, subl_aim, way_speed, way_width)
+				way2(3, subl_aim, way_speed/1.15, way_width)
+			else
+				way2(3, subl_aim,       way_speed, way_width)
+				way2(3, subl_aim+51.2,  way_speed, way_width)
+				way2(3, subl_aim+102.4, way_speed, way_width)
+				way2(3, subl_aim+153.6, way_speed, way_width)
+				way2(3, subl_aim+204.8, way_speed, way_width)
+				way2(3, subl_aim,       way_speed/1.15, way_width)
+				way2(3, subl_aim+51.2,  way_speed/1.15, way_width)
+				way2(3, subl_aim+102.4, way_speed/1.15, way_width)
+				way2(3, subl_aim+153.6, way_speed/1.15, way_width)
+				way2(3, subl_aim+204.8, way_speed/1.15, way_width)
+			end
+		end
+	end
+	
+	if(hplow==false) then
+		if(cnt==500) then
+			vanish()
+		end
+	else
+		if(cnt==200) then
+			vanish()
+		end
+	end
+	
+	return
+end
+
+function sub_3way_r()
+	setPos(parentx+80, parenty-45)
+	
+	if(math.mod(cnt, 100) > 28) then
+		if(math.mod(cnt, 100) == 29) then
+			subr_aim = getPlayerAngle2(32)
+		end
+		
+		if(math.mod(cnt, 8) == 7) then
+			if(loop == 1) then
+				way2(3, subr_aim, way_speed, way_width)
+			elseif(loop == 2) then
+				way2(3, subr_aim, way_speed, way_width)
+				way2(3, subr_aim, way_speed/1.15, way_width)
+			else
+				way2(3, subr_aim,       way_speed, way_width)
+				way2(3, subr_aim+51.2,  way_speed, way_width)
+				way2(3, subr_aim+102.4, way_speed, way_width)
+				way2(3, subr_aim+153.6, way_speed, way_width)
+				way2(3, subr_aim+204.8, way_speed, way_width)
+				way2(3, subr_aim,       way_speed/1.15, way_width)
+				way2(3, subr_aim+51.2,  way_speed/1.15, way_width)
+				way2(3, subr_aim+102.4, way_speed/1.15, way_width)
+				way2(3, subr_aim+153.6, way_speed/1.15, way_width)
+				way2(3, subr_aim+204.8, way_speed/1.15, way_width)
+			end
+		end
+	end
+	
+	if(hplow==false) then
+		if(cnt==500) then
+			vanish()
+		end
+	else
+		if(cnt==200) then
+			vanish()
+		end
+	end
+	
+	return
+end
+
+----------------------------------
+-- 水平移動＆ぐるぐる砲台
+----------------------------------
+guruguru_dir = 0
+
+vx = 0
+vy = 0
+freq = 0
+
+dirchange = false
+
+function act_guruguru()
+	if(cnt==0) then
+		fire(0, 0, "sub_guruguru")
+		vy = 0
+		dirchange = false
+		if(getX() < getPlayerX()) then
+			vx = 3
+			movedir = "left"
+		else
+			vx = -3
+			movedir = "right"
+		end
+		
+		if(loop == 1) then
+			freq = 16
+		elseif(loop == 2) then
+			freq = 12
+		else
+			freq = 8
+		end
+	end
+	
+	--移動
+	if(cnt>15) then
+		if(getX() < 20) then
+			movedir = "right"
+			vx = 3
+			dirchange = false
+		elseif(getX() > 280) then
+			movedir = "left"
+			vx = -3
+			dirchange = false
+		end
+		
+		if(dirchange == false) then
+			if(movedir == "left") then
+				if(vx > -3) then
+					vx = vx - 0.3
+				end
+			else
+				if(vx < 3) then
+					vx = vx + 0.3
+				end
+			end
+			
+			setPos(getX()+vx, (getY()*10+120)/11)
+			
+			if(getY() < 121) then
+				if(math.random() < 0.01) then
+					if(movedir == "left") then
+						movedir = "right"
+					else
+						movedir = "left"
+					end
+				end
+				
+				if(math.mod(cnt, freq) == 4) then
+					if(getX() < getPlayerX()-60 and movedir == "left") then
+						dirchange = true
+					elseif(getX() > getPlayerX()+60 and movedir == "right") then
+						dirchange = true
+					end
+				end
+			end
+		else
+			if(vx > 2.5) then
+				vx = vx - 0.05
+			elseif(vx < 2.5) then
+				vx = vx + 0.05
+			end
+			
+			if(vy < 2.5) then
+				vy = vy + 0.1
+			end
+			setPos(getX()+vx, getY()+vy)
+			
+			if(math.mod(cnt, freq) == 0 and getY() > 140) then
+				if(getX() < getPlayerX()) then
+					movedir = "right"
+				else
+					movedir = "left"
+				end
+				
+				vx = 0
+				vy = 0
+				dirchange = false
+			end
+		end
+	end
+	
+	--弾
+	if(math.mod(cnt, freq) == 0) then
+		if(loop <= 2) then
+			shot2(getPlayerAngle2(64), 2.0)
+			shot2(getPlayerAngle2(64), 2.3)
+			shot2(getPlayerAngle2(64), 2.6)
+			shot2(getPlayerAngle2(64), 2.9)
+		else
+			way2(3, getPlayerAngle2(64),   3.6, 32)
+			way2(3, getPlayerAngle2(64)-2, 3.3, 32)
+			way2(3, getPlayerAngle2(64)+2, 3.3, 32)
+			way2(3, getPlayerAngle2(64),   3.0, 32)
+			
+			way2(3, getPlayerAngle2(64)-12, 2.9, 32)
+			way2(3, getPlayerAngle2(64)+12, 2.9, 32)
+			way2(3, getPlayerAngle2(64)-13, 2.8, 32)
+			way2(3, getPlayerAngle2(64)+13, 2.8, 32)
+			way2(3, getPlayerAngle2(64)-14, 2.7, 32)
+			way2(3, getPlayerAngle2(64)+14, 2.7, 32)
+		end
+	end
+	
+	if(cnt==500) then
+		changeAction(act_5way)
+		wait = 80
+		point_x = 150
+		point_y = 50
+	end
+	
+	return
+end
+
+function sub_guruguru()
+	if(parentx < 150) then
+		setPos(parentx+148, parenty-12)
+	else
+		setPos(parentx-148, parenty-12)
+	end
+	
+	if(cnt>30) then
+		if(math.mod(cnt, 1) == 0) then
+			if(loop == 1) then
+				shot2(guruguru_dir, 2.4)
+			elseif(loop == 2) then
+				shot2(guruguru_dir, 2.5)
+				shot2(guruguru_dir, 2.2)
+			else
+				shot2(guruguru_dir,    2.6)
+				shot2(guruguru_dir-32, 2.3)
+				shot2(guruguru_dir-64, 2.0)
+			end
+			guruguru_dir = guruguru_dir - 8
+		end
+	end
+	
+	if(cnt==500) then
+		vanish()
+	end
+	
+	return
+end
+
+----------------------------------
+-- ５ウェイばらまき
+----------------------------------
+function act_5way()
+	if(cnt==0) then
+		fire(0, 0, "sub_front")
+		
+		movedir = 192
+		movetype = 0
+	end
+	
+	movedir = math.mod(movedir+256, 256)
+	
+	--移動
+	if(getX() < getPlayerX()-50 or getX() < 20) then
+		movetype = 1
+	elseif(getX() > getPlayerX()+50 or getX() > 280) then
+		movetype = 0
+	end
+	
+	if(movetype == 0) then
+		if(movedir ~= 192) then
+			movedir = movedir - 4
+		end
+	elseif(movetype == 1) then
+		if(movedir ~= 64) then
+			movedir = movedir - 4
+		end
+	end
+	setSpeed2(movedir, 1.1)
+	
+	if(cnt==500) then
+		changeAction(act_shuriken)
+		wait = 60
+		point_x = 150
+		point_y = 120
+	end
+	
+	return
+end
+
+function sub_front()
+	setPos(parentx, parenty+24)
+	
+	if(cnt>=30 and cnt<500) then
+		if(math.mod(cnt, 16) == 0) then
+			if(loop == 1) then
+				way(5, 0, 2.3, 10)
+			elseif(loop == 2) then
+				way(7, 0, 2.3, 8)
+			else
+				way(9, 0, 2.4, 6)
+				way(9, 0, 2.8, 7)
+			end
+		end
+		if(math.mod(cnt, 16) == 8) then
+			if(loop == 1) then
+				way(5, 0, 1.7, 10)
+			elseif(loop == 2) then
+				way(7, 0, 1.8, 8)
+				way(7, 0, 1.6, 8)
+			else
+				way(8, 0, 1.7, 8)
+				way(9, 0, 2.0, 8)
+				way(8, 0, 2.3, 8)
+			end
+		end
+	end
+	
+	if(cnt==500) then
+		vanish()
+	end
+	
+	return
+end
+
+----------------------------------
+-- 手裏剣弾
+----------------------------------
+function act_shuriken()
+	if(cnt==0) then
+		fire(0, 0, "sub_shuriken_l1")
+		fire(0, 0, "sub_shuriken_l2")
+		fire(0, 0, "sub_shuriken_r1")
+		fire(0, 0, "sub_shuriken_r2")
+		
+		movedir = 192
+	end
+	
+	--移動
+	movedir = movedir - 2
+	setSpeed2(movedir, 0.5)
+	
+	if(cnt==500) then
+		changeAction(act_3way)
+		wait = 80
+		point_x = 150
+		point_y = 150
+		
+		hplow = true
+	end
+	
+	return
+end
+
+function sub_shuriken_l1()
+	setPos(parentx-124, parenty)
+	
+	if(math.mod(cnt, 128) <= 64 and math.mod(cnt, 2) == 1) then
+		if(math.mod(cnt, 128) == 1) then
+			subl_aim = getPlayerAngle2(256)+64
+		end
+	
+		subl_aim = subl_aim - 4
+		
+		if(loop == 1) then
+			shot(subl_aim, 1.5)
+		elseif(loop == 2) then
+			shot(subl_aim, 1.6)
+			shot(subl_aim, 1.3)
+		else
+			shot(subl_aim+1, 1.7)
+			shot(subl_aim+1, 1.5)
+			shot(subl_aim+1, 1.3)
+			shot(subl_aim-1, 1.6)
+			shot(subl_aim-1, 1.4)
+			shot(subl_aim-1, 1.2)
+		end
+	end
+	
+	if(cnt==500) then
+		vanish()
+	end
+	
+	return
+end
+
+function sub_shuriken_l2()
+	setPos(parentx-114, parenty)
+	
+	if(math.mod(cnt, 128) > 64 and math.mod(cnt, 2) == 1) then
+		if(math.mod(cnt, 128) == 65) then
+			subl_aim = getPlayerAngle2(256)-64
+		end
+	
+		subl_aim = subl_aim + 4
+		
+		if(loop == 1) then
+			shot(subl_aim, 1.5)
+		elseif(loop == 2) then
+			shot(subl_aim, 1.6)
+			shot(subl_aim, 1.3)
+		else
+			shot(subl_aim+1, 1.7)
+			shot(subl_aim+1, 1.5)
+			shot(subl_aim+1, 1.3)
+			shot(subl_aim-1, 1.6)
+			shot(subl_aim-1, 1.4)
+			shot(subl_aim-1, 1.2)
+		end
+	end
+	
+	if(cnt==500) then
+		vanish()
+	end
+	
+	return
+end
+
+function sub_shuriken_r1()
+	setPos(parentx+114, parenty)
+	
+	if(math.mod(cnt, 128) <= 64 and math.mod(cnt, 2) == 1) then
+		if(math.mod(cnt, 128) == 1) then
+			subr_aim = getPlayerAngle2(256)+64
+		end
+		
+		subr_aim = subr_aim - 4
+		
+		if(loop == 1) then
+			shot(subr_aim, 1.5)
+		elseif(loop == 2) then
+			shot(subr_aim, 1.6)
+			shot(subr_aim, 1.3)
+		else
+			shot(subr_aim+1, 1.7)
+			shot(subr_aim+1, 1.5)
+			shot(subr_aim+1, 1.3)
+			shot(subr_aim-1, 1.6)
+			shot(subr_aim-1, 1.4)
+			shot(subr_aim-1, 1.2)
+		end
+	end
+	
+	if(cnt==500) then
+		vanish()
+	end
+	
+	return
+end
+
+function sub_shuriken_r2()
+	setPos(parentx+124, parenty)
+	
+	if(math.mod(cnt, 128) > 64 and math.mod(cnt, 2) == 1) then
+		if(math.mod(cnt, 128) == 65) then
+			subr_aim = getPlayerAngle2(256)-64
+		end
+	
+		subr_aim = subr_aim + 4
+		
+		if(loop == 1) then
+			shot(subr_aim, 1.5)
+		elseif(loop == 2) then
+			shot(subr_aim, 1.6)
+			shot(subr_aim, 1.3)
+		else
+			shot(subr_aim+1, 1.7)
+			shot(subr_aim+1, 1.5)
+			shot(subr_aim+1, 1.3)
+			shot(subr_aim-1, 1.6)
+			shot(subr_aim-1, 1.4)
+			shot(subr_aim-1, 1.2)
+		end
+	end
+	
+	if(cnt==500) then
+		vanish()
+	end
+	
+	return
+end
+
+----------------------------------
+-- 発狂
+----------------------------------
+winder_width = {}
+winder_scaling = {}
+
+function act_last()
+	if(cnt==0) then
+		fire(0, 0, "sub_laser_l")
+		fire(0, 0, "sub_laser_r")
+		
+		fire(0, 0, "sub_winder", 1)
+		winder_width[1] = 4
+		winder_scaling[1] = 2
+		
+		fire(0, 0, "sub_winder", 2)
+		if(loop == 1) then
+			winder_width[2] = 64
+			winder_scaling[2] = 2
+		else
+			winder_width[2] = 44
+			winder_scaling[2] = 2
+			
+			fire(0, 0, "sub_winder", 3)
+			winder_width[3] = 44
+			winder_scaling[3] = -2
+		end
+		
+		movedir = 192
+	end
+	
+	--移動
+	movedir = movedir - 4
+	setSpeed2(movedir, 0.7)
+	
+	if(cnt==950) then
+		quit()
+	end
+	
+	return
+end
+
+function sub_winder(id)
+	if(id == 1) then setPos(parentx, parenty-48) end
+	if(id == 2) then setPos(parentx, parenty-56) end
+	if(id == 3) then setPos(parentx, parenty-52) end
+	
+	if(cnt >= 16 and cnt<896) then
+		if(winder_width[id] == 4) then
+			winder_scaling[id] = 2
+		elseif(winder_width[id] == 64) then
+			winder_scaling[id] = -2
+		end
+		
+		if(cnt < 64+16) then
+			if(math.mod(cnt, 4) == 0) then
+				shot(getPlayerAngle2(256)+winder_width[id], 3.8)
+				shot(getPlayerAngle2(256)-winder_width[id], 3.8)
+				
+				winder_width[id] = winder_width[id] + winder_scaling[id]
+			end
+		else
+			if(math.mod(cnt, 2) == 0) then
+				shot(getPlayerAngle2(256)+winder_width[id], 3.8)
+				shot(getPlayerAngle2(256)-winder_width[id], 3.8)
+				
+				winder_width[id] = winder_width[id] + winder_scaling[id]
+			end
+		end
+	end
+	
+	if(cnt==950) then
+		vanish()
+	end
+
+	return
+end
+
+function sub_laser_l()
+	setPos(parentx-90, parenty-25)
+	
+	if(cnt<896) then
+		if(math.mod(cnt, 32) == 1) then
+			subl_aim = getPlayerAngle2(64)
+		end
+		if(math.mod(cnt, 32) <= 12) then
+			if(math.mod(cnt, 2) == 1) then
+				if(loop <= 2) then
+					shot2(subl_aim, 3.8)
+				else
+					way2(5, subl_aim, 3.8, 32)
+				end
+			end
+		elseif(math.mod(cnt, 32) >= 16 and math.mod(cnt, 32) <= 28) then
+			if(math.mod(cnt, 2) == 1) then
+				if(loop == 3) then
+					way2(4, subl_aim, 3.8, 32)
+				end
+			end
+		end
+	end
+	
+	if(cnt==950) then
+		vanish()
+	end
+
+	return
+end
+
+function sub_laser_r()
+	setPos(parentx+90, parenty-25)
+	
+	if(cnt<896) then
+		if(math.mod(cnt, 32) == 17) then
+			subr_aim = getPlayerAngle2(64)
+		end
+		if(math.mod(cnt, 32) >= 16 and math.mod(cnt, 32) <= 28) then
+			if(math.mod(cnt, 2) == 1) then
+				if(loop <= 2) then
+					shot2(subr_aim, 3.8)
+				else
+					way2(5, subr_aim, 3.8, 32)
+				end
+			end
+		elseif(math.mod(cnt, 32) <= 12) then
+			if(math.mod(cnt, 2) == 1) then
+				if(loop == 3) then
+					way2(4, subr_aim, 3.8, 32)
+				end
+			end
+		end
+	end
+	
+	if(cnt==950) then
+		vanish()
+	end
+
+	return
+end
+
+]]>
+</lua>
+
+</barrage>

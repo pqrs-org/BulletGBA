@@ -1,0 +1,12 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/laser.bnml"
+
+action top {
+  fire direction absolute 270 speed absolute 0.1 bullet actionRef lib_laser(20);
+  repeat 15 action {
+    wait 10;
+    fire direction sequence 20 speed absolute 0.1 bullet actionRef lib_laser(20);
+  }
+}

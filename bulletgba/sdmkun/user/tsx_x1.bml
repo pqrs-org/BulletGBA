@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_x1</filename>
+ <group>KotuAnzenX</group>
+ <title>習作その１：ダンデオン＋ドゥーム弾</title>
+ <description>六方向に高速弾を発射。それぞれ進行方向と垂直に弾を発射します。</description>
+ <capture>高速弾は動かなければ当たりません。高速弾が通過してから回避しましょう。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <fire>
+  <speed>6-$rank*4</speed>
+  <direction type="aim">50</direction>
+  <bulletRef label="side"/>
+ </fire>
+ <repeat><times>5</times>
+ <action>
+ <fire>
+  <speed type="sequence">0</speed>
+  <direction type="sequence">-20</direction>
+  <bulletRef label="side"/>
+ </fire>
+ </action>
+ </repeat>
+ <wait>120</wait>
+</action>
+
+<bullet label="side">
+ <action>
+  <repeat><times>200</times>
+   <action>
+    <fire>
+     <speed>1</speed>
+     <direction type="relative">90</direction>
+     <bullet/>
+    </fire>
+    <fire>
+     <speed type="sequence">0</speed>
+     <direction type="relative">270</direction>
+     <bullet/>
+    </fire>
+    <wait>3</wait>
+   </action>
+  </repeat>
+ </action>
+</bullet>
+
+</bulletml>
+</barrage>

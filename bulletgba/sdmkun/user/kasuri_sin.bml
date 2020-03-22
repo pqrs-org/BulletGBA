@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+2003/11/25 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* buzz the fire
+* hello central
+* ride the wave
+-->
+
+<barrageInfo>
+  <filename>kasuri_sin</filename>
+  <group>Oohara</group>
+  <title>カスリ正弦</title>
+  <description>某カスリシューティングの自機の最終形態がこんな感じの弾を撃ちます。LuaBullet でようやく構造がわかりました。</description>
+  <capture>後ろにまわるまでもないでしょう。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+function top()
+  local turn = getTurn()
+  local speed = 0.5 + getRank() * 0.5
+  if (turn > 500) then
+    quit()
+  end
+  if (turn < 30) then
+    return
+  end
+  if (math.mod(turn, 4) < 3.0) then
+    fire(speed * math.sin(turn * 7 * 2 * 3.14 / 360.0), speed * 2.0)
+  end
+end
+]]>
+</lua>
+
+</barrage>

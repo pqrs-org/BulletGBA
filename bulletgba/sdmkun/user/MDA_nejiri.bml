@@ -1,0 +1,170 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>MDA_nejiri</filename>
+	<group>MDA</group>
+	<title>ねじれ棒？</title>
+	<description>あまり名前が合ってませんが、青弾の撒き方がなんとなくねじれていたので。意図的なのかいい加減なのか、簡単なのか難しいのかよくわかりません。</description>
+	<capture>ある程度近づいて、切り返したり回ったり。一応、青が奇数弾で赤が偶数弾でして、実は８０レベル位まではコンコン避けのみでも避けられたりします。レベルが上がるほど、青には高速弾が、赤には低速弾（これが邪魔）が追加されます。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+	<changeSpeed>
+		<speed>1</speed>
+		<term>1</term>
+	</changeSpeed>
+	<changeDirection>
+		<direction type="absolute">180</direction>
+		<term>1</term>
+	</changeDirection>
+	<wait>10</wait>
+	<changeSpeed>
+		<speed>0</speed>
+		<term>1</term>
+	</changeSpeed>
+	<wait>10</wait>
+	<repeat>
+		<times>9</times>
+		<action>
+			<actionRef label="seed_w"/>
+			<wait>30</wait>
+			<actionRef label="seed_n"/>
+			<wait>60</wait>
+		</action>
+	</repeat>
+	<wait>120</wait>
+</action>
+
+<!-- 青ワイドショット -->
+<action label="seed_w">
+	<fire>
+		<direction type="aim">60-30+($rand*210)</direction>
+		<speed>2</speed>
+		<bullet>
+			<actionRef label="leaf_w"><param>-12</param></actionRef>
+		</bullet>
+	</fire>
+	<fireRef label="seed_w_2"><param>-9</param></fireRef>
+	<fireRef label="seed_w_2"><param>-5</param></fireRef>
+	<fireRef label="seed_w_2"><param>0</param></fireRef>
+	<fireRef label="seed_w_2"><param>5</param></fireRef>
+	<fireRef label="seed_w_2"><param>9</param></fireRef>
+	<fireRef label="seed_w_2"><param>12</param></fireRef>
+</action>
+
+<fire label="seed_w_2">
+	<direction type="sequence">10</direction>
+	<speed>2</speed>
+	<bullet>
+		<action label="leaf_w">
+			<wait>10</wait>
+			<changeSpeed>
+				<speed>0</speed>
+				<term>1</term>
+			</changeSpeed>
+			<wait>1</wait>
+			<fireRef label="blue"><param>4*$1</param></fireRef>
+			<repeat>
+				<times>$rank*7</times>
+				<actionRef label="blue_2"/>
+			</repeat>
+			<fireRef label="blue"><param>-4*$1</param></fireRef>
+			<repeat>
+				<times>$rank*7</times>
+				<actionRef label="blue_2"/>
+			</repeat>
+			<vanish/>
+		</action>
+	</bullet>
+</fire>
+
+<fire label="blue">
+	<direction type="aim">$1</direction>
+	<speed>0.8</speed>
+	<bullet/>
+</fire>
+
+<action label="blue_2">
+	<fire>
+		<direction type="sequence">0</direction>
+		<speed type="sequence">0.15</speed>
+		<bullet/>
+	</fire>
+</action>
+
+<!-- 赤集中ショット -->
+<action label="seed_n">
+	<fire>
+		<direction type="aim">105-40-($rand*210)</direction>
+		<speed>2</speed>
+		<bullet>
+			<actionRef label="leaf_n"><param>-105</param></actionRef>
+		</bullet>
+	</fire>
+	<fireRef label="seed_n_2"><param>-35</param></fireRef>
+	<fireRef label="seed_n_2"><param>35</param></fireRef>
+	<fireRef label="seed_n_2"><param>105</param></fireRef>
+</action>
+
+<fire label="seed_n_2">
+	<direction type="sequence">40</direction>
+	<speed>2</speed>
+	<bullet>
+		<action label="leaf_n">
+			<wait>10</wait>
+			<changeSpeed>
+				<speed>0</speed>
+				<term>1</term>
+			</changeSpeed>
+			<wait>1</wait>
+			<fireRef label="red"><param>0.05*$1</param></fireRef>
+			<repeat>
+				<times>$rank*13</times>
+				<actionRef label="red_2"/>
+			</repeat>
+			<fireRef label="red"><param>-0.05*$1</param></fireRef>
+			<repeat>
+				<times>$rank*13</times>
+				<actionRef label="red_2"/>
+			</repeat>
+			<vanish/>
+		</action>
+	</bullet>
+</fire>
+
+<fire label="red">
+	<direction type="aim">$1</direction>
+	<speed>3.1</speed>
+	<bullet>
+		<action>
+			<wait>9999</wait>
+			<vanish/>
+		</action>
+	</bullet>
+</fire>
+
+<action label="red_2">
+	<fire>
+		<direction type="sequence">0</direction>
+		<speed type="sequence">-0.2</speed>
+		<bullet>
+			<action>
+				<wait>9999</wait>
+				<vanish/>
+			</action>
+		</bullet>
+	</fire>
+</action>
+
+</bulletml>
+</barrage>
+

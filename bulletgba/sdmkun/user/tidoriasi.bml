@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tidoriasi</filename>
+ <group>user</group>
+ <title>千鳥足</title>
+ <description>くねくね動く変な弾幕。題名の通りですね。</description>
+ <capture>弾の動きが結構厄介。周りを回ることもできますがしにくくしてあります。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <repeat>
+  <times>50+$rank*150</times>
+   <action>
+    <fire>
+     <direction>70-140*$rand</direction>
+     <speed>0.6+$rand*0.6</speed>
+     <bulletRef label="shot"><param>1</param></bulletRef>
+    </fire>
+    <fire>
+     <direction>70-140*$rand</direction>
+     <speed>0.6+$rand*0.6</speed>
+     <bulletRef label="shot"><param>-1</param></bulletRef>
+    </fire>
+    <fire>
+     <direction>50-100*$rand</direction>
+     <speed>0.4+$rand*0.4</speed>
+     <bulletRef label="shot"><param>1</param></bulletRef>
+    </fire>
+    <fire>
+     <direction>50-100*$rand</direction>
+     <speed>0.4+$rand*0.4</speed>
+     <bulletRef label="shot"><param>-1</param></bulletRef>
+    </fire>
+   <wait>12-$rank*8</wait>
+  </action>
+ </repeat>
+ <wait>150</wait>
+</action>
+
+<bullet label="shot">
+ <wait>15</wait>
+  <action>
+   <changeDirection>
+    <direction type="relative">(50+$rand*20)*$1</direction>
+    <term>15</term>
+   </changeDirection>
+   <wait>15</wait>
+   <repeat>
+    <times>30</times>
+    <action>
+     <changeDirection>
+      <direction type="relative">(-100-$rand*40)*$1</direction>
+      <term>30</term>
+     </changeDirection>
+    <wait>30</wait>
+     <changeDirection>
+      <direction type="relative">(100+$rand*40)*$1</direction>
+      <term>30</term>
+     </changeDirection>
+    <wait>30</wait>
+   </action>
+  </repeat>
+  </action>
+</bullet>
+
+</bulletml>
+</barrage>

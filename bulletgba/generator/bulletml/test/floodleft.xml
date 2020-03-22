@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <fire>
+      <direction type="absolute">-90</direction>
+      <speed>26</speed>
+      <bullet>
+        <action>
+          <actionRef label="Grid" />
+        </action>
+      </bullet>
+    </fire>
+  </action>
+  <action label="Grid">
+    <wait>1</wait>
+    <changeSpeed>
+      <speed>0</speed>
+      <term>1</term>
+    </changeSpeed>
+    <wait>1</wait>
+    <repeat>
+      <times>1000</times>
+      <action>
+        <fire>
+          <direction type="absolute">0</direction>
+          <speed>1</speed>
+          <bullet />
+        </fire>
+        <fire>
+          <direction type="absolute">180</direction>
+          <speed>1</speed>
+          <bullet />
+        </fire>
+        <wait>1</wait>
+      </action>
+    </repeat>
+    <vanish />
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  fire direction absolute -90 speed 26 bullet action {
+    actionRef Grid();
+  }
+}
+
+// $1: direction, $2: wait
+action Grid {
+  wait 1;
+  changeSpeed speed 0 term 1;
+  wait 1;
+  repeat 1000 action {
+    fire direction absolute 0 speed 1 bullet;
+    fire direction absolute 180 speed 1 bullet;
+    wait 1;
+  }
+  vanish;
+}
+-->

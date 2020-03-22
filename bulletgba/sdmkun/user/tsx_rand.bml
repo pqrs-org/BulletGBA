@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_rand</filename>
+ <group>KotuAnzenX</group>
+ <title>八双手裏剣</title>
+ <description>「ランダム全方位弾」のリメイク。八双のくせに３６方向弾。記述列はたった２２行。</description>
+ <capture>道を辿る。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <repeat><times>60+$rank*180</times>
+  <action>
+   <fire>
+    <speed>1+$rank</speed>
+    <direction type="absolute">$rand*360</direction>
+    <bullet/>
+   </fire>
+   <repeat><times>35</times>
+    <action>
+     <fire>
+      <speed type="sequence">0</speed>
+      <direction type="sequence">10</direction>
+      <bullet/>
+     </fire>
+    </action>
+   </repeat>
+   <wait>5</wait>
+  </action>
+ </repeat>
+</action>
+
+</bulletml>
+</barrage>

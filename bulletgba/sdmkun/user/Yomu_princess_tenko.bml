@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+   <filename>Yomu_princess_tenko</filename>
+   <group>Toho</group>
+   <title>東方妖々夢より、プリンセス天狐</title>
+   <description>避けれねえよ、と思ったので。あまし似てないけどこういう弾幕は雰囲気に慣れて自信をつけると良いね。</description>
+   <capture>結構避けれるようになったよ。レベルを上げると人外魔境。要は敵の誘導のパターン化、それと撃ち込みを諦めて自爆待ち…って白い弾幕くんとは関係ない。</capture>
+   <author>shinichiro.h</author>
+</barrageInfo>
+
+<barrageStyle>
+        <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+
+turn = 0
+
+function top()
+	if (turn > 630) then
+		quit()
+	elseif (turn > 600) then
+		turn = turn + 1
+		return
+	end
+
+	span = math.ceil(120-getRank()*60)
+	span_2 = math.ceil(span / 2)
+
+	t = math.mod(turn, span)
+
+	if (t == 0) then
+		tx = getPlayerX() - 4
+		setSpeed((getPlayerX() - getX()) / span_2 * 0.6,
+				 (getPlayerY() - getY()) / span_2 * 0.6)
+	elseif (t == span_2) then
+		setSpeed(0, 0)
+	elseif (t == span_2+10) then
+		a = getPlayerAngle()
+		for i = 1,40 do
+			for j = 1,4 do
+			   s = 0.9+j*(0.1+getRank()*0.06)
+				fire(math.sin(a)*s, -math.cos(a)*s)
+			end
+			a = a + math.pi / 20.0
+		end
+		fire(0, 0, "aim")
+	end
+
+	turn = turn + 1
+end
+
+function aim()
+	pa = getPlayerAngle()
+	for i=1,20 do
+		a = pa - 0.1 + math.random() * 0.2
+		s = 1.3+0.8*math.random()
+		fire(math.sin(a)*s, -math.cos(a)*s)
+	end
+	x = getX()
+	y = getY()
+	a = 0
+	for i = 1,20 do
+		setPos(x+math.cos(a)*14, y+math.sin(a)*14)
+		fire(math.sin(pa)*2.2, -math.cos(pa)*2.2)
+		a = a + math.pi / 10.0
+	end
+	vanish()
+end
+
+]]>
+</lua>
+
+</barrage>

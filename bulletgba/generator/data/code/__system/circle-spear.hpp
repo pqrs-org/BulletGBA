@@ -1,0 +1,30 @@
+#ifndef GENERATED_2a99ec7298972dcc31207a9b50a5aab5_HPP 
+#define GENERATED_2a99ec7298972dcc31207a9b50a5aab5_HPP 
+
+#include "bullet.hpp" 
+
+void stepfunc_c172a15bb6eca889f748350b364028cc_5b3de107f763f45f711859024683942c(BulletInfo *p); 
+void stepfunc_913c43f1778c0ec781d6daecb8525a49_5b3de107f763f45f711859024683942c(BulletInfo *p); 
+void stepfunc_dae2cf81747ffb5070f05c8837b1d568_5b3de107f763f45f711859024683942c(BulletInfo *p); 
+void stepfunc_b9f3746024faf71a948d02a3f58cba12_5b3de107f763f45f711859024683942c(BulletInfo *p); 
+void stepfunc_5af03e3b70acdef3e811d4b95b8f0781_5b3de107f763f45f711859024683942c(BulletInfo *p); 
+void stepfunc_fe781b5b1e98853b0850a52f0f4d28cc_5b3de107f763f45f711859024683942c(BulletInfo *p); 
+void stepfunc_8fff89501dcb48caade16bb16deb7b61_5b3de107f763f45f711859024683942c(BulletInfo *p); 
+void stepfunc_6c88a51082ed4fd2337504d13a7f1d2c_5b3de107f763f45f711859024683942c(BulletInfo *p); 
+void stepfunc_af6445e1d78937e343a8f52b6fb52257_5b3de107f763f45f711859024683942c(BulletInfo *p); 
+
+
+extern const BulletStepFunc bullet_bf38adb1f7f09da794f3d0d778078d1a_5b3de107f763f45f711859024683942c[]; 
+const unsigned int bullet_bf38adb1f7f09da794f3d0d778078d1a_5b3de107f763f45f711859024683942c_size = 53; 
+extern const BulletStepFunc bullet_46351162b3733adb114d4b820b333850_5b3de107f763f45f711859024683942c[]; 
+const unsigned int bullet_46351162b3733adb114d4b820b333850_5b3de107f763f45f711859024683942c_size = 3; 
+extern const BulletStepFunc bullet_e41e28b34e2b9e5febeeaab762777150_5b3de107f763f45f711859024683942c[]; 
+const unsigned int bullet_e41e28b34e2b9e5febeeaab762777150_5b3de107f763f45f711859024683942c_size = 2; 
+extern const BulletStepFunc bullet_4fe2bfe654bdf4718c669e478f5f438c_5b3de107f763f45f711859024683942c[]; 
+const unsigned int bullet_4fe2bfe654bdf4718c669e478f5f438c_5b3de107f763f45f711859024683942c_size = 3; 
+extern const BulletStepFunc bullet_7b4addb6445be2530996d8435a5ca7ff_5b3de107f763f45f711859024683942c[]; 
+const unsigned int bullet_7b4addb6445be2530996d8435a5ca7ff_5b3de107f763f45f711859024683942c_size = 5; 
+
+
+#endif 
+

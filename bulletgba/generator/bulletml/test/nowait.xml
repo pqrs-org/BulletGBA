@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <repeat>
+      <times>5</times>
+      <action>
+        <repeat>
+          <times>5</times>
+          <action>
+            <fire>
+              <bullet />
+            </fire>
+          </action>
+        </repeat>
+      </action>
+    </repeat>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 5 action {
+    repeat 5 action { 
+      fire bullet;
+    }   
+  }   
+}
+-->

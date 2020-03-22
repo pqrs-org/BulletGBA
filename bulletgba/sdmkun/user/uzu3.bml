@@ -1,0 +1,161 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+<filename>uzu3</filename>
+ <group>user</group>
+ <title>パーフェクトフリーズちっくに固定してvol.3</title>
+ <description>竜巻が周りのものを巻き込む様子？</description>
+ <capture></capture>
+</barrageInfo>
+
+<barrageStyles>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<!-- CDATA とかいうのは大事なおまじないです。 -->
+<lua>
+<![CDATA[
+pi = 3.141592
+std = pi/180
+a = 0
+b = 0
+rotv = 0
+c = 0
+d = 0
+dir = 0
+rotv1 = 0
+function cal(p,q,r)
+	rr = r*std
+	pp = (p/math.sqrt(p^2+q^2))*math.cos(rr)-(q/math.sqrt(p^2+q^2))*math.sin(rr)
+	qq = (q/math.sqrt(p^2+q^2))*math.cos(rr)+(p/math.sqrt(p^2+q^2))*math.sin(rr)
+	return pp,qq
+end
+
+function center()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	x1 = getX() - 4
+	y1 = getY() - 4
+	vx1 = getSpeedX()
+	vy1 = getSpeedY()
+	t = getTurn()
+
+	if(rank > 0.6)then
+	rotv1 = rotv1 + 0.0003+rank*0.001
+	size = 10-rank*9.8
+	else
+	rotv1 = rotv1 + 0.0005
+	size = 10
+	end
+
+	if(t == 1)then
+	setPos(getMaxX()/2, getMaxY()/2)
+	end
+	if(turn > 1400)then
+	vanish()
+	end
+end
+
+function rot1()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	local x = getX() - 4
+	local y = getY() - 4
+	local t = getTurn()
+	local vx = getSpeedX()
+	local vy = getSpeedY()
+	
+	if(turn > 1400)then
+	dirx,diry = cal(vx,vy,0) 
+	fire((1+rank*0.5)*dirx,(1+rank*0.5)*diry)
+	vanish()
+	end
+	if(t > 1000)then
+	dirx,diry = cal(vx,vy,0) 
+	fire((1+rank*1)*dirx,(1+rank*1)*diry)
+	vanish()
+	end
+
+	if(turn > 430)then
+	r = math.sqrt((x-x1)^2+(y-y1)^2)
+	if(r > 0 and r < size)then
+	rv = -3
+	rotsp = rotv1*r
+	setSpeed(rv*(x-x1)/r-rotsp*(y-y1)/r,rv*(y-y1)/r+rotsp*(x-x1)/r)
+	else
+	rv = -0.01-rotv1*0.09
+	rotsp = rotv1*100/r
+	setSpeed(rv*(x-x1)/r-rotsp*(y-y1)/r,rv*(y-y1)/r+rotsp*(x-x1)/r)
+	end
+
+	elseif(turn > 401)then
+	setSpeed(0,0)
+	end
+end
+
+
+function top()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	px = getPlayerX() - 4
+	py = getPlayerY() - 4
+	turn = getTurn()
+	local sp = 0.05+math.random()*3
+
+	if(turn < 400)then
+	randomn = math.random()
+	fire(sp*math.cos(360*randomn*std),sp*math.sin(360*randomn*std),"rot1")
+	randomn = math.random()
+	fire(sp*math.cos(360*randomn*std),sp*math.sin(360*randomn*std),"rot1")
+	if(rank > 0.9)then
+	randomn = math.random()
+	fire(sp*math.cos(360*randomn*std),sp*math.sin(360*randomn*std),"rot1")
+	randomn = math.random()
+	fire(sp*math.cos(360*randomn*std),sp*math.sin(360*randomn*std),"rot1")
+	elseif(rank > 0.7)then
+	randomn = math.random()
+	fire(sp*math.cos(360*randomn*std),sp*math.sin(360*randomn*std),"rot1")
+	end
+	end
+
+	if(turn == 398)then
+	fire(0,0,"center")
+	end
+	
+	if(turn == 700)then
+	times = 705
+	for i = 1,36 do
+	fire(2*math.cos(i*10),2*math.sin(i*10),"berot")
+	end
+	end
+	if(turn == 900)then
+	times = 907
+	for i = 1,36 do
+	fire(2*math.cos(i*10),2*math.sin(i*10),"berot")
+	end
+	end
+	if(turn == 1100)then
+	times = 1109
+	for i = 1,36 do
+	fire(2*math.cos(i*10),2*math.sin(i*10),"berot")
+	end
+	end
+	if(turn > 1400)then
+	quit()
+	end
+end
+function berot()
+	if(turn == times)then
+	fire(0,0,"rot1")
+	vanish()
+	end
+end
+
+]]>
+</lua>
+
+</barrage>

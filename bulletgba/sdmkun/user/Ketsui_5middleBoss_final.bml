@@ -1,0 +1,187 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+  <filename>Ketsui_5middleBoss_final</filename>
+  <group>user</group>
+  <title>ケツイ５面トラファルガ発狂</title>
+  <description>こんな中ボスに会えるゲームはケツイだけ！ただちょっと違ってるような気が。</description>
+  <capture>ばらまきに気をつけて自機狙いを上手く避けましょう。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+	<fire>
+		<direction type="absolute">0</direction>
+		<speed type="absolute">1</speed>
+		<bullet><action><vanish/></action></bullet>
+	</fire>
+	
+	<repeat>
+		<times>4</times>
+		<actionRef label="eightWay">
+			<param>1.5+$rank*0.5</param>
+		</actionRef>
+		<actionRef label="eightWay">
+			<param>(1.5+$rank*0.5)*0.8</param>
+		</actionRef>
+	</repeat>
+	<wait>60-$rank*20</wait>
+	
+	<repeat>
+		<times>4+$rank*2</times>
+		<actionRef label="eightWay">
+			<param>1.5+$rank*0.5</param>
+		</actionRef>
+		<actionRef label="eightWay">
+			<param>(1.5+$rank*0.5)*0.8</param>
+		</actionRef>
+	</repeat>
+	<wait>60-$rank*20</wait>
+	
+	<repeat>
+		<times>8</times>
+		<action>
+			<repeat>
+				<times>4+$rank*4</times>
+				<actionRef label="eightWay">
+					<param>1.5+$rank*0.5</param>
+				</actionRef>
+				<actionRef label="eightWay">
+					<param>(1.5+$rank*0.5)*0.8</param>
+				</actionRef>
+			</repeat>
+			<wait>60-$rank*20</wait>
+		</action>
+	</repeat>
+	<wait>60</wait>
+	
+</action>
+
+<!-- $1=delay speed -->
+<action label="eightWay">
+	<fire>
+		<direction type="sequence">46</direction>
+		<speed type="absolute">1.5+$rank*0.5</speed>
+		<bulletRef label="delayBullet">
+			<param>$1</param>
+		</bulletRef>
+	</fire>
+	<fire>
+		<direction type="sequence">0</direction>
+		<speed type="absolute">1.5+$rank*0.5</speed>
+		<bulletRef label="reverseBullet">
+			<param>$1</param>
+		</bulletRef>
+	</fire>
+	<fire>
+		<direction type="sequence">45</direction>
+		<speed type="absolute">1.5+$rank*0.5</speed>
+		<bulletRef label="delayBullet">
+			<param>$1</param>
+		</bulletRef>
+	</fire>
+	
+	<repeat>
+		<times>3</times>
+		<action>
+			<fire>
+				<direction type="sequence">45</direction>
+				<speed type="absolute">1.5+$rank*0.5</speed>
+				<bulletRef label="delayBullet">
+					<param>$1</param>
+				</bulletRef>
+			</fire>
+			<fire>
+				<direction type="sequence">0</direction>
+				<speed type="absolute">1.5+$rank*0.5</speed>
+				<bulletRef label="reverseBullet">
+					<param>$1</param>
+				</bulletRef>
+			</fire>
+			<fire>
+				<direction type="sequence">45</direction>
+				<speed type="absolute">1.5</speed>
+				<bulletRef label="delayBullet">
+					<param>$1</param>
+				</bulletRef>
+			</fire>
+		</action>
+	</repeat>
+	<wait>2</wait>
+</action>
+
+<!-- $1=reverse speed -->
+<bullet label="reverseBullet">
+	<action>
+		<wait>15</wait>
+		<changeSpeed>
+			<speed type="absolute">0.0001</speed>
+			<term>20</term>
+		</changeSpeed>
+		<wait>20</wait>
+		<changeDirection>
+			<direction type="relative">180</direction>
+			<term>1</term>
+		</changeDirection>
+		<wait>5</wait>
+		
+		<fire>
+			<direction type="relative">90</direction>
+			<speed type="absolute">1</speed>
+			<bulletRef label="aimBullet"/>
+		</fire>
+		
+		<changeSpeed>
+			<speed type="absolute">1.0+$rank*0.5</speed>
+			<term>30</term>
+		</changeSpeed>
+		<wait>60</wait>
+		<changeSpeed>
+			<speed type="absolute">$1</speed>
+			<term>10</term>
+		</changeSpeed>
+	</action>
+</bullet>
+
+<!-- $1=delayed speed -->
+<bullet label="delayBullet">
+	<action>
+		<wait>15</wait>
+		<fire>
+			<direction type="relative">0</direction>
+			<speed type="absolute">$1</speed>
+			<bullet/>
+		</fire>
+		<vanish/>
+	</action>
+</bullet>
+
+<bullet label="aimBullet">
+	<action>
+		<changeSpeed>
+			<speed type="absolute">0.0001</speed>
+			<term>20</term>
+		</changeSpeed>
+		<wait>20</wait>
+		<changeDirection>
+			<direction type="aim">0</direction>
+			<term>1</term>
+		</changeDirection>
+		<wait>1</wait>
+		<changeSpeed>
+			<speed type="absolute">2+$rank*0.5</speed>
+			<term>10</term>
+		</changeSpeed>
+	</action>
+</bullet>
+</bulletml>
+
+</barrage>

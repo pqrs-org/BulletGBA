@@ -1,0 +1,102 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <repeat>
+      <times>5</times>
+      <action>
+        <repeat>
+          <times>5</times>
+          <action>
+            <repeat>
+              <times>10</times>
+              <action>
+                <fire>
+                  <direction type="aim">0</direction>
+                  <speed type="absolute">2</speed>
+                  <bullet>
+                    <action>
+                      <wait>10</wait>
+                      <fire>
+                        <direction type="relative">180-60</direction>
+                        <speed type="absolute">1</speed>
+                        <bullet>
+                          <actionRef label="fireVulcan_easy" />
+                        </bullet>
+                      </fire>
+                      <fire>
+                        <direction type="relative">180+60</direction>
+                        <speed type="absolute">1</speed>
+                        <bullet>
+                          <actionRef label="fireVulcan_easy" />
+                        </bullet>
+                      </fire>
+                      <vanish />
+                    </action>
+                  </bullet>
+                </fire>
+                <wait>2</wait>
+              </action>
+            </repeat>
+            <wait>20</wait>
+          </action>
+        </repeat>
+        <wait>30</wait>
+      </action>
+    </repeat>
+  </action>
+  <action label="fireVulcan_easy">
+    <wait>30</wait>
+    <changeSpeed>
+      <speed type="absolute">0.1</speed>
+      <term>1</term>
+    </changeSpeed>
+    <wait>30</wait>
+    <fire form="thin">
+      <direction type="aim">0</direction>
+      <speed type="absolute">2</speed>
+      <bullet>
+        <action />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="absolute">360*$rand</direction>
+      <speed type="absolute">1</speed>
+      <bullet>
+        <action />
+      </bullet>
+    </fire>
+    <vanish />
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 5 action {
+    repeat 5 action {
+      repeat 10 action {
+        fire direction aim 0 speed absolute 2 bullet action {
+          wait 10;
+          fire direction relative 180 - 60 speed absolute 1 bullet actionRef fireVulcan_easy();
+          fire direction relative 180 + 60 speed absolute 1 bullet actionRef fireVulcan_easy();
+          vanish;
+        }
+        wait 2;
+      }
+      wait 20;
+    }
+    wait 30;
+  }
+}
+
+action fireVulcan_easy {
+  wait 30;
+  changeSpeed absolute 0.1 term 1;
+  wait 30;
+  fire form thin direction aim 0 speed absolute 2 bullet action;
+  fire direction absolute 360 * $rand speed absolute 1 bullet action;
+  vanish;
+}
+-->

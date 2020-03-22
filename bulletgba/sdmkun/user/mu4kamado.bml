@@ -1,0 +1,266 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>mu4kamado</filename>
+ <group>user</group>
+ <title>虫姫４面カマドウマ（ウルトラ）</title>
+ <description>虫姫らしいアホ弾幕。豪快。</description>
+ <capture>ちょん</capture>
+</barrageInfo>
+
+<barrageStyles>
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<lua>
+<![CDATA[
+
+----------------------------------
+-- 汎用
+----------------------------------
+function getVectorX(dir, speed)
+	dir = dir + 64
+	return -math.cos(math.pi/128*dir)*speed
+end
+
+function getVectorY(dir, speed)
+	dir = dir + 64
+	return math.sin(math.pi/128*dir)*speed
+end
+
+function getAngle(x1, y1, x2, y2)
+	local tempx = x1-x2
+	local tempy = y1-y2
+	return (math.atan2(tempy, -tempx)*128/math.pi)+64
+end
+
+function getDistance(x, y, px, py)
+	return math.sqrt((x-px)^2+(y-py)^2)
+end
+
+function getPlayerAngle2(seido)
+	local dir
+	
+	dir = 128/math.pi * getPlayerAngle()
+	dir = -dir+128
+	dir = math.floor((dir / (256/seido)) +0.5) * (256/seido)
+	
+	return dir
+end
+
+function setSpeed2(dir, speed)
+	setSpeed(getVectorX(dir, speed), getVectorY(dir, speed))
+	return
+end
+
+----------------------------------
+-- ショット
+----------------------------------
+function shot(dir, speed, color)
+	if(color == 2) then
+		fire(dir, speed*rank, "shot2_sub")
+	elseif(color == 3) then
+		fire(getVectorX(dir, speed*rank), getVectorY(dir, speed*rank), "shot3_sub")
+	else
+		fire(getVectorX(dir, speed*rank), getVectorY(dir, speed*rank))
+	end
+	
+	return
+end
+
+function shot2_sub()
+	shot(getSpeedX(), getSpeedY())
+	setSpeed(0, 0)
+	vanish()
+	return
+end
+
+function shot3_sub()
+end
+
+function way(num, dir, speed, width, color)
+	num = math.floor(num)
+	local angle = -width*(num/2-0.5)
+	for i=1,num do
+		shot(angle+dir, speed, color)
+		angle = angle + width
+	end
+	
+	return
+end
+
+function round(num, dir, speed, color)
+	num = math.floor(num)
+	for i=1,num do
+		shot(dir, speed, color)
+		dir = dir + 256/num
+	end
+	
+	return
+end
+
+function bigshot(dir, speed, color)
+	for i=0, 16 do
+		if(color == 2) then
+			fire(dir, speed*rank, "bigshot_sub", i*16)
+		elseif(color == 3) then
+			fire(getVectorX(dir, speed*rank), getVectorY(dir, speed*rank), "bigshot3_sub", i*16)
+		else
+			fire(dir, speed*rank, "bigshot2_sub", i*16)
+		end
+	end
+	
+	return
+end
+
+function bigshot_sub(i)
+	setPos(getX()+getVectorX(i, 10), getY()+getVectorY(i, 10))
+	shot(getSpeedX(), getSpeedY())
+	setSpeed(0, 0)
+	vanish()
+end
+
+function bigshot2_sub(i)
+	fire(getSpeedX(), getSpeedY(), "bigshot_sub", i)
+	setSpeed(0, 0)
+	vanish()
+end
+
+function bigshot3_sub(i)
+	if(getTurn()==0) then
+		setPos(getX()+getVectorX(i, 10), getY()+getVectorY(i, 10))
+	end
+end
+
+----------------------------------
+-- メイン
+----------------------------------
+parentx = 0
+parenty = 0
+
+cnt = -1
+
+rank = 1
+
+function top()
+	parentx = getX()
+	parenty = getY()
+	
+	rank = getRank() / 2.5 + 0.8
+	
+   	--setPos(150, 130)
+	
+	if(cnt == 0) then
+		setSpeed(0, -1)
+	end
+	
+	if(cnt == 15) then
+		fire(0, 0, "sub_f")
+		fire(0, 0, "sub_b")
+		fire(0, 0, "sub_l")
+		fire(0, 0, "sub_r")
+		setSpeed(0, 0)
+	end
+	if(cnt == 50) then
+		setSpeed(0, 0.4)
+	end
+	if(cnt == 200) then
+		setSpeed(0, 0)
+	end
+	
+	if(cnt == 95 or cnt == 100 or cnt == 105) then
+		local dir = math.floor(math.random()*2)*4
+		round(32, dir, 2.7, 2)
+		round(32, dir, 2.9, 2)
+	end
+	
+	if(cnt == 370) then
+		quit()
+	end
+	
+	cnt = cnt + 1
+	return
+end
+
+function sub_f()
+	setPos(parentx, parenty+40)
+	
+	if(cnt == 20 or cnt == 30) then
+		local aimdir = getPlayerAngle2(1024)
+		way(8, aimdir, 2.5,  8)
+		way(8, aimdir, 2.65, 8)
+	end
+	if(cnt == 25 or cnt == 35) then
+		local aimdir = getPlayerAngle2(1024)
+		way(7, aimdir, 2.5,  8)
+		way(7, aimdir, 2.65, 8)
+	end
+	
+	if(cnt == 370) then
+		vanish()
+	end
+end
+
+function sub_b()
+	setPos(parentx, parenty-20)
+	
+	if(cnt == 90) then
+		local dir = math.floor(math.random()*2)*4
+		round(32, dir, 2.7)
+		round(32, dir, 2.9)
+	end
+	
+	if(cnt == 110) then
+		aimdir = getPlayerAngle2(1024)
+		dir = -128
+		speed = 1
+	end
+	if(cnt >= 110 and cnt <= 142) then
+		for i=0, 14 do
+			shot(aimdir-dir, (0.15+i/4/speed)*speed, 2)
+			shot(aimdir+dir, (0.15+i/4/speed)*speed, 2)
+		end
+		dir = dir + 4
+		speed = speed + 0.25
+	end
+	
+	if(cnt == 370) then
+		vanish()
+	end
+end
+
+function sub_l()
+	setPos(parentx-30, parenty-8)
+	
+	if(cnt == 80) then
+		local dir = math.floor(math.random()*2)*4
+		round(32, dir, 2.7)
+		round(32, dir, 2.9)
+	end
+	
+	if(cnt == 370) then
+		vanish()
+	end
+end
+
+function sub_r()
+	setPos(parentx+30, parenty-8)
+	
+	if(cnt == 85) then
+		local dir = math.floor(math.random()*2)*4
+		round(32, dir, 2.7)
+		round(32, dir, 2.9)
+	end
+	
+	if(cnt == 370) then
+		vanish()
+	end
+end
+
+]]>
+</lua>
+
+</barrage>

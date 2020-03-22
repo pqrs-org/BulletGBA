@@ -1,0 +1,97 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+  <filename>torino2006</filename>
+  <group>user</group>
+  <title>torino 2006</title>
+  <description>一発時事ネタ弾幕！</description>
+  <capture>気分は大回転</capture>
+  <author>Pentan</author>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+
+topaim=0.0
+waitturn=0
+atkturn=0
+
+function top()
+	local ringwait, interval, spd=45, 6, 2.5
+	
+	if atkturn==0 then
+		fire( 0.0, 0.0, "ringShooter" );
+	elseif atkturn==ringwait then
+		topaim=getPlayerAngle()
+		flatShot( 5, topaim, spd, -0.05, 0.4 )
+	elseif atkturn==interval+ringwait then
+		flatShot( 5, topaim, spd, -0.1, 0.35 )
+	elseif atkturn==interval*2+ringwait then
+		flatShot( 3, topaim, spd, -0.15, 0.325 )
+	elseif atkturn==interval*3+ringwait then
+		flatShot( 1, topaim, spd, -0.2, 0.3 )
+	elseif atkturn==interval*4+ringwait then
+		flatShot( 1, topaim, spd, -0.25, 0.2 )
+	elseif atkturn==interval*5+ringwait then
+		flatShot( 1, topaim, spd, -0.25, 0.2 )
+	elseif atkturn>interval*5+ringwait then
+		if getTurn()>1200 then quit() end
+		waitturn=waitturn+1
+		if waitturn>120-getRank()*118.9 then
+			atkturn=-1
+			waitturn=0
+		end
+	end
+	atkturn=atkturn+1
+end
+
+function flatShot(way, angle, spd1, dspd, dh)
+	local bvx, bvy =math.sin(angle), -math.cos(angle)
+	local vvx, vvy=bvy, -bvx
+	local cdh=(way-1)*-0.5*dh
+	local crossspd=0.075
+	spd1=spd1-(way-1)*0.5*dspd
+	
+	for i=1, way do
+		local cvx, cvy=bvx*spd1+vvx*cdh, bvy*spd1+vvy*cdh
+		local tmpl=math.sqrt(cvx*cvx+cvy*cvy)
+		local cix, ciy=cvx/tmpl, cvy/tmpl
+		
+		fire( cvx+cix*crossspd, cvy+ciy*crossspd  )
+		fire( cvx-cix*crossspd, cvy-ciy*crossspd  )
+		fire( cvx+ciy*crossspd, cvy-cix*crossspd  )
+		fire( cvx-ciy*crossspd, cvy+cix*crossspd  )
+		fire( cvx, cvy  )
+		cdh=cdh+dh
+		spd1=spd1+dspd
+	end
+	
+end
+
+function ringShooter()
+	local vx, vy=math.sin(getPlayerAngle()), -math.cos(getPlayerAngle())
+	local side=0.125
+	for i=1, 5 do
+		local spdbias=1.5-math.mod(i,2)*0.125
+		ringShot( (vx-vy*(i-3)*side)*spdbias, (vy+vx*(i-3)*side)*spdbias, 18, 0.15 )
+	end
+	vanish()
+end
+
+function ringShot( vx, vy, div, r )
+	for i=1, div do
+		fire( vx+math.sin(i/div*6.283185)*r, vy-math.cos(i/div*6.283185)*r )
+	end
+end
+
+]]>
+</lua>
+
+</barrage>

@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+<filename>04b</filename>
+<group>XIN</group>
+<title>#04b</title>
+<description>BulletML歴3日。いろいろ弄ってたら偶然出来たので、それを手直し。こんなんでいいんだろうか。</description>
+<capture>自機狙いばっかりなので、主にこんこん避けとか切り返しとかでいいんじゃないでしょうか。よく分かりませんが。あと、ワインダーの内側で避けましょうね。</capture>
+</barrageInfo>
+<barrageStyle>
+<bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+
+<action label="top1">
+ <repeat>
+ <times>84/(8-$rank*5)</times>
+  <action>
+   <bulletRef label="pattern"/>
+   <wait>80-$rank*50</wait>
+  </action>
+ </repeat>
+</action>
+
+<bullet label="pattern">
+ <direction type="aim">(-25+$rand*50)*$rank</direction>
+ <speed>1.2</speed>
+ <action>
+  <repeat> <times>4</times>
+   <action>
+    <fire>
+     <speed>1.5+$rank*2</speed>
+     <bullet/>
+    </fire>
+
+    <repeat> <times>10+$rank*20</times>
+     <action>
+      <wait>2</wait>
+      <fire>
+       <direction type="sequence">0</direction>
+       <speed>1</speed>
+       <bullet/>
+      </fire>
+     </action>
+    </repeat>
+
+    <wait>50-$rank*30</wait>
+   </action>
+  </repeat>
+ </action>
+</bullet>
+
+<action label="top2">
+ <repeat>
+ <times>210</times>
+  <action>
+   <fire>
+    <direction type="absolute">$rank*30+120</direction>
+    <bullet/>
+   </fire>
+   <fire>
+    <direction type="absolute">-$rank*30-120</direction>
+    <bullet/>
+   </fire>
+   <wait>4</wait>
+  </action>
+ </repeat>
+</action>
+
+</bulletml>
+</barrage>

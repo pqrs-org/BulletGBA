@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>self-mis02</filename>
+ <group>OtakuTwo</group>
+ <title>扇状弾・重複型改</title>
+<description>
+どっかで見た…白幕くん100個目の弾幕か。 エスプレイドのIZUNA扇弾、とかいうやつ。 なおレベル74以降が、この弾幕の真の姿。
+</description>
+<capture>
+通路だと思うな網だと思え。　　　　　　　３セット目は通過する隙間が交点にあるが、真の姿の場合、その交点に邪魔な弾がいる。別交点は邪魔無し、だが隙間が異様に狭い。
+</capture>
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <fireRef label="seed"><param> 1</param><param>$rand</param></fireRef>
+ <wait>180</wait>
+ <fireRef label="seed"><param>-1</param><param>$rand</param></fireRef>
+ <wait>210</wait>
+ <actionRef label="randfix"><param>$rand</param></actionRef>
+ <wait>240</wait>
+</action>
+
+<action label="randfix">
+ <fireRef label="seed"><param> 1</param><param>$1</param></fireRef>
+ <fireRef label="seed"><param>-1</param><param>$1</param></fireRef>
+</action>
+
+<fire label="seed">
+ <speed>0</speed>
+ <bullet>
+  <action>
+   <fire>
+    <direction type="relative">360*$2</direction>
+    <speed>0.5</speed>
+    <bullet/>
+   </fire>
+   <actionRef label="allway"/>
+   <repeat><times>4+$rank*15</times>
+    <action>
+     <wait>5</wait>
+     <fire>
+      <direction type="sequence">17*$1</direction>
+      <speed type="sequence">0.1</speed>
+      <bullet/>
+     </fire>
+     <actionRef label="allway"/>
+    </action>
+   </repeat>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<action label="allway">
+ <repeat><times>23</times>
+  <action>
+   <fire>
+    <direction type="sequence">15</direction>
+    <speed type="sequence">0</speed>
+    <bullet/>
+   </fire>
+  </action>
+ </repeat>
+</action>
+
+</bulletml>
+
+</barrage>
+

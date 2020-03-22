@@ -1,0 +1,20 @@
+Note:
+
+sox ~/audio/music/humanpark/loop1.wav -c 1 -b -r 16384 music_menu.wav
+sox ~/audio/music/humanpark/loop15.wav -c 1 -b -r 16384 music_game.wav
+sox ~/audio/music/humanpark/loop22.wav -c 1 -b -r 16384 music_result.wav
+
+sox ~/audio/se/forc/effect4.wav -c 1 -b -r 16384 se_menu_select.wav
+sox ~/audio/se/forc/effect3.wav -c 1 -b -r 16384 se_menu_click.wav
+sox ~/audio/se/osa/paper01.wav -c 1 -b -r 16384 se_menu_cancel.wav fade 0 0.2 0.1
+sox ~/audio/se/osa/sha00.wav -c 1 -b -r 16384 se_menu_changepage.wav trim 0 0.1
+
+sox ~/audio/se/osa/bom34.wav -c 1 -b -r 16384 se_explode_self.wav fade 0 0.8 0.1
+sox ~/audio/se/osa/bom20_a.wav -c 1 -b -r 16384 se_explode_boss_shield.wav fade 0 0.8 0.1
+
+# sox ~/audio/se/osa/fm000.wav -c 1 -b -r 16384 se_shot_hit.wav trim 0.35 0.05
+sox ~/audio/se/osa/sha04.wav -c 1 -b -r 16384 se_shot_hit.wav trim 0 0.02
+sox ~/audio/se/osa/warp02.wav -c 1 -b -r 16384 se_toggle_slow_mode.wav trim 0.4 2
+
+sox ~/audio/se/osa/mecha16.wav -c 1 -b -r 16384 se_boss_destroy_vibration.wav
+sox ~/audio/se/osa/bom32.wav -c 1 -b -r 16384 se_boss_destroy_explode.wav

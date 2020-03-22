@@ -1,0 +1,117 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+2003/7/16 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* never say never
+* anxious for return
+* tiny confession
+-->
+
+<barrageInfo>
+  <filename>first_bravery</filename>
+  <group>Bulletsmorph</group>
+  <title>最初の勇気</title>
+  <description>陣中見舞い。原作はプロギア三ボス発狂の弾の半分が自機狙いに化けるという凶悪なものでしたが、ずっと簡単にしてあります。題名は某TRPGマンガより。</description>
+  <capture>あわてないこと。弾の大半は左右へ飛んでいくので、中央下でちょこちょこ動けば避けられます。本体のうしろに回るのもあり。なお、弾を誘導しようとするとかえって苦しくなることが多いです。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+  <actionRef label="loop">
+    <param>120</param>
+  </actionRef>
+
+  <actionRef label="loop">
+    <param>90</param>
+  </actionRef>
+
+  <wait>200</wait>
+
+</action>
+
+<action label="loop">
+
+    <fire>
+      <direction type="absolute">180 + 70</direction>
+      <bulletRef label="bit">
+        <param>-$1</param>
+      </bulletRef>
+    </fire>
+    <wait>10</wait>
+
+    <fire>
+      <direction type="absolute">180 - 70</direction>
+      <bulletRef label="bit">
+        <param>$1</param>
+      </bulletRef>
+    </fire>
+    <wait>10</wait>
+
+    <fire>
+      <direction type="absolute">180 + 80</direction>
+      <bulletRef label="bit">
+        <param>-$1</param>
+      </bulletRef>
+    </fire>
+    <wait>10</wait>
+
+    <fire>
+      <direction type="absolute">180 - 80</direction>
+      <bulletRef label="bit">
+        <param>$1</param>
+      </bulletRef>
+    </fire>
+    <wait>10</wait>
+
+    <fire>
+      <direction type="absolute">180 + 60</direction>
+      <bulletRef label="bit">
+        <param>-$1</param>
+      </bulletRef>
+    </fire>
+    <wait>10</wait>
+
+    <fire>
+      <direction type="absolute">180 - 60</direction>
+      <bulletRef label="bit">
+        <param>$1</param>
+      </bulletRef>
+    </fire>
+    <wait>10</wait>
+
+</action>
+
+<bullet label="bit">
+<speed>0.8</speed>
+<action>
+
+  <repeat> <times>999</times><action>
+    <fire>
+      <direction type="relative">$1</direction>
+      <speed>0.7 + 1.1 * $rank</speed>
+      <bullet/>
+    </fire>
+    <fire>
+      <direction type="aim">0</direction>
+      <speed>0.7 + 1.1 * $rank</speed>
+      <bullet/>
+    </fire>
+    <wait>30 - 20 * $rank</wait>
+  </action></repeat>
+
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

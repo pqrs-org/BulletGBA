@@ -1,0 +1,285 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../bulletml.dtd">
+<barrage>
+<barrageInfo>
+
+<filename>aja3</filename>
+<group>original</group>
+<title>式神の城Ⅱエイジャ兄弟第三形態の様な物</title>
+<description>降り注ぐ敵弾と、立ち昇る敵弾。これが兄弟の力だ。</description>
+<capture>とりあえず下にいた方が避けやすいかと。あせって動くと危険。</capture>
+
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+
+<action label="top">
+<repeat><times>1</times>
+<action>
+ <fire>
+ <direction type="absolute">180</direction> 
+ <speed type="absolute">2</speed> 
+ <bulletRef label="bros"/>
+ </fire>
+</action>
+</repeat>
+<wait>60</wait>
+<repeat><times>8</times>
+<action>
+ <fire>
+ <direction type="aim">-70+21*$rank</direction>
+ <speed type="absolute">2+$rank</speed> 
+ <bullet/>
+ </fire>
+ <repeat><times>7</times>
+  <action>
+   <fire>
+     <direction type="sequence">20-3*$rank</direction>
+     <speed>2+$rank</speed>
+     <bullet/>
+   </fire>
+  </action>
+ </repeat>
+ <wait>2</wait>
+ <fire>
+ <direction type="aim">-67+21*$rank</direction>
+ <speed type="absolute">2+$rank</speed> 
+ <bullet/>
+ </fire>
+ <repeat><times>7</times>
+  <action>
+   <fire>
+     <direction type="sequence">20-3*$rank</direction>
+     <speed>2+$rank</speed>
+     <bullet/>
+   </fire>
+  </action>
+ </repeat>
+ <wait>2</wait>
+ <fire>
+ <direction type="aim">-64+21*$rank</direction>
+ <speed type="absolute">2+$rank</speed> 
+ <bullet/>
+ </fire>
+ <repeat><times>7</times>
+  <action>
+   <fire>
+     <direction type="sequence">20-3*$rank</direction>
+     <speed>2+$rank</speed>
+     <bullet/>
+   </fire>
+  </action>
+ </repeat>
+<wait>50-10*$rank</wait>
+ <fire>
+ <direction type="aim">70-21*$rank</direction>
+ <speed type="absolute">2+$rank</speed> 
+ <bullet/>
+ </fire>
+ <repeat><times>7</times>
+  <action>
+   <fire>
+     <direction type="sequence">-20+3*$rank</direction>
+     <speed>2+$rank</speed>
+     <bullet/>
+   </fire>
+  </action>
+ </repeat>
+ <wait>2</wait>
+ <fire>
+ <direction type="aim">67-21*$rank</direction>
+ <speed type="absolute">2+$rank</speed> 
+ <bullet/>
+ </fire>
+ <repeat><times>7</times>
+  <action>
+   <fire>
+     <direction type="sequence">-20+3*$rank</direction>
+     <speed>2+$rank</speed>
+     <bullet/>
+   </fire>
+  </action>
+ </repeat>
+ <wait>2</wait>
+ <fire>
+ <direction type="aim">64-21*$rank</direction>
+ <speed type="absolute">2+$rank</speed> 
+ <bullet/>
+ </fire>
+ <repeat><times>7</times>
+  <action>
+   <fire>
+     <direction type="sequence">-20+3*$rank</direction>
+     <speed>2+$rank</speed>
+     <bullet/>
+   </fire>
+  </action>
+ </repeat>
+<wait>50</wait>
+</action>
+</repeat>
+<wait>100</wait>
+</action>
+
+<bullet label="bros">
+<action>
+ <wait>70</wait>
+ <changeSpeed>
+  <speed type="absolute">0</speed>
+  <term>37</term>
+ </changeSpeed>
+ <wait>40</wait>
+ <fire>
+  <direction type="absolute">90</direction>
+  <speed>2</speed>
+  <bulletRef label="true"/>
+ </fire>
+ <vanish/>
+</action>
+</bullet>
+
+<bullet label="true">
+<action>
+<repeat><times>4</times>
+ <action>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>7</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>8</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>9</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>10</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>7</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>1</wait>
+ <changeDirection>
+  <direction type="absolute">270</direction>
+  <term>0</term>
+ </changeDirection>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>4</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>9</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>5</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>8</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>4</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>11</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>7</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>3</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>10</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>9</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>4</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>1</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>5</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>4</wait>
+ <changeDirection>
+  <direction type="absolute">90</direction>
+  <term>0</term>
+ </changeDirection>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>0</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>21</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>7</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>11</wait>
+<repeat><times>1</times>
+ <actionRef label="backfire"/>
+</repeat>
+<wait>3</wait>
+
+
+</action>
+</repeat>
+</action>
+</bullet>
+
+<action label="backfire">
+ <fire>
+  <direction type="absolute">0</direction>
+  <speed>2*$rand</speed>
+  <bulletRef label="upper"/>
+ </fire>
+</action>
+
+<bullet label="upper">
+<action>
+ <wait>30</wait>
+ <changeSpeed>
+  <speed type="absolute">(2*$rank+$rand)*0.75</speed>
+  <term>10*(1+5*$rand)</term>
+ </changeSpeed>
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

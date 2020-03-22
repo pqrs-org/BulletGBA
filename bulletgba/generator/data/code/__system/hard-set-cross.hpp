@@ -1,0 +1,30 @@
+#ifndef GENERATED_d3112cbc384a1db02a68d9e037ebbcae_HPP 
+#define GENERATED_d3112cbc384a1db02a68d9e037ebbcae_HPP 
+
+#include "bullet.hpp" 
+
+void stepfunc_c172a15bb6eca889f748350b364028cc_4ce096840278208d4059cf88d5996e94(BulletInfo *p); 
+void stepfunc_c4d4e858c15e560b23a1b1a6a8131982_4ce096840278208d4059cf88d5996e94(BulletInfo *p); 
+void stepfunc_b52e6638b14b87eafc2e5d74e82953c2_4ce096840278208d4059cf88d5996e94(BulletInfo *p); 
+void stepfunc_b9f3746024faf71a948d02a3f58cba12_4ce096840278208d4059cf88d5996e94(BulletInfo *p); 
+void stepfunc_c06b73d8d822ae4b4feedee8a4161467_4ce096840278208d4059cf88d5996e94(BulletInfo *p); 
+void stepfunc_496a177f09c6c70ac478a8ede25ddcfc_4ce096840278208d4059cf88d5996e94(BulletInfo *p); 
+void stepfunc_2bd9d54ed77522b7669729281f386d14_4ce096840278208d4059cf88d5996e94(BulletInfo *p); 
+void stepfunc_ba45a1a979278abfcb9c8d9eecdca361_4ce096840278208d4059cf88d5996e94(BulletInfo *p); 
+void stepfunc_fa71aded89ac57c6eb7053ce43570631_4ce096840278208d4059cf88d5996e94(BulletInfo *p); 
+void stepfunc_8fff89501dcb48caade16bb16deb7b61_4ce096840278208d4059cf88d5996e94(BulletInfo *p); 
+void stepfunc_260381aee90cadd8dd69ec124aceaf24_4ce096840278208d4059cf88d5996e94(BulletInfo *p); 
+void stepfunc_44648be0d5ce69ad5e93201ae04baf96_4ce096840278208d4059cf88d5996e94(BulletInfo *p); 
+void stepfunc_dae2cf81747ffb5070f05c8837b1d568_4ce096840278208d4059cf88d5996e94(BulletInfo *p); 
+
+
+extern const BulletStepFunc bullet_5113b902bc5e07368f25e586f63fa933_4ce096840278208d4059cf88d5996e94[]; 
+const unsigned int bullet_5113b902bc5e07368f25e586f63fa933_4ce096840278208d4059cf88d5996e94_size = 20; 
+extern const BulletStepFunc bullet_4c56732eaa16d27cf9beb0cac5fa4486_4ce096840278208d4059cf88d5996e94[]; 
+const unsigned int bullet_4c56732eaa16d27cf9beb0cac5fa4486_4ce096840278208d4059cf88d5996e94_size = 3; 
+extern const BulletStepFunc bullet_32ed3b4edf45d53804b0e417cc9d08fa_4ce096840278208d4059cf88d5996e94[]; 
+const unsigned int bullet_32ed3b4edf45d53804b0e417cc9d08fa_4ce096840278208d4059cf88d5996e94_size = 242; 
+
+
+#endif 
+

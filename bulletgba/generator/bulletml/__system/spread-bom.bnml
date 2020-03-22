@@ -1,0 +1,32 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/spread.bnml"
+
+action top {
+  actionRef spreadBom(180 - 30);
+  wait 90;
+  actionRef spreadBom(180 + 30);
+}
+
+// $1: direction
+action spreadBom {
+  repeat 10 action {
+    fire form root direction sequence 36 speed absolute 4 bullet action {
+      wait 2;
+      changeDirection absolute $1 term 1;
+      changeSpeed absolute 0.1 term 1;
+      wait 1;
+      changeSpeed sequence 2 term 1;
+      wait 30;
+      changeSpeed absolute 0 term 10;
+      wait 30;
+      actionRef lib_spread(1);
+      wait 20;
+      actionRef lib_spread(2);
+      wait 30;
+      actionRef lib_spread(3);
+      vanish;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+  <filename>skydiver</filename>
+  <group>user</group>
+  <title>スカイダイバー</title>
+  <description>プロギアっぽい弾幕を作ってみたかった</description>
+  <capture>動き回って散らすようにすると避けやすい</capture>
+  <author>Pentan</author>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+PI2=3.14159265358979*2
+PI025=3.14159265358979*0.25
+PI05=3.14159265358979*0.5
+topaim=0
+
+function top()
+	topaim=getPlayerAngle()
+	if getTurn()>900 then
+		if getTurn()>960 then quit() end
+	elseif math.mod( getTurn(), 60 )==0 then
+		local spd=0.3+getRank()*0.2
+		local way=math.floor(15+getRank()*15+0.5)
+		local livx, livy=math.sin( topaim+PI05 ), -math.cos( topaim+PI05 )
+		local langle, rangle=topaim+PI05, topaim-PI05
+		local dangle=PI2/way
+		for i=1, way do
+			langle, rangle=langle-dangle, rangle+dangle
+			fire( (math.sin(langle)+livx)*spd, (-math.cos( langle )+livy)*spd, "aimBullet", i )
+			fire( (math.sin(rangle)-livx)*spd, (-math.cos( rangle )-livy)*spd, "aimBullet", i )
+		end
+	end
+end
+
+function aimBullet(t)
+	if getTurn()>30+t*2 then
+		local spd=0.8+t*0.05
+		setSpeed( math.sin(topaim)*spd, -math.cos(topaim)*spd )
+		quit()
+	end
+end
+
+]]>
+</lua>
+
+</barrage>

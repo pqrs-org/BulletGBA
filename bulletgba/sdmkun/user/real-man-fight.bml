@@ -1,0 +1,331 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+2006/7/27 by Oohara Yuuma (oohara@libra.interq.or.jp)
+2006/7/27
+  * added return to changecolor()
+  * upper bound is now 1/2 (was 1/3), wilder blue bullets
+-->
+
+<barrageInfo>
+  <filename>real_man_fight</filename>
+  <group>Oohara</group>
+  <title>大人のマジな戦い</title>
+  <description>脳がよろこぶ弾幕習慣。一日十本の切りかえしは、10歳から99歳までの男女に最適。</description>
+  <capture>青弾がばらまき、1wayなほうの白弾が自機狙いなので、中央下で切りかえせばいいのですが、問題は2wayな白弾です。1wayな白弾に対して一定角度で撃ちこむというもので、自機を直接狙わないので事故誘発性が高いです。あと上に逃げるとたぶん死にます。</capture>
+  <author>Oohara_Yuuma</author>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+---
+--- subroutines for BulletML compatibility start
+---
+
+function dtor(d)
+  return 2.0 * math.pi * d / 360.0
+end
+
+function rtod(r)
+  return 360.0 * r / (2.0 * math.pi)
+end
+
+function fire_absolute(d, speed)
+  local r = dtor(d - 90.0)
+  if (speed < 0.0001) then
+    return
+  end
+  fire(speed * math.cos(r), speed * math.sin(r))
+end
+
+function fire_absolute_f(d, speed, func)
+  local r = dtor(d - 90.0)
+  if (speed < 0.0001) then
+    return
+  end
+  fire(speed * math.cos(r), speed * math.sin(r), func)
+end
+
+function fire_aim(d, speed)
+  local r = dtor(d)
+  local dx = getPlayerX() - getX()
+  local dy = getPlayerY() - getY()
+  local d_length = dx * dx + dy * dy
+  local v_x = 0.0
+  local v_y = 0.0
+  if (speed < 0.0001) then
+    return
+  end
+  if (d_length < 0.0001) then
+    fire_absolute(360.0 * math.random(), speed)
+    return
+  end
+  d_length = math.sqrt(d_length)
+  dx = dx / d_length
+  dy = dy / d_length
+  v_x = speed * (dx * math.cos(r) - dy * math.sin(r))
+  v_y = speed * (dx * math.sin(r) + dy * math.cos(r))
+  fire(v_x, v_y)
+end
+
+function fire_aim_f(d, speed, func)
+  local r = dtor(d)
+  local dx = getPlayerX() - getX()
+  local dy = getPlayerY() - getY()
+  local d_length = dx * dx + dy * dy
+  local v_x = 0.0
+  local v_y = 0.0
+  if (speed < 0.0001) then
+    return
+  end
+  if (d_length < 0.0001) then
+    fire_absolute_f(360.0 * math.random(), speed, func)
+    return
+  end
+  d_length = math.sqrt(d_length)
+  dx = dx / d_length
+  dy = dy / d_length
+  v_x = speed * (dx * math.cos(r) - dy * math.sin(r))
+  v_y = speed * (dx * math.sin(r) + dy * math.cos(r))
+  fire(v_x, v_y, func)
+end
+
+function fire_relative(d, speed)
+  local r = dtor(d)
+  local dx = getSpeedX()
+  local dy = getSpeedY()
+  local d_length = dx * dx + dy * dy
+  local v_x = 0.0
+  local v_y = 0.0
+  if (speed < 0.0001) then
+    return
+  end
+  if (d_length < 0.0001) then
+    fire_absolute(360.0 * math.random(), speed)
+    return
+  end
+  d_length = math.sqrt(d_length)
+  dx = dx / d_length
+  dy = dy / d_length
+  v_x = speed * (dx * math.cos(r) - dy * math.sin(r))
+  v_y = speed * (dx * math.sin(r) + dy * math.cos(r))
+  fire(v_x, v_y)
+end
+
+function fire_relative_f(d, speed, func)
+  local r = dtor(d)
+  local dx = getSpeedX()
+  local dy = getSpeedY()
+  local d_length = dx * dx + dy * dy
+  local v_x = 0.0
+  local v_y = 0.0
+  if (speed < 0.0001) then
+    return
+  end
+  if (d_length < 0.0001) then
+    fire_absolute_f(360.0 * math.random(), speed, func)
+    return
+  end
+  d_length = math.sqrt(d_length)
+  dx = dx / d_length
+  dy = dy / d_length
+  v_x = speed * (dx * math.cos(r) - dy * math.sin(r))
+  v_y = speed * (dx * math.sin(r) + dy * math.cos(r))
+  fire(v_x, v_y, func)
+end
+
+function fire_point(target_x, target_y, d, speed)
+  local r = dtor(d)
+  local dx = target_x - getX()
+  local dy = target_y - getY()
+  local d_length = dx * dx + dy * dy
+  local v_x = 0.0
+  local v_y = 0.0
+  if (speed < 0.0001) then
+    return
+  end
+  if (d_length < 0.0001) then
+    fire_absolute(360.0 * math.random(), speed)
+    return
+  end
+  d_length = math.sqrt(d_length)
+  dx = dx / d_length
+  dy = dy / d_length
+  v_x = speed * (dx * math.cos(r) - dy * math.sin(r))
+  v_y = speed * (dx * math.sin(r) + dy * math.cos(r))
+  fire(v_x, v_y)
+end
+
+function fire_point_f(target_x, target_y, d, speed, func)
+  local r = dtor(d)
+  local dx = target_x - getX()
+  local dy = target_y - getY()
+  local d_length = dx * dx + dy * dy
+  local v_x = 0.0
+  local v_y = 0.0
+  if (speed < 0.0001) then
+    return
+  end
+  if (d_length < 0.0001) then
+    fire_absolute_f(360.0 * math.random(), speed, func)
+    return
+  end
+  d_length = math.sqrt(d_length)
+  dx = dx / d_length
+  dy = dy / d_length
+  v_x = speed * (dx * math.cos(r) - dy * math.sin(r))
+  v_y = speed * (dx * math.sin(r) + dy * math.cos(r))
+  fire(v_x, v_y, func)
+end
+
+---
+--- subroutines for BulletML compatibility end
+---
+
+lockon_x = 0.0
+lockon_y = 1.0
+
+function changecolor()
+  if (getPlayerY() * 2.0 < getMaxY()) then
+    fire_aim(-30.0 + 60.0 * math.random(), math.sqrt(getSpeedX() * getSpeedX() + getSpeedY() * getSpeedY() + 0.0001))
+    vanish()
+    return
+  end
+  fire(getSpeedX(), getSpeedY())
+  vanish()
+end
+
+function top()
+  local speed = 2.7
+  local length2 = 0.0
+  local x = 0.0
+  local y = 0.0
+  local v_x = 0.0
+  local v_y = 0.0
+  local d = 180.0
+  local r = 0.0
+  local orig_x = getX()
+  local orig_y = getY()
+  if (getTurn() > 2000) then
+    quit()
+  end
+  if (getTurn() > 1799) then
+    return
+  end
+  if ((math.mod(getTurn(), 5.0) < 1.0) and (math.mod(getTurn(), 75.0) > 60.0 - 60.0 * getRank())) then
+    speed = 1.0 + 1.2 * math.mod(getTurn(), 75.0) / 75.0
+    d = 165.0 + 30.0 * math.mod(getTurn(), 75.0) / 75.0
+    if (math.mod(getTurn(), 150.0) < 75.0) then
+      d = -d
+    end
+    x = getMaxX() * 0.1
+    y = orig_y * 0.1
+    if (math.mod(getTurn(), 150.0) < 75.0) then
+      x = getMaxX() - x
+    end
+    setPos(x, y)
+    fire_absolute_f(d, speed, "changecolor")
+    x = getMaxX() * 0.15
+    y = orig_y * 0.1
+    if (math.mod(getTurn(), 150.0) < 75.0) then
+      x = getMaxX() - x
+    end
+    setPos(x, y)
+    fire_absolute_f(d, speed, "changecolor")
+    setPos(orig_x, orig_y)
+  end
+  if ((getTurn() >= 300) and (math.mod(getTurn(), 3.0) < 1.0) and (math.mod(getTurn(), 75.0) > 50.0 - 50.0 * getRank() * getRank())) then
+    speed = 1.0 + 1.2 * math.mod(getTurn(), 75.0) / 75.0
+    d = 100.0 + 160.0 * math.mod(getTurn(), 75.0) / 75.0
+    if (math.mod(getTurn(), 150.0) < 75.0) then
+      d = -d
+    end
+    x = getMaxX() * (0.1 + 0.7 * math.mod(getTurn(), 75.0) / 75.0)
+    y = orig_y * 0.1
+    if (math.mod(getTurn(), 150.0) < 75.0) then
+      x = getMaxX() - x
+    end
+    setPos(x, y)
+    fire_absolute_f(d, speed, "changecolor")
+    x = getMaxX() * (0.15 + 0.7 * math.mod(getTurn(), 75.0) / 75.0)
+    y = orig_y * 0.1
+    if (math.mod(getTurn(), 150.0) < 75.0) then
+      x = getMaxX() - x
+    end
+    setPos(x, y)
+    fire_absolute_f(d, speed, "changecolor")
+    setPos(orig_x, orig_y)
+  end
+  speed = 1.0 + 1.7 * getRank()
+  if ((getTurn() >= 100) and (math.mod(getTurn() - 100, 100.0) < 1.0)) then
+    x = getMaxX() * 0.1
+    y = orig_y
+    if (math.mod(getTurn() - 100, 200.0) < 100.0) then
+      x = getMaxX() * 0.9
+      y = orig_y
+    end
+    setPos(x, y)
+    lockon_x = getPlayerX() - getX()
+    lockon_y = getPlayerY() - getY()
+    length2 = lockon_x * lockon_x + lockon_y * lockon_y
+    if (length2 < 0.0001) then
+      lockon_x = 0.0
+      lockon_y = 1.0
+      length2 = 1.0
+    end
+    lockon_x = lockon_x / math.sqrt(length2)
+    lockon_y = lockon_y / math.sqrt(length2)
+    setPos(orig_x, orig_y)
+  end
+  if ((getTurn() >= 100) and (math.mod(getTurn() - 100, 100.0) < 40.0 + 50.0 * getRank()) and (math.mod(getTurn() - 100, 5.0) < 1.0)) then
+    x = getMaxX() * 0.1
+    y = orig_y
+    if (math.mod(getTurn() - 100, 200.0) < 100.0) then
+      x = getMaxX() * 0.9
+      y = orig_y
+    end
+    setPos(x, y)
+    v_x = speed * lockon_x
+    v_y = speed * lockon_y
+    fire(v_x, v_y)
+    x = getMaxX() * 0.9
+    y = orig_y
+    if (math.mod(getTurn() - 100, 200.0) < 100.0) then
+      x = getMaxX() * 0.1
+      y = orig_y
+    end
+    setPos(x, y)
+    r = dtor(60)
+    if (math.mod(getTurn() - 100, 200.0) < 100.0) then
+      r = dtor(-60)
+    end
+    if (getPlayerY() * 2.0 < getMaxY()) then
+      r = -r
+    end
+    v_x = speed * (lockon_x * math.cos(r) - lockon_y * math.sin(r)) 
+    v_y = speed * (lockon_x * math.sin(r) + lockon_y * math.cos(r))
+    fire(v_x, v_y)
+    r = dtor(45)
+    if (math.mod(getTurn() - 100, 200.0) < 100.0) then
+      r = dtor(-45)
+    end
+    if (getPlayerY() * 2.0 < getMaxY()) then
+      r = -r
+    end
+    v_x = speed * (lockon_x * math.cos(r) - lockon_y * math.sin(r)) 
+    v_y = speed * (lockon_x * math.sin(r) + lockon_y * math.cos(r))
+    fire(v_x, v_y)
+    setPos(orig_x, orig_y)
+  end
+end
+]]>
+</lua>
+
+</barrage>

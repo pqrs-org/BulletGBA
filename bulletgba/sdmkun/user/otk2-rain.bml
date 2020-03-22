@@ -1,0 +1,118 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+<filename>
+otk2-rain
+</filename>
+<group>
+OtakuTwo
+</group>
+<title>
+大雨警報
+</title>
+<description>
+真のシューターは、傘も無いのに豪雨の中を全く濡れずに帰ってくるそうです…
+</description>
+<capture>
+まず右上から、次に左上からレーザーの雨。疎の部分を見つけて、そこに逃げ込もう。
+</capture>
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+
+
+<action label="top">
+ <accel>
+  <vertical>-100</vertical>
+  <term>1</term>
+ </accel>
+ <wait>5</wait>
+ <accel>
+  <vertical>0</vertical>
+  <term>1</term>
+ </accel>
+ <wait>5</wait>
+
+ <accel>
+  <horizontal>100</horizontal>
+  <term>1</term>
+ </accel>
+ <wait>5</wait>
+ <accel>
+  <horizontal>0</horizontal>
+  <term>1</term>
+ </accel>
+ <wait>5</wait>
+ <actionRef label="rain"><param>210+$rand*30</param><param>-1</param></actionRef>
+ <wait>60</wait>
+
+ <accel>
+  <horizontal>-100</horizontal>
+  <term>1</term>
+ </accel>
+ <wait>5</wait>
+ <accel>
+  <horizontal>0</horizontal>
+  <term>1</term>
+ </accel>
+ <wait>5</wait>
+ <actionRef label="rain"><param>120+$rand*30</param><param> 1</param></actionRef>
+</action>
+
+<action label="rain">
+ <repeat><times>300</times>
+  <action>
+   <repeat><times>2+$rank*$rank*2</times>
+    <action>
+     <fire>
+      <direction type="absolute">180</direction>
+      <speed>$rand*60</speed>
+      <bulletRef label="fall"><param>$1</param></bulletRef>
+     </fire>
+     <fire>
+      <direction type="absolute">90*$2</direction>
+      <speed>$rand*80</speed>
+      <bulletRef label="fall"><param>$1+$rand*5-$rand*5</param></bulletRef>
+     </fire>
+    </action>
+   </repeat>
+   <wait>2</wait>
+  </action>
+ </repeat>
+</action>
+
+<bullet label="fall">
+ <action>
+  <wait>5</wait>
+  <changeSpeed>
+   <speed>0</speed>
+   <term>1</term>
+  </changeSpeed>
+  <wait>3</wait>
+  <repeat><times>3+$rank*$rank*3</times>
+   <action>
+    <fire>
+     <direction type="absolute">$1</direction>
+     <speed>1+$rank*$rank*1.5</speed>
+     <bullet/>
+    </fire>
+    <wait>3-$rank*$rank*$rank*$rank*2</wait>
+   </action>
+  </repeat>
+  <vanish/>
+ </action>
+</bullet>
+
+
+
+</bulletml>
+
+</barrage>

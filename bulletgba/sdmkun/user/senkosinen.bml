@@ -1,0 +1,226 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../bulletml.dtd">
+<barrage>
+<barrageInfo>
+
+<filename>senkosinen</filename>
+<group>original</group>
+<title>式神「仙狐思念」なのか？</title>
+<description>八方向に綺麗な形で広がる炸裂弾。</description>
+<capture>チョン避けで避けられることはかなり有名。炸裂した瞬間にほんの少し真横に動く。</capture>
+
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<repeat><times>6</times>
+<action>
+<fire>
+ <direction type="absolute">150+60*$rand</direction>
+ <speed>3</speed>
+ <bulletRef label="seed"/>
+</fire>
+<wait>140-20*$rank</wait>
+</action>
+</repeat>
+</action>
+
+<bullet label="seed">
+<action>
+<wait>10</wait>
+<changeSpeed>
+ <speed>0.1</speed>
+ <term>20</term>
+</changeSpeed>
+<wait>30</wait>
+<fire>
+ <direction type="aim">0</direction>
+ <speed>5</speed>
+ <bulletRef label="1"/>
+</fire>
+<repeat><times>3</times>
+<action>
+<fire>
+ <direction type="sequence">90</direction>
+ <speed>5</speed>
+ <bulletRef label="1"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>4</times>
+<action>
+<fire>
+ <direction type="sequence">90</direction>
+ <speed>5</speed>
+ <bulletRef label="2"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>4</times>
+<action>
+<fire>
+ <direction type="sequence">90</direction>
+ <speed>5</speed>
+ <bulletRef label="3"/>
+</fire>
+</action>
+</repeat>
+<fire>
+ <direction type="aim">45</direction>
+ <speed>5/1.41421356</speed>
+ <bulletRef label="2"/>
+</fire>
+<repeat><times>3</times>
+<action>
+<fire>
+ <direction type="sequence">90</direction>
+ <speed>5/1.41421356</speed>
+ <bulletRef label="2"/>
+</fire>
+</action>
+</repeat>
+<fire>
+ <direction type="aim">26</direction>
+ <speed>11.1803395/3</speed>
+ <bulletRef label="5"/>
+</fire>
+<repeat><times>3</times>
+<action>
+<fire>
+ <direction type="sequence">90</direction>
+ <speed>11.1803395/3</speed>
+ <bulletRef label="5"/>
+</fire>
+</action>
+</repeat>
+<fire>
+ <direction type="aim">-26</direction>
+ <speed>11.1803395/3</speed>
+ <bulletRef label="4"/>
+</fire>
+<repeat><times>3</times>
+<action>
+<fire>
+ <direction type="sequence">90</direction>
+ <speed>11.1803395/3</speed>
+ <bulletRef label="4"/>
+</fire>
+</action>
+</repeat>
+<wait>1</wait>
+<vanish/>
+</action>
+</bullet>
+
+<bullet label="1">
+<action>
+<wait>2</wait>
+<fire>
+ <direction type="relative">0</direction>
+ <speed>0.75</speed>
+ <bullet/>
+</fire>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="sequence">45</direction>
+ <speed>0.75</speed>
+ <bullet/>
+</fire>
+</action>
+</repeat>
+<wait>1</wait>
+<vanish/>
+</action>
+</bullet>
+<bullet label="2">
+<action>
+<wait>4</wait>
+<fire>
+ <direction type="relative">0</direction>
+ <speed>0.75</speed>
+ <bullet/>
+</fire>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="sequence">45</direction>
+ <speed>0.75</speed>
+ <bullet/>
+</fire>
+</action>
+</repeat>
+<wait>0.75</wait>
+<vanish/>
+</action>
+</bullet>
+<bullet label="3">
+<action>
+<wait>6</wait>
+<fire>
+ <direction type="relative">0</direction>
+ <speed>0.75</speed>
+ <bullet/>
+</fire>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="sequence">45</direction>
+ <speed>0.75</speed>
+ <bullet/>
+</fire>
+</action>
+</repeat>
+<wait>1</wait>
+<vanish/>
+</action>
+</bullet>
+<bullet label="4">
+<action>
+<wait>6</wait>
+<fire>
+ <direction type="relative">26</direction>
+ <speed>0.75</speed>
+ <bullet/>
+</fire>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="sequence">45</direction>
+ <speed>0.75</speed>
+ <bullet/>
+</fire>
+</action>
+</repeat>
+<wait>1</wait>
+<vanish/>
+</action>
+</bullet>
+<bullet label="5">
+<action>
+<wait>6</wait>
+<fire>
+ <direction type="relative">-26</direction>
+ <speed>0.75</speed>
+ <bullet/>
+</fire>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="sequence">45</direction>
+ <speed>0.75</speed>
+ <bullet/>
+</fire>
+</action>
+</repeat>
+<wait>1</wait>
+<vanish/>
+</action>
+</bullet>
+</bulletml>
+</barrage>

@@ -1,0 +1,300 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+
+<barrage>
+  <barrageInfo>
+    <filename>5way-hell</filename>
+    <group>user</group>
+    <title>5way弾</title>
+    <description>中央付近でコンコン避けで。</description>
+    <capture></capture>
+  </barrageInfo>
+  <barrageStyle>
+    <bulletLanguage name="bulletml" />
+  </barrageStyle>
+
+<bulletml>
+  <action label="top">
+    <repeat>
+      <times>5</times>
+      <action>
+        <actionRef label="main" />
+        <wait>50</wait>
+      </action>
+    </repeat>
+    <repeat>
+      <times>5</times>
+      <action>
+        <actionRef label="main" />
+        <wait>40</wait>
+      </action>
+    </repeat>
+    <repeat>
+      <times>5</times>
+      <action>
+        <actionRef label="main" />
+        <wait>30</wait>
+      </action>
+    </repeat>
+    <repeat>
+      <times>5</times>
+      <action>
+        <actionRef label="main" />
+        <wait>20</wait>
+      </action>
+    </repeat>
+    <repeat>
+      <times>5</times>
+      <action>
+        <actionRef label="main" />
+        <wait>10</wait>
+      </action>
+    </repeat>
+  </action>
+  <action label="main">
+    <fire>
+      <speed>0</speed>
+      <bullet>
+        <action>
+          <actionRef label="halfRoundBullet">
+            <param>-2</param>
+            <param>8</param>
+          </actionRef>
+          <actionRef label="halfRoundBullet">
+            <param>2</param>
+            <param>8</param>
+          </actionRef>
+          <actionRef label="halfRoundBullet">
+            <param>-2</param>
+            <param>4</param>
+          </actionRef>
+          <actionRef label="halfRoundBullet">
+            <param>2</param>
+            <param>4</param>
+          </actionRef>
+          <actionRef label="halfRoundBullet">
+            <param>-2</param>
+            <param>2</param>
+          </actionRef>
+          <actionRef label="halfRoundBullet">
+            <param>2</param>
+            <param>2</param>
+          </actionRef>
+          <wait>70</wait>
+          <fireRef label="5way">
+            <param>30</param>
+          </fireRef>
+          <fireRef label="5way">
+            <param>-30</param>
+          </fireRef>
+          <fireRef label="5way">
+            <param>150</param>
+          </fireRef>
+          <fireRef label="5way">
+            <param>-150</param>
+          </fireRef>
+          <wait>10</wait>
+          <repeat>
+            <times>10</times>
+            <action>
+              <fireRef label="4way" />
+              <wait>1</wait>
+            </action>
+          </repeat>
+          <wait>40</wait>
+          <repeat>
+            <times>10</times>
+            <action>
+              <fireRef label="4way" />
+              <wait>1</wait>
+            </action>
+          </repeat>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+  </action>
+  <fire label="5way">
+    <direction>$1</direction>
+    <speed>0.5</speed>
+    <bullet>
+      <action>
+        <wait>10</wait>
+        <repeat>
+          <times>10</times>
+          <action>
+            <fire>
+              <direction type="aim">0+$rand*2</direction>
+              <speed>2</speed>
+              <bullet />
+            </fire>
+            <fire>
+              <direction type="aim">20+$rand*2</direction>
+              <speed>2</speed>
+              <bullet />
+            </fire>
+            <fire>
+              <direction type="aim">40+$rand*2</direction>
+              <speed>2</speed>
+              <bullet />
+            </fire>
+            <fire>
+              <direction type="aim">-20+$rand*2</direction>
+              <speed>2</speed>
+              <bullet />
+            </fire>
+            <fire>
+              <direction type="aim">-40+$rand*2</direction>
+              <speed>2</speed>
+              <bullet />
+            </fire>
+            <wait>2</wait>
+          </action>
+        </repeat>
+        <vanish />
+      </action>
+    </bullet>
+  </fire>
+  <action label="halfRoundBullet">
+    <fire>
+      <speed>0</speed>
+      <bullet>
+        <action>
+          <fire>
+            <direction type="absolute">$1</direction>
+            <speed>$2</speed>
+            <bullet />
+          </fire>
+          <repeat>
+            <times>80</times>
+            <action>
+              <fire>
+                <direction type="sequence">$1</direction>
+                <speed>$2</speed>
+                <bullet />
+              </fire>
+              <wait>1</wait>
+            </action>
+          </repeat>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+  </action>
+  <fire label="4way">
+    <speed>0</speed>
+    <bullet>
+      <action>
+        <fire>
+          <direction type="aim">5</direction>
+          <speed>5</speed>
+          <bullet />
+        </fire>
+        <fire>
+          <direction type="aim">-5</direction>
+          <speed>5</speed>
+          <bullet />
+        </fire>
+        <fire>
+          <direction type="aim">10</direction>
+          <speed>5</speed>
+          <bullet />
+        </fire>
+        <fire>
+          <direction type="aim">-10</direction>
+          <speed>5</speed>
+          <bullet />
+        </fire>
+        <vanish />
+      </action>
+    </bullet>
+  </fire>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 5 action {
+    actionRef main;
+    wait 50;
+  }
+  repeat 5 action {
+    actionRef main;
+    wait 40;
+  }
+  repeat 5 action {
+    actionRef main;
+    wait 30;
+  }
+  repeat 5 action {
+    actionRef main;
+    wait 20;
+  }
+  repeat 5 action {
+    actionRef main;
+    wait 10;
+  }
+}
+
+action main {
+  fire speed 0 bullet action {
+    actionRef halfRoundBullet(-2, 8);
+    actionRef halfRoundBullet(2, 8);
+    actionRef halfRoundBullet(-2, 4);
+    actionRef halfRoundBullet(2, 4);
+    actionRef halfRoundBullet(-2, 2);
+    actionRef halfRoundBullet(2, 2);
+    wait 70;
+    fireRef 5way(30);
+    fireRef 5way(-30);
+    fireRef 5way(150);
+    fireRef 5way(-150);
+    wait 10;
+    repeat 10 action {
+      fireRef 4way;
+      wait 1;
+    }
+    wait 40;
+    repeat 10 action {
+      fireRef 4way;
+      wait 1;
+    }
+    vanish;
+  }
+}
+
+fire 5way direction $1 speed 0.5 bullet action {
+  wait 10;
+  repeat 10 action {
+    fire direction aim 0 + $rand * 2 speed 2 bullet;
+    fire direction aim 20 + $rand * 2 speed 2 bullet;
+    fire direction aim 40 + $rand * 2 speed 2 bullet;
+    fire direction aim -20 + $rand * 2 speed 2 bullet;
+    fire direction aim -40 + $rand * 2 speed 2 bullet;
+    wait 2;
+  }
+  vanish;
+}
+
+action halfRoundBullet {
+  fire speed 0 bullet action {
+    fire direction absolute $1 speed $2 bullet;
+    repeat 80 action {
+      fire direction sequence $1 speed $2 bullet;
+      wait 1;
+    }
+    vanish;
+  }
+}
+
+fire 4way speed 0 bullet action {
+  fire direction aim 5 speed 5 bullet;
+  fire direction aim -5 speed 5 bullet;
+  fire direction aim 10 speed 5 bullet;
+  fire direction aim -10 speed 5 bullet;
+  vanish;
+}
+-->
+
+</barrage>

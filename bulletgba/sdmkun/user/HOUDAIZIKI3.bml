@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+<barrage>
+<barrageInfo>
+  <filename>HOUDAIZIKI3</filename>
+  <group>/a_a</group>
+  <title>é•ãCíeî≠éÀñCë‰3</title>
+  <description>é©ã@ë_Ç¢íeÇî≠éÀÇ∑ÇÈñCë‰ver2.0Ç≈Ç∑ÅB</description>
+  <capture>ÇÊÇØÇÍÇÈÇ∆Ç¢Ç¢ÇÀ</capture>
+</barrageInfo>
+<barrageStyle>
+	<bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<repeat>
+<times>100</times>
+<action>
+ <fire>
+  <direction type="sequence">23</direction>
+  <bulletRef label="straight"/>
+ </fire>
+ <wait>1</wait>
+</action>
+</repeat>
+</action>
+
+<bullet label="straight">
+<action>
+ <wait>20+$rand*50</wait>
+ <fire>
+  <direction type="aim">0</direction>
+  <bulletRef label="straight"/>
+ </fire>
+</action>
+</bullet>
+
+</bulletml>
+</barrage>
+

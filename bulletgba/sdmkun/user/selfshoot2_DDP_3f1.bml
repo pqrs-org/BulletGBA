@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+  <filename>selfshoot2_DDP_3f1</filename>
+  <group>user</group>
+  <title>再帰実践編-怒首領蜂３ボス発狂１-</title>
+  <description>アレスを参考にして実装。実はLuaを使うと遥かに少ない行数で記述できます（笑</description>
+  <capture>ただのばらまきなので適当に。</capture>
+  <author>Pentan</author>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+	<fire>
+		<direction type="absolute">15-$rand*30</direction>
+		<speed type="absolute">0.0001</speed>
+		<bulletRef label="fireBullet">
+			<param>0</param>
+			<param>0</param>
+		</bulletRef>
+	</fire>
+	<wait>1800</wait>
+</action>
+
+<!-- $1=times, $2=angle -->
+<bullet label="fireBullet">
+	<action>
+		<wait>$1-300</wait>
+		<fire>
+			<direction type="relative">$2</direction>
+			<speed type="absolute">1</speed>
+			<bullet><action><vanish/></action></bullet>
+		</fire>
+		<repeat>
+			<times>3+$rank*4</times>
+			<action>
+				<fire>
+					<direction type="sequence">20-$rank*5</direction>
+					<speed type="absolute">1.5</speed>
+					<bullet/>
+				</fire>
+				<fire>
+					<direction type="sequence">180</direction>
+					<speed type="absolute">1.5</speed>
+					<bullet/>
+				</fire>
+			</action>
+		</repeat>
+		<fire>
+			<direction type="relative">0</direction>
+			<speed type="absolute">0.0001</speed>
+			<bulletRef label="waitBullet">
+				<param>$1+1</param>
+				<param>$2+90+$1</param>
+			</bulletRef>
+		</fire>
+		<vanish/>
+	</action>
+</bullet>
+
+<bullet label="waitBullet">
+	<action>
+		<wait>6</wait>
+		<fire>
+			<direction type="relative">0</direction>
+			<speed type="absolute">10000</speed>
+			<bulletRef label="fireBullet">
+				<param>$1</param>
+				<param>$2</param>
+			</bulletRef>
+		</fire>
+		<vanish/>
+	</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

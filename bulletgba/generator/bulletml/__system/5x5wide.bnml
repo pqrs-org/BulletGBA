@@ -1,0 +1,46 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  actionRef shot5way(0);
+  wait 10;
+  actionRef shot5way(5);
+  wait 10;
+  actionRef shot5way(10);
+  wait 10;
+  actionRef shot5way(5);
+  wait 10;
+  actionRef shot5way(0);
+  wait 10;
+  actionRef shot5way(-5);
+  wait 10;
+  actionRef shot5way(-10);
+  wait 10;
+  actionRef shot5way(-5);
+}
+
+// $1: base aim
+action shot5way {
+  fire direction aim $1 + 0 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 + 20 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 - 20 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 + 40 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 - 40 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 + 60 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 - 60 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 + 80 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 - 80 speed absolute 2 bullet actionRef shotchild();
+}
+
+action shotchild {
+  wait 10;
+  changeSpeed absolute 0.1 term 1;
+  wait 20;
+  fire direction relative 0 speed absolute 1 bullet;
+  fire direction relative 20 speed absolute 1 bullet;
+  fire direction relative -20 speed absolute 1 bullet;
+  fire direction relative 40 speed absolute 1 bullet;
+  fire direction relative -40 speed absolute 1 bullet;
+
+  vanish;
+}

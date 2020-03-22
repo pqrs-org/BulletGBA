@@ -1,0 +1,103 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+  <filename>mushihime_ultra5midboss</filename>
+  <group>OtakuTwo</group>
+  <title>虫姫ウル５面中ボス・拡散ワインダー</title>
+  <description>その美しさに一目で惚れた。本物と同じだと簡単なので、ちょっと難しくしてみました。</description>
+  <capture>弾の速さに注意。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+
+
+<bullet label="cracker">
+  <action>
+    <wait>12</wait>
+    <fire>
+      <direction type="absolute">-$2*($1*$1)/(30-$rank*10)+$3*360</direction>
+      <speed>(1+$1*0.05)*(0.8+$rank*0.4)</speed>
+      <bullet/>
+    </fire>
+    <repeat><times>36-1</times>
+      <action>
+        <fire>
+          <direction type="sequence">360/36</direction>
+          <speed type="sequence">0</speed>
+          <bullet/>
+        </fire>
+      </action>
+    </repeat>
+    <vanish/>
+  </action>
+</bullet>
+
+<fire label="seed">
+  <direction type="absolute">90*$2</direction>
+  <speed>6</speed>
+  <bullet>
+    <action>
+      <wait>8</wait>
+      <fire>
+        <direction type="relative">180</direction>
+        <speed>$1*0.25</speed>
+        <bulletRef label="cracker"><param>$1</param><param>$2</param><param>$3</param></bulletRef>
+      </fire>
+      <vanish/>
+    </action>
+  </bullet>
+</fire>
+
+<action label="seedsseed">
+  <fireRef label="seed"><param> 1</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param> 2</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param> 3</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param> 4</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param> 5</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param> 6</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param> 7</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param> 8</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param> 9</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param>10</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param>11</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param>12</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param>13</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param>14</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param>15</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param>16</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param>17</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param>18</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param>19</param><param>$1</param><param>$2</param></fireRef>
+  <fireRef label="seed"><param>20</param><param>$1</param><param>$2</param></fireRef>
+</action>
+
+
+
+<action label="top">
+  <actionRef label="seedsseed"><param> 1</param><param>$rand</param></actionRef><wait>180*(1.2-$rank*0.4)</wait>
+  <actionRef label="seedsseed"><param>-1</param><param>$rand</param></actionRef><wait>150*(1.2-$rank*0.4)</wait>
+  <actionRef label="seedsseed"><param> 1</param><param>$rand</param></actionRef><wait>120*(1.2-$rank*0.4)</wait>
+  <actionRef label="seedsseed"><param>-1</param><param>$rand</param></actionRef><wait> 90*(1.2-$rank*0.4)</wait>
+  <actionRef label="seedsseed"><param> 1</param><param>$rand</param></actionRef><wait> 60*(1.2-$rank*0.4)</wait>
+  <actionRef label="seedsseed"><param>-1</param><param>$rand</param></actionRef><wait> 30*(1.2-$rank*0.4)</wait>
+  <actionRef label="seedsseed"><param> 1</param><param>$rand</param></actionRef><wait>240*(1.2-$rank*0.4)</wait>
+  <actionRef label="seedsseed"><param>-1</param><param>$rand</param></actionRef>
+  <actionRef label="seedsseed"><param> 1</param><param>$rand</param></actionRef><wait>200</wait>
+</action>
+
+
+
+
+
+</bulletml>
+
+</barrage>
+
+

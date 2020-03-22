@@ -1,0 +1,135 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+2004/3/11 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* red eye
+* silver bullet
+* off with her head
+-->
+
+<barrageInfo>
+  <filename>flat_nway</filename>
+  <group>Oohara</group>
+  <title>ペタンコNウェイ</title>
+  <description>ガンバード2の4ボスがこんな感じの弾を撃ってきます。後半はオリジナルです。</description>
+  <capture>内側から2番目の弾が自機を狙っています。</capture>
+  <author>Oohara_Yuuma</author>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+  <fire>
+    <direction type="absolute">90</direction>
+    <speed>2.0</speed>
+    <bulletRef label="bit">
+      <param>15 - 10 * $rank</param>
+      <param>-(15 - 10 * $rank)</param>
+      <param>1.0 + 0.7 * $rank</param>
+      <param>0.05</param>
+    </bulletRef>
+  </fire>
+  <fire>
+    <direction type="absolute">-90</direction>
+    <speed>2.0</speed>
+    <bulletRef label="bit">
+      <param>-(15 - 10 * $rank)</param>
+      <param>15 - 10 * $rank</param>
+      <param>1.0 + 0.7 * $rank</param>
+      <param>0.05</param>
+    </bulletRef>
+  </fire>
+
+  <wait>300 - 100 * $rank</wait>
+
+  <fire>
+    <direction type="absolute">90</direction>
+    <speed>2.5</speed>
+    <bulletRef label="bit">
+      <param>21 - 15 * $rank</param>
+      <param>-(21 - 15 * $rank)</param>
+      <param>1.0 + 0.7 * $rank</param>
+      <param>0.05</param>
+    </bulletRef>
+  </fire>
+  <fire>
+    <direction type="absolute">-90</direction>
+    <speed>2.5</speed>
+    <bulletRef label="bit">
+      <param>-(21 - 15 * $rank)</param>
+      <param>21 - 15 * $rank</param>
+      <param>1.0 + 0.7 * $rank</param>
+      <param>0.05</param>
+    </bulletRef>
+  </fire>
+
+  <wait>30</wait>
+
+  <fire>
+    <direction type="absolute">90</direction>
+    <speed>1.5</speed>
+    <bulletRef label="bit">
+      <param>12 - 8 * $rank</param>
+      <param>-(12 - 8 * $rank)</param>
+      <param>1.0 + 0.7 * $rank</param>
+      <param>-0.05</param>
+    </bulletRef>
+  </fire>
+  <fire>
+    <direction type="absolute">-90</direction>
+    <speed>1.5</speed>
+    <bulletRef label="bit">
+      <param>-(12 - 8 * $rank)</param>
+      <param>12 - 8 * $rank</param>
+      <param>1.0 + 0.7 * $rank</param>
+      <param>-0.05</param>
+    </bulletRef>
+  </fire>
+
+  <wait>400 - 100 * $rank</wait>
+
+</action>
+
+<bullet label="bit">
+<action>
+
+  <wait>20</wait>
+  <changeSpeed>
+    <speed>0.0</speed>
+    <term>1</term>
+  </changeSpeed>
+  <wait>5</wait>
+
+  <repeat><times>3</times><action>
+    <fire>
+      <direction type="aim">$1</direction>
+      <speed>$3</speed>
+      <bullet/>
+    </fire>
+    <repeat><times>12</times><action>
+      <fire>
+        <direction type="sequence">$2</direction>
+        <speed type="sequence">$4</speed>
+        <bullet/>
+      </fire>
+    </action></repeat>
+    <wait>60</wait>
+  </action></repeat>
+
+  <vanish/>
+
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

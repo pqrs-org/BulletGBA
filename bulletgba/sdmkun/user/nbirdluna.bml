@@ -1,0 +1,148 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../bulletml.dtd">
+<barrage>
+<barrageInfo>
+
+<filename>nbird</filename>
+<group>original</group>
+<title>夜符「ナイトバード」（Luna）のつもりらしい。</title>
+<description>時間差をつけた16WAY扇状弾×3を8連射。</description>
+<capture>内側から五番目が自機を正確に狙っている。こんこん避けで楽勝。</capture>
+
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+
+<action label="top">
+<fire>
+<direction type="absolute">0</direction>
+<speed>0</speed>
+<bulletRef label="quarter"/>
+</fire>
+<fire>
+<direction type="absolute">0</direction>
+<speed>0</speed>
+<bulletRef label="half"/>
+</fire>
+<repeat><times>4</times>
+<action>
+<fire>
+ <direction type="aim">-50</direction>
+ <speed>0.5</speed>
+ <bullet/>
+</fire>
+<repeat><times>15</times>
+<action>
+<wait>2</wait>
+<fire>
+ <direction type="sequence">10</direction>
+ <speed type="sequence">0.2</speed>
+ <bullet/>
+</fire>
+</action>
+</repeat>
+<fire>
+ <direction type="aim">50</direction>
+ <speed>0.5</speed>
+ <bullet/>
+</fire>
+<repeat><times>15</times>
+<action>
+<wait>2</wait>
+<fire>
+ <direction type="sequence">-10</direction>
+ <speed type="sequence">0.2</speed>
+ <bullet/>
+</fire>
+</action>
+</repeat>
+</action>
+</repeat>
+<wait>160</wait>
+</action>
+
+<bullet label="quarter">
+<action>
+<repeat><times>4</times>
+<action>
+<fire>
+ <direction type="aim">-50</direction>
+ <speed>0.375</speed>
+ <bullet/>
+</fire>
+<repeat><times>15</times>
+<action>
+<wait>2</wait>
+<fire>
+ <direction type="sequence">10</direction>
+ <speed type="sequence">0.15</speed>
+ <bullet/>
+</fire>
+</action>
+</repeat>
+<fire>
+ <direction type="aim">50</direction>
+ <speed>0.375</speed>
+ <bullet/>
+</fire>
+<repeat><times>15</times>
+<action>
+<wait>2</wait>
+<fire>
+ <direction type="sequence">-10</direction>
+ <speed type="sequence">0.15</speed>
+ <bullet/>
+</fire>
+</action>
+</repeat>
+</action>
+</repeat>
+<vanish/>
+</action>
+</bullet>
+<bullet label="half">
+<action>
+<repeat><times>4</times>
+<action>
+<fire>
+ <direction type="aim">-50</direction>
+ <speed>0.25</speed>
+ <bullet/>
+</fire>
+<repeat><times>15</times>
+<action>
+<wait>2</wait>
+<fire>
+ <direction type="sequence">10</direction>
+ <speed type="sequence">0.1</speed>
+ <bullet/>
+</fire>
+</action>
+</repeat>
+<fire>
+ <direction type="aim">50</direction>
+ <speed>0.25</speed>
+ <bullet/>
+</fire>
+<repeat><times>15</times>
+<action>
+<wait>2</wait>
+<fire>
+ <direction type="sequence">-10</direction>
+ <speed type="sequence">0.1</speed>
+ <bullet/>
+</fire>
+</action>
+</repeat>
+</action>
+</repeat>
+<vanish/>
+</action>
+</bullet>
+</bulletml>
+</barrage>

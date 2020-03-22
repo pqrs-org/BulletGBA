@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../bulletml.dtd">
+<barrage>
+<barrageInfo>
+
+<filename>eternal</filename>
+<group>original</group>
+<title>奇術「エターナルミーク」らしきもの。</title>
+<description>とにかくランダム。手抜きではない。レベル0でノーマル、レベル100でハードぐらい？</description>
+<capture>こういうのが一番タチが悪いかもしれない。脊髄反射であっちょー。</capture>
+
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<repeat><times>600</times>
+<action>
+<repeat><times>4</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3*$rand+1+$rank</speed>
+ <bullet/>
+</fire>
+</action>
+</repeat>
+<wait>1</wait>
+</action>
+</repeat>
+</action>
+
+</bulletml>
+
+</barrage>

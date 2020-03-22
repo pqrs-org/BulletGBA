@@ -1,0 +1,108 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>bb03-winderjiki</filename>
+ <group>KotuAnzenX</group>
+ <title>ワインダーから自機狙い</title>
+ <description>ワインダー（と言っても角度はかなり広いですが）を張り、そこから大量の自機狙い弾が吐き出されます。</description>
+ <capture>ワインダー内で切り返し。ワインダーが完成する前に動くと形が崩れてしまうのでお勧めできない。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<actionRef label="seed"><param>90</param><param>60-$rank*15</param></actionRef>
+<actionRef label="seed"><param>270</param><param>-60+$rank*15</param></actionRef>
+<wait>1200</wait>
+</action>
+
+<action label="seed">
+ <fire>
+  <direction type="absolute">$1</direction>
+  <speed>1</speed>
+  <bulletRef label="stop"><param>$2</param></bulletRef>
+ </fire>
+</action>
+
+<bullet label="stop">
+ <action>
+  <changeSpeed>
+   <speed>0</speed>
+   <term>30</term>
+  </changeSpeed>
+  <wait>30</wait>
+  <actionRef label="winder"><param>$1</param></actionRef>
+ </action>
+</bullet>
+ 
+<action label="winder">
+ <action>
+  <fire>
+   <direction type="aim">$1</direction>
+   <speed>3</speed>
+   <bulletRef label="homing"></bulletRef>
+  </fire>
+   <wait>3</wait>
+ <repeat>
+  <times>75</times>
+   <action>
+    <fire>
+     <direction type="sequence">0</direction>
+     <speed>4</speed>
+     <bulletRef label="homing"><param>6</param></bulletRef>
+    </fire>
+    <wait>3</wait>
+    <fire>
+     <direction type="sequence">0</direction>
+     <speed>4</speed>
+     <bulletRef label="homing"><param>9</param></bulletRef>
+    </fire>
+    <wait>3</wait>
+    <fire>
+     <direction type="sequence">0</direction>
+     <speed>4</speed>
+     <bulletRef label="homing"><param>12</param></bulletRef>
+    </fire>
+    <wait>3</wait>
+    <fire>
+     <direction type="sequence">0</direction>
+     <speed>4</speed>
+     <bulletRef label="homing"><param>15</param></bulletRef>
+    </fire>
+    <wait>3</wait>
+    <fire>
+     <direction type="sequence">0</direction>
+     <speed>4</speed>
+     <bulletRef label="homing"><param>18</param></bulletRef>
+    </fire>
+    <wait>3</wait>
+   </action>
+  </repeat>
+ </action>
+<vanish/>
+</action>
+
+<bullet label="homing">
+ <action>
+  <wait>$1</wait>
+   <repeat>
+    <times>9999</times>
+     <action>
+      <fire>
+       <direction type="aim">0</direction>
+       <speed>1+$rank*1</speed>
+       <bullet/>
+      </fire>
+     <wait>60-$rank*45</wait>
+    </action>
+   </repeat>
+  </action>
+</bullet>
+
+</bulletml>
+</barrage>

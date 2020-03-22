@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+  <filename>Progear_4boss_spread</filename>
+  <group>user</group>
+  <title>プロギア４面ボススプレッド</title>
+  <description>本当はスプレッド弾ではないんですけど初期位置では上が切れてしまうので。</description>
+  <capture>下を向いたところの真下にいて全て動き出したらちょんと動く。もしくは盛大に右に左に動き回る。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+
+function top()
+	if getTurn()==0 then
+		fire( math.sin( getPlayerAngle() )*2, -math.cos( getPlayerAngle() )*2, "calibrateBullet" )
+	elseif getTurn()>1200 then
+		quit() 
+	elseif math.mod( getTurn(), 240 )==10 then
+		fire( math.sin( getPlayerAngle() ), -math.cos( getPlayerAngle() ), "spreadShoot" )
+	end
+end
+
+function spreadShoot()
+	if getTurn()>30 then
+		way=math.floor( 8+getRank()*8.9 )
+		for j=0, getRank()*4+4 do
+			spd=0.5-getRank()*0.2+j*0.05
+			for i=0, way do
+				-- 6.283185307=2*pi
+				angle=i*6.283185307/way
+				fire( -math.cos( angle )*spd, math.sin( angle )*spd, "changeDir", j )
+			end
+		end
+		vanish()
+	end
+end
+
+function changeDir( n )
+	if getTurn()==60+n*8 then
+		-- culc aim angle from center
+		vx=getPlayerX()-getX()+getSpeedX()*getTurn()*XYSCALE
+		vy=getPlayerY()-getY()+getSpeedY()*getTurn()*XYSCALE
+		vl=math.sqrt( vx*vx+vy*vy )
+		setSpeed( vx/vl*(1+n*0.1), vy/vl*(1+n*0.1) )
+	end
+end
+
+--#####
+OFFSETX, OFFSETY=0,0
+XYSCALE=1
+--#####
+
+-- #####
+calibrateTmpY=0,0
+function calibrateBullet()
+	if getTurn()==0 then
+		setSpeed( 0, 1 )
+		calibrateTmpY=getY()
+	elseif getTurn()==1 then
+		setSpeed( 0, 0 )
+		OFFSETX, OFFSETY=getX(), getY()
+		XYSCALE=getY()-calibrateTmpY
+		setPos( getX(), getY() )
+	elseif getTurn()==2 then
+		OFFSETX, OFFSETY=OFFSETX-getX(), OFFSETY-getY()
+	else
+		--print( OFFSETX, OFFSETY, XYSCALE )
+		vanish()
+	end
+end
+
+]]>
+</lua>
+
+</barrage>

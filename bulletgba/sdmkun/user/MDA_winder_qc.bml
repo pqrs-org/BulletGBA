@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>MDA_winder_qc</filename>
+	<group>MDA</group>
+	<title>永遠と累乗の昆布汁</title>
+	<description>拙作「乱数と累乗の昆布汁」からランダム要素とタイムリミットを省いた物です。ほんとに死ぬまで終わらないので、Normalモードで出てくると困ると言う方はgroupを書きかえるなりしてください。</description>
+	<capture>基本的には来た物だけ避けて、ワインダー状態になったら大きく動いて避ける…位しか。レベルが上がると弾源が増えます。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="lua"/>
+</barrageStyle>
+
+<!-- w:本数 r:発射角度 t:時間 q:回転累乗 1.6:弾速 -->
+
+<lua>
+<![CDATA[
+
+function top()
+	local turn = getTurn()
+	if (turn == 1) then
+		X = getMaxX()/2
+		Y = getMaxY()/3
+		setPos(X, Y)
+		rank = getRank()
+		w = 1+(rank*10)
+		r = 360/w 
+		q = 1.635-((((w-1)*202.8)^0.4399)*(0.010))
+	end
+	if (math.mod(turn,2) == 1) then
+		for i=1,w do
+		fire(math.sin( math.pi*((turn^q)+(i*r))/180)*1.6,
+		-math.cos(math.pi*((turn^q)+(i*r))/180)*1.6)
+		end
+	end
+end
+
+]]>
+</lua>
+
+</barrage>

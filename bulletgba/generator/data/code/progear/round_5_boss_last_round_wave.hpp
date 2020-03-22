@@ -1,0 +1,20 @@
+#ifndef GENERATED_766b1274b81391fdf6477591c9e3d584_HPP 
+#define GENERATED_766b1274b81391fdf6477591c9e3d584_HPP 
+
+#include "bullet.hpp" 
+
+void stepfunc_4bc00bcb18e59efb41fde6cce3c0d1cc_9e187bb17853de9f9ca09e3cebf2061b(BulletInfo *p); 
+void stepfunc_8e1209e6d60b32d2bbe5aedfc21be898_9e187bb17853de9f9ca09e3cebf2061b(BulletInfo *p); 
+void stepfunc_036de42c61d02906de83b035b08bdbe0_9e187bb17853de9f9ca09e3cebf2061b(BulletInfo *p); 
+void stepfunc_97e8979d1a7c719f55deab0bdea20675_9e187bb17853de9f9ca09e3cebf2061b(BulletInfo *p); 
+void stepfunc_9a262eab9bee9a27b0f4b6d72eb6d017_9e187bb17853de9f9ca09e3cebf2061b(BulletInfo *p); 
+
+
+extern const BulletStepFunc bullet_0c1e5c80908a42d96076c51a4a9a1539_9e187bb17853de9f9ca09e3cebf2061b[]; 
+const unsigned int bullet_0c1e5c80908a42d96076c51a4a9a1539_9e187bb17853de9f9ca09e3cebf2061b_size = 19999; 
+extern const BulletStepFunc bullet_5ae55a8ab8928167e715d9c791695dc9_9e187bb17853de9f9ca09e3cebf2061b[]; 
+const unsigned int bullet_5ae55a8ab8928167e715d9c791695dc9_9e187bb17853de9f9ca09e3cebf2061b_size = 18; 
+
+
+#endif 
+

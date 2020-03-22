@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="lib_laser">
+    <repeat>
+      <times>$1</times>
+      <action>
+        <fire>
+          <direction type="relative">0</direction>
+          <speed type="absolute">2</speed>
+          <bullet />
+        </fire>
+        <wait>3</wait>
+      </action>
+    </repeat>
+    <vanish />
+  </action>
+  <action label="top">
+    <repeat>
+      <times>5</times>
+      <action>
+        <fire>
+          <direction type="aim">0</direction>
+          <speed type="absolute">0.1</speed>
+          <bullet>
+            <actionRef label="lib_laser">
+              <param>10</param>
+            </actionRef>
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="aim">-10</direction>
+          <speed type="absolute">0.1</speed>
+          <bullet>
+            <actionRef label="lib_laser">
+              <param>10</param>
+            </actionRef>
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="aim">10</direction>
+          <speed type="absolute">0.1</speed>
+          <bullet>
+            <actionRef label="lib_laser">
+              <param>10</param>
+            </actionRef>
+          </bullet>
+        </fire>
+        <wait>60</wait>
+      </action>
+    </repeat>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/laser.bnml"
+
+action top {
+  repeat 5 action {
+    fire direction aim 0 speed absolute 0.1 bullet actionRef lib_laser(10);
+    fire direction aim -10 speed absolute 0.1 bullet actionRef lib_laser(10);
+    fire direction aim 10 speed absolute 0.1 bullet actionRef lib_laser(10);
+    wait 60;
+  }
+}
+-->

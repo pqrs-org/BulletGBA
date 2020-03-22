@@ -1,0 +1,153 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+  <filename>SenkoRo_burstballA</filename>
+  <group>user</group>
+  <title>バーストボールA</title>
+  <description>加速しながら曲がる上に交差するという非常に目眩まし効果の高い鬼弾幕。実際のゲームはrank70くらい？</description>
+  <capture>よく見る</capture>
+  <author>Pentan</author>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+	
+	<!-- ball -->
+	<repeat>
+		<times>1+$rank*5.5</times>
+		<action>
+			<fire>
+				<direction type="aim">160+$rand*40</direction>
+				<speed type="absolute">0.5</speed>
+				<bulletRef label="burstball">
+					<param>5+$rand*5</param>
+				</bulletRef>
+			</fire>
+		<wait>30</wait>
+		</action>
+	</repeat>
+	
+	<wait>30</wait>
+	
+	<!-- vulcan -->
+	<repeat>
+		<times>3+$rank*2</times>
+		<action>
+			<wait>15</wait>
+			<fire>
+				<direction type="aim">0</direction>
+				<speed type="absolute">1.5+$rank</speed>
+				<bullet/>
+			</fire>
+			<repeat>
+				<times>2</times>
+				<action>
+					<wait>4</wait>
+					<fire>
+						<direction type="sequence">0</direction>
+						<speed type="sequence">0</speed>
+						<bullet/>
+					</fire>
+				</action>
+			</repeat>
+		</action>
+	</repeat>
+	
+	<wait>60</wait>
+</action>
+
+<!-- $1=repeat times -->
+<bullet label="burstball">
+	<action>
+		<changeSpeed>
+			<speed type="absolute">0.5+$rank*1.0</speed>
+			<term>(10+$1)*5</term>
+		</changeSpeed>
+		<repeat>
+			<times>10</times>
+			<action>
+				<changeDirection>
+					<direction type="aim">0</direction>
+					<term>30</term>
+				</changeDirection>
+				<wait>5</wait>
+			</action>
+		</repeat>
+		<repeat>
+			<times>$1</times>
+			<action>
+				<changeDirection>
+					<direction type="aim">0</direction>
+					<term>10</term>
+				</changeDirection>
+				<wait>5</wait>
+			</action>
+		</repeat>
+		<changeSpeed>
+			<speed type="absolute">0.0001</speed>
+			<term>1</term>
+		</changeSpeed>
+		<wait>1</wait>
+		<fire>
+			<direction type="relative">$rand*360</direction>
+			<speed type="absolute">0.5</speed>
+			<bullet><action><vanish/></action></bullet>
+		</fire>
+		<repeat>
+			<times>2+$rank*2</times>
+			<action>
+				<repeat>
+					<times>12</times>
+					<action>
+						<fire>
+							<direction type="sequence">30</direction>
+							<speed type="sequence">0</speed>
+							<bulletRef label="burstlazer">
+								<param>1</param>
+							</bulletRef>
+						</fire>
+						<fire>
+							<direction type="sequence">0</direction>
+							<speed type="sequence">0</speed>
+							<bulletRef label="burstlazer">
+								<param>-1</param>
+							</bulletRef>
+						</fire>
+					</action>
+				</repeat>
+				<wait>2</wait>
+			</action>
+		</repeat>
+		<vanish/>
+	</action>
+</bullet>
+
+<bullet label="burstlazer">
+	<action>
+		<changeSpeed>
+			<speed type="absolute">2.0+$rank*0.5</speed>
+			<term>120</term>
+		</changeSpeed>
+		<changeDirection>
+			<direction type="sequence">6*$1</direction>
+			<term>60</term>
+		</changeDirection>
+		<wait>60</wait>
+		<changeDirection>
+			<direction type="sequence">2*$1</direction>
+			<term>60</term>
+		</changeDirection>
+	</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

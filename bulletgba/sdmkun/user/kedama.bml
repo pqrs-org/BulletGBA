@@ -1,0 +1,230 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+<filename>kedama</filename>
+ <group>user</group>
+ <title>東方紅魔境より、毛玉</title>
+ <description>レーザーをつけてみた。</description>
+ <capture></capture>
+</barrageInfo>
+
+<barrageStyles>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<!-- CDATA とかいうのは大事なおまじないです。 -->
+<lua>
+<![CDATA[
+pi = 3.141592
+std = pi/180
+a = 0
+b = 0
+c = 0
+function cal(p,q,r)
+	rr = r*std
+	pp = (p/math.sqrt(p^2+q^2))*math.cos(rr)-(q/math.sqrt(p^2+q^2))*math.sin(rr)
+	qq = (q/math.sqrt(p^2+q^2))*math.cos(rr)+(p/math.sqrt(p^2+q^2))*math.sin(rr)
+	return pp,qq
+end
+
+function lay()
+setSpeed(getPlayerSpeedX(), getSpeedY())
+end
+
+function shot1()
+	setPos(px-2,py-5)
+	if(turn > 1050)then
+	vanish()
+	end
+	if(math.cos(turn*120*std) > 0.99)then
+	fire(0,-7,"lay")
+	end
+end
+function shot2()
+	setPos(px+2,py-5)
+	if(turn > 1050)then
+	vanish()
+	end
+	if(math.cos(turn*120*std) > 0.99)then
+	fire(0,-7,"lay")
+	end
+end
+
+function kedama1()
+	local t = getTurn()
+	local vx = getSpeedX()
+	local vy = getSpeedY()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	
+	if(t == 2)then
+	fire(0,3, "ked")
+	vanish()
+	end
+
+	if(t == 1)then
+	setPos(pos,1)
+	end
+end
+function kedama3()
+	local t = getTurn()
+	local x = getX()
+	local y = getY()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	
+	if(t == 2 and x < 10)then
+	fire(3,0, "ked")
+	vanish()
+	elseif(t == 2 and x > getMaxX()-10)then
+	fire(-3,0, "ked")
+	vanish()
+	end
+
+	if(t == 1)then
+	setPos(pos,60)
+	end
+end
+
+function ked()
+	local t = getTurn()
+	local vx = getSpeedX()
+	local vy = getSpeedY()
+	local x = getX()
+	local y = getY()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+
+	if(t > 10)then
+	if(t > math.random()*(1200-rank*400))then
+
+	if(rank < 0.2)then
+	for i = 1,2 do
+	sp = 0.6+i*0.33
+	for j = 0,1 do
+	fire(sp*math.cos(aim+(j*12-6)*std),sp*math.sin(aim+(j*12-6)*std))
+	end
+	end
+	elseif(rank < 0.6)then
+	for i = 1,2 do
+	sp = 0.6+i*0.33
+	for j = 0,2 do
+	fire(sp*math.cos(aim+(j*12-12)*std),sp*math.sin(aim+(j*12-12)*std))
+	end
+	end
+	elseif(rank < 0.9)then
+	for i = 1,2 do
+	sp = 0.6+i*0.33
+	for j = 0,4 do
+	fire(sp*math.cos(aim+(j*12-24)*std),sp*math.sin(aim+(j*12-24)*std))
+	end
+	end
+	else
+	for i = 1,2 do
+	sp = 0.6+i*0.33
+	for j = 0,8 do
+	fire(sp*math.cos(aim+(j*12-48)*std),sp*math.sin(aim+(j*12-48)*std))
+	end
+	end
+	end
+	fire(vx,vy,"ked")
+	vanish()
+	end
+	end
+
+	if(py > y)then
+	if(px+3 > x and x > px-3)then
+	vanish()
+	end
+	end
+end
+
+function top()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	px = getPlayerX()
+	py = getPlayerY()
+	turn = getTurn()
+	randomn = math.random()
+
+	if(turn > 1100)then
+	a = 0
+	b = 0
+	quit()
+	end
+
+
+	if(turn > 910)then
+	if(a > 5 and b < 104)then
+	pos = 1
+	fire(0,0, "kedama3", pos)
+	a = 0
+	b = b + 1
+	end
+	elseif(turn > 780)then
+	if(a > 5 and b < 91)then
+	pos = 299
+	fire(0,0, "kedama3", pos)
+	a = 0
+	b = b + 1
+	end
+	elseif(turn > 650)then
+	if(a > 5 and b < 78)then
+	pos = 150
+	fire(0,0, "kedama1", pos)
+	a = 0
+	b = b + 1
+	end
+	elseif(turn > 520)then
+	if(a > 5 and b < 65)then
+	pos = 240
+	fire(0,0, "kedama1", pos)
+	a = 0
+	b = b + 1
+	end
+
+	elseif(turn > 390)then
+	if(a > 5 and b < 52)then
+	pos = 299
+	fire(0,0, "kedama3", pos)
+	a = 0
+	b = b + 1
+	end
+	elseif(turn > 260)then
+	if(a > 5 and b < 39)then
+	pos = 1
+	fire(0,0, "kedama3", pos)
+	a = 0
+	b = b + 1
+	end
+	elseif(turn > 130)then
+	if(a > 5 and b < 26)then
+	pos = 150
+	fire(0,0, "kedama1", pos)
+	a = 0
+	b = b + 1
+	end
+	elseif(turn > 1)then
+	if(a > 5 and b < 13)then
+	pos = 60
+	fire(0,0, "kedama1", pos)
+	a = 0
+	b = b + 1
+	end
+	end
+	a = a + 1
+
+	if(turn == 1)then
+	fire(0,0,"shot1")
+	fire(0,0,"shot2")
+	end
+end
+
+]]>
+</lua>
+
+</barrage>

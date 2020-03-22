@@ -1,0 +1,119 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>bb07-las1</filename>
+ <group>KotuAnzenX</group>
+ <title>ラスボスっぽい弾幕１</title>
+ <description>時計回りの単発弾と反時計回りの五方向です。ＬＶ１００が本来の弾幕です。２以降を作るかどうかは知りませんｗ</description>
+ <capture>五方向弾は右から左にまとめて潜り、間の狭い単発弾は慎重に回避しましょう。ちなみにランダム要素は皆無です。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <fireRef label="seed"><param>0</param></fireRef>
+ <fireRef label="seed"><param>90</param><param>0</param></fireRef>
+ <fireRef label="seed"><param>180</param><param>0</param></fireRef>
+ <fireRef label="seed"><param>270</param><param>0</param></fireRef>
+ <fireRef label="seed2"><param>0</param><param>25</param></fireRef>
+ <fireRef label="seed2"><param>0</param><param>35</param></fireRef>
+ <fireRef label="seed2"><param>0</param><param>45</param></fireRef>
+ <fireRef label="seed2"><param>0</param><param>55</param></fireRef>
+ <fireRef label="seed2"><param>0</param><param>65</param></fireRef>
+ <fireRef label="seed2"><param>90</param><param>115</param></fireRef>
+ <fireRef label="seed2"><param>90</param><param>125</param></fireRef>
+ <fireRef label="seed2"><param>90</param><param>135</param></fireRef>
+ <fireRef label="seed2"><param>90</param><param>145</param></fireRef>
+ <fireRef label="seed2"><param>90</param><param>155</param></fireRef>
+ <fireRef label="seed2"><param>180</param><param>185</param></fireRef>
+ <fireRef label="seed2"><param>180</param><param>195</param></fireRef>
+ <fireRef label="seed2"><param>180</param><param>205</param></fireRef>
+ <fireRef label="seed2"><param>180</param><param>215</param></fireRef>
+ <fireRef label="seed2"><param>180</param><param>225</param></fireRef>
+ <fireRef label="seed2"><param>270</param><param>295</param></fireRef>
+ <fireRef label="seed2"><param>270</param><param>305</param></fireRef>
+ <fireRef label="seed2"><param>270</param><param>315</param></fireRef>
+ <fireRef label="seed2"><param>270</param><param>325</param></fireRef>
+ <fireRef label="seed2"><param>270</param><param>335</param></fireRef>
+ <wait>600</wait>
+</action>
+
+<fire label="seed">
+ <speed>4</speed>
+ <direction type="absolute">$1+45</direction>
+ <bulletRef label="stop"><param>$1</param></bulletRef>
+</fire>
+
+<bullet label="stop">
+ <action>
+  <changeSpeed>
+   <speed>0</speed>
+   <term>10</term>
+  </changeSpeed>
+  <actionRef label="web"><param>$1</param></actionRef>
+ </action>
+</bullet>
+
+<action label="web">
+ <fire>
+  <speed>1+$rank</speed>
+  <direction type="absolute">$1</direction>
+  <bullet/>
+ </fire>
+ <wait>2</wait>
+ <repeat><times>99+$rank*200</times>
+  <action>
+   <fire>
+    <speed>0.5+$rank</speed>
+    <direction type="sequence">4.1</direction>
+    <bullet/>
+   </fire>
+   <wait>2</wait>
+  </action>
+ </repeat>
+ <vanish/>
+</action>
+
+<fire label="seed2">
+ <speed>4</speed>
+ <direction type="absolute">$1+45</direction>
+ <bulletRef label="stop2"><param>$1</param><param>$2</param></bulletRef>
+</fire>
+
+<bullet label="stop2">
+ <action>
+  <changeSpeed>
+   <speed>0</speed>
+   <term>10</term>
+  </changeSpeed>
+  <actionRef label="blust"><param>$1</param><param>$2</param></actionRef>
+ </action>
+</bullet>
+
+<action label="blust">
+ <fire>
+  <speed>1+$rank</speed>
+  <direction type="absolute">$2</direction>
+  <bullet/>
+ </fire>
+ <wait>10</wait>
+ <repeat><times>19+$rank*40</times>
+  <action>
+   <fire>
+    <speed>1+$rank</speed>
+    <direction type="sequence">-4.9</direction>
+    <bullet/>
+   </fire>
+   <wait>10</wait>
+  </action>
+ </repeat>
+ <vanish/>
+</action>
+
+</bulletml>
+</barrage>

@@ -1,0 +1,8 @@
+Note:
+
+sox ~/audio/music/forc/loop1.mp3 -c 1 -b -r 16384 music01.wav
+sox ~/audio/music/forc/loop5.mp3 -c 1 -b -r 16384 music02.wav
+sox ~/audio/music/forc/loop6.mp3 -c 1 -b -r 16384 music03.wav
+
+sox ~/audio/se/forc/effect4.wav -c 1 -b -r 16384 se01.wav
+sox ~/audio/se/forc/effect3.wav -c 1 -b -r 16384 se02.wav

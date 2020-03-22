@@ -1,0 +1,236 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+2004/6/17 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* heaven or hell
+* flattened voice
+* there is alice everywhere
+-->
+
+<barrageInfo>
+  <filename>midgard_loop</filename>
+  <group>Oohara</group>
+  <title>ミドガルドループ</title>
+  <description>PS2版エスプガルーダ発売記念。3ボス発狂を再現しようとした失敗作。</description>
+  <capture>なるべく画面の外側、本体のななめ下に張りつくと、弾速がおそいので安定します。なお上に逃げた人は異界送りです。</capture>
+  <author>Oohara_Yuuma</author>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+---
+--- subroutines for BulletML compatibility start
+---
+
+function dtor(d)
+  return 2.0 * math.pi * d / 360.0
+end
+
+function rtod(r)
+  return 360.0 * r / (2.0 * math.pi)
+end
+
+function fire_absolute(d, speed)
+  local r = dtor(d - 90.0)
+  if (speed < 0.0001) then
+    return
+  end
+  fire(speed * math.cos(r), speed * math.sin(r))
+end
+
+function fire_absolute_f(d, speed, func)
+  local r = dtor(d - 90.0)
+  if (speed < 0.0001) then
+    return
+  end
+  fire(speed * math.cos(r), speed * math.sin(r), func)
+end
+
+function fire_aim(d, speed)
+  local r = dtor(d)
+  local dx = getPlayerX() - getX()
+  local dy = getPlayerY() - getY()
+  local d_length = dx * dx + dy * dy
+  local v_x = 0.0
+  local v_y = 0.0
+  if (speed < 0.0001) then
+    return
+  end
+  if (d_length < 0.0001) then
+    fire_absolute(360.0 * math.random(), speed)
+    return
+  end
+  d_length = math.sqrt(d_length)
+  dx = dx / d_length
+  dy = dy / d_length
+  v_x = speed * (dx * math.cos(r) - dy * math.sin(r))
+  v_y = speed * (dx * math.sin(r) + dy * math.cos(r))
+  fire(v_x, v_y)
+end
+
+function fire_aim_f(d, speed, func)
+  local r = dtor(d)
+  local dx = getPlayerX() - getX()
+  local dy = getPlayerY() - getY()
+  local d_length = dx * dx + dy * dy
+  local v_x = 0.0
+  local v_y = 0.0
+  if (speed < 0.0001) then
+    return
+  end
+  if (d_length < 0.0001) then
+    fire_absolute_f(360.0 * math.random(), speed, func)
+    return
+  end
+  d_length = math.sqrt(d_length)
+  dx = dx / d_length
+  dy = dy / d_length
+  v_x = speed * (dx * math.cos(r) - dy * math.sin(r))
+  v_y = speed * (dx * math.sin(r) + dy * math.cos(r))
+  fire(v_x, v_y, func)
+end
+
+function fire_relative(d, speed)
+  local r = dtor(d)
+  local dx = getSpeedX()
+  local dy = getSpeedY()
+  local d_length = dx * dx + dy * dy
+  local v_x = 0.0
+  local v_y = 0.0
+  if (speed < 0.0001) then
+    return
+  end
+  if (d_length < 0.0001) then
+    fire_absolute(360.0 * math.random(), speed)
+    return
+  end
+  d_length = math.sqrt(d_length)
+  dx = dx / d_length
+  dy = dy / d_length
+  v_x = speed * (dx * math.cos(r) - dy * math.sin(r))
+  v_y = speed * (dx * math.sin(r) + dy * math.cos(r))
+  fire(v_x, v_y)
+end
+
+function fire_relative_f(d, speed, func)
+  local r = dtor(d)
+  local dx = getSpeedX()
+  local dy = getSpeedY()
+  local d_length = dx * dx + dy * dy
+  local v_x = 0.0
+  local v_y = 0.0
+  if (speed < 0.0001) then
+    return
+  end
+  if (d_length < 0.0001) then
+    fire_absolute_f(360.0 * math.random(), speed, func)
+    return
+  end
+  d_length = math.sqrt(d_length)
+  dx = dx / d_length
+  dy = dy / d_length
+  v_x = speed * (dx * math.cos(r) - dy * math.sin(r))
+  v_y = speed * (dx * math.sin(r) + dy * math.cos(r))
+  fire(v_x, v_y, func)
+end
+
+function fire_point(target_x, target_y, d, speed)
+  local r = dtor(d)
+  local dx = target_x - getX()
+  local dy = target_y - getY()
+  local d_length = dx * dx + dy * dy
+  local v_x = 0.0
+  local v_y = 0.0
+  if (speed < 0.0001) then
+    return
+  end
+  if (d_length < 0.0001) then
+    fire_absolute(360.0 * math.random(), speed)
+    return
+  end
+  d_length = math.sqrt(d_length)
+  dx = dx / d_length
+  dy = dy / d_length
+  v_x = speed * (dx * math.cos(r) - dy * math.sin(r))
+  v_y = speed * (dx * math.sin(r) + dy * math.cos(r))
+  fire(v_x, v_y)
+end
+
+function fire_point_f(target_x, target_y, d, speed, func)
+  local r = dtor(d)
+  local dx = target_x - getX()
+  local dy = target_y - getY()
+  local d_length = dx * dx + dy * dy
+  local v_x = 0.0
+  local v_y = 0.0
+  if (speed < 0.0001) then
+    return
+  end
+  if (d_length < 0.0001) then
+    fire_absolute_f(360.0 * math.random(), speed, func)
+    return
+  end
+  d_length = math.sqrt(d_length)
+  dx = dx / d_length
+  dy = dy / d_length
+  v_x = speed * (dx * math.cos(r) - dy * math.sin(r))
+  v_y = speed * (dx * math.sin(r) + dy * math.cos(r))
+  fire(v_x, v_y, func)
+end
+
+---
+--- subroutines for BulletML compatibility end
+---
+
+function bit()
+  local dx = getSpeedX()
+  local dy = getSpeedY()
+  local v = math.sqrt(dx * dx + dy * dy)
+  local c = 0.5 + 0.5 * getRank()
+  if (getTurn() >= 60) then
+    if (getPlayerY() < 120.0) then
+      fire_point(getPlayerX(), getPlayerY(), -45.0 + 90.0 * math.random(), 1.6)
+    elseif (dy < 0.0) then
+      fire(c * (-0.4) * dx / v, c * (-1.6) * dy / v)
+    else
+      fire(c * (0.4) * dx / v, c * 1.6 * dy / v)
+    end    
+    vanish()
+  end
+end
+
+function top()
+  local t = getTurn()
+  local i = 0
+  local theta = 0
+  local r = 0
+  if (t > 1100 - 300 * getRank()) then
+    quit()
+  end
+  if (t > 720) then
+    return
+  end
+  if (math.mod(t, 10.0 - 8.0 * getRank() * getRank()) < 1.0) then
+    i = 0
+    while (i <= 160) do
+      theta = 7 * t / 2 + i - 180
+      if (math.mod(t, 240.0) < 120.0) then
+        theta = 180 - theta
+      end
+      r = dtor(theta)
+      fire(0.6 * math.cos(r), 0.3 * math.sin(r), "bit")
+      i = i + 40
+    end
+  end
+end
+]]>
+</lua>
+
+</barrage>

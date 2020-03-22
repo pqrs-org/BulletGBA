@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+2004/8/25 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* galactic string
+* golem mastery
+* history manipulation
+-->
+
+<barrageInfo>
+  <filename>nopida_crying_dance</filename>
+  <group>Oohara</group>
+  <title>号泣舞踏ノピダくん</title>
+  <description>ハイエルフアーチャーにて変愚蛮怒*勝利*記念。みな忘れているが、彼は射撃の名手であり、全一を取ったこともある。</description>
+  <capture>青弾の半分が自機を狙っています。下の隅からはじめて、ゆっくり反対側へ。白弾が意外にはやくて危険なので注意。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+  <repeat><times>10 + 10 * $rank</times><action>
+    <actionRef label="p">
+      <param>1</param>
+    </actionRef>
+    <wait>20 - 10 * $rank</wait>
+    <actionRef label="p">
+      <param>-1</param>
+    </actionRef>
+    <wait>20 - 10 * $rank</wait>
+  </action></repeat>
+
+  <wait>250 - 100 * $rank</wait>
+
+</action>
+
+<action label="p">
+
+  <fire>
+    <direction type="aim">-60 + 120 * $rand</direction>
+    <speed>2.6 * (0.5 + 0.5 * $rank)</speed>
+    <bullet/>
+  </fire>
+  <repeat><times>5</times><action>
+    <fire>
+      <direction type="sequence">6 * $1</direction>
+      <speed type="sequence">-0.3 * (0.5 + 0.5 * $rank)</speed>
+      <bullet/>
+    </fire>
+  </action></repeat>
+  <fire>
+    <direction type="sequence">6 * $1</direction>
+    <speed type="sequence">-0.3 * (0.5 + 0.5 * $rank)</speed>
+    <bulletRef label="bit">
+      <param>-80 * $1</param>
+    </bulletRef>
+  </fire>
+
+</action>
+
+<bullet label="bit">
+<action>
+
+  <wait>30 + 20 * $rand</wait>
+
+  <fire>
+    <direction type="relative">$1</direction>
+    <speed>0.8</speed>
+    <bullet/>
+  </fire>
+  <repeat><times>1 + 3 * $rank</times><action>
+    <fire>
+      <direction type="sequence">0</direction>
+      <speed type="sequence">0.2</speed>
+      <bullet/>
+    </fire>
+  </action></repeat>
+
+  <wait>30 + 20 * $rand</wait>
+
+  <fire>
+    <direction type="aim">0</direction>
+    <speed>0.8</speed>
+    <bullet/>
+  </fire>
+  <repeat><times>1 + 3 * $rank</times><action>
+    <fire>
+      <direction type="sequence">0</direction>
+      <speed type="sequence">0.2</speed>
+      <bullet/>
+    </fire>
+  </action></repeat>
+
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

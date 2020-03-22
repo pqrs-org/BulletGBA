@@ -1,0 +1,511 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <fire>
+      <direction type="absolute">0</direction>
+      <speed type="absolute">1</speed>
+      <bullet>
+        <action>
+          <actionRef label="fireLance">
+            <param>180-60</param>
+          </actionRef>
+          <actionRef label="fireLance">
+            <param>180+60</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <wait>120</wait>
+    <fire>
+      <direction type="absolute">0</direction>
+      <speed type="absolute">1</speed>
+      <bullet>
+        <action>
+          <actionRef label="fireLance">
+            <param>180</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <wait>120</wait>
+    <fire>
+      <direction type="absolute">180</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>30</wait>
+          <actionRef label="fireLance">
+            <param>0</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="absolute">180-60</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>20</wait>
+          <actionRef label="fireLance">
+            <param>180-60+90</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="absolute">180+60</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>20</wait>
+          <actionRef label="fireLance">
+            <param>180+60-90</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <wait>120</wait>
+    <fire>
+      <direction type="absolute">180-30</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>40</wait>
+          <actionRef label="fireLance">
+            <param>180-30+120</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="absolute">180+30</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>40</wait>
+          <actionRef label="fireLance">
+            <param>180+30-120</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <wait>120</wait>
+    <fire>
+      <direction type="absolute">180-30</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>40</wait>
+          <actionRef label="fireLance">
+            <param>180-30+180</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="absolute">180+30</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>40</wait>
+          <actionRef label="fireLance">
+            <param>180+30-180</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="absolute">180-90</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>10</wait>
+          <actionRef label="fireLance">
+            <param>180-90+150</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="absolute">180+90</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>10</wait>
+          <actionRef label="fireLance">
+            <param>180+90-150</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <wait>120</wait>
+    <fire>
+      <direction type="absolute">180</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>10</wait>
+          <actionRef label="fireLance">
+            <param>180</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="absolute">180-90</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>10</wait>
+          <actionRef label="fireLance">
+            <param>180-90+150</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="absolute">180+90</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>10</wait>
+          <actionRef label="fireLance">
+            <param>180+90-150</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <wait>120</wait>
+    <fire>
+      <direction type="absolute">0</direction>
+      <speed type="absolute">1</speed>
+      <bullet>
+        <action>
+          <actionRef label="fireLance">
+            <param>180</param>
+          </actionRef>
+          <actionRef label="fireLance">
+            <param>180-30</param>
+          </actionRef>
+          <actionRef label="fireLance">
+            <param>180+30</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <wait>120</wait>
+    <fire>
+      <direction type="absolute">0</direction>
+      <speed type="absolute">1</speed>
+      <bullet>
+        <action>
+          <actionRef label="fireLance">
+            <param>180-15</param>
+          </actionRef>
+          <actionRef label="fireLance">
+            <param>180+15</param>
+          </actionRef>
+          <actionRef label="fireLance">
+            <param>180-45</param>
+          </actionRef>
+          <actionRef label="fireLance">
+            <param>180+45</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <wait>120</wait>
+    <fire>
+      <direction type="absolute">90</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>5</wait>
+          <actionRef label="fireLance">
+            <param>190</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="absolute">90</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>10</wait>
+          <actionRef label="fireLance">
+            <param>210</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="absolute">270</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>5</wait>
+          <actionRef label="fireLance">
+            <param>170</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="absolute">270</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>10</wait>
+          <actionRef label="fireLance">
+            <param>150</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <wait>120</wait>
+  </action>
+  <action label="fireLance">
+    <fire>
+      <direction type="absolute">$1</direction>
+      <speed type="absolute">2</speed>
+      <bullet>
+        <action>
+          <repeat>
+            <times>10</times>
+            <action>
+              <wait>6</wait>
+              <actionRef label="fireLanceNode">
+                <param>180-30</param>
+                <param>$1</param>
+              </actionRef>
+              <actionRef label="fireLanceNode">
+                <param>180+30</param>
+                <param>$1</param>
+              </actionRef>
+            </action>
+          </repeat>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+  </action>
+  <action label="fireLanceNode">
+    <fire form="middle">
+      <direction type="relative">$1</direction>
+      <speed type="absolute">0.2</speed>
+      <bullet>
+        <actionRef label="fireLanceNodeBul">
+          <param>$2</param>
+        </actionRef>
+      </bullet>
+    </fire>
+    <repeat>
+      <times>5</times>
+      <action>
+        <fire form="middle">
+          <direction type="relative">$1</direction>
+          <speed type="sequence">0.1</speed>
+          <bullet>
+            <actionRef label="fireLanceNodeBul">
+              <param>$2</param>
+            </actionRef>
+          </bullet>
+        </fire>
+      </action>
+    </repeat>
+  </action>
+  <action label="fireLanceNodeBul">
+    <wait>60</wait>
+    <changeDirection>
+      <direction type="absolute">$1</direction>
+      <term>1</term>
+    </changeDirection>
+    <changeSpeed>
+      <speed type="sequence">0.2</speed>
+      <term>30</term>
+    </changeSpeed>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  fire direction absolute 0 speed absolute 1 bullet action {
+    actionRef fireLance(180 - 60);
+    actionRef fireLance(180 + 60);
+    vanish;
+  }
+  wait 120;
+
+  ////////////////////////////////////////////////////////////
+  fire direction absolute 0 speed absolute 1 bullet action {
+    actionRef fireLance(180);
+    vanish;
+  }
+  wait 120;
+
+  ////////////////////////////////////////////////////////////
+  fire direction absolute 180 speed absolute 4 bullet action {
+    wait 30;
+    actionRef fireLance(0);
+    vanish;
+  }
+  fire direction absolute 180 - 60 speed absolute 4 bullet action {
+    wait 20;
+    actionRef fireLance(180 - 60 + 90);
+    vanish;
+  }
+  fire direction absolute 180 + 60 speed absolute 4 bullet action {
+    wait 20;
+    actionRef fireLance(180 + 60 - 90);
+    vanish;
+  }
+  wait 120;
+
+  ////////////////////////////////////////////////////////////
+  fire direction absolute 180 - 30 speed absolute 4 bullet action {
+    wait 40;
+    actionRef fireLance(180 - 30 + 120);
+    vanish;
+  }
+  fire direction absolute 180 + 30 speed absolute 4 bullet action {
+    wait 40;
+    actionRef fireLance(180 + 30 - 120);
+    vanish;
+  }
+  wait 120;
+
+  ////////////////////////////////////////////////////////////
+  fire direction absolute 180 - 30 speed absolute 4 bullet action {
+    wait 40;
+    actionRef fireLance(180 - 30 + 180);
+    vanish;
+  }
+  fire direction absolute 180 + 30 speed absolute 4 bullet action {
+    wait 40;
+    actionRef fireLance(180 + 30 - 180);
+    vanish;
+  }
+  fire direction absolute 180 - 90 speed absolute 4 bullet action {
+    wait 10;
+    actionRef fireLance(180 - 90 + 150);
+    vanish;
+  }
+  fire direction absolute 180 + 90 speed absolute 4 bullet action {
+    wait 10;
+    actionRef fireLance(180 + 90 - 150);
+    vanish;
+  }
+  wait 120;
+
+  ////////////////////////////////////////////////////////////
+  fire direction absolute 180 speed absolute 4 bullet action {
+    wait 10;
+    actionRef fireLance(180);
+    vanish;
+  }
+  fire direction absolute 180 - 90 speed absolute 4 bullet action {
+    wait 10;
+    actionRef fireLance(180 - 90 + 150);
+    vanish;
+  }
+  fire direction absolute 180 + 90 speed absolute 4 bullet action {
+    wait 10;
+    actionRef fireLance(180 + 90 - 150);
+    vanish;
+  }
+  wait 120;
+
+  ////////////////////////////////////////////////////////////
+  fire direction absolute 0 speed absolute 1 bullet action {
+    actionRef fireLance(180);
+    actionRef fireLance(180 - 30);
+    actionRef fireLance(180 + 30);
+    vanish;
+  }
+  wait 120;
+
+  ////////////////////////////////////////////////////////////
+  fire direction absolute 0 speed absolute 1 bullet action {
+    actionRef fireLance(180 - 15);
+    actionRef fireLance(180 + 15);
+    actionRef fireLance(180 - 45);
+    actionRef fireLance(180 + 45);
+    vanish;
+  }
+  wait 120;
+
+  ////////////////////////////////////////////////////////////
+  fire direction absolute 90 speed absolute 4 bullet action {
+    wait 5;
+    actionRef fireLance(190);
+    vanish;
+  }
+  fire direction absolute 90 speed absolute 4 bullet action {
+    wait 10;
+    actionRef fireLance(210);
+    vanish;
+  }
+  fire direction absolute 270 speed absolute 4 bullet action {
+    wait 5;
+    actionRef fireLance(170);
+    vanish;
+  }
+  fire direction absolute 270 speed absolute 4 bullet action {
+    wait 10;
+    actionRef fireLance(150);
+    vanish;
+  }
+  wait 120;
+}
+
+// $1: direction
+action fireLance {
+  fire direction absolute $1 speed absolute 2 bullet action {
+    repeat 10 action {
+      wait 6;
+      actionRef fireLanceNode(180 - 30, $1);
+      actionRef fireLanceNode(180 + 30, $1);
+    }
+    vanish;
+  }
+}
+
+// $1: direction, $2: second-direction
+action fireLanceNode {
+  fire form middle direction relative $1 speed absolute 0.2 bullet actionRef fireLanceNodeBul($2);
+  repeat 5 action {
+    fire form middle direction relative $1 speed sequence 0.1 bullet actionRef fireLanceNodeBul($2);
+  }
+}
+
+// $1: direction
+action fireLanceNodeBul {
+  wait 60;
+  changeDirection absolute $1 term 1;
+  changeSpeed sequence 0.2 term 30;
+}
+-->

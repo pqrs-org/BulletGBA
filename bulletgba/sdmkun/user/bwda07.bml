@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!-- コメント -->
+
+<barrageInfo>
+ <!-- ファイル名が別の名前になっていると、
+      この名前に従ってファイル名は修正されます。
+      これは必ずつけて下さい。ブラウザから実行する場合、
+      ファイル名が変わっていることが多々あります。 -->
+ <filename>bwda07</filename>
+ <!-- グループ名は data/groups.dat から適切なものを選んでも良いですし、
+      お好きな名前を付けてもらっても結構です。
+	  存在しないグループ名をつけた場合は userグループ扱いになります。
+	  ある程度同じグループの弾幕がたまったら
+	  data/groups.dat に私が追加します。
+   -->
+ <group>bwda</group>
+ <title>Hyper Density</title>
+ <description>ランダムに散らばった弾源がその場でぐるぐる回りながら弾をばら撒くだけ。題名のとおり密度が半端じゃないです。運によって難易度が結構変わります。一応自機狙いですが幅が広いので切り返しは無駄だとおもいます。</description>
+<capture>基本的には気合い避けしかないとおもいます。弾源の散らばり方にもよりますが真ん中で避けると右と左両方から弾がきて難しいので端のほうで避けたほうがやりやすいとおもいます。
+また、ごく低確率ですが全弾源が画面外に消えたりすることもあります。</capture>
+</barrageInfo>
+
+<!-- ここで弾の色とか形とかを指定できるようにする予定 -->
+<barrageStyle>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<repeat>
+<times>3</times>
+<action>
+<actionRef label="bara"></actionRef>
+<wait>800</wait>
+</action>
+</repeat>
+</action>
+
+
+<action label="bara">
+<repeat>
+<times>5+($rank*5)</times>
+<action>
+ <bullet>
+  <direction type="absolute">$rand*360</direction>
+  <speed>2</speed>
+<actionRef label="stop"></actionRef>
+<actionRef label="spin"></actionRef>
+</bullet>
+</action>
+</repeat>
+</action>
+
+<action label="stop">
+
+<wait>$rand*30</wait>
+<changeSpeed>
+<speed>0</speed>
+<term>30</term>
+</changeSpeed>
+<wait>40</wait>
+<changeSpeed>
+<speed>$rank+1</speed>
+<term>30</term>
+</changeSpeed>
+</action>
+
+<action label="spin">
+<repeat>
+<times>200+($rank*100)</times>
+<action>
+<bullet>
+  <direction type="aim">($rand*150)-75</direction>
+  <speed>(1+$rank)/2</speed>
+</bullet>
+ <wait>1</wait>
+<changeDirection>
+<direction type="relative">5-$rank</direction>
+<term>1</term>
+</changeDirection>
+</action>
+</repeat>
+</action>
+
+</bulletml>
+
+</barrage>
+

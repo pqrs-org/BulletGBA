@@ -1,0 +1,192 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+<filename>superplayer</filename>
+ <group>user</group>
+ <title>バリア展開モード</title>
+ <description>円形領域における反射。避けなくてよいのです。</description>
+ <capture></capture>
+</barrageInfo>
+
+<barrageStyles>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<!-- CDATA とかいうのは大事なおまじないです。 -->
+<lua>
+<![CDATA[
+pi = 3.141592
+std = pi/180
+a = 0
+b = 0
+function cal(p,q,r)
+	rr = r*std
+	pp = (p/math.sqrt(p^2+q^2))*math.cos(rr)-(q/math.sqrt(p^2+q^2))*math.sin(rr)
+	qq = (q/math.sqrt(p^2+q^2))*math.cos(rr)+(p/math.sqrt(p^2+q^2))*math.sin(rr)
+	return pp,qq
+end
+
+function random()
+	number = math.random()
+	if(turn == 2)then
+	vanish()
+	end
+end
+
+function reflect()
+	local x = getX()-4
+	local y = getY()-4
+	local vx = getSpeedX()
+	local vy = getSpeedY()
+	if( math.sqrt((x-px)^2+(y-py)^2) < 50)then
+	vr = math.sqrt(vx^2+vy^2)
+	cos , sin = cal(x-px,y-py, 0)
+	vcos, vsin = cal(vx,vy, 180)
+
+	cosd = cos*vcos + sin*vsin
+	sind = sin*vcos - cos*vsin
+
+	cosab = cos*cosd - sin*sind
+	sinab = sin*cosd + cos*sind
+	fire(vr*cosab, vr*sinab)
+	vanish()
+	end
+end
+
+function round()
+	local t = getTurn()	
+	local x = getX()-4
+	local y = getY()-4
+	local rank = getRank()
+	r = math.sqrt((x-px)^2+(y-py)^2)
+
+	if(rank < 0.6)then
+	if(t == 1)then
+	setPos(6 + math.random()*(getMaxX()-12),getMaxY()-6)
+	end
+	if(t > 10 and r > 60)then
+	for i = 0,20 do 
+	fire(math.cos(-2*i), math.sin(-2*i), "reflect")
+	end
+	vanish()
+	end
+	if(t > 13)then
+	vanish()
+	end
+
+	else
+	if(t == 1)then
+	setPos(6 + math.random()*(getMaxX()-12),getMaxY()-6)
+	end
+	if(t > 13 and r > 60)then
+	for i = 0,40 do 
+	fire(rank*3*math.cos(-i), rank*3*math.sin(-i), "reflect")
+	end
+	elseif(t > 5 and r > 60)then
+	for i = 1,6 do
+	fire(math.cos((i*60+5*t)*std), math.sin((i*60+5*t)*std), "reflect")
+	end
+	end
+	if(t > 13)then
+	vanish()
+	end
+	end
+end
+
+function ball()
+	local t = getTurn()	
+	local x = getX()-4
+	local y = getY()-4
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	dir = aim + (pi*2*math.random() - pi)/30
+	r = math.sqrt((x-px)^2+(y-py)^2)
+
+	if(t > 1 and r > 60)then
+	for i = 1,20 do 
+	fire(rank*3*math.cos(i*18*std), rank*3*math.sin(i*18*std), "ball2" , dir)
+	end
+	vanish()
+	end
+end
+
+function ball2()
+	local t = getTurn()
+	local rank = getRank()	
+	if(t == 1)then 
+	fire((1+rank*1)*math.cos(dir), (1+rank*1)*math.sin(dir), "reflect")
+	vanish()
+	end
+end
+
+function attacker()
+	if(math.cos(turn*30*std) > 0.9)then
+	fire(0,0,"attack")
+	end
+end
+
+function attack()
+	local aim = getPlayerAngle() - pi/2
+	if(a > 15)then
+	fire(math.cos(aim+std*(2*math.random()-1)),math.sin(aim+std*(2*math.random()-1)), "reflect")
+	fire(0,2,"reflect")
+	end
+	if(turn > 230)then
+	vanish()
+	end
+end
+
+function top()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	px = getPlayerX()-4
+	py = getPlayerY()-4
+	turn = getTurn()
+
+	if(turn == 1)then
+	fire(0,0, "random")
+	end
+
+	if(turn > 350)then
+	a = 0
+	b = 0
+	quit()
+	end
+
+	if(turn > 2 and number > 0.5)then
+	if(turn > 200 and 250 > turn)then
+	for i = 1,6 do
+	fire(math.cos((i*60+5*turn)*std), math.sin((i*60+5*turn)*std), "reflect")
+	end
+	end
+	if(turn > 250)then
+	a = 0
+	elseif(turn > 5 and a > 15)then
+	fire(0,2,"reflect")
+	a = 0
+	elseif(turn == 3)then
+	fire(3*math.cos(aim+35*std),3*math.sin(aim+35*std), "attacker")
+	fire(3*math.cos(aim-35*std),3*math.sin(aim-35*std), "attacker")
+	end
+	a = a + 1
+	elseif(turn > 2)then
+	if(turn > 250)then
+	a = 0
+	elseif(a > 15)then
+	fire(0,0,"round")
+	fire(0,0,"ball")
+	a = 0
+	end
+	a = a + 1
+	end
+end
+
+
+]]>
+</lua>
+
+</barrage>

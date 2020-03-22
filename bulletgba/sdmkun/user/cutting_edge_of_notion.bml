@@ -1,0 +1,261 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<!--
+2003/7/7 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* deer ace pitcher
+* spiral argument
+* reinterpretation of hasami
+-->
+
+<barrage>
+
+<barrageInfo>
+  <filename>cutting_edge_of_notion</filename>
+  <group>Oohara</group>
+  <title>概念の切り裂く刃</title>
+  <description>某弾幕RPGの戦闘BGMがすごい題名だったので作りました。というわけで、題名と内容は無関係です。史上最強のNウェイを見よ!</description>
+  <capture>どの弾も二回屈折しますが、屈折していないときは通常のNウェイと同じ軌道をとります。したがって奇数ウェイだけをこんこん避けすればよいのですが、間合いをまちがえて屈折に巻きこまれると死にます。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+  <repeat><times>15</times><action>
+    <actionRef label="5way">
+      <param>1.2 + 1.8 * $rank</param>
+      <param>15</param>
+    </actionRef>
+
+    <wait>4</wait>
+
+    <actionRef label="4way">
+      <param>1.2 + 1.8 * $rank</param>
+      <param>15</param>
+    </actionRef>
+
+    <wait>4</wait>
+
+    <actionRef label="5way">
+      <param>1.4 + 1.8 * $rank</param>
+      <param>15</param>
+    </actionRef>
+
+    <wait>4</wait>
+
+    <actionRef label="4way">
+      <param>1.4 + 1.8 * $rank</param>
+      <param>15</param>
+    </actionRef>
+
+    <wait>4</wait>
+
+    <actionRef label="5way">
+      <param>1.0 + 1.8 * $rank</param>
+      <param>15</param>
+    </actionRef>
+
+    <wait>4</wait>
+
+    <actionRef label="4way">
+      <param>1.0 + 1.8 * $rank</param>
+      <param>15</param>
+    </actionRef>
+
+    <wait>4</wait>
+
+    <actionRef label="5way">
+      <param>0.8 + 1.8 * $rank</param>
+      <param>15</param>
+    </actionRef>
+
+    <wait>4</wait>
+
+    <actionRef label="4way">
+      <param>0.8 + 1.8 * $rank</param>
+      <param>15</param>
+    </actionRef>
+
+    <wait>4</wait>
+
+  </action></repeat>
+
+  <wait>200</wait>
+
+</action>
+
+<action label="4way">
+
+  <fire>
+    <direction type="aim">45</direction>
+    <speed>$1</speed>
+    <bulletRef label="edge">
+      <param>$2</param>
+      <param>-90</param>
+      <param>1.73205</param>
+      <param>30</param>
+      <param>$1</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <direction type="aim">15</direction>
+    <speed>$1</speed>
+    <bulletRef label="edge">
+      <param>$2</param>
+      <param>-90</param>
+      <param>1.73205</param>
+      <param>30</param>
+      <param>$1</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <direction type="aim">-15</direction>
+    <speed>$1</speed>
+    <bulletRef label="edge">
+      <param>$2</param>
+      <param>90</param>
+      <param>1.73205</param>
+      <param>-30</param>
+      <param>$1</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <direction type="aim">-45</direction>
+    <speed>$1</speed>
+    <bulletRef label="edge">
+      <param>$2</param>
+      <param>90</param>
+      <param>1.73205</param>
+      <param>-30</param>
+      <param>$1</param>
+    </bulletRef>
+  </fire>
+
+</action>
+
+<action label="5way">
+
+  <fire>
+    <direction type="aim">40</direction>
+    <speed>$1</speed>
+    <bulletRef label="edge">
+      <param>$2</param>
+      <param>-90</param>
+      <param>1.73205</param>
+      <param>30</param>
+      <param>$1</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <direction type="aim">20</direction>
+    <speed>$1</speed>
+    <bulletRef label="edge">
+      <param>$2</param>
+      <param>-90</param>
+      <param>1.73205</param>
+      <param>30</param>
+      <param>$1</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <direction type="aim">0</direction>
+    <speed>$1</speed>
+    <bulletRef label="edge">
+      <param>$2</param>
+      <param>0</param>
+      <param>1.0</param>
+      <param>0</param>
+      <param>$1</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <direction type="aim">-20</direction>
+    <speed>$1</speed>
+    <bulletRef label="edge">
+      <param>$2</param>
+      <param>90</param>
+      <param>1.73205</param>
+      <param>-30</param>
+      <param>$1</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <direction type="aim">-40</direction>
+    <speed>$1</speed>
+    <bulletRef label="edge">
+      <param>$2</param>
+      <param>90</param>
+      <param>1.73205</param>
+      <param>-30</param>
+      <param>$1</param>
+    </bulletRef>
+  </fire>
+
+</action>
+
+<bullet label="edge">
+<action>
+
+  <wait>$1</wait>
+
+  <changeDirection>
+    <direction type="relative">$2</direction>
+    <term>1</term>
+  </changeDirection>
+  <changeSpeed>
+    <speed>$5 * $3</speed>
+    <term>1</term>
+  </changeSpeed>
+
+  <wait>$1</wait>
+
+  <changeDirection>
+    <direction type="relative">$4</direction>
+    <term>1</term>
+  </changeDirection>
+  <changeSpeed>
+    <speed>$5</speed>
+    <term>1</term>
+  </changeSpeed>
+
+  <wait>$1</wait>
+
+  <changeDirection>
+    <direction type="relative">-$2</direction>
+    <term>1</term>
+  </changeDirection>
+  <changeSpeed>
+    <speed>$5 * $3</speed>
+    <term>1</term>
+  </changeSpeed>
+
+  <wait>$1 * 3</wait>
+
+  <changeDirection>
+    <direction type="relative">-$4</direction>
+    <term>1</term>
+  </changeDirection>
+  <changeSpeed>
+    <speed>$5</speed>
+    <term>1</term>
+  </changeSpeed>
+
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

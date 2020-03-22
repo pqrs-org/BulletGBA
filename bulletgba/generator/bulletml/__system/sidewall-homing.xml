@@ -1,0 +1,175 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="lib_line">
+    <fire>
+      <direction type="relative">0</direction>
+      <speed type="absolute">$2</speed>
+      <bullet />
+    </fire>
+    <repeat>
+      <times>$1</times>
+      <action>
+        <fire>
+          <direction type="relative">0</direction>
+          <speed type="sequence">0.1</speed>
+          <bullet />
+        </fire>
+      </action>
+    </repeat>
+    <vanish />
+  </action>
+  <action label="top">
+    <fire form="root">
+      <direction type="absolute">90</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>10</wait>
+          <changeSpeed>
+            <speed type="absolute">0</speed>
+            <term>1</term>
+          </changeSpeed>
+          <wait>20</wait>
+          <fire form="small">
+            <direction type="absolute">180-10</direction>
+            <speed type="absolute">0.1</speed>
+            <bullet>
+              <actionRef label="fireSideWall">
+                <param>80</param>
+              </actionRef>
+            </bullet>
+          </fire>
+          <wait>120</wait>
+          <wait>10</wait>
+          <fire form="small">
+            <direction type="absolute">180-10</direction>
+            <speed type="absolute">0.1</speed>
+            <bullet>
+              <actionRef label="fireSideWall">
+                <param>90</param>
+              </actionRef>
+            </bullet>
+          </fire>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire form="root">
+      <direction type="absolute">270</direction>
+      <speed type="absolute">4</speed>
+      <bullet>
+        <action>
+          <wait>10</wait>
+          <changeSpeed>
+            <speed type="absolute">0</speed>
+            <term>1</term>
+          </changeSpeed>
+          <wait>10</wait>
+          <fire form="small">
+            <direction type="absolute">180+10</direction>
+            <speed type="absolute">0.1</speed>
+            <bullet>
+              <actionRef label="fireSideWall">
+                <param>90</param>
+              </actionRef>
+            </bullet>
+          </fire>
+          <wait>120</wait>
+          <wait>20</wait>
+          <fire form="small">
+            <direction type="absolute">180+10</direction>
+            <speed type="absolute">0.1</speed>
+            <bullet>
+              <actionRef label="fireSideWall">
+                <param>80</param>
+              </actionRef>
+            </bullet>
+          </fire>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+  </action>
+  <action label="fireSideWall">
+    <changeSpeed>
+      <speed type="absolute">4</speed>
+      <term>1</term>
+    </changeSpeed>
+    <repeat>
+      <times>50</times>
+      <action>
+        <fire form="middle">
+          <direction type="relative">0</direction>
+          <speed type="absolute">0.1</speed>
+          <bullet>
+            <action>
+              <wait>$1</wait>
+              <changeDirection>
+                <direction type="aim">0</direction>
+                <term>1</term>
+              </changeDirection>
+              <changeSpeed>
+                <speed type="absolute">2</speed>
+                <term>1</term>
+              </changeSpeed>
+            </action>
+          </bullet>
+        </fire>
+        <wait>1</wait>
+      </action>
+    </repeat>
+    <vanish />
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/line.bnml"
+
+action top {
+  fire form root direction absolute 90 speed absolute 4 bullet action {
+    wait 10;
+    changeSpeed absolute 0 term 1;
+
+    wait 20;
+    fire form small direction absolute 180 - 10 speed absolute 0.1 bullet actionRef fireSideWall(80);
+
+    wait 120;
+
+    wait 10;
+    fire form small direction absolute 180 - 10 speed absolute 0.1 bullet actionRef fireSideWall(90);
+
+    vanish;
+  }
+  fire form root direction absolute 270 speed absolute 4 bullet action {
+    wait 10;
+    changeSpeed absolute 0 term 1;
+
+    wait 10;
+    fire form small direction absolute 180 + 10 speed absolute 0.1 bullet actionRef fireSideWall(90);
+
+    wait 120;
+
+    wait 20;
+    fire form small direction absolute 180 + 10 speed absolute 0.1 bullet actionRef fireSideWall(80);
+
+    vanish;
+  }
+}
+
+// $1: wait
+action fireSideWall {
+  changeSpeed absolute 4 term 1;
+  repeat 50 action {
+    fire form middle direction relative 0 speed absolute 0.1 bullet action {
+      wait $1;
+      changeDirection aim 0 term 1;
+      changeSpeed absolute 2 term 1;
+    }
+    wait 1;
+  }
+  vanish;
+}
+-->

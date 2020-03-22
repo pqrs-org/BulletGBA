@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!-- コメント -->
+
+<barrageInfo>
+ <!-- ファイル名が別の名前になっていると、
+      この名前に従ってファイル名は修正されます。
+      これは必ずつけて下さい。ブラウザから実行する場合、
+      ファイル名が変わっていることが多々あります。 -->
+ <filename>test</filename>
+ <!-- グループ名は data/groups.dat から適切なものを選んでも良いですし、
+      お好きな名前を付けてもらっても結構です。
+	  存在しないグループ名をつけた場合は userグループ扱いになります。
+	  ある程度同じグループの弾幕がたまったら
+	  data/groups.dat に私が追加します。
+   -->
+ <group>user</group>
+ <title>ここにタイトルを書く。「振動」</title>
+ <description>で、ここに解説を書くのです。思いのたけをぶちまけて下さい。
+ ところでこれを弾幕と呼んで良いものでしょうか？私はダメじゃないかと思
+ います。(この弾幕はbmlファイルのサンプルになってるのでヘンな説明です)</description>
+ <capture>最後にここは攻略なのです。改行も入れて良いと思います。
+あとたぶん途中に半角スペース入れるのも大丈夫になったと思います 。文字コードはSJISです。Windowsな人ならたぶん大丈夫。この弾幕の攻略は特にありません。</capture>
+</barrageInfo>
+
+<!-- ここで弾の色とか形とかを指定できるようにする予定 -->
+<barrageStyle>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <repeat> <times>500</times> <action>
+  <fire>
+   <direction type="absolute">360*$rand</direction>
+   <speed>1+$rand*2</speed>
+   <bullet><actionRef label="vibration"/></bullet>
+  </fire>
+  <wait>1</wait>
+ </action> </repeat>
+ <wait>500</wait>
+</action>
+
+<action label="vibration">
+ <changeSpeed>
+  <speed>0</speed>
+  <term>$rand*120+60</term>
+ </changeSpeed>
+ <wait>100</wait>
+ <changeSpeed>
+  <speed>1</speed>
+  <term>$rand*220+260</term>
+ </changeSpeed>
+ <repeat> <times>30</times> <action>
+  <changeDirection>
+   <direction>$rand*360</direction>
+   <term>10</term>
+  </changeDirection>
+  <wait>10</wait>
+ </action> </repeat>
+ <changeSpeed>
+  <speed>3</speed>
+  <term>100</term>
+ </changeSpeed>
+</action>
+
+</bulletml>
+
+</barrage>
+

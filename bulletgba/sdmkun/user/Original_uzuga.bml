@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+   <filename>Original_uzuga</filename>
+   <group>shinichiro_h</group>
+   <title>渦が</title>
+   <description>近距離で撃たれるので案外キツい。</description>
+   <capture>先が見えてないのにヘタに動かないこと。たぶん動かない方がラ
+   ク。</capture>
+   <author>shinichiro.h</author>
+</barrageInfo>
+
+<barrageStyle>
+        <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml>
+  <action label="top">
+    <fire>
+      <speed>3</speed>
+      <bulletRef label="fan">
+        <param>1</param>
+      </bulletRef>
+    </fire>
+    <wait>200</wait>
+    <fire>
+      <speed>3</speed>
+      <bulletRef label="fan">
+        <param>-1</param>
+      </bulletRef>
+    </fire>
+    <wait>150+$rank*20</wait>
+    <fire>
+      <speed>3</speed>
+      <bulletRef label="fan">
+        <param>1</param>
+      </bulletRef>
+    </fire>
+    <wait>150+$rank*20</wait>
+    <fire>
+      <speed>3</speed>
+      <bulletRef label="fan">
+        <param>-1</param>
+      </bulletRef>
+    </fire>
+    <wait>250</wait>
+  </action>
+  <action label="way3">
+    <repeat>
+      <times>3</times>
+      <action>
+        <fire>
+          <direction type="sequence">-233</direction>
+          <speed>1</speed>
+          <bullet />
+        </fire>
+        <fire>
+          <direction type="sequence">120</direction>
+          <speed>1</speed>
+          <bullet />
+        </fire>
+        <fire>
+          <direction type="sequence">120</direction>
+          <speed>1</speed>
+          <bullet />
+        </fire>
+      </action>
+    </repeat>
+  </action>
+  <bullet label="fan">
+    <direction type="absolute">180+$1*30</direction>
+    <action>
+      <repeat>
+        <times>5</times>
+        <action>
+          <wait>$rank*5+5</wait>
+        </action>
+      </repeat>
+      <changeDirection>
+        <direction type="absolute">0</direction>
+        <term>1</term>
+      </changeDirection>
+      <changeSpeed>
+        <speed type="absolute">1.5</speed>
+        <term>1</term>
+      </changeSpeed>
+      <wait>3</wait>
+      <changeDirection>
+        <direction type="sequence">$1</direction>
+        <term>9999</term>
+      </changeDirection>
+      <repeat>
+        <times>9999</times>
+        <action>
+          <actionRef label="way3" />
+          <wait>3</wait>
+        </action>
+      </repeat>
+    </action>
+  </bullet>
+</bulletml>
+
+</barrage>

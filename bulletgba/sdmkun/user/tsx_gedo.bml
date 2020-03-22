@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_gedo</filename>
+ <group>KotuAnzenX</group>
+ <title>外道</title>
+ <description>人外向けのためレベル非対応。</description>
+ <capture>右下か左下で地道に回避。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <actionRef label="spin"><param>1</param></actionRef>
+ <wait>30</wait>
+ <actionRef label="spin"><param>2</param></actionRef>
+ <wait>30</wait>
+ <actionRef label="spin"><param>3</param></actionRef>
+ <wait>30</wait>
+ <actionRef label="spin"><param>100</param></actionRef>
+ <wait>60</wait>
+</action>
+
+<action label="spin">
+ <fire>
+  <speed>2</speed>
+  <direction type="aim">20</direction>
+  <bulletRef label="turn"/>
+ </fire>
+ <repeat><times>17</times>
+  <action>
+   <fire>
+    <speed type="sequence">0</speed>
+    <direction type="sequence">20</direction>
+    <bulletRef label="turn"/>
+   </fire>
+  </action>
+ </repeat>
+ <wait>6</wait>
+ <repeat><times>$1</times>
+  <action>
+   <fire>
+    <speed type="sequence">0</speed>
+    <direction type="sequence">27</direction>
+    <bulletRef label="turn"/>
+   </fire>
+   <repeat><times>17</times>
+    <action>
+     <fire>
+      <speed type="sequence">0</speed>
+      <direction type="sequence">20</direction>
+      <bulletRef label="turn"/>
+     </fire>
+    </action>
+   </repeat>
+   <wait>6</wait>
+  </action>
+ </repeat>
+</action>
+
+<bullet label="turn">
+ <action>
+  <wait>10</wait>
+  <fire>
+   <speed type="relative">0</speed>
+   <direction type="relative">0</direction>
+   <bullet>
+    <action>
+     <changeDirection>
+      <direction type="relative">-90</direction>
+      <term>90</term>
+     </changeDirection>
+    </action>
+   </bullet>
+  </fire>
+  <wait>10</wait>
+  <changeDirection>
+   <direction type="relative">90</direction>
+   <term>90</term>
+  </changeDirection>
+ </action>
+</bullet>
+
+</bulletml>
+</barrage>

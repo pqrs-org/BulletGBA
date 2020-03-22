@@ -1,0 +1,57 @@
+<bulletml xmlns="http://www.asahi-net.or.jp/‾cs8k-cyu/bulletml" type="vertical"><action label="2wayAimSrc"><repeat><times>
+				2
+			</times><action><actionRef label="2wayAim"><param>
+						(39-$rank*8)*$1
+					</param></actionRef><actionRef label="2wayAim"><param>
+						(24-$rank*8)*$1
+					</param></actionRef><actionRef label="2wayAim"><param>
+						(7-$rank*4)*$1
+					</param></actionRef><actionRef label="2wayAim"><param>
+						(24-$rank*8)*$1
+					</param></actionRef></action></repeat><vanish/></action><action label="top2"><fire><direction>
+				0
+			</direction><speed>
+				0
+			</speed><bullet><actionRef label="2wayAimSrc"><param>
+						1
+					</param></actionRef></bullet></fire><fire><direction>
+				0
+			</direction><speed>
+				0
+			</speed><bullet><actionRef label="2wayAimSrc"><param>
+						-1
+					</param></actionRef></bullet></fire></action><action label="2wayAim"><repeat><times>
+				11
+			</times><action><wait>
+					3
+				</wait><fire><direction type="aim">
+						$1
+					</direction><speed>
+						1+$rank*1.4
+					</speed><bullet/></fire></action></repeat></action><action label="top1"><fire><direction type="aim">
+				-120+$rank*60
+			</direction><speed>
+				0
+			</speed><bullet><action><vanish/></action></bullet></fire><repeat><times>
+				4
+			</times><action><actionRef label="fanSet"><param>
+						1
+					</param></actionRef><actionRef label="fanSet"><param>
+						-1
+					</param></actionRef></action></repeat><wait>
+			90-$rank*60
+		</wait></action><action label="fanSet"><repeat><times>
+				11
+			</times><action><wait>
+					3
+				</wait><fire><direction type="sequence">
+						(15-$rank*10)*$1
+					</direction><speed>
+						1+$rank
+					</speed><bullet/></fire><repeat><times>
+						6
+					</times><action><fire><direction type="sequence">
+								$1
+							</direction><speed type="sequence">
+								0
+							</speed><bullet/></fire></action></repeat></action></repeat></action></bulletml>

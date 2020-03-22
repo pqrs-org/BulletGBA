@@ -1,0 +1,111 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_gedo</filename>
+ <group>KotuAnzenX</group>
+ <title>ぐにゃあああああああああああーーーー</title>
+ <description>外道を少し改造した物。ソース滅茶苦茶。</description>
+ <capture>４発目、８発目、１２，１３，１４発目はかなりひどい</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+ <actionRef label="spin"><param>5</param></actionRef>
+ <wait>200</wait>
+ <actionRef label="spin"><param>9</param></actionRef>
+ <wait>200</wait>
+ <actionRef label="spin"><param>12</param></actionRef>
+ <wait>200</wait>
+ <actionRef label="spin"><param>17</param></actionRef>
+ <wait>100</wait>
+ <actionRef label="spin"><param>7</param></actionRef>
+ <wait>100</wait>
+ <actionRef label="spin"><param>10</param></actionRef>
+ <wait>100</wait>
+ <actionRef label="spin"><param>14</param></actionRef>
+ <wait>100</wait>
+ <actionRef label="spin"><param>17</param></actionRef>
+ <wait>80</wait>
+ <actionRef label="spin"><param>7</param></actionRef>
+ <wait>80</wait>
+ <actionRef label="spin"><param>10</param></actionRef>
+ <wait>80</wait>
+ <actionRef label="spin"><param>14</param></actionRef>
+ <wait>80</wait>
+ <actionRef label="spin"><param>17</param></actionRef>
+ <wait>50</wait>
+ <actionRef label="spin"><param>17</param></actionRef>
+ <wait>50</wait>
+ <actionRef label="spin"><param>19</param></actionRef>
+ <wait>50</wait>
+</action>
+
+<action label="spin">
+ <fire>
+  <speed>1.1</speed>
+  <direction type="aim">20</direction>
+  <bulletRef label="turn"/>
+ </fire>
+ <repeat><times>0</times>
+  <action>
+   <fire>
+    <speed type="sequence">0</speed>
+    <direction type="sequence">20</direction>
+    <bulletRef label="turn"/>
+   </fire>
+  </action>
+ </repeat>
+ <wait>0</wait>
+ <repeat><times>$1</times>
+  <action>
+   <fire>
+    <speed type="sequence">0</speed>
+    <direction type="sequence">27</direction>
+    <bulletRef label="turn"/>
+   </fire>
+   <repeat><times>37</times>
+    <action>
+     <fire>
+      <speed type="sequence">0</speed>
+      <direction type="sequence">20</direction>
+      <bulletRef label="turn"/>
+     </fire>
+    </action>
+   </repeat>
+   <wait>0</wait>
+  </action>
+ </repeat>
+</action>
+
+<bullet label="turn">
+ <action>
+  <wait>0</wait>
+  <fire>
+   <speed type="relative">0</speed>
+   <direction type="relative">0</direction>
+   <bullet>
+    <action>
+     <changeDirection>
+      <direction type="relative">-130</direction>
+      <term>90</term>
+     </changeDirection>
+    </action>
+   </bullet>
+  </fire>
+  <wait>0</wait>
+  <changeDirection>
+   <direction type="relative">130</direction>
+   <term>90</term>
+  </changeDirection>
+ </action>
+</bullet>
+
+</bulletml>
+</barrage>

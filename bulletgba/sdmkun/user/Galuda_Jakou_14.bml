@@ -1,0 +1,122 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+  <filename>Galuda_Jakou_14</filename>
+  <group>user</group>
+  <title>ジャコウ第１形態ばらまき</title>
+  <description>回転するビットからのばらまき。80までが通常、80より大きいとアレンジ、90より大きいとアレンジ覚聖。</description>
+  <capture>自機狙いに注意してばらまきを避ける。ただアレンジ覚聖は人では大変（笑</capture>
+  <author>Pentan</author>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+topx, topy=0, 0
+PI2=3.14159265358979*2
+trot=1
+spdX=1000
+
+function top()
+	topx, topy=getX(), getY()
+	local turn=getTurn()
+	
+	if turn>1200 then
+		if turn>1400 then quit() end
+	elseif math.mod( turn, 60 )==0 then
+		local way, spd=2*(math.floor(3+getRank()*5.5) ), 0.3+getRank()*0.5
+		local dangle=PI2/way
+		local cangle=math.random()*dangle
+		local aspd=spd*spdX*trot
+		for i=1, way do
+			cangle=cangle+dangle
+			fire( math.sin(cangle)*spd, -math.cos(cangle)*spd, "rotbullet", aspd )
+		end
+		trot=trot*-1
+	end
+	
+end
+
+wait1, wait2=60, 110
+function rotbullet(n)
+	local turn=getTurn()
+	local vx, vy=getX()-topx, getY()-topy
+	local spdx, spdy=0, 0
+	local awayspd, rotspd, rotdir=math.abs(n/spdX), 0.5, 1
+	if n<0 then
+		rotspd =-0.75
+		rotdir=-1
+	else
+		rotspd =0.75
+		rotdir=1
+	end
+	-- ##
+	local vl=math.sqrt( vx*vx+vy*vy )
+	if vl>0 then
+		local vspd=rotspd/vl
+		spdx=-vy*vspd
+		spdy=vx*vspd
+	else
+		vx, vy=getSpeedX(), getSpeedY()
+		local vspd=rotspd/math.sqrt( vx*vx+vy*vy )
+		spdx=-vy*vspd
+		spdy=vx*vspd
+	end
+	-- ##
+	if turn<wait1 then
+		if turn>0 then
+			local vspd=awayspd/vl
+			spdx=spdx+vx*vspd
+			spdy=spdy+vy*vspd
+		else
+			spdx, spdy=getSpeedX(), getSpeedY()
+		end
+		-- attack1
+		if turn==wait1-20 then
+			local aim=getPlayerAngle()
+			for i=0, getRank()*1.11 do
+				 local bspd=1.5-i*0.2
+				fire( math.sin(aim)*bspd, -math.cos(aim)*bspd, "aimbullet" )
+			end
+		end
+	elseif turn<wait2 then
+		--spdx, spdy=spdx+0, spdy+0
+	else
+		if vl>10 then
+			local vspd=awayspd/vl
+			spdx=spdx-vx*vspd*2
+			spdy=spdy-vy*vspd*2
+			-- attack2
+			local itvl=math.floor( 5-getRank()*2.7 )
+			if math.mod(turn,itvl)==0 then
+				local bl=rotdir/vl
+				local bvx, bvy=-vy*bl, vx*bl
+				for i=0, getRank()*1.11 do
+					local bspd=1.5-i*0.3
+					fire( bvx*bspd, bvy*bspd )
+					if getRank()>0.8 then fire( -bvx*bspd, -bvy*bspd ) end
+				end
+			end
+		else
+			vanish()
+		end
+	end
+	
+	setSpeed( spdx, spdy )
+end
+
+function aimbullet()
+	fire( getSpeedX(), getSpeedY() )
+	vanish()
+end
+
+]]>
+</lua>
+
+</barrage>

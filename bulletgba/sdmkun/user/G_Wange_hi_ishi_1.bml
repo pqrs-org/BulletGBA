@@ -1,0 +1,119 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+idea by G-Wange (http://cgp.s5.xrea.com/gw/youko.html)
+bml written on 2003/8/15 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* end of fight
+* eye of fury
+* endeavor or fail
+-->
+
+<barrageInfo>
+  <filename>G_Wange_hi_ishi_1</filename>
+  <group>G-Wange</group>
+  <title>G-わんげラスボス案、緋石その一</title>
+  <description>あのさあ氏がG-わんげBBSに提出したラスボス案を一部実装。開幕だから許されるハメ技。</description>
+  <capture>レベル100の場合、画面左からはじめないと詰みます。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+  <wait>100</wait>
+
+  <fire>
+    <bulletRef label="turn8way">
+      <param>360 * $rand</param>
+      <param>1</param>
+      <param>360</param>
+    </bulletRef>
+  </fire>
+
+  <wait>180</wait>
+
+  <fire>
+    <bulletRef label="turn8way">
+      <param>360 * $rand</param>
+      <param>-1</param>
+      <param>180</param>
+    </bulletRef>
+  </fire>
+
+  <wait>200</wait>
+
+</action>
+
+<bullet label="turn8way">
+<direction type="absolute">0</direction>
+<speed>0.0</speed>
+<action>
+
+  <fire>
+    <direction type="absolute">$1</direction>
+    <speed>1.7</speed>
+    <bulletRef label="turn">
+      <param>$2</param>
+    </bulletRef>
+  </fire>
+  <repeat> <times>7</times> <action>
+    <fire>
+      <direction type="sequence">
+        $2 * (360 - (0.2 + 0.2 * $rank)) / 8
+      </direction>
+      <speed type="sequence">0.0</speed>
+      <bulletRef label="turn">
+        <param>$2</param>
+      </bulletRef>
+    </fire>
+  </action> </repeat>
+  <wait>1</wait>
+
+  <repeat> <times>$3 - 1</times> <action>
+    <repeat> <times>8</times> <action>
+      <fire>
+        <direction type="sequence">
+          $2 * (360 - (0.2 + 0.2 * $rank)) / 8
+        </direction>
+        <speed type="sequence">0.0</speed>
+        <bulletRef label="turn">
+          <param>$2</param>
+        </bulletRef>
+      </fire>
+    </action> </repeat>
+    <wait>1</wait>
+  </action> </repeat>
+
+  <vanish/>
+
+</action></bullet>
+
+<bullet label="turn">
+<action>
+
+  <repeat><times>999</times><action>
+    <changeDirection>
+      <direction type="relative">150*$1</direction>
+      <term>80</term>
+    </changeDirection>
+    <changeSpeed>
+      <speed type="relative">1.7</speed>
+      <term>60</term>
+    </changeSpeed>
+    <wait>60</wait>
+  </action></repeat>
+
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

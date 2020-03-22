@@ -1,0 +1,168 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>MDA_gnnny_2xb</filename>
+	<group>MDA</group>
+	<title>電波蝶々／泥炭</title>
+	<description>4セットの回転砲台から5wayに炸裂する弾、炸裂後の残りカスが自機に向かってくる。なんというか、ぐだぐだ。誘導弾の挙動のせいでちょっとレベルが綺麗に反映しないこともありそう。</description>
+	<capture>まあ、大きく動いてきり返すのが楽そう。レベルが上がると、時間が延び、誘導弾の誘導開始時間が短くなる（画面外へ逃げる弾が減る）。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+	<!-- param:seed発射角/seed弾速/shootWay間隔 -->
+<action label="top">
+	<fire>
+		<direction>0</direction>
+		<speed>0</speed>
+		<bullet>
+			<actionRef label="seed_blue">
+				<param>-183.7</param>
+				<param>2.0</param>
+				<param>7.2</param>
+			</actionRef>
+		</bullet>
+	</fire>
+	<fire>
+		<direction>0</direction>
+		<speed>0</speed>
+		<bullet>
+			<actionRef label="seed_red">
+				<param>183.7</param>
+				<param>2.0</param>
+				<param>7.2</param>
+			</actionRef>
+		</bullet>
+	</fire>
+	<wait>3*(40+20+($rank*160))</wait>
+</action>
+
+<!-- seed -->
+
+<action label="seed_blue">
+	<fire>
+		<direction type="absolute">91</direction>
+		<speed>1</speed>
+		<bulletRef label="start"/>
+	</fire>
+	<repeat>
+		<times>40+($rank*160)</times>
+		<action>
+			<fire>
+				<direction type="sequence">$1</direction>
+				<speed>$2</speed>
+				<bullet>
+					<actionRef label="shoot_blue"><param>$3</param></actionRef>
+				</bullet>
+			</fire>
+			<wait>3</wait>
+		</action>
+	</repeat>
+	<vanish/>
+</action>
+
+<action label="seed_red">
+	<fire>
+		<direction type="absolute">91</direction>
+		<speed>1</speed>
+		<bulletRef label="start"/>
+	</fire>
+	<repeat>
+		<times>40+($rank*160)</times>
+		<action>
+			<fire>
+				<direction type="sequence">$1</direction>
+				<speed>$2</speed>
+				<bullet>
+					<actionRef label="shoot_red"><param>$3</param></actionRef>
+				</bullet>
+			</fire>
+			<wait>3</wait>
+		</action>
+	</repeat>
+	<vanish/>
+</action>
+
+<!-- shoot -->
+
+<action label="shoot_blue">
+	<wait>12</wait>
+	<fire>
+		<direction type="relative">0</direction>
+		<speed>1.5</speed>
+		<bulletRef label="blue"/>
+	</fire>
+	<repeat>
+		<times>4</times>
+		<action>
+			<fire>
+				<direction type="sequence">$1</direction>
+				<speed>1.5</speed>
+				<bulletRef label="blue"/>
+			</fire>
+		</action>
+	</repeat>
+	<wait>36-($rank*26)</wait>
+	<changeDirection>
+		<direction type="aim">0</direction>
+		<term>12</term>
+	</changeDirection>
+</action>
+
+<action label="shoot_red">
+	<wait>12</wait>
+	<fire>
+		<direction type="relative">0</direction>
+		<speed>-1.5</speed>
+		<bulletRef label="red"/>
+	</fire>
+	<repeat>
+		<times>4</times>
+		<action>
+			<fire>
+				<direction type="sequence">$1</direction>
+				<speed>-1.5</speed>
+				<bulletRef label="red"/>
+			</fire>
+		</action>
+	</repeat>
+	<wait>36-($rank*26)</wait>
+	<changeDirection>
+		<direction type="aim">0</direction>
+		<term>12</term>
+	</changeDirection>
+</action>
+
+<!-- other -->
+
+<bullet label="red">
+	<action/>
+</bullet>
+
+<bullet label="blue">
+	<action>
+		<wait>1</wait>
+		<fire>
+			<direction type="relative">0</direction>
+			<speed type="relative">0</speed>
+			<bullet/>
+		</fire>
+		<vanish/>
+	</action>
+</bullet>
+
+<bullet label="start">
+	<action>
+		<vanish/>
+	</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

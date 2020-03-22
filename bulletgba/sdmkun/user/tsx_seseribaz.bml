@@ -1,0 +1,138 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_seseribaz</filename>
+ <group>KotuAnzenX</group>
+ <title>エスプガルーダ１面ボス：セセリバズーカ’</title>
+ <description>第二形態の「きえろー」と共に飛んでくる攻撃。迫力がないばかりか微妙に違う。</description>
+ <capture>真下の青弾が非常に邪魔。基本的に間を抜ける。原作と違って青弾が破壊出来ない、白弾の量が多い上に回転率が高い、覚聖出来ないなどの理由でやや難しくなっています。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <changeSpeed>
+  <speed>1</speed>
+  <term>1</term>
+ </changeSpeed>
+ <changeDirection>
+  <direction type="absolute">$rand*360</direction>
+  <term>1</term>
+ </changeDirection>
+ <wait>30</wait>
+ <changeSpeed>
+  <speed>0</speed>
+  <term>1</term>
+ </changeSpeed>
+ <wait>1</wait>
+ <fireRef label="front"/>
+ <fireRef label="baram"><param>1</param><param>$rand*360</param></fireRef>
+ <wait>700</wait>
+ <fireRef label="front"/>
+ <fireRef label="baram"><param>-1</param><param>$rand*360</param></fireRef>
+ <wait>600</wait>
+</action>
+
+<fire label="baram">
+ <speed>0</speed>
+ <bullet>
+  <action>
+   <fireRef label="sema8"><param>$1</param><param>$2</param></fireRef>
+   <fireRef label="hiro4"><param>$1*-1</param><param>$2+45</param></fireRef>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<fire label="hiro4">
+ <speed>0</speed>
+ <bullet>
+  <action>
+   <fire>
+    <speed>0.5+$rank*0.5</speed>
+    <direction type="absolute">$1</direction>
+    <bullet/>
+   </fire>
+   <actionRef label="kaku"><param>$1*45</param><param>7</param></actionRef>
+   <wait>20-$rank*10</wait>
+   <repeat><times>29+$rank*30</times>
+    <action>
+     <fire>
+      <speed type="sequence">0</speed>
+      <direction type="sequence">45+$1*(2.8-$rank*1.4)</direction>
+      <bullet/>
+     </fire>
+     <actionRef label="kaku"><param>$1*45</param><param>7</param></actionRef>
+     <wait>20-$rank*10</wait>
+    </action>
+   </repeat>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<fire label="sema8">
+ <speed>0</speed>
+ <bullet>
+  <action>
+   <fire>
+    <speed>1+$rank</speed>
+    <direction type="absolute">$1</direction>
+    <bullet/>
+   </fire>
+   <actionRef label="kaku"><param>$1*90</param><param>3</param></actionRef>
+   <wait>8-$rank*4</wait>
+   <repeat><times>74+$rank*75</times>
+    <action>
+     <fire>
+      <speed type="sequence">0</speed>
+      <direction type="sequence">90+$1*(1.8-$rank*0.9)</direction>
+      <bullet/>
+     </fire>
+     <actionRef label="kaku"><param>$1*90</param><param>3</param></actionRef>
+     <wait>8-$rank*4</wait>
+    </action>
+   </repeat>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<action label="kaku">
+ <repeat><times>$2</times>
+  <action>
+   <fire>
+    <speed type="sequence">0</speed>
+    <direction type="sequence">$1</direction>
+    <bullet/>
+   </fire>
+  </action>
+ </repeat>
+</action>
+
+<fire label="front">
+ <speed>0</speed>
+ <bullet>
+  <action>
+   <repeat><times>150+$rank*150</times>
+    <action>
+     <fire>
+      <speed>2+$rank*2</speed>
+      <direction type="absolute">180</direction>
+      <bullet/>
+     </fire>
+     <wait>4-$rank*2</wait>
+    </action>
+   </repeat>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+</bulletml>
+</barrage>

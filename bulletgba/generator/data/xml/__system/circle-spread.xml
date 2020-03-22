@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="lib_spread">
+    <fire>
+      <direction type="aim">0</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <action>
+          <wait>1</wait>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <repeat>
+      <times>20</times>
+      <action>
+        <fire>
+          <direction type="sequence">18</direction>
+          <speed type="absolute">3</speed>
+          <bullet>
+            <action>
+              <wait>3</wait>
+              <changeSpeed>
+                <speed type="absolute">0.2</speed>
+                <term>1</term>
+              </changeSpeed>
+              <wait>20</wait>
+              <changeSpeed>
+                <speed type="absolute">$1</speed>
+                <term>1</term>
+              </changeSpeed>
+            </action>
+          </bullet>
+        </fire>
+      </action>
+    </repeat>
+  </action>
+  <action label="top">
+    <repeat>
+      <times>5</times>
+      <action>
+        <repeat>
+          <times>10</times>
+          <action>
+            <fire form="root">
+              <direction type="sequence">36</direction>
+              <speed type="absolute">4</speed>
+              <bullet>
+                <action>
+                  <wait>10</wait>
+                  <changeSpeed>
+                    <speed type="absolute">0.1</speed>
+                    <term>1</term>
+                  </changeSpeed>
+                  <wait>10</wait>
+                  <actionRef label="lib_spread">
+                    <param>1</param>
+                  </actionRef>
+                  <vanish />
+                </action>
+              </bullet>
+            </fire>
+          </action>
+        </repeat>
+        <wait>60</wait>
+      </action>
+    </repeat>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/spread.bnml"
+
+action top {
+  repeat 5 action {
+    repeat 10 action {
+      fire form root direction sequence 36 speed absolute 4 bullet action {
+        wait 10;
+        changeSpeed absolute 0.1 term 1;
+        wait 10;
+        actionRef lib_spread(1);
+        vanish;
+      }
+    }
+    wait 60;
+  }
+}
+-->

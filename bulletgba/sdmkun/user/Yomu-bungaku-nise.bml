@@ -1,0 +1,144 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>Yomu-bungaku-nise</filename>
+	<group>Toho</group>
+	<title>東方妖々夢の、乙女文楽かも。</title>
+	<description>bulletMLで最初に作った弾幕です。全然似てません。本物よりも弾が多いです。</description>
+	<capture>ばら撒き弾は全方位弾と八連装速度差弾とビーム型の弾の三種類です。攻略法は特にありません。遅れて発射される高速のビーム型弾に気をつけてください。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <repeat><times>5+$rank*15</times>
+  <action>
+   <fire>
+    <direction type="absolute">70+$rand*220</direction>
+    <speed>0.5+$rand*2.5</speed>
+    <bulletRef label="change"/>
+   </fire>
+   <fire>
+    <direction type="absolute">70+$rand*220</direction>
+    <speed>0.5+$rand*2.5</speed>
+    <bulletRef label="change"/>
+   </fire>
+   <fire>
+    <direction type="absolute">70+$rand*220</direction>
+    <speed>0.5+$rand*2.5</speed>
+    <bulletRef label="change"/>
+   </fire>
+   <fire>
+    <direction type="absolute">70+$rand*220</direction>
+    <speed>0.5+$rand*2.5</speed>
+    <bulletRef label="change2"/>
+   </fire>
+   <fire>
+    <direction type="absolute">70+$rand*220</direction>
+    <speed>0.5+$rand*2.5</speed>
+    <bulletRef label="change2"/>
+   </fire>
+   <fire>
+    <direction type="absolute">70+$rand*220</direction>
+    <speed>0.5+$rand*2.5</speed>
+    <bulletRef label="change3"/>
+   </fire>
+  </action>
+  </repeat>
+ <wait>200</wait>
+</action>
+
+
+<bullet label="change">
+ <action>
+  <wait>30</wait>
+   <fire>
+    <direction type="absolute">110+$rand*140</direction>
+    <speed>0.7</speed>
+    <bullet/>
+   </fire>
+   <repeat><times>7</times>
+    <action>
+     <fire>
+      <direction type="sequence">0</direction>
+      <speed type="sequence">0.1</speed>
+      <bullet/>
+     </fire>
+    </action>
+   </repeat>
+  <vanish/>
+ </action>
+</bullet>
+
+<bullet label="change2">
+ <action>
+  <wait>30</wait>
+   <fire>
+    <direction type="absolute">$rand*360</direction>
+    <speed>0.5+$rand*0.4</speed>
+    <bulletRef label="change2b"/>
+   </fire>
+   <repeat><times>7</times>
+    <action>
+     <fire>
+      <direction type="absolute">$rand*360</direction>
+      <speed>0.5+$rand*0.4</speed>
+      <bulletRef label="change2b"/>
+     </fire>
+    </action>
+   </repeat>
+  <vanish/>
+ </action>
+</bullet>
+
+<bullet label="change3">
+ <action>
+   <wait>30</wait>
+   <fire>
+    <direction type="absolute">0</direction>
+    <speed>0</speed>
+    <bulletRef label="change3b"/>
+   </fire>
+  <vanish/>
+ </action>
+</bullet>
+
+<bullet label="change3b">
+ <action>
+  <wait>30</wait>
+   <fire>
+    <direction type="absolute">160+$rand*40</direction>
+    <speed>3</speed>
+    <bullet/>
+   </fire>
+   <wait>2</wait>
+   <repeat><times>29</times>
+    <action>
+     <fire>
+      <direction type="sequence">0</direction>
+      <speed>3</speed>
+      <bullet/>
+     </fire>
+    <wait>2</wait>
+    </action>
+   </repeat>
+  <vanish/>
+ </action>
+</bullet>
+
+<bullet label="change2b">
+ <action>
+   <wait>9999</wait>
+  <vanish/>
+ </action>
+</bullet>
+
+</bulletml>
+</barrage>

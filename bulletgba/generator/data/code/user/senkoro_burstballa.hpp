@@ -1,0 +1,39 @@
+#ifndef GENERATED_e71e5635dc6d9cbc7035b39d6c01774e_HPP 
+#define GENERATED_e71e5635dc6d9cbc7035b39d6c01774e_HPP 
+
+#include "bullet.hpp" 
+
+void stepfunc_145aca95c4c74c5624f5d8b513f5b416_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_2bfeb18ecdad70b4c34eea4691e9682b_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_f0a2afaf20d5c2aa0e16d5fe3b965057_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_56dff1464ae76a21656345accd84ae74_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_df2762f2cf72c79274c476c1c947253b_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_f922e1f8658ab88e048af3b86f012fb7_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_3ae91687fcd6be207e26c49ad3da69c5_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_ae9f735c6401a821cc04ce1cd68278bf_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_952a935627c23e404f66d7bf7966176f_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_c9fe7ac3908e134223183c010f326619_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_bf071a562da520155046174066a2c4ad_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_b8d5556c0012a7480d76c8c8de523d2a_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_e9650daa14c251706d3600c1f06f34b9_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_d7428c9dcd26fea74995c38e49dc4220_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_30eb5b90fec1634e5c736eded3426405_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_c536286494ab4e638e5709b93759a2fd_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_0ce2d240b4eba445cb9f77a741570c50_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+void stepfunc_19f0795d12f474824a4dbc767f11c899_43ebd0650ba15ba330e4551aa60ff315(BulletInfo *p); 
+
+
+extern const BulletStepFunc bullet_d665bb47aabd9e66e7b68f81f38c560a_43ebd0650ba15ba330e4551aa60ff315[]; 
+const unsigned int bullet_d665bb47aabd9e66e7b68f81f38c560a_43ebd0650ba15ba330e4551aa60ff315_size = 77; 
+extern const BulletStepFunc bullet_a371b8520b43638374028b16eeb4c68d_43ebd0650ba15ba330e4551aa60ff315[]; 
+const unsigned int bullet_a371b8520b43638374028b16eeb4c68d_43ebd0650ba15ba330e4551aa60ff315_size = 2; 
+extern const BulletStepFunc bullet_3a4c32a8062235435bfd3efec42c3852_43ebd0650ba15ba330e4551aa60ff315[]; 
+const unsigned int bullet_3a4c32a8062235435bfd3efec42c3852_43ebd0650ba15ba330e4551aa60ff315_size = 3; 
+extern const BulletStepFunc bullet_f337e59bf1cb63f0ce51282377cc0780_43ebd0650ba15ba330e4551aa60ff315[]; 
+const unsigned int bullet_f337e59bf1cb63f0ce51282377cc0780_43ebd0650ba15ba330e4551aa60ff315_size = 3; 
+extern const BulletStepFunc bullet_f55d03a72bda279c2907acbf67ecbe0b_43ebd0650ba15ba330e4551aa60ff315[]; 
+const unsigned int bullet_f55d03a72bda279c2907acbf67ecbe0b_43ebd0650ba15ba330e4551aa60ff315_size = 39; 
+
+
+#endif 
+

@@ -1,0 +1,170 @@
+// XXX uniqID XXX 60b92bb1a7ed2bf62c2e679ddd00e52c XXX 
+
+#include <gba_types.h>
+#include "bullet.hpp"
+#include "fixed.hpp"
+
+
+#include "dodonpachi/kitiku_2.hpp" 
+
+extern const BulletStepFunc bullet_aca3129a8491609c5d7907ba445773e0_60b92bb1a7ed2bf62c2e679ddd00e52c[] = { 
+stepfunc_af96e564d993e9b248ed8c0ebbf2769e_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_4a9dbe831f7a5ab6f68b93e4b1faf79c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_9a262eab9bee9a27b0f4b6d72eb6d017_60b92bb1a7ed2bf62c2e679ddd00e52c,
+NULL}; 
+extern const BulletStepFunc bullet_360a981111fd7642d9df4d47cf0e6179_60b92bb1a7ed2bf62c2e679ddd00e52c[] = { 
+stepfunc_9a262eab9bee9a27b0f4b6d72eb6d017_60b92bb1a7ed2bf62c2e679ddd00e52c,
+NULL}; 
+extern const BulletStepFunc bullet_4576fe70f44d56b48320d88c52f97170_60b92bb1a7ed2bf62c2e679ddd00e52c[] = { 
+stepfunc_366f4d9e22fcd3982751f195c57632dd_60b92bb1a7ed2bf62c2e679ddd00e52c,
+stepfunc_f77c7359650c20990adbd1681f0ec907_60b92bb1a7ed2bf62c2e679ddd00e52c,
+NULL}; 
+void stepfunc_e150453a0c38f25ec6daf4f2d53c84a2_60b92bb1a7ed2bf62c2e679ddd00e52c(BulletInfo *p) { 
+{ 
+  BulletInfo *bi;  p->lastBulletAngle = p->lastBulletAngle + (FixedPointNum::degree2angle(3.0));  p->lastBulletSpeed = p->lastBulletSpeed + (0.15);  bi = ListBullets::makeNewBullet();  if (bi != NULL) {    bi->initialize(p->getType() << 1, p->getPosX(), p->getPosY(), p->lastBulletAngle, p->lastBulletSpeed, StepFunc::nullStepFuncList); 
+  }
+}
+}
+void stepfunc_bc4388ffcfb806ad313816a5fc420b8c_60b92bb1a7ed2bf62c2e679ddd00e52c(BulletInfo *p) { 
+{ 
+  BulletInfo *bi;  p->lastBulletAngle = p->lastBulletAngle + (FixedPointNum::degree2angle(10.0-(3.0+1.0*6.0)*3.0));  p->lastBulletSpeed = (1.0);  bi = ListBullets::makeNewBullet();  if (bi != NULL) {    bi->initialize(p->getType() << 1, p->getPosX(), p->getPosY(), p->lastBulletAngle, p->lastBulletSpeed, StepFunc::nullStepFuncList); 
+  }
+}
+for (u32 i = 0; i < 9; ++i) { 
+stepfunc_e150453a0c38f25ec6daf4f2d53c84a2_60b92bb1a7ed2bf62c2e679ddd00e52c(p);}
+p->wait = static_cast<u16>(4.0); 
+}
+void stepfunc_9a262eab9bee9a27b0f4b6d72eb6d017_60b92bb1a7ed2bf62c2e679ddd00e52c(BulletInfo *p) { 
+ListBullets::stepFuncDrop(p);}
+void stepfunc_af96e564d993e9b248ed8c0ebbf2769e_60b92bb1a7ed2bf62c2e679ddd00e52c(BulletInfo *p) { 
+p->wait = static_cast<u16>(6.0); 
+}
+void stepfunc_4a9dbe831f7a5ab6f68b93e4b1faf79c_60b92bb1a7ed2bf62c2e679ddd00e52c(BulletInfo *p) { 
+{ 
+  BulletInfo *bi;  p->lastBulletAngle = p->getAngle() + (FixedPointNum::degree2angle(0.0));  p->lastBulletSpeed = 1;  bi = ListBullets::makeNewBullet();  if (bi != NULL) {    bi->initialize(p->getType() << 1, p->getPosX(), p->getPosY(), p->lastBulletAngle, p->lastBulletSpeed, bullet_360a981111fd7642d9df4d47cf0e6179_60b92bb1a7ed2bf62c2e679ddd00e52c); 
+  }
+}
+{
+  u16 life = static_cast<u16>(1.0);  FixedPointNum speed = 0.0 - p->getSpeed();p->setAccel(speed, life);}
+p->wait = static_cast<u16>(1.0); 
+}
+void stepfunc_366f4d9e22fcd3982751f195c57632dd_60b92bb1a7ed2bf62c2e679ddd00e52c(BulletInfo *p) { 
+{ 
+  BulletInfo *bi;  p->lastBulletAngle = (FixedPointNum::degree2angle(-90.0));  p->lastBulletSpeed = (4.0);  bi = ListBullets::makeNewBullet();  if (bi != NULL) {    bi->initialize(p->getType() << 1, p->getPosX(), p->getPosY(), p->lastBulletAngle, p->lastBulletSpeed, bullet_aca3129a8491609c5d7907ba445773e0_60b92bb1a7ed2bf62c2e679ddd00e52c); 
+  }
+}
+p->wait = static_cast<u16>(1.0); 
+}
+void stepfunc_f77c7359650c20990adbd1681f0ec907_60b92bb1a7ed2bf62c2e679ddd00e52c(BulletInfo *p) { 
+{ 
+  BulletInfo *bi;  p->lastBulletAngle = (FixedPointNum::degree2angle(90.0));  p->lastBulletSpeed = (4.0);  bi = ListBullets::makeNewBullet();  if (bi != NULL) {    bi->initialize(p->getType() << 1, p->getPosX(), p->getPosY(), p->lastBulletAngle, p->lastBulletSpeed, bullet_aca3129a8491609c5d7907ba445773e0_60b92bb1a7ed2bf62c2e679ddd00e52c); 
+  }
+}
+ListBullets::stepFuncDrop(p);}
+
+
+BulletInfo *genBulletFunc_60b92bb1a7ed2bf62c2e679ddd00e52c(FixedPointNum posx, FixedPointNum posy) {  BulletInfo * bi;  bi = ListBullets::makeNewBullet();  if (bi != NULL) {    bi->initialize(BULLET_TYPE_ROOT, posx, posy, BulletInfo::DEFAULT_ANGLE, 0, bullet_4576fe70f44d56b48320d88c52f97170_60b92bb1a7ed2bf62c2e679ddd00e52c); 
+  }
+return bi;}
+
+

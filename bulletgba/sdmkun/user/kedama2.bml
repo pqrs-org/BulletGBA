@@ -1,0 +1,250 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+<filename>kedama2</filename>
+ <group>user</group>
+ <title>東方紅魔境より、毛玉その２</title>
+ <description>倒せば倒すほど玉が増える。</description>
+ <capture></capture>
+</barrageInfo>
+
+<barrageStyles>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<!-- CDATA とかいうのは大事なおまじないです。 -->
+<lua>
+<![CDATA[
+pi = 3.141592
+std = pi/180
+a = 0
+b = 0
+c = 0
+function cal(p,q,r)
+	rr = r*std
+	pp = (p/math.sqrt(p^2+q^2))*math.cos(rr)-(q/math.sqrt(p^2+q^2))*math.sin(rr)
+	qq = (q/math.sqrt(p^2+q^2))*math.cos(rr)+(p/math.sqrt(p^2+q^2))*math.sin(rr)
+	return pp,qq
+end
+
+function lay()
+setSpeed(getPlayerSpeedX(), getSpeedY())
+end
+
+function shot1()
+	setPos(px-2,py-5)
+	if(turn > 1050)then
+	vanish()
+	end
+	if(math.cos(turn*120*std) > 0.99)then
+	fire(0,-7,"lay")
+	end
+end
+function shot2()
+	setPos(px+2,py-5)
+	if(turn > 1050)then
+	vanish()
+	end
+	if(math.cos(turn*120*std) > 0.99)then
+	fire(0,-7,"lay")
+	end
+end
+
+function kedama1()
+	local t = getTurn()
+	local vx = getSpeedX()
+	local vy = getSpeedY()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	
+	if(t == 2)then
+	fire(0.6*math.random()-0.3,0.7, "ked")
+	vanish()
+	end
+
+	if(t == 1)then
+	setPos(pos,1)
+	end
+end
+
+function ked()
+	local t = getTurn()
+	local vx = getSpeedX()
+	local vy = getSpeedY()
+	local x = getX()
+	local y = getY()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	local rand = math.random()
+
+	if(t > 10 and math.cos(rand*360*std) > 0.999999)then
+	if(rank > 0.9)then
+	for i = 1,10 do
+	dir = aim+(math.random()*1-2+i*36)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	elseif(rank > 0.6)then
+	for i = 1,6 do
+	dir = aim+(math.random()*1-2+i*60)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	elseif(rank > 0.3)then
+	for i = 1,6 do
+	dir = aim+(math.random()*1-2+30+i*60)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	else
+	for i = 1,4 do
+	dir = aim+(math.random()*1-2+45+i*90)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	end
+	fire(vx,vy,"ked")
+	vanish()
+	end
+
+	if(y > 320-math.random()*60)then
+	fire(vx, vy-0.01, "slow")
+	vanish()
+	end
+	
+	if(py > y)then
+	if(px+3 > x and x > px-3)then
+	
+	if(rank > 0.9)then
+	for i = 1,10 do
+	dir = aim+(math.random()*1-2+i*36)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	elseif(rank > 0.6)then
+	for i = 1,6 do
+	dir = aim+(math.random()*1-2+i*60)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	elseif(rank > 0.3)then
+	for i = 1,6 do
+	dir = aim+(math.random()*1-2+30+i*60)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	else
+	for i = 1,4 do
+	dir = aim+(math.random()*1-2+45+i*90)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	end
+	
+	vanish()
+	end
+	end
+end
+function slow()
+	local t = getTurn()
+	local vx = getSpeedX()
+	local vy = getSpeedY()
+	local x = getX()
+	local y = getY()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	local rand = math.random()
+	
+	if(t > 10 and math.cos(rand*360*std) > 0.999999)then
+	if(rank > 0.9)then
+	for i = 1,10 do
+	dir = aim+(math.random()*1-2+i*36)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	elseif(rank > 0.6)then
+	for i = 1,6 do
+	dir = aim+(math.random()*1-2+i*60)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	elseif(rank > 0.3)then
+	for i = 1,6 do
+	dir = aim+(math.random()*1-2+30+i*60)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	else
+	for i = 1,4 do
+	dir = aim+(math.random()*1-2+45+i*90)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	end
+	fire(vx,vy,"slow")
+	vanish()
+	end
+
+
+	if(y > 300)then
+	setSpeed(vx, vy-0.01)
+	end
+	
+	if(py > y)then
+	if(px+3 > x and x > px-3)then
+	
+	if(rank > 0.9)then
+	for i = 1,10 do
+	dir = aim+(math.random()*1-2+i*36)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	elseif(rank > 0.6)then
+	for i = 1,6 do
+	dir = aim+(math.random()*1-2+i*60)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	elseif(rank > 0.3)then
+	for i = 1,6 do
+	dir = aim+(math.random()*1-2+30+i*60)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	else
+	for i = 1,4 do
+	dir = aim+(math.random()*1-2+45+i*90)*std
+	fire(math.cos(dir), math.sin(dir))
+	end
+	end
+
+	vanish()
+	end
+	end
+end
+
+
+function top()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	px = getPlayerX()
+	py = getPlayerY()
+	turn = getTurn()
+	randomn = math.random()
+
+	if(turn > 1100)then
+	a = 0
+	b = 0
+	quit()
+	end
+
+
+	if(900 > turn and turn > 1)then
+	if(a > 5-rank*2 and b < 500)then
+	pos = math.random()*300
+	fire(0,0, "kedama1", pos)
+	a = 0
+	b = b + 1
+	end
+	end
+	a = a + 1
+
+	if(turn == 1)then
+	fire(0,0,"shot1")
+	fire(0,0,"shot2")
+	end
+end
+
+]]>
+</lua>
+
+</barrage>

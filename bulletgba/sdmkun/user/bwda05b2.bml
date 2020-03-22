@@ -1,0 +1,290 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!-- コメント -->
+
+<barrageInfo>
+ <!-- ファイル名が別の名前になっていると、
+      この名前に従ってファイル名は修正されます。
+      これは必ずつけて下さい。ブラウザから実行する場合、
+      ファイル名が変わっていることが多々あります。 -->
+ <filename>bwda05b2</filename>
+ <!-- グループ名は data/groups.dat から適切なものを選んでも良いですし、
+      お好きな名前を付けてもらっても結構です。
+	  存在しないグループ名をつけた場合は userグループ扱いになります。
+	  ある程度同じグループの弾幕がたまったら
+	  data/groups.dat に私が追加します。
+   -->
+ <group>bwda</group>
+ <title>Hyper Speed 4' -Btype</title>
+ <description>Hyper Speed 4' -Atype の逆回転バージョン。それ以外はまったく同じ。回転方向を変えただけで全然雰囲気の違う弾幕になった…ような気がする。</description>
+ <capture>Hyper Speed 4'系共通の問題ですが２週め以降左右の弾源のタイミングがずれると突然難しくなります。</capture>
+</barrageInfo>
+
+<!-- ここで弾の色とか形とかを指定できるようにする予定 -->
+<barrageStyle>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<actionRef label="lefthandset"/>
+<actionRef label="righthandset"/>
+<wait>4800-($rank*2400)</wait>
+</action>
+
+<action label="lefthandset">
+<fire>
+<direction type="absolute">260</direction>
+<speed>2</speed>
+<bullet>
+<actionRef label="slow"/>
+<actionRef label="leftaction"/>
+<actionRef label="leftoff"/>
+</bullet>
+</fire>
+</action>
+
+<action label="righthandset">
+<fire>
+<direction type="absolute">100</direction>
+<speed>2</speed>
+<bullet>
+<actionRef label="slow"/>
+<actionRef label="rightaction"/>
+<actionRef label="rightoff"/>
+</bullet>
+</fire>
+</action>
+
+<action label="slow">
+<wait>20</wait>
+<changeSpeed>
+<speed>0</speed>
+<term>10</term>
+</changeSpeed>
+</action>
+
+<action label="rightaction">
+<actionRef label="spine"></actionRef>
+<actionRef label="spinf"></actionRef>
+<actionRef label="sping"></actionRef>
+<actionRef label="spinh"></actionRef>
+<wait>50</wait>
+<wait>50</wait>
+</action>
+
+<action label="leftaction">
+<actionRef label="spina"></actionRef>
+<actionRef label="spinb"></actionRef>
+<actionRef label="spinc"></actionRef>
+<actionRef label="spind"></actionRef>
+<wait>50</wait>
+<wait>50</wait>
+</action>
+
+
+<action label="leftoff">
+<changeDirection>
+<direction type="absolute">100</direction>
+<term>1</term>
+</changeDirection>
+<changeSpeed>
+<speed>2</speed>
+<term>1</term>
+</changeSpeed>
+</action>
+
+<action label="rightoff">
+<changeDirection>
+<direction type="absolute">260</direction>
+<term>1</term>
+</changeDirection>
+<changeSpeed>
+<speed>2</speed>
+<term>1</term>
+</changeSpeed>
+</action>
+
+<action label="spina">
+<repeat>
+<times>200</times>
+<action>
+ <bullet>
+  <direction type="sequence">($rank*3)+2</direction>
+  <speed>3</speed>
+  </bullet>
+ <bullet>
+  <direction type="sequence">180</direction>
+  <speed>3</speed>
+  </bullet>
+</action>
+<wait>6-($rank*3)</wait>
+</repeat>
+</action>
+
+<action label="spinb">
+<repeat>
+<times>200</times>
+<action>
+ <bullet>
+  <direction type="sequence">($rank*3)+2</direction>
+  <speed>3</speed>
+  </bullet>
+<repeat>
+<times>3</times>
+<action>
+ <bullet>
+  <direction type="sequence">90</direction>
+  <speed>3</speed>
+  </bullet>
+</action>
+</repeat>
+</action>
+<wait>6-($rank*3)</wait>
+</repeat>
+</action>
+
+<action label="spinc">
+<repeat>
+<times>200</times>
+<action>
+ <bullet>
+  <direction type="sequence">($rank*3)+2</direction>
+  <speed>3</speed>
+  </bullet>
+<repeat>
+<times>7</times>
+<action>
+ <bullet>
+  <direction type="sequence">45</direction>
+  <speed>3</speed>
+  </bullet>
+</action>
+</repeat>
+</action>
+<wait>6-($rank*3)</wait>
+</repeat>
+</action>
+
+<action label="spind">
+<repeat>
+<times>200</times>
+<action>
+ <bullet>
+  <direction type="sequence">($rank*3)+2</direction>
+  <speed>3</speed>
+  </bullet>
+<repeat>
+<times>7</times>
+<action>
+ <bullet>
+  <direction type="sequence">22</direction>
+  <speed>3</speed>
+  </bullet>
+ <bullet>
+  <direction type="sequence">23</direction>
+  <speed>3</speed>
+  </bullet>
+</action>
+</repeat>
+</action>
+<wait>6-($rank*3)</wait>
+</repeat>
+</action>
+
+<action label="spine">
+<repeat>
+<times>200</times>
+<action>
+ <bullet>
+  <direction type="sequence">-(($rank*3)+2)</direction>
+  <speed>3</speed>
+  </bullet>
+ <bullet>
+  <direction type="sequence">-180</direction>
+  <speed>3</speed>
+  </bullet>
+</action>
+<wait>6-($rank*3)</wait>
+</repeat>
+</action>
+
+<action label="spinf">
+<repeat>
+<times>200</times>
+<action>
+ <bullet>
+  <direction type="sequence">-(($rank*3)+2)</direction>
+  <speed>3</speed>
+  </bullet>
+<repeat>
+<times>3</times>
+<action>
+ <bullet>
+  <direction type="sequence">-90</direction>
+  <speed>3</speed>
+  </bullet>
+</action>
+</repeat>
+</action>
+<wait>6-($rank*3)</wait>
+</repeat>
+</action>
+
+<action label="sping">
+<repeat>
+<times>200</times>
+<action>
+ <bullet>
+  <direction type="sequence">-(($rank*3)+2)</direction>
+  <speed>3</speed>
+  </bullet>
+<repeat>
+<times>7</times>
+<action>
+ <bullet>
+  <direction type="sequence">-45</direction>
+  <speed>3</speed>
+  </bullet>
+</action>
+</repeat>
+</action>
+<wait>6-($rank*3)</wait>
+</repeat>
+</action>
+
+<action label="spinh">
+<repeat>
+<times>200</times>
+<action>
+ <bullet>
+  <direction type="sequence">-(($rank*3)+2)</direction>
+  <speed>3</speed>
+  </bullet>
+<repeat>
+<times>7</times>
+<action>
+ <bullet>
+  <direction type="sequence">-22</direction>
+  <speed>3</speed>
+  </bullet>
+ <bullet>
+  <direction type="sequence">-23</direction>
+  <speed>3</speed>
+  </bullet>
+</action>
+</repeat>
+</action>
+<wait>6-($rank*3)</wait>
+</repeat>
+</action>
+
+</bulletml>
+
+</barrage>
+

@@ -1,0 +1,184 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <actionRef label="shot5way">
+      <param>0</param>
+    </actionRef>
+    <wait>10</wait>
+    <actionRef label="shot5way">
+      <param>5</param>
+    </actionRef>
+    <wait>10</wait>
+    <actionRef label="shot5way">
+      <param>10</param>
+    </actionRef>
+    <wait>10</wait>
+    <actionRef label="shot5way">
+      <param>5</param>
+    </actionRef>
+    <wait>10</wait>
+    <actionRef label="shot5way">
+      <param>0</param>
+    </actionRef>
+    <wait>10</wait>
+    <actionRef label="shot5way">
+      <param>-5</param>
+    </actionRef>
+    <wait>10</wait>
+    <actionRef label="shot5way">
+      <param>-10</param>
+    </actionRef>
+    <wait>10</wait>
+    <actionRef label="shot5way">
+      <param>-5</param>
+    </actionRef>
+  </action>
+  <action label="shot5way">
+    <fire>
+      <direction type="aim">$1+0</direction>
+      <speed type="absolute">2</speed>
+      <bullet>
+        <actionRef label="shotchild" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="aim">$1+20</direction>
+      <speed type="absolute">2</speed>
+      <bullet>
+        <actionRef label="shotchild" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="aim">$1-20</direction>
+      <speed type="absolute">2</speed>
+      <bullet>
+        <actionRef label="shotchild" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="aim">$1+40</direction>
+      <speed type="absolute">2</speed>
+      <bullet>
+        <actionRef label="shotchild" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="aim">$1-40</direction>
+      <speed type="absolute">2</speed>
+      <bullet>
+        <actionRef label="shotchild" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="aim">$1+60</direction>
+      <speed type="absolute">2</speed>
+      <bullet>
+        <actionRef label="shotchild" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="aim">$1-60</direction>
+      <speed type="absolute">2</speed>
+      <bullet>
+        <actionRef label="shotchild" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="aim">$1+80</direction>
+      <speed type="absolute">2</speed>
+      <bullet>
+        <actionRef label="shotchild" />
+      </bullet>
+    </fire>
+    <fire>
+      <direction type="aim">$1-80</direction>
+      <speed type="absolute">2</speed>
+      <bullet>
+        <actionRef label="shotchild" />
+      </bullet>
+    </fire>
+  </action>
+  <action label="shotchild">
+    <wait>10</wait>
+    <changeSpeed>
+      <speed type="absolute">0.1</speed>
+      <term>1</term>
+    </changeSpeed>
+    <wait>20</wait>
+    <fire>
+      <direction type="relative">0</direction>
+      <speed type="absolute">1</speed>
+      <bullet />
+    </fire>
+    <fire>
+      <direction type="relative">20</direction>
+      <speed type="absolute">1</speed>
+      <bullet />
+    </fire>
+    <fire>
+      <direction type="relative">-20</direction>
+      <speed type="absolute">1</speed>
+      <bullet />
+    </fire>
+    <fire>
+      <direction type="relative">40</direction>
+      <speed type="absolute">1</speed>
+      <bullet />
+    </fire>
+    <fire>
+      <direction type="relative">-40</direction>
+      <speed type="absolute">1</speed>
+      <bullet />
+    </fire>
+    <vanish />
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  actionRef shot5way(0);
+  wait 10;
+  actionRef shot5way(5);
+  wait 10;
+  actionRef shot5way(10);
+  wait 10;
+  actionRef shot5way(5);
+  wait 10;
+  actionRef shot5way(0);
+  wait 10;
+  actionRef shot5way(-5);
+  wait 10;
+  actionRef shot5way(-10);
+  wait 10;
+  actionRef shot5way(-5);
+}
+
+// $1: base aim
+action shot5way {
+  fire direction aim $1 + 0 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 + 20 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 - 20 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 + 40 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 - 40 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 + 60 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 - 60 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 + 80 speed absolute 2 bullet actionRef shotchild();
+  fire direction aim $1 - 80 speed absolute 2 bullet actionRef shotchild();
+}
+
+action shotchild {
+  wait 10;
+  changeSpeed absolute 0.1 term 1;
+  wait 20;
+  fire direction relative 0 speed absolute 1 bullet;
+  fire direction relative 20 speed absolute 1 bullet;
+  fire direction relative -20 speed absolute 1 bullet;
+  fire direction relative 40 speed absolute 1 bullet;
+  fire direction relative -40 speed absolute 1 bullet;
+
+  vanish;
+}
+-->

@@ -1,0 +1,9 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+    repeat 1000 action {
+      fire direction absolute 360 * $rand bullet;
+      wait 1;
+    }
+}

@@ -1,0 +1,96 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  actionRef enemy1(70);
+  actionRef enemy1(120);
+  actionRef enemy1(-70);
+  actionRef enemy1(-120);
+  wait 50;
+  repeat 4 action {
+    fireRef 4way;
+    wait 20;
+  }
+  repeat 4 action {
+    fireRef 4way;
+    wait 20;
+  }
+  repeat 4 action {
+    fireRef 4way;
+    wait 10;
+  }
+  actionRef circle;
+}
+
+action enemy1 {
+  fire direction absolute $1 speed 1 bullet action {
+    wait 20;
+    changeSpeed speed 0 term 1;
+    actionRef halfRoundBullet(-5, 5);
+    actionRef halfRoundBullet(5, 5);
+    wait 40;
+    actionRef selfDirection;
+    vanish;
+  }
+}
+
+action halfRoundBullet {
+  fire speed 0 bullet action {
+    fire direction absolute $1 speed $2 bullet;
+    repeat 32 action {
+      fire direction sequence $1 speed $2 bullet;
+      wait 1;
+    }
+    vanish;
+  }
+}
+
+action selfDirection {
+  repeat 5 action {
+    repeat 30 action {
+      fire speed 4 bullet;
+      wait 1;
+    }
+    wait 10;
+  }
+}
+
+fire 4way speed 0 bullet action {
+  fire direction absolute -30 speed 1 bullet action {
+    wait 30;
+    actionRef straightAim(10, 3);
+    actionRef straightAim(15, 3);
+    vanish;
+  }
+  fire direction absolute 30 speed 1 bullet action {
+    wait 30;
+    actionRef straightAim(-10, 3);
+    actionRef straightAim(-15, 3);
+    vanish;
+  }
+  vanish;
+}
+
+// $1: direction, $2: speed
+action straightAim {
+  fire direction aim $1 speed $2 bullet;
+  repeat 5 action {
+    fire direction aim $1 speed sequence 0.2 bullet;
+  }
+}
+
+action circle {
+  repeat 5 action {
+    fireRef circleCore;
+    wait 3;
+  }
+}
+
+fire circleCore speed 0 bullet action {
+  fire direction absolute 0 speed 3 bullet;
+  repeat 72 action {
+    fire direction sequence 5 speed 3 bullet;
+    wait 1;
+  }
+  vanish;
+}

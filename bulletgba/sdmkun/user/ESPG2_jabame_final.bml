@@ -1,0 +1,116 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+  <filename>ESPG2_jabame_final</filename>
+  <group>user</group>
+  <title>ガルーダ２融合体発狂</title>
+  <description>一応rank100が再現のつもり</description>
+  <capture>アサギで瞬殺（オイ</capture>
+  <author>Pentan</author>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+
+fallinSpd=0.75
+winderFreq=600
+
+rollingNum=16
+rollingFreq=600
+rollingArm=120
+
+vInterval=40
+
+topturn=0
+endTime=900
+
+shotside=0
+function top()
+	topturn=getTurn()
+	
+	rollingNum=math.floor(4+getRank()*12.9)
+	rollingArm=50+getRank()*70.9
+	
+	if topturn>endTime then
+		if topturn>endTime+120 then quit() end
+	elseif math.mod( topturn, 60 )==0 then
+		fire( 0, fallinSpd, "centerBullet", shotside )
+		if shotside>0 then shotside=0
+		else shotside=2 end
+	end
+	
+	if topturn==120 then
+		fire( 0, 0, "virticalShooter" )
+	end
+	
+end
+
+function centerBullet(side)
+	local turn=getTurn()
+	if turn==0 then
+		-- max*A+max*B*rand=max*(A+B*rand)
+		if side>0 then --right
+			setPos( getMaxX()*(0.55+math.random()*0.25), 4 )
+		else --left
+			setPos( getMaxX()*(0.2+math.random()*0.25), 4 )
+		end
+	end
+	
+	-- winder
+	if math.mod( turn, 2 )==0 then
+		local spd=3.0
+		local angle=(0.5+turn/winderFreq)*3.14159*(side-1)
+		fire( math.sin(angle)*spd, -math.cos(angle)*spd )
+		fire( -math.sin(angle)*spd, math.cos(angle)*spd )
+	end
+	
+	-- rolling
+	for i=1, rollingNum do
+		local angle=(i/rollingNum+turn/rollingFreq)*6.28318*(1-side)
+		fire( math.sin(angle), -math.cos(angle)*0.125, "rollingBullet", 0 )
+	end
+end
+
+function rollingBullet(n)
+	if getTurn()>0 then
+		vanish()
+	else
+		setPos( getX()+getSpeedX()*rollingArm, getY()+getSpeedY()*rollingArm )
+		setSpeed( 0, 0 )
+	end
+end
+
+virticalturn=0
+function virticalShooter()
+	virticalturn=getTurn()
+	vinterval=math.floor(120-getRank()*80.99)
+	
+	if virticalturn==0 then
+		setPos( getMaxX()-4, 4 )
+	elseif topturn>endTime then
+		vanish()
+	elseif math.mod(virticalturn, math.floor(60-getRank()*45.9) )==0 then
+		fire( -1, 0, "virticalBullet")
+	end
+end
+
+function virticalBullet()
+	modturn=math.mod( virticalturn, vInterval )
+	if modturn==0 then
+		fire( -0.15, 1.0 )
+	elseif modturn==math.floor(vInterval*0.5) then
+		fire( 0.15, 1.0 )
+	end
+end
+
+]]>
+</lua>
+
+</barrage>

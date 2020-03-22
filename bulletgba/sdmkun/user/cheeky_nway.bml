@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+2004/3/11 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* hollow sight
+* sharp insight
+* publish or perish
+-->
+
+<barrageInfo>
+  <filename>cheeky_nway</filename>
+  <group>Oohara</group>
+  <title>なまいきNウェイ</title>
+  <description>某SRPG風に。達人王のザコがこんな感じの弾を撃ってきます。</description>
+  <capture>自機狙い3wayを弾速を変えつつ分割して発射しているだけです。</capture>
+  <author>Oohara_Yuuma</author>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+  <fire>
+    <direction type="aim">40 * (1.5 - 0.5 * $rank)</direction>
+    <speed>1.0 - 0.3 * $rank</speed>
+    <bulletRef label="bit"/>
+  </fire>
+  <wait>40</wait>
+  <fire>
+    <direction type="absolute">180 - 40 * (1.5 - 0.5 * $rank)</direction>
+    <speed>1.0 - 0.3 * $rank</speed>
+    <bulletRef label="bit"/>
+  </fire>
+  <wait>30</wait>
+  <fire>
+    <direction type="aim">-40 * (1.5 - 0.5 * $rank)</direction>
+    <speed>1.0 - 0.3 * $rank</speed>
+    <bulletRef label="bit"/>
+  </fire>
+  <wait>20</wait>
+  <fire>
+    <direction type="absolute">180 + 40 * (1.5 - 0.5 * $rank)</direction>
+    <speed>1.0 - 0.3 * $rank</speed>
+    <bulletRef label="bit"/>
+  </fire>
+  <wait>10</wait>
+
+  <wait>300</wait>
+
+</action>
+
+<bullet label="bit">
+<action>
+
+  <repeat><times>999</times><action>
+    <fire>
+      <direction type="aim">0</direction>
+      <speed>1.0 * (1.0 + 0.5 * $rank)</speed>
+      <bullet/>
+    </fire>
+    <wait>6 - 3 * $rank</wait>
+    <fire>
+      <direction type="sequence">-10</direction>
+      <speed type="sequence">0.1 * (1.0 + $rank)</speed>
+      <bullet/>
+    </fire>
+    <wait>6 - 3 * $rank</wait>
+    <fire>
+      <direction type="sequence">20</direction>
+      <speed type="sequence">0.1 * (1.0 + $rank)</speed>
+      <bullet/>
+    </fire>
+    <wait>18 - 3 * $rank</wait>
+  </action></repeat>
+
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

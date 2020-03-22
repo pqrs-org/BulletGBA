@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>ESP_GALUDA_stage5_true_jakou_2</filename>
+ <group>ESP_GALUDA</group>
+ <title>エスプガルーダから、真ジャコウ第二</title>
+ <description>苦手なんで練習用に。似せる意思はあまりありません。</description>
+ <capture>0を書くように移動するらしいですよ？</capture>
+ <author>shinichiro.h</author>
+</barrageInfo>
+
+<barrageStyle>
+        <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+angle = {}
+rank = 0
+
+function ud()
+	if (math.random() < 0.05+getRank()*0.1) then
+		fire(0, 1)
+		fire(0, -1)
+	end
+end
+
+function uds()
+	if (getTurn() == 35) then
+		fire(1.5, 0, "ud")
+		fire(-1.5, 0, "ud")
+	end
+end
+
+function bit(id)
+	local t = getTurn()
+	local c = math.mod(t, 60)
+	if (t == 15) then
+		setSpeed(0, 0)
+	elseif (t > 600) then
+		vanish()
+	elseif (c == rank) then
+		angle[id] = getPlayerAngle()
+		if ((math.mod(t, 120) < 60 and id == 0) or
+		    (math.mod(t, 120) > 60 and id == 1)) then
+			fire(1.5, 0, "ud")
+			fire(-1.5, 0, "ud")
+		else
+			fire(0, 5, "uds")
+		end
+	elseif (math.mod(t, 60) > rank and math.mod(t, 2) == 1) then
+		fire(1.7*math.sin(angle[id]), -1.7*math.cos(angle[id]))
+	end
+end
+
+function top()
+	local t = getTurn()
+	if (t == 0) then
+		rank = math.floor(40-getRank()*20)
+		fire(3, 0, "bit", 0)
+		fire(-3, 0, "bit", 1)
+	elseif (t > 700) then
+		quit()
+	end
+end
+]]>
+</lua>
+</barrage>
+

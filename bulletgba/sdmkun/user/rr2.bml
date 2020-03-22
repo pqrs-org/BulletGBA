@@ -1,0 +1,92 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!-- 2006/09/05 本気屋（stglover@hotmail.com）-->
+
+<barrageInfo>
+  <filename>rr2</filename>
+  <group>user</group>
+  <title>年下の義姉</title>
+  <description>自機狙い緑弾が垂直落下の赤弾を置いていきます。</description>
+  <capture>気持ち前に出て、赤弾の隙間を縫いながら緑弾の切り返し。回るのは無理と思います。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <repeat><times>10</times><action>
+	<fire>
+		<speed>3.6-($rank*1.2)</speed>
+		<direction type="aim">-50</direction>
+		<bulletRef label="seed"/>
+	</fire>
+	<wait>45-($rank*15)</wait>
+	<fire>
+		<speed>3.6-($rank*1.2)</speed>
+		<direction type="aim">50</direction>
+		<bulletRef label="seed"/>
+	</fire>
+       	<wait>45-($rank*15)</wait>
+	</action></repeat>
+ <wait>60</wait>
+</action>
+
+<bullet label="seed">
+<action>
+ <repeat><times>20</times><action>
+	<fire>
+		<direction type="aim">0</direction>
+		<speed>2</speed>
+      		<bulletRef label="mago"/>
+	</fire>
+        <wait>12</wait>
+	</action></repeat>
+</action>
+</bullet>
+
+<bullet label="mago">
+<action>
+
+  <wait>20</wait>
+
+
+	<fire>
+		<direction type="relative">-6</direction>
+		<speed>0.12</speed>
+		<bulletRef label="himago"/>
+	 </fire>
+
+	<repeat><times>2+(2*$rank)</times><action>
+	<fire>
+		<direction type="sequence">6</direction>
+		<speed>0.12</speed>
+		<bulletRef label="himago" />
+	</fire>
+	</action></repeat>
+ </action>
+</bullet>
+
+<bullet label="himago">
+<action>
+	<changeDirection>
+		<direction type="absolute">180</direction>
+		<term>40+60*$rand</term>
+	</changeDirection>
+	<changeSpeed>
+		<speed>1+($rand*1.8)+($rank*0.5)</speed>
+		<term>100+80*$rand</term>
+	</changeSpeed>
+
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

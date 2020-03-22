@@ -1,0 +1,12 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  action { 
+    action {
+      fire bullet;
+    }
+    wait 20;
+  }
+  wait 10;
+}

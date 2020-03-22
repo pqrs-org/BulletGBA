@@ -1,0 +1,361 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+<filename>starmaker8</filename>
+ <group>user</group>
+ <title>流れ星２</title>
+ <description>左右から飛んでくる弾は避けにくいらしい。</description>
+ <capture>時々でかい魔方陣がくるので注意しましょう。</capture>
+</barrageInfo>
+
+<barrageStyles>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<!-- CDATA とかいうのは大事なおまじないです。 -->
+<lua>
+<![CDATA[
+cnt = 0
+count = 0
+cntt = 0
+countt = 0
+cotton = 0
+corn = 0
+pi = 3.141592
+std = pi/180
+
+function top()
+	local turn = getTurn()
+	local rank = getRank()
+	local rand = math.random()
+	spd = 1+rank*1.5*math.random()
+	t = turn
+	r = 2*pi*rand
+	if(turn == 2) then
+	fire(-2, -1, "beforemakerleft")
+	fire(4, -2, "beforemakerright")
+	end
+	if(turn > 30 and corn > 150-rank*90 and math.random() <= 0.9-rank*0.4) then
+	fire(0, 0, "neramaker")
+	corn = 0
+	end
+	if(turn > 30 and corn > 150-rank*90 and math.random() > 0.9-rank*0.4) then
+	fire(0, 0, "neramakersp")
+	corn = 0
+	end
+	if(turn > 600)then
+	quit()
+	end
+	corn = corn + 1
+end	
+
+function beforemakerleft()
+	local x = getX()-4
+	local y = getY()-4
+	local turn = getTurn()
+	local rank = getRank()
+	if(x < 20 or y < 20) then
+	setSpeed(0,0)
+	end
+	if(cotton > 70) then
+	fire(0, 1.3-rank*0.9, "maker")
+	cotton = 0
+	end
+	if(turn > 600) then
+	cotton = 0
+	vanish()
+	end
+	cotton = cotton + 1	
+end
+
+function beforemakerright()
+	local x = getX()-4
+	local y = getY()-4
+	local turn = getTurn()
+	local rank = getRank()
+	if(x > getMaxX()-30 or y < 20) then
+	setSpeed(0,0)
+	end
+	if(cotton > 70) then
+	fire(0, 1.3-rank*0.9, "maker")
+	cotton = 0
+	end
+	if(turn > 600) then
+	cotton = 0
+	vanish()
+	end
+	cotton = cotton + 1
+end
+
+function maker()
+	
+	local m = getMaxY()-10
+	local turn = getTurn()
+	local rank = getRank()
+	local rand = math.random()
+	spd = 0.5+rank*1*math.random()+2*math.random()
+		if(turn > 20 and cntt > 800-rank*600*math.random()) then
+		fire(0, 0, "starmaker", r)
+		cntt = 0
+		countt = countt + 1
+			if(countt > 10+rank*30)then
+			countt = 0
+			vanish()
+			end	
+		end
+	cntt = cntt + 1
+end
+
+
+
+function starmaker()
+	local turn = getTurn()
+	local rand = math.random()
+	local rank = getRank()
+	random = rand
+	r = 2*pi*math.random()
+	if(turn > 50 and math.random() >= 0.02+rank*0.04)then
+	spd = 0.12
+		fire(math.cos(r+36*std)*spd, math.sin(r+36*std)*spd, "star", random)
+		for i = 1,4 do
+		fire(math.cos(r+36*std+72*i*std)*spd, math.sin(r+36*std+72*i*std)*spd, "star", random)
+		end
+	spd = 0.17
+		for i = 1,5 do
+		fire(math.cos(r+9*std+72*i*std)*spd, math.sin(r+9*std+72*i*std)*spd, "star", random)
+		end
+		for i = 1,5 do
+		fire(math.cos(r-9*std+72*i*std)*spd, math.sin(r-9*std+72*i*std)*spd, "star", random)
+		end
+	spd = 0.24
+		fire(math.cos(r)*spd, math.sin(r)*spd, "star", random)
+		for i = 1,4 do
+		fire(math.cos(r+72*i*std)*spd, math.sin(r+72*i*std)*spd, "star", random)
+		end
+	vanish()
+	elseif(turn > 50 and math.random() > 0.02)then
+	spd = 0.4
+		fire(math.cos(r)*spd, math.sin(r)*spd, "star", random)
+		for i = 1,4 do
+		fire(math.cos(r+72*i*std)*spd, math.sin(r+72*i*std)*spd, "star", random)
+		end
+	spd = 0.2
+		for i = 1,5 do
+		fire(math.cos(r+36*std+72*i*std)*spd, math.sin(r+36*std+72*i*std)*spd, "star", random)
+		end
+	spd = 0.3
+		for i = 1,5 do
+		fire(math.cos(r+9*std+72*i*std)*spd, math.sin(r+9*std+72*i*std)*spd, "star", random)
+		end
+		for i = 1,5 do
+		fire(math.cos(r-9*std+72*i*std)*spd, math.sin(r-9*std+72*i*std)*spd, "star", random)
+		end
+	vanish()
+	elseif(turn > 50)then
+	spd = 0.2
+		for i = 1,6 do
+		fire(math.cos(r+30*std+60*i*std)*spd, math.sin(r+30*std+60*i*std)*spd, "star", random)
+		end
+	spd = 0.29
+		for i = 1,6 do
+		fire(math.cos(r+10*std+60*i*std)*spd, math.sin(r+10*std+60*i*std)*spd, "star", random)
+		end
+		for i = 1,6 do
+		fire(math.cos(r-10*std+60*i*std)*spd, math.sin(r-10*std+60*i*std)*spd, "star", random)
+		end
+	spd = 0.4
+	fire(math.cos(r)*spd, math.sin(r)*spd, "star", random)
+		for i = 1,5 do
+		fire(math.cos(r+60*i*std)*spd, math.sin(r+60*i*std)*spd, "star", random)
+		end
+	vanish()
+	end	
+end
+
+function neramaker()
+	local turn = getTurn()
+	local rand = math.random()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	local r = 2*pi*math.random()
+	dir = aim
+	random = rand
+	if(turn > 50 and math.random() > 0.2)then
+	spd = 0.4
+		fire(math.cos(r)*spd, math.sin(r)*spd, "nera", dir)
+		for i = 1,4 do
+		fire(math.cos(r+72*i*std)*spd, math.sin(r+72*i*std)*spd, "nera", dir)
+		end
+	spd = 0.2
+		for i = 1,5 do
+		fire(math.cos(r+36*std+72*i*std)*spd, math.sin(r+36*std+72*i*std)*spd, "nera", dir)
+		end
+	spd = 0.3
+		for i = 1,5 do
+		fire(math.cos(r+9*std+72*i*std)*spd, math.sin(r+9*std+72*i*std)*spd, "nera", dir)
+		end
+		for i = 1,5 do
+		fire(math.cos(r-9*std+72*i*std)*spd, math.sin(r-9*std+72*i*std)*spd, "nera", dir)
+		end
+	vanish()
+	elseif(turn > 50 and math.random() <= 0.2)then
+	spd = 0.1
+	fire(math.cos(r)*spd, math.sin(r)*spd, "nera", dir)
+		for i = 1,4 do
+		fire(math.cos(r+72*i*std)*spd, math.sin(r+72*i*std)*spd, "nera", dir)
+		end
+	vanish()
+	end
+	
+end
+
+function neramakersp()
+	local turn = getTurn()
+	local rand = math.random()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	local r = 2*pi*math.random()
+	dir = aim
+	
+	if(turn > 50 and math.random() > 0.2)then
+	spd = 0.1
+	fire(math.cos(r)*spd, math.sin(r)*spd, "nera", dir)
+		for i = 1,4 do
+		fire(math.cos(r+72*i*std)*spd, math.sin(r+72*i*std)*spd, "nera", dir)
+		end
+	spd = 1.5
+		fire(math.cos(r)*spd, math.sin(r)*spd, "nera", dir)
+		for i = 1,119 do
+		fire(math.cos(r+3*i*std)*spd, math.sin(r+3*i*std)*spd, "nera", dir)
+		end
+	spd = 1.1
+		fire(math.cos(r)*spd, math.sin(r)*spd, "nera", dir)
+		for i = 1,59 do
+		fire(math.cos(r+6*i*std)*spd, math.sin(r+6*i*std)*spd, "nera", dir)
+		end
+	spd = 0.98
+		fire(math.cos(r)*spd, math.sin(r)*spd, "nera", dir)
+		for i = 1,4 do
+		fire(math.cos(r+72*i*std)*spd, math.sin(r+72*i*std)*spd, "nera", dir)
+		end
+	spd = 0.38
+		for i = 1,5 do
+		fire(math.cos(r+36*std+72*i*std)*spd, math.sin(r+36*std+72*i*std)*spd, "nera", dir)
+		end
+	spd = 0.56
+		for i = 1,5 do
+		fire(math.cos(r+14*std+72*i*std)*spd, math.sin(r+14*std+72*i*std)*spd, "nera", dir)
+		end
+		for i = 1,5 do
+		fire(math.cos(r-14*std+72*i*std)*spd, math.sin(r-14*std+72*i*std)*spd, "nera", dir)
+		end
+	spd = 0.76
+		for i = 1,5 do
+		fire(math.cos(r+5*std+72*i*std)*spd, math.sin(r+5*std+72*i*std)*spd, "nera", dir)
+		end
+		for i = 1,5 do
+		fire(math.cos(r-5*std+72*i*std)*spd, math.sin(r-5*std+72*i*std)*spd, "nera", dir)
+		end
+	vanish()
+	elseif(turn > 50 and math.random() <= 0.2)then
+		fire(0, 0, "onmyoudama1", dir)
+	spd = 8
+		fire(math.cos(pi)*spd, math.sin(pi)*spd, "onmyoudama2", dir)
+		fire(math.cos(pi+180*std)*spd, math.sin(pi+180*std)*spd, "onmyoudama3", dir)
+	vanish()
+	end		
+end
+
+function onmyoudama1()
+	local turn = getTurn()
+	if(turn > 2) then
+	spd = 1.55
+		fire(math.cos(r)*spd, math.sin(r)*spd, "nera", dir)
+		for i = 1,119 do
+		fire(math.cos(r+3*i*std)*spd, math.sin(r+3*i*std)*spd, "nera", dir)
+		end
+	vanish()
+	end
+end
+function onmyoudama2()
+	local turn = getTurn()
+	if(turn > 2) then
+	spd = 0.76
+	fire(math.cos(pi)*spd, math.sin(pi)*spd, "nera", dir)
+		for i = 1,20 do
+		fire(math.cos(pi+9*i*std)*spd, math.sin(pi+9*i*std)*spd, "nera", dir)
+		end
+	spd = 0.1
+	fire(math.cos(r)*spd, math.sin(r)*spd, "nera", dir)
+		for i = 1,9 do
+		fire(math.cos(r+36*i*std)*spd, math.sin(r+36*i*std)*spd, "nera", dir)
+		end
+	vanish()
+	end
+end
+function onmyoudama3()
+	local turn = getTurn()
+	if(turn > 2) then
+	spd = 0.76
+	fire(math.cos(pi+180*std)*spd, math.sin(pi+180*std)*spd, "nera", dir)
+		for i = 1,20 do
+		fire(math.cos(pi+9*i*std+180*std)*spd, math.sin(pi+9*i*std+180*std)*spd, "nera", dir)
+		end
+	spd = 0.1
+	fire(math.cos(r)*spd, math.sin(r)*spd, "nera", dir)
+		for i = 1,9 do
+		fire(math.cos(r+36*i*std)*spd, math.sin(r+36*i*std)*spd, "nera", dir)
+		end
+	vanish()
+	end
+end
+
+
+function nera()
+	
+	local turn = getTurn()
+	local rank = getRank()
+	if(turn > 30) then
+	setSpeed(0, 0)
+		if(turn > 50) then
+		fire(math.cos(dir)*(0.2+rank*1.5), math.sin(dir)*(0.2+rank*1.5))
+		vanish()
+		end
+	end
+end 
+
+function star()
+	local turn = getTurn()
+	local rank = getRank()
+	local x = getX()
+	t = turn 
+	r = random
+	if(t > 30)then
+	setSpeed(0, 0)
+		if(t > 100 and x < getMaxX()-60)then
+		setSpeed((0+rank*0.7)*(0.2+rank*random*2), (1-rank*0.5)*(0.2+rank*random*2))
+		quit()
+		elseif(t > 100 and x >= getMaxX()-60)then
+		fire(0, 0, "bull", r)
+		vanish()
+		end
+	end
+end
+	
+function bull()
+	local turn = getTurn()
+	local rank = getRank()
+	if(turn > 0)then
+	fire(-(0+rank*0.7)*(0.2+rank*random*2), (1-rank*0.5)*(0.2+rank*random*2))
+	vanish()
+	end
+end
+
+]]>
+</lua>
+
+</barrage>

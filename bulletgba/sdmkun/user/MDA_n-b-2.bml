@@ -1,0 +1,117 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>MDA_n-b-2</filename>
+	<group>MDA</group>
+	<title>針と板。の、おまけ。</title>
+	<description>「針と板」の変則版で、片方のビットが出す青弾が完全な自機狙いになってます。自機狙いビットとバラマキビットは左右交互に現れます。</description>
+	<capture>バラマキが減った分、運の要素と難易度は落ちた感じですが、自機狙い青弾で詰んだりすることも。あくまで自機狙いです。画面端では注意。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+	<changeDirection>
+		<direction type="absolute">180</direction>
+		<term>1</term>
+	</changeDirection>
+	<changeSpeed>
+		<speed>1</speed>
+		<term>1</term>
+	</changeSpeed>
+	<wait>10</wait>
+	<changeSpeed>
+		<speed>0</speed>
+		<term>1</term>
+	</changeSpeed>
+
+	<repeat>
+		<times>3+($rank*4)</times>
+		<action>
+			<fireRef label="seed"><param>-90</param><param>1</param></fireRef>	<!-- スイッチ -->
+			<fireRef label="seed"><param>90</param>	<param>0</param></fireRef>	<!-- スイッチ -->
+			<actionRef label="seedBoard"/>
+			<fireRef label="seed"><param>-90</param><param>0</param></fireRef>	<!-- スイッチ -->
+			<fireRef label="seed"><param>90</param>	<param>1</param></fireRef>	<!-- スイッチ -->
+			<actionRef label="seedBoard"/>
+		</action>
+	</repeat>
+	<wait>120</wait>
+</action>
+
+<fire label="seed">
+	<direction type="aim">$1</direction>
+	<speed>7-($rank*3)</speed>	<!-- レベル要素 -->
+	<bullet>
+		<action>
+			<repeat>
+				<times>9999</times>
+				<actionRef label="needle"><param>$2*(60-($rand*120))</param></actionRef>
+			</repeat>
+			<vanish/>
+		</action>
+	</bullet>
+</fire>
+
+<action label="needle">
+	<wait>2</wait>
+	<fire>
+		<direction type="aim">$1</direction>
+		<speed type="absolute">1.2-($rank*0.2)</speed>	<!-- レベル要素 -->
+		<bullet/>
+	</fire>
+	<repeat>
+		<times>2+($rank*4)</times>	<!-- レベル要素 -->
+		<action>
+			<fire>
+				<direction type="aim">$1</direction>
+				<speed type="sequence">0.08-($rank*0.04)</speed>	<!-- レベル要素 -->
+				<bullet/>
+			</fire>
+		</action>
+	</repeat>
+</action>
+
+<action label="seedBoard">
+	<repeat>
+		<times>3</times>
+		<action>
+			<wait>20</wait>
+			<actionRef label="board"><param>0</param><param>1</param></actionRef>
+			<actionRef label="board"><param>1</param><param>1</param></actionRef>
+			<actionRef label="board"><param>2</param><param>1</param></actionRef>
+			<actionRef label="board"><param>3</param><param>1</param></actionRef>
+			<actionRef label="board"><param>4</param><param>1</param></actionRef>
+		</action>
+	</repeat>
+</action>
+
+<action label="board">
+	<fireRef label="board2"><param>$1</param><param>1</param></fireRef>
+	<fireRef label="board2"><param>$1</param><param>-1</param></fireRef>
+</action>
+
+<fire label="board2">
+	<direction type="aim">$2*(($1*((1+$rank)*0.7))+0.12)</direction>	<!-- レベル要素 -->
+	<speed>(10-$1)/5</speed>
+	<bullet>
+		<action>
+			<changeSpeed>
+				<speed>(10+$1)/3</speed>
+				<term>90</term>
+			</changeSpeed>
+		</action>
+	</bullet>
+</fire>
+
+
+</bulletml>
+
+</barrage>

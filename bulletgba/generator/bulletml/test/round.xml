@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <repeat>
+      <times>100</times>
+      <action>
+        <repeat>
+          <times>36</times>
+          <action>
+            <fire>
+              <direction type="sequence">10</direction>
+              <bullet>
+                <action>
+                  <changeDirection>
+                    <direction type="sequence">1</direction>
+                    <term>100</term>
+                  </changeDirection>
+                  <wait>100</wait>
+                  <changeDirection>
+                    <direction type="sequence">4</direction>
+                    <term>100</term>
+                  </changeDirection>
+                  <wait>100</wait>
+                  <changeDirection>
+                    <direction type="sequence">-1</direction>
+                    <term>100</term>
+                  </changeDirection>
+                </action>
+              </bullet>
+            </fire>
+          </action>
+        </repeat>
+        <wait>10</wait>
+      </action>
+    </repeat>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 100 action {
+    repeat 36 action { 
+      fire direction sequence 10 bullet action {
+        changeDirection sequence 1 term 100;
+        wait 100;
+        changeDirection sequence 4 term 100;
+        wait 100;
+        changeDirection sequence -1 term 100;
+      }
+    }
+    wait 10;
+  }
+}
+-->

@@ -1,0 +1,109 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!-- 2003/7/4 by Oohara Yuuma (oohara@libra.interq.or.jp) -->
+
+<barrageInfo>
+  <filename>celestial_thought</filename>
+  <group>Oohara</group>
+  <title>celestial thought</title>
+  <description>Happy those early days, when I / Shined in my Angel-infancy! / Before I understood this place / Appointed for my second race, / Or taught my soul to fancy aught / But a white, celestial thought; --- Vaughan</description>
+  <capture>発射直後に見えるすきまは一定時間でふさがります。三番目の輪を下で待つと、ちょうど着弾時にすきまがふさがってしまいます。したがって弾道を予測できるようになったばかりの中級者が一番死にやすいです。発射と同時に特攻が正解です。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+  <fire>
+    <direction type="absolute">360 * $rand</direction>
+    <speed>0.5</speed>
+    <bulletRef label="bit">
+      <param>-1</param>
+    </bulletRef>
+  </fire>
+  <repeat> <times>19</times><action>
+    <fire>
+      <direction type="sequence">18</direction>
+      <speed type="sequence">0</speed>
+      <bulletRef label="bit">
+        <param>-1</param>
+      </bulletRef>
+    </fire>
+  </action></repeat>
+
+  <wait>120</wait>
+
+  <fire>
+    <direction type="absolute">360 * $rand</direction>
+    <speed>0.7</speed>
+    <bulletRef label="bit">
+      <param>1</param>
+    </bulletRef>
+  </fire>
+  <repeat> <times>23</times><action>
+    <fire>
+      <direction type="sequence">15</direction>
+      <speed type="sequence">0</speed>
+      <bulletRef label="bit">
+        <param>1</param>
+      </bulletRef>
+    </fire>
+  </action></repeat>
+
+  <wait>130</wait>
+
+  <fire>
+    <direction type="absolute">360 * $rand</direction>
+    <speed>1.7</speed>
+    <bulletRef label="bit">
+      <param>-1</param>
+    </bulletRef>
+  </fire>
+  <repeat> <times>35</times><action>
+    <fire>
+      <direction type="sequence">10</direction>
+      <speed type="sequence">0</speed>
+      <bulletRef label="bit">
+        <param>-1</param>
+      </bulletRef>
+    </fire>
+  </action></repeat>
+
+  <wait>300</wait>
+
+</action>
+
+<bullet label="bit">
+<action>
+
+  <fire>
+    <direction type="relative">0</direction>
+    <speed type="relative">0</speed>
+    <bullet/>
+  </fire>
+  <wait>9</wait>
+  <repeat> <times>3 + 7 * $rank</times><action>
+    <fire>
+      <direction type="sequence">4 * $1</direction>
+      <speed type="sequence">0</speed>
+      <bullet/>
+    </fire>
+    <wait>9</wait>
+  </action></repeat>
+
+  <vanish/>
+
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

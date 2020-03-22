@@ -1,0 +1,129 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+<filename>
+otk2-doom
+</filename>
+<group>
+OtakuTwo
+</group>
+<title>
+エヴァッカニア・ドゥームの扇弾
+</title>
+<description>
+ウェブ解説だけで再現してみよう大作戦。　全然難しくないので、全然似てないかと。　LVを高くすれば、それなりに難しくなる。
+</description>
+<capture>
+右向きに現れた扇は左向きに迫ってくるのでそれを考えてスタンバイする。
+</capture>
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <fire>
+  <direction type="absolute">165+$rand*30</direction>
+  <speed>1</speed>
+  <bullet><action><vanish/></action></bullet>
+ </fire>
+ <actionRef label="way"><param> 1</param><param> 1</param></actionRef>
+ <actionRef label="way"><param> 2</param><param> 1</param></actionRef>
+ <actionRef label="way"><param> 3</param><param> 1</param></actionRef>
+ <actionRef label="way"><param> 4</param><param> 1</param></actionRef>
+ <actionRef label="way"><param> 5</param><param> 1</param></actionRef>
+ <actionRef label="way"><param> 6</param><param> 1</param></actionRef>
+ <actionRef label="way"><param> 7</param><param> 1</param></actionRef>
+ <actionRef label="way"><param> 8</param><param> 1</param></actionRef>
+ <actionRef label="way"><param> 9</param><param> 1</param></actionRef>
+ <actionRef label="way"><param>10</param><param> 1</param></actionRef>
+ <actionRef label="way"><param>11</param><param> 1</param></actionRef>
+ <actionRef label="way"><param>12</param><param> 1</param></actionRef>
+ <actionRef label="way"><param>13</param><param> 1</param></actionRef>
+ <actionRef label="way"><param>14</param><param> 1</param></actionRef>
+ <actionRef label="way"><param>15</param><param> 1</param></actionRef>
+ <actionRef label="way"><param>16</param><param> 1</param></actionRef>
+ <actionRef label="way"><param>17</param><param> 1</param></actionRef>
+ <actionRef label="way"><param>18</param><param> 1</param></actionRef>
+ <actionRef label="way"><param>19</param><param> 1</param></actionRef>
+ <actionRef label="way"><param>20</param><param> 1</param></actionRef>
+ <wait>300-$rank*100</wait>
+
+ <fire>
+  <direction type="absolute">165+$rand*30</direction>
+  <speed>1</speed>
+  <bullet><action><vanish/></action></bullet>
+ </fire>
+ <actionRef label="way"><param> 1</param><param>-1</param></actionRef>
+ <actionRef label="way"><param> 2</param><param>-1</param></actionRef>
+ <actionRef label="way"><param> 3</param><param>-1</param></actionRef>
+ <actionRef label="way"><param> 4</param><param>-1</param></actionRef>
+ <actionRef label="way"><param> 5</param><param>-1</param></actionRef>
+ <actionRef label="way"><param> 6</param><param>-1</param></actionRef>
+ <actionRef label="way"><param> 7</param><param>-1</param></actionRef>
+ <actionRef label="way"><param> 8</param><param>-1</param></actionRef>
+ <actionRef label="way"><param> 9</param><param>-1</param></actionRef>
+ <actionRef label="way"><param>10</param><param>-1</param></actionRef>
+ <actionRef label="way"><param>11</param><param>-1</param></actionRef>
+ <actionRef label="way"><param>12</param><param>-1</param></actionRef>
+ <actionRef label="way"><param>13</param><param>-1</param></actionRef>
+ <actionRef label="way"><param>14</param><param>-1</param></actionRef>
+ <actionRef label="way"><param>15</param><param>-1</param></actionRef>
+ <actionRef label="way"><param>16</param><param>-1</param></actionRef>
+ <actionRef label="way"><param>17</param><param>-1</param></actionRef>
+ <actionRef label="way"><param>18</param><param>-1</param></actionRef>
+ <actionRef label="way"><param>19</param><param>-1</param></actionRef>
+ <actionRef label="way"><param>20</param><param>-1</param></actionRef>
+ <wait>300-$rank*100</wait>
+</action>
+
+<action label="way">
+ <fire>
+  <direction type="sequence">1.7*$2</direction>
+  <speed>0.1</speed>
+  <bullet>
+   <action>
+    <fire>
+     <direction type="relative">0</direction>
+     <speed>$1*0.8</speed>
+     <bulletRef label="stop"><param>$1</param></bulletRef>
+    </fire>
+    <repeat><times>17</times>
+     <action>
+      <fire>
+       <direction type="sequence">-20*$2</direction>
+       <speed>$1*0.8</speed>
+       <bulletRef label="stop"><param>$1</param></bulletRef>
+      </fire>
+     </action>
+    </repeat>
+    <vanish/>
+   </action>
+  </bullet>
+ </fire>
+</action>
+
+<bullet label="stop">
+ <action>
+  <wait>5</wait>
+  <changeSpeed>
+   <speed>0.00000000000000000000001</speed>
+   <term>1</term>
+  </changeSpeed>
+  <wait>30-$rank*15+$1*(6-$rank*$rank*3)</wait>
+  <changeSpeed>
+   <speed>1.2+$rank*$rank*1.8</speed>
+   <term>20</term>
+  </changeSpeed>
+ </action>
+</bullet>
+
+</bulletml>
+
+</barrage>

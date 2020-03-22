@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="lib_laser">
+    <repeat>
+      <times>$1</times>
+      <action>
+        <fire>
+          <direction type="relative">0</direction>
+          <speed type="absolute">2</speed>
+          <bullet />
+        </fire>
+        <wait>3</wait>
+      </action>
+    </repeat>
+    <vanish />
+  </action>
+  <action label="top">
+    <fire>
+      <direction type="absolute">270</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <actionRef label="lib_laser">
+          <param>20</param>
+        </actionRef>
+      </bullet>
+    </fire>
+    <repeat>
+      <times>15</times>
+      <action>
+        <wait>10</wait>
+        <fire>
+          <direction type="sequence">20</direction>
+          <speed type="absolute">0.1</speed>
+          <bullet>
+            <actionRef label="lib_laser">
+              <param>20</param>
+            </actionRef>
+          </bullet>
+        </fire>
+      </action>
+    </repeat>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/laser.bnml"
+
+action top {
+  fire direction absolute 270 speed absolute 0.1 bullet actionRef lib_laser(20);
+  repeat 15 action {
+    wait 10;
+    fire direction sequence 20 speed absolute 0.1 bullet actionRef lib_laser(20);
+  }
+}
+-->

@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>bb06-ohgi</filename>
+ <group>KotuAnzenX</group>
+ <title>扇状弾連射</title>
+ <description>１２０～２４０度の角度内でランダムに弾を発射。一定時間経過で下方向の扇状弾に分裂します。</description>
+ <capture>上に逃げれば当たりません。戦う場合は正面を避け、画面端で。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <repeat>
+  <times>50</times>
+   <action>
+    <fire>
+     <direction type="absolute">120+$rand*120</direction>
+     <bulletRef label="change"/>
+    </fire>
+   <wait>6</wait>
+  </action>
+ </repeat>
+</action>
+
+<bullet label="change">
+ <speed>1</speed>
+ <action>
+  <changeSpeed>
+   <speed>8</speed>
+   <term>19</term>
+  </changeSpeed>
+  <wait>19</wait>
+  <fire>
+   <speed>1+$rank</speed>
+   <direction type="absolute">145</direction>
+   <bullet/>
+  </fire>
+  <fire>
+   <speed>1+$rank</speed>
+   <direction type="sequence">10</direction>
+   <bullet/>
+  </fire>
+  <fire>
+   <speed>1+$rank</speed>
+   <direction type="sequence">10</direction>
+   <bullet/>
+  </fire>
+  <fire>
+   <speed>1+$rank</speed>
+   <direction type="sequence">10</direction>
+   <bullet/>
+  </fire>
+  <fire>
+   <speed>1+$rank</speed>
+   <direction type="sequence">10</direction>
+   <bullet/>
+  </fire>
+  <fire>
+   <speed>1+$rank</speed>
+   <direction type="sequence">10</direction>
+   <bullet/>
+  </fire>
+  <fire>
+   <speed>1+$rank</speed>
+   <direction type="sequence">10</direction>
+   <bullet/>
+  </fire>
+  <fire>
+   <speed>1+$rank</speed>
+   <direction type="sequence">10</direction>
+   <bullet/>
+  </fire>
+ <vanish/>
+ </action>
+</bullet>
+
+</bulletml>
+</barrage>

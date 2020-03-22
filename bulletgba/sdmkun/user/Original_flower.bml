@@ -1,0 +1,169 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>Original_flower</filename>
+ <group>shinichiro_h</group>
+ <title>オリジナル、華</title>
+ <description>この手の弾幕って書いたこと無いなーと思って。
+ 別に中国の人を再現しようと思ったわけではない。</description>
+ <capture>よく見るしかないと思います。
+ よくわからなければ動かなければそんなに当りません。</capture>
+</barrageInfo>
+
+<barrageStyle>
+        <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+	<action label="top">
+		<fire>
+			<direction type="aim">
+				$rand*360
+			</direction>
+			<speed>
+				1+$rank*2
+			</speed>
+			<bullet>
+				<action>
+					<vanish/>
+				</action>
+			</bullet>
+		</fire>
+		<actionRef label="flower">
+			<param>
+				-165
+			</param>
+		</actionRef>
+		<actionRef label="flower">
+			<param>
+				75
+			</param>
+		</actionRef>
+		<fire>
+			<direction type="aim">
+				$rand*360
+			</direction>
+			<speed type="sequence">
+				0
+			</speed>
+			<bullet>
+				<action>
+					<vanish/>
+				</action>
+			</bullet>
+		</fire>
+		<actionRef label="flower">
+			<param>
+				-120
+			</param>
+		</actionRef>
+		<actionRef label="flower">
+			<param>
+				60
+			</param>
+		</actionRef>
+		<wait>
+			90
+		</wait>
+	</action>
+	<action label="lineSrc">
+		<changeSpeed>
+			<speed>
+				0.00001
+			</speed>
+			<term>
+				20
+			</term>
+		</changeSpeed>
+		<wait>
+			50
+		</wait>
+		<fire>
+			<direction type="relative">
+				$1
+			</direction>
+			<speed>
+				1.3+$rank
+			</speed>
+			<bullet>
+				<action>
+					<vanish/>
+				</action>
+			</bullet>
+		</fire>
+		<repeat>
+			<times>
+				4
+			</times>
+			<action>
+				<fire>
+					<direction type="relative">
+						$1
+					</direction>
+					<speed type="sequence">
+						0.2
+					</speed>
+					<bullet/>
+				</fire>
+				<fire>
+					<direction type="sequence">
+						2*$rank
+					</direction>
+					<speed type="sequence">
+						0
+					</speed>
+					<bullet/>
+				</fire>
+			</action>
+		</repeat>
+		<vanish/>
+	</action>
+	<action label="flower">
+		<repeat>
+			<times>
+				15
+			</times>
+			<action>
+				<wait>
+					1
+				</wait>
+				<fire>
+					<direction type="sequence">
+						12
+					</direction>
+					<speed type="sequence">
+						0.03
+					</speed>
+					<bullet>
+						<actionRef label="lineSrc">
+							<param>
+								$1
+							</param>
+						</actionRef>
+					</bullet>
+				</fire>
+				<fire>
+					<direction type="sequence">
+						180
+					</direction>
+					<speed type="sequence">
+						0
+					</speed>
+					<bullet>
+						<actionRef label="lineSrc">
+							<param>
+								$1
+							</param>
+						</actionRef>
+					</bullet>
+				</fire>
+			</action>
+		</repeat>
+	</action>
+</bulletml>
+</barrage>
+

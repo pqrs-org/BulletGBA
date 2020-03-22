@@ -1,0 +1,225 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<!-- I don't believe the zipup CGI can handle various Japanese encodings. -->
+
+<!-- 2003/6/13 by Oohara Yuuma (oohara@libra.interq.or.jp) -->
+
+<barrageInfo>
+  <filename>green_thought</filename>
+  <group>Oohara</group>
+  <title>green thought</title>
+  <description>Annihilating all that's made / To a green thought in a green shade. --- Marvell</description>
+  <capture>Run to the outside.  Quickly.</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+  <fire>
+    <direction type="absolute">225 + 30 * $rand</direction>
+    <speed>0.5 + 0.3 * $rand</speed>
+    <bulletRef label="side">
+      <param>1</param>
+    </bulletRef>
+  </fire>
+  <fire>
+    <direction type="absolute">135 - 30 * $rand</direction>
+    <speed>0.5 + 0.3 * $rand</speed>
+    <bulletRef label="side">
+      <param>-1</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <direction type="absolute">0</direction>
+    <speed>0</speed>
+    <bulletRef label="halfcenter">
+      <param>1</param>
+    </bulletRef>
+  </fire>
+  <fire>
+    <direction type="absolute">0</direction>
+    <speed>0</speed>
+    <bulletRef label="halfcenter">
+      <param>-1</param>
+    </bulletRef>
+  </fire>
+
+  <wait>200</wait>
+</action>
+
+<bullet label="halfcenter">
+<action>
+
+  <wait>60</wait>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>3 * $1</param>
+      <param>0</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>9 * $1</param>
+      <param>0</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>15 * $1</param>
+      <param>0</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>21 * $1</param>
+      <param>0</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>27 * $1</param>
+      <param>0</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>33 * $1</param>
+      <param>0</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>39 * $1</param>
+      <param>0</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>45 * $1</param>
+      <param>0</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>51 * $1</param>
+      <param>0</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>57 * $1</param>
+      <param>0</param>
+    </bulletRef>
+  </fire>
+
+  <vanish/>
+
+</action>
+</bullet>
+
+<bullet label="side">
+<action>
+
+  <wait>60</wait>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>0 * $1</param>
+      <param>-14 * $1</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>7 * $1</param>
+      <param>-14 * $1</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>14 * $1</param>
+      <param>-14 * $1</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>21 * $1</param>
+      <param>-14 * $1</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>28 * $1</param>
+      <param>-14 * $1</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>35 * $1</param>
+      <param>-14 * $1</param>
+    </bulletRef>
+  </fire>
+
+  <fire>
+    <bulletRef label="oneline">
+      <param>42 * $1</param>
+      <param>-14 * $1</param>
+    </bulletRef>
+  </fire>
+
+  <vanish/>
+
+</action>
+</bullet>
+
+<bullet label="oneline">
+<direction type="absolute">0</direction>
+<speed>0</speed>
+<action>
+
+  <fire>
+    <direction type="aim">$1 + $2</direction>
+    <speed>1.3 + 1.0 * $rank</speed>
+    <bullet/>
+  </fire>
+  <wait>17 - 10 * $rank</wait>
+  <repeat><times>4 + 5 * $rank</times><action>
+    <fire>
+      <direction type="sequence">$1 * (-0.1)</direction>
+      <speed>1.3 + 1.0 * $rank</speed>
+    <bullet/>
+    </fire>
+    <wait>17 - 10 * $rank</wait>
+  </action> </repeat>
+
+  <vanish/>
+
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

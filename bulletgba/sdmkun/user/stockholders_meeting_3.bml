@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+2003/10/7 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* genocide
+* repeated repetition
+* human-centered politics
+-->
+
+<barrageInfo>
+  <filename>stockholders_meeting_3</filename>
+  <group>Oohara</group>
+  <title>株主総会その三</title>
+  <description>「会社は利潤のためにある。会社は、株が無配になるのを阻止しようとしているのだ! それがなぜわからない?」</description>
+  <capture>画面下にいればワインダーには当たりません。緑弾はいちおう自機を狙っているので注意。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+    <fire>
+      <direction type="absolute">0</direction>
+      <speed>0.6</speed>
+      <bulletRef label="bit"/>
+    </fire>
+  <repeat><times>20</times><action>
+    <wait>30</wait>
+    <fire>
+      <direction type="sequence">-53</direction>
+      <speed>0.6</speed>
+      <bulletRef label="bit"/>
+    </fire>
+  </action></repeat>
+
+    <wait>600</wait>
+</action>
+
+
+<bullet label="bit">
+<action>
+
+    <changeDirection>
+      <direction type="aim">0</direction>
+      <term>200</term>
+    </changeDirection>
+
+  <repeat><times>999</times><action>
+    <wait>25 - 22 * $rank</wait>
+    <fire>
+      <direction type="relative">135 - 20 * $rank</direction>
+      <speed>0.5 + 0.5 * $rank</speed>
+      <bullet/>
+    </fire>
+    <fire>
+      <direction type="relative">-(135 - 20 * $rank)</direction>
+      <speed>0.5 + 0.5 * $rank</speed>
+      <bullet/>
+    </fire>
+  </action></repeat>
+  <vanish/>
+
+</action>
+</bullet>
+
+</bulletml>
+</barrage>

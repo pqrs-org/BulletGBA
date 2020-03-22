@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx-bx1-seahorse</filename>
+ <group>KotuAnzenX</group>
+ <title>全方位シーホース</title>
+ <description>別名全方位凄駆。八方向にばら撒き。後に発射される弾ほど高速になります。</description>
+ <capture>レベルが低ければ全方位弾の隙間に入れば回避出来ます。レベルが高いと隙間が高速弾で埋まってしまうので、気合で弾と弾との小さな隙間に入らなければいけません。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<actionRef label="shoot"><param>1</param><param>10+$rank*8</param></actionRef>
+<wait>60-$rank*30</wait>
+<actionRef label="shoot"><param>-1</param><param>12+$rank*8</param></actionRef>
+<wait>60-$rank*30</wait>
+<actionRef label="shoot"><param>1</param><param>14+$rank*8</param></actionRef>
+<wait>60-$rank*30</wait>
+</action>
+
+<action label="shoot">
+ <fire>
+  <speed type="absolute">1+$rank</speed>
+  <direction type="aim">-45*$rand*90</direction>
+  <bullet/>
+ </fire>
+ <repeat><times>7</times>
+ <action>
+ <fire>
+  <speed type="sequence">0</speed>
+  <direction type="sequence">45*$1</direction>
+  <bullet/>
+ </fire>
+ </action>
+ </repeat>
+ <wait>3</wait>
+ <repeat><times>$2</times>
+ <action>
+ <fire>
+  <speed type="sequence">0.1</speed>
+  <direction type="sequence">48*$1</direction>
+  <bullet/>
+ </fire>
+ <repeat><times>7</times>
+ <action>
+ <fire>
+  <speed type="sequence">0</speed>
+  <direction type="sequence">45*$1</direction>
+  <bullet/>
+ </fire>
+ </action>
+ </repeat>
+ <wait>3</wait>
+ </action>
+ </repeat>
+</action>
+
+</bulletml>
+</barrage>

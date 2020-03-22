@@ -1,0 +1,101 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!-- コメント -->
+
+<barrageInfo>
+ <!-- ファイル名が別の名前になっていると、
+      この名前に従ってファイル名は修正されます。
+      これは必ずつけて下さい。ブラウザから実行する場合、
+      ファイル名が変わっていることが多々あります。 -->
+ <filename>bwda06</filename>
+ <!-- グループ名は data/groups.dat から適切なものを選んでも良いですし、
+      お好きな名前を付けてもらっても結構です。
+	  存在しないグループ名をつけた場合は userグループ扱いになります。
+	  ある程度同じグループの弾幕がたまったら
+	  data/groups.dat に私が追加します。
+   -->
+ <group>bwda</group>
+ <title>Raypear・Anti-Aircraft・Defence・System</title>
+ <description>題名は目標撃破率９９．９９９％を誇るというイギリスの地対空迎撃システムから。その名を冠する追尾弾は画面外に追い出すことさえ不可能なほど完璧な追尾性能を持つ。</description> <capture>追尾弾の場所を常に確認しつつそちらに動かないようにして全方位を避ける。レベルが上がると追尾弾の速度が上がるので常に先のことを考えて動くこと。ちなみにコンフィグで自機の最大速度を極端に遅くしている人はめでたく爆死決定。</capture>
+</barrageInfo>
+
+<!-- ここで弾の色とか形とかを指定できるようにする予定 -->
+<barrageStyle>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<actionRef label="bara"></actionRef>
+<actionRef label="eve"></actionRef>
+<wait>600+($rank*600)</wait>
+</action>
+
+
+<action label="eve">
+<wait>40</wait>
+<repeat>
+<times>11+($rank*10)</times>
+<action>
+<repeat>
+<times>75+($rank*75)</times>
+<action>
+ <bullet>
+  <direction type="sequence">$rand*10</direction>
+  <speed>2</speed>
+  </bullet>
+
+</action>
+</repeat>
+<wait>60</wait>
+</action>
+</repeat>
+</action>
+
+
+<action label="bara">
+<repeat>
+<times>10</times>
+<action>
+ <bullet>
+  <direction type="absolute">$rand*360</direction>
+  <speed>2</speed>
+<actionRef label="home"></actionRef>
+  </bullet>
+</action>
+</repeat>
+</action>
+
+<action label="home">
+
+<wait>$rand*30</wait>
+<changeSpeed>
+<speed>0</speed>
+<term>30</term>
+</changeSpeed>
+<wait>40</wait>
+<changeSpeed>
+<speed>$rank+1</speed>
+<term>30</term>
+</changeSpeed>
+<repeat>
+<times>600+($rank*600)</times>
+<action>
+<changeDirection>
+<direction type="aim">0</direction>
+<term>1</term>
+</changeDirection>
+ <wait>1</wait>
+</action>
+</repeat>
+</action>
+
+</bulletml>
+
+</barrage>
+

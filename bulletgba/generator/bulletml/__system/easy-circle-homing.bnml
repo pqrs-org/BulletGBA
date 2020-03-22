@@ -1,0 +1,25 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/spear.bnml"
+
+action top {
+  repeat 3 action {
+    fire form root direction absolute 180 speed absolute 4 bullet action {
+      wait 20;
+      changeSpeed absolute 0 term 1;
+      repeat 36 action {
+        wait 3;
+        fire form middle direction sequence 10 speed absolute 4 bullet action {
+          wait 10;
+          changeSpeed absolute 0 term 1;
+          wait 90;
+          fire form small direction aim 0 speed absolute 2 bullet;
+          vanish;
+        }
+      }
+      vanish;
+    }
+    wait 200;
+  }
+}

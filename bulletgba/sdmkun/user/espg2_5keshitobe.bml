@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>espg2_5keshitobe</filename>
+ <group>user</group>
+ <title>エスプガルーダ２　５面ボス発狂</title>
+ <description>消し飛べー！</description>
+ <capture>弾密度の低いところを選んで気合避け。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml" />
+</barrageStyle>
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+	<changeDirection>
+		<direction type="absolute">0</direction>
+		<term>1</term>
+	</changeDirection>
+	<changeSpeed>
+		<speed type="absolute">0.4</speed>
+		<term>20</term>
+	</changeSpeed>
+	<wait>24</wait>
+	<changeSpeed>
+		<speed type="absolute">0</speed>
+		<term>30</term>
+	</changeSpeed>
+	<wait>30</wait>
+	<repeat><times>3</times><action>
+		<fire>
+			<direction type="absolute">5.625</direction>
+			<speed type="absolute">1.1</speed>
+			<bulletRef label="sub">
+				<param>-2.8125</param>
+			</bulletRef>
+		</fire>
+		<repeat><times>31</times><action>
+			<fire>
+				<direction type="sequence">11.25</direction>
+				<speed type="absolute">1.1</speed>
+				<bulletRef label="sub">
+					<param>-2.8125</param>
+				</bulletRef>
+			</fire>
+		</action></repeat>
+		<wait>210</wait>
+		<fire>
+			<direction type="absolute">5.625</direction>
+			<speed type="absolute">1.1</speed>
+			<bulletRef label="sub">
+				<param>-2.8125</param>
+			</bulletRef>
+		</fire>
+		<repeat><times>31</times><action>
+			<fire>
+				<direction type="sequence">11.25</direction>
+				<speed type="absolute">1.1</speed>
+				<bulletRef label="sub">
+					<param>2.8125</param>
+				</bulletRef>
+			</fire>
+		</action></repeat>
+		<wait>210</wait>
+	</action></repeat>
+	<wait>100</wait>
+</action>
+
+<bullet label="sub">
+	<action>
+		<wait>24</wait>
+		<fire>
+			<direction type="relative">180</direction>
+			<speed type="absolute">0.5</speed>
+			<bullet/>
+		</fire>
+		<repeat><times>9999</times><action>
+			<wait>4</wait>
+			<fire>
+				<direction type="sequence">$1</direction>
+				<speed type="absolute">0.65</speed>
+				<bullet/>
+			</fire>
+			<wait>4</wait>
+			<fire>
+				<direction type="sequence">$1</direction>
+				<speed type="absolute">0.5</speed>
+				<bullet/>
+			</fire>
+		</action></repeat>
+	</action>
+</bullet>
+
+</bulletml>
+</barrage>

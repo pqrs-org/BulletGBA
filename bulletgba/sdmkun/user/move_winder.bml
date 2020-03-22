@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>move_winder</filename>
+	<group>user</group>
+	<title>回転移動ワインダー＋ばら撒き弾</title>
+	<description>壁に沿って移動する自機狙い偶数ワインダー＋自機方向狙いばら撒き弾。挙動がちょっと怪しいですが・・・。</description>
+	<capture>大きく動こうとするとワインダーが邪魔なので、真ん中でばら撒き弾を小さく気合避け。ランクはワインダーの幅にのみ影響します。完全ランダムなので回避能力と運を頼りに頑張ってください。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <repeat><times>150+$rank*100</times>
+  <actionRef label="move"/>
+ </repeat>
+</action>
+
+<action label="move">
+ <changeDirection>
+  <direction type="relative">3</direction>
+  <term>1</term>
+ </changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>1</term>
+ </changeSpeed>
+  <actionRef label="shot"/>
+  <actionRef label="winder"/>
+  <actionRef label="winder2"/>
+</action>
+
+<action label="shot">
+ <fire>
+  <speed>0.5+($rand*1.5)</speed>
+  <direction type="aim">60-($rand*120)</direction>
+  <bullet/>
+  <wait>5</wait>
+ </fire>
+</action>
+
+<action label="winder">
+ <fire>
+  <speed>3</speed>
+  <direction type="aim">315+($rank*30)</direction>
+  <bullet/>
+ </fire>
+</action>
+
+<action label="winder2">
+ <fire>
+  <speed>3</speed>
+  <direction type="aim">45-($rank*30)</direction>
+  <bullet/>
+ </fire>
+</action>
+
+</bulletml>
+</barrage>

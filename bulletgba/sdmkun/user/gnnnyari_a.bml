@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>gnnnyari_a</filename>
+	<group>MDA</group>
+	<title>「なんか生々しい」修正版</title>
+	<description>条件によって動きが変になる欠陥弾幕だったのが、仕様変更によりいよいよ駄目になったので修正版を。他にもちょこちょこ変わっています。攻略は以前の文章そのままです</description>
+	<capture>赤弾付近は弾密度が高くなっているので、それ以外のところを通るようにすれば良いでしょ。道にしたがって右のほうにずっと行くとすぐに厳しくなるので、左の方を通ることを覚悟しておかなければならないと思います。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+	<actionRef label="seed"/>
+	<wait>130</wait>
+</action>
+
+<action label="seed">
+	<fire>
+		<direction type="absolute">178+(4*$rand)</direction>
+		<speed>1.05+($rank*0.1)</speed>
+		<bulletRef label="shoot"/>
+	</fire>
+	<wait>2</wait>
+	<repeat>
+		<times>30+$rank*180</times>
+		<action>
+			<fire>
+				<direction type="sequence">27</direction>
+				<speed>1.05+($rank*0.1)</speed>
+				<bulletRef label="shoot"/>
+			</fire>
+			<wait>2</wait>
+		</action>
+	</repeat>
+</action>
+
+<bullet label="shoot">
+	<action>
+		<wait>10</wait>
+		<fire>
+			<direction type="relative">0</direction>
+			<speed>1.0+0.4*$rank</speed>
+			<bulletRef label="dummy"/>
+		</fire>
+		<repeat>
+			<times>11</times>
+			<action>
+				<fire>
+					<direction type="sequence">30</direction>
+					<speed>1.0+0.4*$rank</speed>
+					<bullet/>
+				</fire>
+			</action>
+		</repeat>
+		<vanish/>
+	</action>
+</bullet>
+
+<bullet label="dummy">
+	<action/>
+</bullet>
+
+</bulletml>
+
+</barrage>

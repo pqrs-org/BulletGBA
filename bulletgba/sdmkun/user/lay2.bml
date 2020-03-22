@@ -1,0 +1,175 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+<filename>lay2</filename>
+ <group>user</group>
+ <title>東方紅魔郷より、ムーンライトレイもどき</title>
+ <description>本物では回転レーザーです。</description>
+ <capture>せめてレーザーらしく剛体回転するようにした。</capture>
+</barrageInfo>
+
+<barrageStyles>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<!-- CDATA とかいうのは大事なおまじないです。 -->
+<lua>
+<![CDATA[
+pi = 3.141592
+a1 = 0
+a2 = 0
+a3 = 0
+
+function cal(p,q,r)
+	rr = r*pi/180
+	pp = (p/math.sqrt(p^2+q^2))*math.cos(rr)-(q/math.sqrt(p^2+q^2))*math.sin(rr)
+	qq = (q/math.sqrt(p^2+q^2))*math.cos(rr)+(p/math.sqrt(p^2+q^2))*math.sin(rr)
+	return pp,qq
+end
+
+function top()
+	rank = getRank()
+	px = getPlayerX()
+	py = getPlayerY()
+	turn = getTurn()
+	local aim = getPlayerAngle()-pi/2
+	
+	if(turn == 1)then
+	fire(-4,0,"lay1")
+	fire(4,0,"lay2")
+	end
+
+	if(a3 > 10)then
+	speed = 1+rank*2.2
+	for i = 0,8 do
+	fire(speed*math.cos(aim+pi/180*(i*20-80)),speed*math.sin(aim+pi/180*(i*20-80)))
+	a3 = 0
+	end
+	end
+	
+	if(turn > 330)then
+	quit()
+	end
+	a3 = a3 + 1
+end
+
+function lay1()
+	x1 = getX()-4
+	y1 = getY()-4
+	local t1 = getTurn()
+	if(t1 > 5)then
+
+	if(t1 > 265+rank*8)then
+	w1 = 0
+	v1 = 1.5
+	ra1 = 8
+	wa1 = 0.4
+	cos1 = math.cos(-0.01*(136+rank*8)+aim1+85*pi/180)
+	sin1 = math.sin(-0.01*(136+rank*8)+aim1+85*pi/180)
+	elseif(t1 > 130)then
+	w1 = -0.01
+	v1 = 1.5
+	ra1 = 8
+	wa1 = 0.4
+	cos1 = math.cos(w1*(t1-130)+aim1+85*pi/180)
+	sin1 = math.sin(w1*(t1-130)+aim1+85*pi/180)
+	else
+	w1 = 0
+	v1 = 1.5
+	ra1 = 8
+	wa1 = 0.4
+	cos1 = math.cos(w1*t1+aim1+85*pi/180)
+	sin1 = math.sin(w1*t1+aim1+85*pi/180)
+	end
+
+	if(a1 > 2)then
+	fire(v1*cos1-ra1*wa1*sin1,v1*sin1+ra1*wa1*cos1,"ball1")
+	a1 = 0
+	end
+	a1 = a1 + 1
+
+	end
+	
+	if(t1 > 320)then
+	vanish()
+	end
+	if(t1 == 2)then
+	setSpeed(0,0)
+	fire(0,0,"point1")
+	end
+end
+function point1()
+	aim1 = getPlayerAngle()-pi/2
+	vanish()
+end
+function ball1()
+	local t = getTurn()
+	local vx = v1*cos1-(v1*t)*w1*sin1+w1*ra1*wa1*math.cos(wa1*t)*cos1-ra1*wa1*math.cos(wa1*t)*sin1
+	local vy = v1*sin1+(v1*t)*w1*cos1+w1*ra1*wa1*math.cos(wa1*t)*sin1+ra1*wa1*math.cos(wa1*t)*cos1
+	setSpeed(vx,vy)
+end
+
+function lay2()
+	x2 = getX()-4
+	y2 = getY()-4
+	local t2 = getTurn()
+	if(t2 > 5)then
+
+	if(t2 > 265+rank*8)then
+	w2 = 0
+	v2 = 1.5
+	ra2 = 8
+	wa2 = -0.4
+	cos2 = math.cos(0.01*(136+rank*8)+aim2-85*pi/180)
+	sin2 = math.sin(0.01*(136+rank*8)+aim2-85*pi/180)
+	elseif(t2 > 130)then
+	w2 = 0.01
+	v2 = 1.5
+	ra2 = 8
+	wa2 = -0.4
+	cos2 = math.cos(w2*(t2-130)+aim2-85*pi/180)
+	sin2 = math.sin(w2*(t2-130)+aim2-85*pi/180)
+	else
+	w2 = 0
+	v2 = 1.5
+	ra2 = 8
+	wa2 = -0.4
+	cos2 = math.cos(w2*t2+aim2-85*pi/180)
+	sin2 = math.sin(w2*t2+aim2-85*pi/180)
+	end
+
+	if(a2 > 2)then
+	fire(v2*cos2-ra2*wa2*sin2,v2*sin2+ra2*wa2*cos2,"ball2")
+	a2 = 0
+	end
+	a2 = a2 + 1
+
+	end
+	
+	if(t2 > 320)then
+	vanish()
+	end
+	if(t2 == 2)then
+	setSpeed(0,0)
+	fire(0,0,"point2")
+	end
+end
+function point2()
+	aim2 = getPlayerAngle()-pi/2
+	vanish()
+end
+function ball2()
+	local t = getTurn()
+	local vx = v2*cos2-(v2*t)*w2*sin2+w2*ra2*wa2*math.cos(wa2*t)*cos2-ra2*wa2*math.cos(wa2*t)*sin2
+	local vy = v2*sin2+(v2*t)*w2*cos2+w2*ra2*wa2*math.cos(wa2*t)*sin2+ra2*wa2*math.cos(wa2*t)*cos2
+	setSpeed(vx,vy)
+end
+
+]]>
+</lua>
+
+</barrage>

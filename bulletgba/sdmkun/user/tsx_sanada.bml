@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_sanada</filename>
+ <group>KotuAnzenX</group>
+ <title>ケツイ４面中ボス：サナダ虫弾</title>
+ <description>実物は自機狙い弾がまさにサナダ虫。</description>
+ <capture>切り返そうと思うなかれ。端っこからコンコン避けをせよ。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <changeSpeed>
+  <speed>4</speed>
+  <term>1</term>
+ </changeSpeed>
+ <changeDirection>
+  <direction type="absolute">180</direction>
+  <term>1</term>
+ </changeDirection>
+ <wait>9</wait>
+ <changeSpeed>
+  <speed>0</speed>
+  <term>1</term>
+ </changeSpeed>
+ <fire>
+  <direction type="absolute">0</direction>
+  <bullet>
+   <action>
+    <vanish/>
+   </action>
+  </bullet>
+ </fire>
+ <wait>1</wait>
+ <repeat><times>6</times>
+  <action>
+   <repeat><times>60</times>
+    <action>
+     <fire>
+      <speed>2</speed>
+      <direction type="sequence">7</direction>
+      <bullet>
+       <action>
+        <wait>5</wait>
+        <changeSpeed>
+         <speed>0.1</speed>
+         <term>5+$rank*20</term>
+        </changeSpeed>
+        <wait>5+$rank*20</wait>
+        <changeSpeed>
+         <speed>2+$rank*2</speed>
+         <term>30</term>
+        </changeSpeed>
+       </action>
+      </bullet>
+     </fire>
+     <fire>
+      <speed type="sequence">1</speed>
+      <direction type="sequence">0</direction>
+      <bullet>
+       <action>
+        <wait>5</wait>
+        <changeSpeed>
+         <speed>0.1</speed>
+         <term>5+$rank*20</term>
+        </changeSpeed>
+        <wait>5+$rank*20</wait>
+        <changeDirection>
+         <direction type="aim">0</direction>
+         <term>1</term>
+        </changeDirection>
+        <changeSpeed>
+         <speed>2.5+$rank*2.5</speed>
+         <term>30</term>
+        </changeSpeed>
+       </action>
+      </bullet>
+     </fire>
+     <wait>1</wait>
+    </action>
+   </repeat>
+   <wait>25-$rank*20</wait>
+  </action>
+ </repeat>
+</action>
+
+</bulletml>
+</barrage>

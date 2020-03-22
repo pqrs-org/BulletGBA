@@ -1,0 +1,68 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 10 action {
+    actionRef fireScrewCross(-1);
+    actionRef fireScrewCross(1);
+    wait 40;
+  }
+  wait 120;
+  actionRef fireScrewCrossWithoutHoming(-1);
+  wait 30;
+  actionRef fireScrewCrossWithoutHoming(1);
+}
+
+// $1: round-direction
+action fireScrewCross {
+  fire direction absolute 0 speed absolute 0.1 bullet action {
+    changeDirection sequence $1 term 60;
+    repeat 10 action {
+      fire form thin direction relative 0 speed absolute 2 bullet;
+      fire form thin direction relative 90 speed absolute 2 bullet;
+      fire form thin direction relative 180 speed absolute 2 bullet;
+      fire form thin direction relative 270 speed absolute 2 bullet;
+      wait 4;
+    }
+    fire form thin direction relative 0 + 45 speed absolute 0.1 bullet actionRef homingLine(5);
+    fire form thin direction relative 90 + 45 speed absolute 0.1 bullet actionRef homingLine(5);
+    fire form thin direction relative 180 + 45 speed absolute 0.1 bullet actionRef homingLine(5);
+    fire form thin direction relative 270 + 45 speed absolute 0.1 bullet actionRef homingLine(5);
+
+    vanish;
+  }
+}
+
+action fireScrewCrossWithoutHoming {
+  fire direction absolute 0 speed absolute 0.1 bullet action {
+    changeDirection sequence $1 term 999;
+    repeat 5 action {
+      repeat 10 action {
+        fire form middle direction relative 0 speed absolute 4 bullet;
+        fire form middle direction relative 90 speed absolute 4 bullet;
+        fire form middle direction relative 180 speed absolute 4 bullet;
+        fire form middle direction relative 270 speed absolute 4 bullet;
+        wait 2;
+      }
+      wait 10;
+    }
+    vanish;
+  }
+}
+
+// $1: length
+action homingLine {
+  fire form small direction relative 0 speed absolute 2 bullet action {
+    wait 30;
+    changeDirection aim 0 term 1;
+    changeSpeed absolute 2 term 1;
+  }
+  repeat $1 action {
+    fire form small direction relative 0 speed sequence 0.2 bullet action {
+      wait 30;
+      changeDirection aim 0 term 1;
+      changeSpeed absolute 2 term 1;
+    }
+  }
+  vanish;
+}

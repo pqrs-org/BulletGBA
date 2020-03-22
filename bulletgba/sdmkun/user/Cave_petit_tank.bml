@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+  <filename>Cave_petit_tank</filename>
+  <group>user</group>
+  <title>Cave豆戦車ラッシュ</title>
+  <description>ガルーダで覚醒するとよく判るステッピング自機狙い</description>
+  <capture>切り返し。ランクが上がるほど狙い精度が落ちるので注意</capture>
+  <author>Pentan</author>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+
+PI2=6.283185307
+
+function top()
+	if getTurn()>1500 then
+		quit()
+	elseif getTurn()==0 then
+		fire( -2, -1, "tankShooter" )
+	end
+end
+
+function tankShooter()
+	if getTurn()>1300 then vanish() end
+	if getX()<5 or getX()>getMaxX()-5 then
+		setSpeed(0,0)
+		if math.mod( getTurn(), 60 )==0 then
+			fire( math.sin(PI2/3)*0.5, -math.cos(PI2/3)*0.5, "tank" )
+		end
+	end
+end
+
+function tank()
+	if getX()>getMaxX()*(0.5+getRank()*0.5) then
+		quit()
+	elseif math.mod( getTurn(), 10 )==0 then
+		way=32-getRank()*20
+		angle=math.floor( getPlayerAngle()/PI2*way+0.5 )*PI2/way
+		fire( math.sin(angle), -math.cos(angle) )
+	end
+end
+
+]]>
+</lua>
+
+</barrage>

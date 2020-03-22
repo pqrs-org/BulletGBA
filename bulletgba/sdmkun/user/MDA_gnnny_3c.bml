@@ -1,0 +1,225 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>MDA_gnnny_3c</filename>
+	<group>MDA</group>
+	<title>ぐるぐる三色</title>
+	<description>回転角度、分裂前の弾速（分裂までの距離）、分裂の角度がランダムで決定された3つの弾源がぐるぐると撃ってきます。何を目指していたかはお察しください。しなくてもいいのですが。</description>
+	<capture>適当な弾幕なので、適当に避けるしか…青→白→赤の順に弾速が上がっています。レベルが上がると白・赤の発動が早くなり、全体の時間が伸びます。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+	<!-- param:seed発射角/seed弾速/shootWay間隔 -->
+<action label="top">
+	<fire>
+		<direction>0</direction>
+		<speed>0</speed>
+		<bullet>
+			<actionRef label="seed_blue">
+				<param>($rand*145)+3</param>
+				<param>($rand*1.8)+0.2</param>
+				<param>($rand*65)+5</param>
+			</actionRef>
+		</bullet>
+	</fire>
+	<fire>
+		<direction>0</direction>
+		<speed>0</speed>
+		<bullet>
+			<actionRef label="seed_white">
+				<param>($rand*145)+3</param>
+				<param>($rand*1.8)+0.2</param>
+				<param>($rand*65)+5</param>
+			</actionRef>
+		</bullet>
+	</fire>
+	<fire>
+		<direction>0</direction>
+		<speed>0</speed>
+		<bullet>
+			<actionRef label="seed_red">
+				<param>($rand*145)+3</param>
+				<param>($rand*1.8)+0.2</param>
+				<param>($rand*65)+5</param>
+			</actionRef>
+		</bullet>
+	</fire>
+	<wait>3*(45+20+($rank*150))</wait>
+</action>
+
+<!-- seed -->
+
+<action label="seed_blue">
+	<fire>
+		<direction type="absolute">$rand*360</direction>
+		<speed>1</speed>
+		<bulletRef label="start"/>
+	</fire>
+	<repeat>
+		<times>45+($rank*150)</times>
+		<action>
+			<fire>
+				<direction type="sequence">$1</direction>
+				<speed>$2</speed>
+				<bullet>
+					<actionRef label="shoot_blue"><param>$3</param></actionRef>
+				</bullet>
+			</fire>
+			<wait>3</wait>
+		</action>
+	</repeat>
+	<vanish/>
+</action>
+
+<action label="seed_white">
+	<fire>
+		<direction type="absolute">$rand*360</direction>
+		<speed>1</speed>
+		<bulletRef label="start"/>
+	</fire>
+	<repeat>
+		<times>1+((1-$rank)*20)</times>
+		<action>
+			<wait>3</wait>
+		</action>
+	</repeat>
+	<repeat>
+		<times>45+($rank*(150-20))</times>
+		<action>
+			<fire>
+				<direction type="sequence">$1</direction>
+				<speed>$2</speed>
+				<bullet>
+					<actionRef label="shoot_white"><param>$3</param></actionRef>
+				</bullet>
+			</fire>
+			<wait>3</wait>
+		</action>
+	</repeat>
+	<vanish/>
+</action>
+
+<action label="seed_red">
+	<fire>
+		<direction type="absolute">$rand*360</direction>
+		<speed>1</speed>
+		<bulletRef label="start"/>
+	</fire>
+	<repeat>
+		<times>1+((1-$rank)*40)</times>
+		<action>
+			<wait>3</wait>
+		</action>
+	</repeat>
+	<repeat>
+		<times>45+($rank*(150-40))</times>
+		<action>
+			<fire>
+				<direction type="sequence">$1</direction>
+				<speed>$2</speed>
+				<bullet>
+					<actionRef label="shoot_red"><param>$3</param></actionRef>
+				</bullet>
+			</fire>
+			<wait>3</wait>
+		</action>
+	</repeat>
+	<vanish/>
+</action>
+
+<!-- shoot -->
+
+<action label="shoot_blue">
+	<wait>12</wait>
+	<fire>
+		<direction type="relative">0</direction>
+		<speed>1.0</speed>
+		<bulletRef label="blue"/>
+	</fire>
+	<repeat>
+		<times>5</times>
+		<action>
+			<fire>
+				<direction type="sequence">$1</direction>
+				<speed>1.0</speed>
+				<bulletRef label="blue"/>
+			</fire>
+		</action>
+	</repeat>
+	<vanish/>
+</action>
+
+<action label="shoot_white">
+	<wait>12</wait>
+	<fire>
+		<direction type="relative">0</direction>
+		<speed>1.2</speed>
+		<bullet/>
+	</fire>
+	<repeat>
+		<times>5</times>
+		<action>
+			<fire>
+				<direction type="sequence">$1</direction>
+				<speed>1.2</speed>
+				<bullet/>
+			</fire>
+		</action>
+	</repeat>
+	<vanish/>
+</action>
+
+<action label="shoot_red">
+	<wait>12</wait>
+	<fire>
+		<direction type="relative">0</direction>
+		<speed>1.4</speed>
+		<bulletRef label="red"/>
+	</fire>
+	<repeat>
+		<times>5</times>
+		<action>
+			<fire>
+				<direction type="sequence">$1</direction>
+				<speed>1.4</speed>
+				<bulletRef label="red"/>
+			</fire>
+		</action>
+	</repeat>
+	<vanish/>
+</action>
+
+<!-- other -->
+
+<bullet label="red">
+	<action/>
+</bullet>
+
+<bullet label="blue">
+	<action>
+		<wait>1</wait>
+		<fire>
+			<direction type="relative">0</direction>
+			<speed>1.0</speed>
+			<bullet/>
+		</fire>
+		<vanish/>
+	</action>
+</bullet>
+
+<bullet label="start">
+	<action>
+		<vanish/>
+	</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

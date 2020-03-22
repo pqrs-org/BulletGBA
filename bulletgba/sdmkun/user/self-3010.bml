@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>self-3010</filename>
+ <group>OtakuTwo</group>
+ <title>自分Bulletsmorph　Part01</title>
+ <description>プロギア３ボスの加速落下弾が、大原さんのシューティングスターのように弾撒き。</description>
+ <capture>画面下のほうが安全かも。降ってくる弾にも緑弾の炸裂にも要注意。</capture>
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <repeat><times>6</times>
+  <action>
+   <actionRef label="main"><param>-1</param></actionRef>
+   <actionRef label="main"><param> 1</param></actionRef>
+  </action>
+ </repeat>
+</action>
+
+<action label="main">
+ <fire>
+  <direction type="absolute">$1*120</direction>
+  <speed>2</speed>
+  <bullet>
+   <action>
+    <changeSpeed>
+     <speed>0</speed>
+     <term>30</term>
+    </changeSpeed>
+    <wait>30</wait>
+    <fireRef label="star"><param>$1</param></fireRef>
+    <vanish/>
+   </action>
+  </bullet>
+ </fire>
+ <wait>210-$rank*90</wait>
+</action>
+
+<fire label="star">
+ <direction type="absolute">$1*(10-$rand*30)</direction>
+ <speed>2</speed>
+ <bullet>
+  <action>
+   <accel>
+    <vertical>5</vertical>
+    <term>200</term>
+   </accel>
+   <repeat><times>80</times>
+    <action>
+     <repeat><times>1+$rank*$rank*4</times>
+      <action>
+       <fire>
+        <direction type="relative">150+$rand*60</direction>
+        <speed>0.3+$rand*0.9</speed>
+        <bullet/>
+       </fire>
+      </action>
+     </repeat>
+     <wait>2</wait>
+    </action>
+   </repeat>
+   <repeat><times>60+$rank*60</times>
+    <action>
+     <fire>
+      <direction type="absolute">$rand*360</direction>
+      <speed>0.3+$rand*1.2</speed>
+      <bullet/>
+     </fire>
+    </action>
+   </repeat>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+</bulletml>
+
+</barrage>

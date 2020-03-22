@@ -1,0 +1,262 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <repeat>
+      <times>10</times>
+      <action>
+        <actionRef label="fireScrewCross">
+          <param>-1</param>
+        </actionRef>
+        <actionRef label="fireScrewCross">
+          <param>1</param>
+        </actionRef>
+        <wait>40</wait>
+      </action>
+    </repeat>
+    <wait>120</wait>
+    <actionRef label="fireScrewCrossWithoutHoming">
+      <param>-1</param>
+    </actionRef>
+    <wait>30</wait>
+    <actionRef label="fireScrewCrossWithoutHoming">
+      <param>1</param>
+    </actionRef>
+  </action>
+  <action label="fireScrewCross">
+    <fire>
+      <direction type="absolute">0</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <action>
+          <changeDirection>
+            <direction type="sequence">$1</direction>
+            <term>60</term>
+          </changeDirection>
+          <repeat>
+            <times>10</times>
+            <action>
+              <fire form="thin">
+                <direction type="relative">0</direction>
+                <speed type="absolute">2</speed>
+                <bullet />
+              </fire>
+              <fire form="thin">
+                <direction type="relative">90</direction>
+                <speed type="absolute">2</speed>
+                <bullet />
+              </fire>
+              <fire form="thin">
+                <direction type="relative">180</direction>
+                <speed type="absolute">2</speed>
+                <bullet />
+              </fire>
+              <fire form="thin">
+                <direction type="relative">270</direction>
+                <speed type="absolute">2</speed>
+                <bullet />
+              </fire>
+              <wait>4</wait>
+            </action>
+          </repeat>
+          <fire form="thin">
+            <direction type="relative">0+45</direction>
+            <speed type="absolute">0.1</speed>
+            <bullet>
+              <actionRef label="homingLine">
+                <param>5</param>
+              </actionRef>
+            </bullet>
+          </fire>
+          <fire form="thin">
+            <direction type="relative">90+45</direction>
+            <speed type="absolute">0.1</speed>
+            <bullet>
+              <actionRef label="homingLine">
+                <param>5</param>
+              </actionRef>
+            </bullet>
+          </fire>
+          <fire form="thin">
+            <direction type="relative">180+45</direction>
+            <speed type="absolute">0.1</speed>
+            <bullet>
+              <actionRef label="homingLine">
+                <param>5</param>
+              </actionRef>
+            </bullet>
+          </fire>
+          <fire form="thin">
+            <direction type="relative">270+45</direction>
+            <speed type="absolute">0.1</speed>
+            <bullet>
+              <actionRef label="homingLine">
+                <param>5</param>
+              </actionRef>
+            </bullet>
+          </fire>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+  </action>
+  <action label="fireScrewCrossWithoutHoming">
+    <fire>
+      <direction type="absolute">0</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <action>
+          <changeDirection>
+            <direction type="sequence">$1</direction>
+            <term>999</term>
+          </changeDirection>
+          <repeat>
+            <times>5</times>
+            <action>
+              <repeat>
+                <times>10</times>
+                <action>
+                  <fire form="middle">
+                    <direction type="relative">0</direction>
+                    <speed type="absolute">4</speed>
+                    <bullet />
+                  </fire>
+                  <fire form="middle">
+                    <direction type="relative">90</direction>
+                    <speed type="absolute">4</speed>
+                    <bullet />
+                  </fire>
+                  <fire form="middle">
+                    <direction type="relative">180</direction>
+                    <speed type="absolute">4</speed>
+                    <bullet />
+                  </fire>
+                  <fire form="middle">
+                    <direction type="relative">270</direction>
+                    <speed type="absolute">4</speed>
+                    <bullet />
+                  </fire>
+                  <wait>2</wait>
+                </action>
+              </repeat>
+              <wait>10</wait>
+            </action>
+          </repeat>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+  </action>
+  <action label="homingLine">
+    <fire form="small">
+      <direction type="relative">0</direction>
+      <speed type="absolute">2</speed>
+      <bullet>
+        <action>
+          <wait>30</wait>
+          <changeDirection>
+            <direction type="aim">0</direction>
+            <term>1</term>
+          </changeDirection>
+          <changeSpeed>
+            <speed type="absolute">2</speed>
+            <term>1</term>
+          </changeSpeed>
+        </action>
+      </bullet>
+    </fire>
+    <repeat>
+      <times>$1</times>
+      <action>
+        <fire form="small">
+          <direction type="relative">0</direction>
+          <speed type="sequence">0.2</speed>
+          <bullet>
+            <action>
+              <wait>30</wait>
+              <changeDirection>
+                <direction type="aim">0</direction>
+                <term>1</term>
+              </changeDirection>
+              <changeSpeed>
+                <speed type="absolute">2</speed>
+                <term>1</term>
+              </changeSpeed>
+            </action>
+          </bullet>
+        </fire>
+      </action>
+    </repeat>
+    <vanish />
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 10 action {
+    actionRef fireScrewCross(-1);
+    actionRef fireScrewCross(1);
+    wait 40;
+  }
+  wait 120;
+  actionRef fireScrewCrossWithoutHoming(-1);
+  wait 30;
+  actionRef fireScrewCrossWithoutHoming(1);
+}
+
+// $1: round-direction
+action fireScrewCross {
+  fire direction absolute 0 speed absolute 0.1 bullet action {
+    changeDirection sequence $1 term 60;
+    repeat 10 action {
+      fire form thin direction relative 0 speed absolute 2 bullet;
+      fire form thin direction relative 90 speed absolute 2 bullet;
+      fire form thin direction relative 180 speed absolute 2 bullet;
+      fire form thin direction relative 270 speed absolute 2 bullet;
+      wait 4;
+    }
+    fire form thin direction relative 0 + 45 speed absolute 0.1 bullet actionRef homingLine(5);
+    fire form thin direction relative 90 + 45 speed absolute 0.1 bullet actionRef homingLine(5);
+    fire form thin direction relative 180 + 45 speed absolute 0.1 bullet actionRef homingLine(5);
+    fire form thin direction relative 270 + 45 speed absolute 0.1 bullet actionRef homingLine(5);
+
+    vanish;
+  }
+}
+
+action fireScrewCrossWithoutHoming {
+  fire direction absolute 0 speed absolute 0.1 bullet action {
+    changeDirection sequence $1 term 999;
+    repeat 5 action {
+      repeat 10 action {
+        fire form middle direction relative 0 speed absolute 4 bullet;
+        fire form middle direction relative 90 speed absolute 4 bullet;
+        fire form middle direction relative 180 speed absolute 4 bullet;
+        fire form middle direction relative 270 speed absolute 4 bullet;
+        wait 2;
+      }
+      wait 10;
+    }
+    vanish;
+  }
+}
+
+// $1: length
+action homingLine {
+  fire form small direction relative 0 speed absolute 2 bullet action {
+    wait 30;
+    changeDirection aim 0 term 1;
+    changeSpeed absolute 2 term 1;
+  }
+  repeat $1 action {
+    fire form small direction relative 0 speed sequence 0.2 bullet action {
+      wait 30;
+      changeDirection aim 0 term 1;
+      changeSpeed absolute 2 term 1;
+    }
+  }
+  vanish;
+}
+-->

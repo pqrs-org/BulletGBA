@@ -1,0 +1,148 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <actionRef label="punch">
+      <param>90</param>
+      <param>1</param>
+    </actionRef>
+    <wait>30</wait>
+    <actionRef label="punch">
+      <param>270</param>
+      <param>-1</param>
+    </actionRef>
+    <wait>30</wait>
+  </action>
+  <action label="punch">
+    <fire form="root">
+      <direction type="absolute">$1</direction>
+      <speed type="absolute">1</speed>
+      <bullet>
+        <action>
+          <wait>20</wait>
+          <fire form="small">
+            <direction type="aim">0</direction>
+            <speed type="absolute">1</speed>
+            <bullet />
+          </fire>
+          <wait>20</wait>
+          <changeSpeed>
+            <speed type="absolute">0.1</speed>
+            <term>1</term>
+          </changeSpeed>
+          <repeat>
+            <times>3</times>
+            <action>
+              <fire>
+                <direction type="absolute">180-5+$rand*10</direction>
+                <speed type="absolute">1</speed>
+                <bullet>
+                  <action>
+                    <changeSpeed>
+                      <speed type="sequence">0.1</speed>
+                      <term>30</term>
+                    </changeSpeed>
+                    <changeDirection>
+                      <direction type="sequence">$2</direction>
+                      <term>60</term>
+                    </changeDirection>
+                    <repeat>
+                      <times>50</times>
+                      <action>
+                        <wait>5</wait>
+                        <actionRef label="firePunchNode">
+                          <param>$1</param>
+                        </actionRef>
+                      </action>
+                    </repeat>
+                  </action>
+                </bullet>
+              </fire>
+              <wait>3</wait>
+            </action>
+          </repeat>
+          <fire>
+            <direction type="absolute">180-30+$rand*60</direction>
+            <speed type="absolute">2</speed>
+            <bullet />
+          </fire>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+  </action>
+  <action label="firePunchNode">
+    <fire form="middle">
+      <direction type="relative">-$1</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <action>
+          <wait>60</wait>
+          <changeSpeed>
+            <speed type="sequence">0.1</speed>
+            <term>60</term>
+          </changeSpeed>
+        </action>
+      </bullet>
+    </fire>
+    <fire form="middle">
+      <direction type="relative">$1</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <action>
+          <wait>60</wait>
+          <changeSpeed>
+            <speed type="sequence">0.1</speed>
+            <term>60</term>
+          </changeSpeed>
+        </action>
+      </bullet>
+    </fire>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  actionRef punch(90, 1);
+  wait 30;
+  actionRef punch(270, -1);
+  wait 30;
+}
+
+// $1: first-direction, $2: second-direction
+action punch {
+  fire form root direction absolute $1 speed absolute 1 bullet action {
+    wait 20;
+    fire form small direction aim 0 speed absolute 1 bullet;
+    wait 20;
+    changeSpeed absolute 0.1 term 1;
+    repeat 3 action {
+      fire direction absolute 180 - 5 + $rand * 10 speed absolute 1 bullet action {
+        changeSpeed sequence 0.1 term 30;
+        changeDirection sequence $2 term 60;
+        repeat 50 action {
+          wait 5;
+          actionRef firePunchNode($1);
+        }
+      }
+      wait 3;
+    }
+    fire direction absolute 180 - 30 + $rand * 60 speed absolute 2 bullet;
+    vanish;
+  }
+}
+
+// $1: direction
+action firePunchNode {
+  fire form middle direction relative - $1 speed absolute 0.1 bullet action {
+    wait 60;
+    changeSpeed sequence 0.1 term 60;
+  }
+  fire form middle direction relative $1 speed absolute 0.1 bullet action {
+    wait 60;
+    changeSpeed sequence 0.1 term 60;
+  }
+}
+-->

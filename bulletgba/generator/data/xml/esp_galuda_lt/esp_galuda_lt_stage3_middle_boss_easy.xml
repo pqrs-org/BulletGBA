@@ -1,0 +1,41 @@
+<bulletml xmlns="http://www.asahi-net.or.jp/‾cs8k-cyu/bulletml" type="vertical"><action label="top"><fire><direction type="absolute">
+				190
+			</direction><speed>
+				4
+			</speed><bullet><actionRef label="src"/></bullet></fire><fire><direction type="absolute">
+				170
+			</direction><speed>
+				4
+			</speed><bullet><actionRef label="src"/></bullet></fire><wait>
+			280
+		</wait></action><action label="src"><wait>
+			8
+		</wait><changeSpeed><speed>
+				0
+			</speed><term>
+				1
+			</term></changeSpeed><actionRef label="aim"><param>
+				20
+			</param></actionRef><wait>
+			30
+		</wait><actionRef label="aim"><param>
+				25
+			</param></actionRef><wait>
+			30
+		</wait><actionRef label="aim"><param>
+				50
+			</param></actionRef><vanish/></action><action label="aim"><repeat><times>
+				$1
+			</times><action><wait>
+					2
+				</wait><fire><direction type="aim">
+						-24+$rank*8+(2-$rand*4)*$rank
+					</direction><speed>
+						5
+					</speed><bullet/></fire><repeat><times>
+						4
+					</times><action><fire><direction type="sequence">
+								12-$rank*4
+							</direction><speed type="sequence">
+								0
+							</speed><bullet/></fire></action></repeat></action></repeat></action></bulletml>

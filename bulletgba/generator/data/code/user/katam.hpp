@@ -1,0 +1,30 @@
+#ifndef GENERATED_ba4dc6eff203d45df99ff97005774a97_HPP 
+#define GENERATED_ba4dc6eff203d45df99ff97005774a97_HPP 
+
+#include "bullet.hpp" 
+
+void stepfunc_eda3c4844ab0e23db7ba058e82c14b00_527038219911c40b4fdcc9fc9ff255f4(BulletInfo *p); 
+void stepfunc_bbd5fcfa97ef6b60bd782ede93efc037_527038219911c40b4fdcc9fc9ff255f4(BulletInfo *p); 
+void stepfunc_2e297cae046f9bcbbe863e7a31344cef_527038219911c40b4fdcc9fc9ff255f4(BulletInfo *p); 
+void stepfunc_62242dde4c8c5359cbb9e0018d28d5cf_527038219911c40b4fdcc9fc9ff255f4(BulletInfo *p); 
+void stepfunc_b6b69e12e8029e011df31946bab3914a_527038219911c40b4fdcc9fc9ff255f4(BulletInfo *p); 
+void stepfunc_fffa7aeba26215896fbfdb6d442b9320_527038219911c40b4fdcc9fc9ff255f4(BulletInfo *p); 
+void stepfunc_a2ad465678c8affda1455cb541773788_527038219911c40b4fdcc9fc9ff255f4(BulletInfo *p); 
+void stepfunc_ae9f735c6401a821cc04ce1cd68278bf_527038219911c40b4fdcc9fc9ff255f4(BulletInfo *p); 
+void stepfunc_e3aac6dde283a8bdf603c9403d24fb8f_527038219911c40b4fdcc9fc9ff255f4(BulletInfo *p); 
+void stepfunc_3ae91687fcd6be207e26c49ad3da69c5_527038219911c40b4fdcc9fc9ff255f4(BulletInfo *p); 
+void stepfunc_c3c161e74e0403e6f2a126059bd3c949_527038219911c40b4fdcc9fc9ff255f4(BulletInfo *p); 
+void stepfunc_91968ac4485dd4878f96d725a8b7e45b_527038219911c40b4fdcc9fc9ff255f4(BulletInfo *p); 
+void stepfunc_0c0e2572a4839d771a4aca09fde737d3_527038219911c40b4fdcc9fc9ff255f4(BulletInfo *p); 
+
+
+extern const BulletStepFunc bullet_4f529401d9d5a2f086b74b66f986643f_527038219911c40b4fdcc9fc9ff255f4[]; 
+const unsigned int bullet_4f529401d9d5a2f086b74b66f986643f_527038219911c40b4fdcc9fc9ff255f4_size = 41; 
+extern const BulletStepFunc bullet_d3b1284f2d18661afe090fba75c983ec_527038219911c40b4fdcc9fc9ff255f4[]; 
+const unsigned int bullet_d3b1284f2d18661afe090fba75c983ec_527038219911c40b4fdcc9fc9ff255f4_size = 203; 
+extern const BulletStepFunc bullet_7458529010f8e487b5cbad5ad38dc793_527038219911c40b4fdcc9fc9ff255f4[]; 
+const unsigned int bullet_7458529010f8e487b5cbad5ad38dc793_527038219911c40b4fdcc9fc9ff255f4_size = 11; 
+
+
+#endif 
+

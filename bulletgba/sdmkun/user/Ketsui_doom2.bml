@@ -1,0 +1,155 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+  <filename>Ketsui_doom2</filename>
+  <group>user</group>
+  <title>エヴァッカニアドゥーム扇状弾</title>
+  <description>まだちょっと違う気もします。</description>
+  <capture>見かけに惑わされないで避けられるか。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top2">
+	<changeDirection>
+		<direction type="absolute">120+$rand*20</direction>
+		<term>1</term>
+	</changeDirection>
+	<changeSpeed>
+		<speed type="absolute">0.7+$rank*0.5</speed>
+		<term>5</term>
+	</changeSpeed>
+	<wait>1</wait>
+	<changeDirection>
+		<direction type="sequence">3+$rank*2</direction>
+		<term>120</term>
+	</changeDirection>
+	<wait>120</wait>
+	<!-- +$rand -$rand-->
+	<changeDirection>
+		<direction type="sequence">-3-$rank*2</direction>
+		<term>250</term>
+	</changeDirection>
+	<wait>250</wait>
+	
+</action>
+
+<action label="top1">
+	<wait>20+$rand*10</wait>
+	<!-- 6*2+30=42 -->
+	<fireRef label="aimFive"><param>30</param></fireRef><wait>2</wait>
+	<fireRef label="seqFive"><param>31</param></fireRef><wait>2</wait>
+	<fireRef label="seqFive"><param>32</param></fireRef><wait>2</wait>
+	<fireRef label="seqFive"><param>33</param></fireRef><wait>2</wait>
+	<fireRef label="seqFive"><param>34</param></fireRef><wait>2</wait>
+	<fireRef label="seqFive"><param>35</param></fireRef>
+	
+	<wait>30</wait>
+	<!-- 11*2+25=47 -->
+	<fireRef label="aimFive"><param>30</param></fireRef><wait>2</wait>
+	<fireRef label="seqFive"><param>31</param></fireRef><wait>2</wait>
+	<fireRef label="seqFive"><param>32</param></fireRef><wait>2</wait>
+	<fireRef label="seqFive"><param>33</param></fireRef><wait>2</wait>
+	<fireRef label="seqFive"><param>34</param></fireRef><wait>2</wait>
+	<fireRef label="seqFive"><param>35</param></fireRef><wait>2</wait>
+	<fireRef label="seqFive"><param>36</param></fireRef><wait>2</wait>
+	<fireRef label="seqFive"><param>37</param></fireRef><wait>2</wait>
+	<fireRef label="seqFive"><param>38</param></fireRef><wait>2</wait>
+	<fireRef label="seqFive"><param>39</param></fireRef><wait>2</wait>
+	<fireRef label="seqFive"><param>40</param></fireRef>
+	<wait>25</wait>
+	<!-- 5*(15*2+20)=250 -->
+	<repeat>
+		<times>5</times>
+		<action>
+			<fireRef label="aimFive"><param>30</param></fireRef><wait>2</wait>
+			<fireRef label="seqFive"><param>31</param></fireRef><wait>2</wait>
+			<fireRef label="seqFive"><param>32</param></fireRef><wait>2</wait>
+			<fireRef label="seqFive"><param>33</param></fireRef><wait>2</wait>
+			<fireRef label="seqFive"><param>34</param></fireRef><wait>2</wait>
+			<fireRef label="seqFive"><param>35</param></fireRef><wait>2</wait>
+			<fireRef label="seqFive"><param>36</param></fireRef><wait>2</wait>
+			<fireRef label="seqFive"><param>37</param></fireRef><wait>2</wait>
+			<fireRef label="seqFive"><param>38</param></fireRef><wait>2</wait>
+			<fireRef label="seqFive"><param>39</param></fireRef><wait>2</wait>
+			<fireRef label="seqFive"><param>40</param></fireRef><wait>2</wait>
+			<fireRef label="seqFive"><param>41</param></fireRef><wait>2</wait>
+			<fireRef label="seqFive"><param>42</param></fireRef><wait>2</wait>
+			<fireRef label="seqFive"><param>43</param></fireRef><wait>2</wait>
+			<fireRef label="seqFive"><param>44</param></fireRef>
+			<wait>20</wait>
+		</action>
+	</repeat>
+</action>
+
+<!-- $1=stop wait -->
+<fire label="aimFive">
+	<direction type="aim">0</direction>
+	<speed type="absolute">1</speed>
+	<bulletRef label="fiveShooter">
+		<param>$1</param>
+	</bulletRef>
+</fire>
+
+<!-- $1=stop wait -->
+<fire label="seqFive">
+	<direction type="sequence">0.0</direction>
+	<speed type="sequence">0.3</speed>
+	<bulletRef label="fiveShooter">
+		<param>$1</param>
+	</bulletRef>
+</fire>
+
+<!-- $1=stop wait -->
+<bullet label="fiveShooter">
+	<action>
+		<fire>
+			<!-- 160-$rank*70 -->
+			<direction type="relative">-80+$rank*35</direction>
+			<speed type="relative">0</speed>
+			<bulletRef label="stopnGo">
+				<param>$1</param>
+			</bulletRef>
+		</fire>
+		<repeat>
+			<times>4</times>
+			<action>
+				<fire>
+					<direction type="sequence">40-$rank*17.5</direction>
+					<speed type="sequence">0</speed>
+					<bulletRef label="stopnGo">
+						<param>$1</param>
+					</bulletRef>
+				</fire>
+			</action>
+		</repeat>
+		<vanish/>
+	</action>
+</bullet>
+
+<!-- $1=stop wait -->
+<bullet label="stopnGo">
+	<action>
+		<wait>15</wait>
+		<changeSpeed>
+			<speed type="absolute">0.0001</speed>
+			<term>10</term>
+		</changeSpeed>
+		<wait>$1</wait>
+		<changeSpeed>
+			<speed type="absolute">2+$rank</speed>
+			<term>10</term>
+		</changeSpeed>
+	</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

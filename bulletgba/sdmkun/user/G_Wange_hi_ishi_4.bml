@@ -1,0 +1,171 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+idea by G-Wange (http://cgp.s5.xrea.com/gw/youko.html)
+bml written on 2003/8/15 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* center of the world
+* B harvest
+* dive and pray
+-->
+
+<barrageInfo>
+  <filename>G_Wange_hi_ishi_4</filename>
+  <group>G-Wange</group>
+  <title>G-わんげラスボス案、緋石その四</title>
+  <description>めんどうなので本体は移動させていません。レベル100でどうぞ。</description>
+  <capture>開幕の白弾で位置合わせし、画面右上からはじめて一周半、そのまま下へ脱出。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+  <actionRef label="dummy">
+    <param>360 * $rand</param>
+  </actionRef>
+
+ <wait>(6 - 4 * $rank) * (49 + 150 * $rank) + 150</wait>
+
+</action>
+
+<action label="dummy">
+
+  <fire>
+    <direction type="absolute">$1</direction>
+    <speed>2.3</speed>
+    <bullet/>
+  </fire>
+  <repeat> <times>7</times> <action>
+    <fire>
+      <direction type="sequence">360/ 8</direction>
+      <speed type="sequence">0.0</speed>
+      <bullet/>
+    </fire>
+  </action> </repeat>
+  <wait>100</wait>
+
+  <fire>
+    <bulletRef label="rotate8way">
+      <param>$1</param>
+    </bulletRef>
+  </fire>
+  <fire>
+    <bulletRef label="rotate8wayhoming">
+      <param>$1 + 360 / 16</param>
+    </bulletRef>
+  </fire>
+
+</action>
+
+<bullet label="rotate8way">
+<direction type="absolute">0</direction>
+<speed>0.0</speed>
+<action>
+
+  <fire>
+    <direction type="absolute">$1</direction>
+    <speed>2.3</speed>
+    <bullet/>
+  </fire>
+  <repeat> <times>7</times> <action>
+    <fire>
+      <direction type="sequence">(360 - 3) / 8</direction>
+      <speed type="sequence">0.0</speed>
+      <bullet/>
+    </fire>
+  </action> </repeat>
+  <wait>6 - 4 * $rank</wait>
+
+  <repeat> <times>49 + 150 * $rank</times> <action>
+    <repeat> <times>8</times> <action>
+      <fire>
+        <direction type="sequence">(360 - 3) / 8</direction>
+        <speed type="sequence">0.0</speed>
+        <bullet/>
+      </fire>
+    </action> </repeat>
+    <wait>6 - 4 * $rank</wait>
+  </action> </repeat>
+
+  <vanish/>
+
+</action></bullet>
+
+<bullet label="rotate8wayhoming">
+<direction type="absolute">0</direction>
+<speed>0.0</speed>
+<action>
+
+  <fire>
+    <direction type="absolute">$1</direction>
+    <speed>2.3</speed>
+    <bulletRef label="homing"/>
+  </fire>
+  <repeat> <times>7</times> <action>
+    <fire>
+      <direction type="sequence">(360 - 30) / 8</direction>
+      <speed type="sequence">0.0</speed>
+      <bulletRef label="homing"/>
+    </fire>
+  </action> </repeat>
+  <wait>60 - 40 * $rank</wait>
+
+  <repeat> <times>4 + 15 * $rank</times> <action>
+    <repeat> <times>8</times> <action>
+      <fire>
+        <direction type="sequence">(360 - 30) / 8</direction>
+        <speed type="sequence">0.0</speed>
+        <bulletRef label="homing"/>
+      </fire>
+    </action> </repeat>
+    <wait>60 - 40 * $rank</wait>
+  </action> </repeat>
+
+  <vanish/>
+
+</action></bullet>
+
+<bullet label="homing">
+<action>
+
+  <changeSpeed>
+    <speed>0.2</speed>
+    <term>120</term>
+  </changeSpeed>
+
+  <wait>60</wait>
+
+  <repeat><times>12</times><action>
+    <changeDirection>
+      <direction type="aim">0</direction>
+      <term>5</term>
+    </changeDirection>
+    <wait>5</wait>
+  </action></repeat>
+
+  <changeSpeed>
+    <speed>4.0</speed>
+    <term>300</term>
+  </changeSpeed>
+
+  <repeat><times>1 + 11 * $rank</times><action>
+    <changeDirection>
+      <direction type="aim">0</direction>
+      <term>5</term>
+    </changeDirection>
+    <wait>5</wait>
+  </action></repeat>
+
+</action></bullet>
+
+</bulletml>
+
+</barrage>

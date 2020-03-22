@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>nehe09</filename>
+ <group>shinichiro_h</group>
+ <title>NeHeのレッスン9から</title>
+ <description>パーティクルの基本ですな。</description>
+ <capture>どうしたらいいんだろうね。</capture>
+ <author>shinichiro.h</author>
+</barrageInfo>
+
+<barrageStyle>
+        <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+function circle(theta)
+   local turn = getTurn()
+
+   if (turn == 200) then
+      vanish()
+   end
+
+   local t = turn
+   local a = math.pow(t,1.5)/20+theta
+   local c = math.cos(a)
+   local s = math.sin(a)
+   setPos(150+s*80, 100+c*80)
+   local spd = 0.5+t/100
+   fire(-s*spd, -c*spd)
+end
+
+function top()
+   local turn = getTurn()
+   if (turn > 300) then
+      quit()
+   elseif (turn == 0) then
+      num = math.floor(getRank()*4.999)+1
+      for i=0,num do
+         fire(0, 0, "circle", math.pi*2*i/num)
+      end
+   end
+end
+]]>
+</lua>
+
+</barrage>

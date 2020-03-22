@@ -1,0 +1,105 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <fire>
+      <direction type="absolute">180</direction>
+      <speed type="absolute">2</speed>
+      <bullet>
+        <action>
+          <wait>40</wait>
+          <changeSpeed>
+            <speed type="absolute">0</speed>
+            <term>1</term>
+          </changeSpeed>
+          <actionRef label="cycle">
+            <param>-2</param>
+          </actionRef>
+          <actionRef label="cycle">
+            <param>4</param>
+          </actionRef>
+          <actionRef label="cycle">
+            <param>-8</param>
+          </actionRef>
+        </action>
+      </bullet>
+    </fire>
+  </action>
+  <action label="cycle">
+    <repeat>
+      <times>10</times>
+      <action>
+        <repeat>
+          <times>5</times>
+          <action>
+            <fire form="middle">
+              <direction type="sequence">$1</direction>
+              <speed type="absolute">2</speed>
+              <bullet>
+                <actionRef label="vulcanNode" />
+              </bullet>
+            </fire>
+            <repeat>
+              <times>7</times>
+              <action>
+                <fire form="middle">
+                  <direction type="sequence">45</direction>
+                  <speed type="absolute">2</speed>
+                  <bullet>
+                    <actionRef label="vulcanNode" />
+                  </bullet>
+                </fire>
+              </action>
+            </repeat>
+          </action>
+        </repeat>
+        <wait>20</wait>
+      </action>
+    </repeat>
+  </action>
+  <action label="vulcanNode">
+    <wait>20</wait>
+    <changeDirection>
+      <direction type="relative">180</direction>
+      <term>1</term>
+    </changeDirection>
+    <changeSpeed>
+      <speed type="absolute">1</speed>
+      <term>1</term>
+    </changeSpeed>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  fire direction absolute 180 speed absolute 2 bullet action {
+    wait 40;
+    changeSpeed absolute 0 term 1;
+
+    actionRef cycle(-2);
+    actionRef cycle(4);
+    actionRef cycle(-8);
+  }
+}
+
+// $1: sequence-direction
+action cycle {
+  repeat 10 action {
+    repeat 5 action {
+      fire form middle direction sequence $1 speed absolute 2 bullet actionRef vulcanNode();
+      repeat 7 action {
+        fire form middle direction sequence 45 speed absolute 2 bullet actionRef vulcanNode();
+      }
+    }
+    wait 20;
+  }
+}
+
+action vulcanNode {
+  wait 20;
+  changeDirection relative 180 term 1;
+  changeSpeed absolute 1 term 1;
+}
+-->

@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+2003/11/25 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* midnight
+* blue and black
+* eternal yesterday
+-->
+
+<barrageInfo>
+  <filename>the_43rd_sunset</filename>
+  <group>Oohara</group>
+  <title>43回目の日没</title>
+  <description>Lの誕生日記念。題名は某星物語より。</description>
+  <capture>下で待っていれば道ができます。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+
+  <fire>
+    <direction type="absolute">90</direction>
+    <speed>1.0</speed>
+    <bulletRef label="bit"/>
+  </fire>
+  <repeat><times>1</times><action>
+    <fire>
+      <direction type="sequence">180</direction>
+      <speed type="sequence">0</speed>
+      <bulletRef label="bit"/>
+    </fire>
+  </action></repeat>
+
+  <wait>600</wait>
+
+</action>
+
+<bullet label="bit">
+<action>
+
+  <fire>
+    <direction type="absolute">0</direction>
+    <speed>0.3</speed>
+    <bullet/>
+  </fire>
+  <repeat><times>71</times><action>
+    <fire>
+      <direction type="sequence">5</direction>
+      <speed type="sequence">0</speed>
+      <bullet/>
+    </fire>
+  </action></repeat>
+  <wait>18 - 10 * $rank</wait>
+
+  <repeat><times>999</times><action>
+    <fire>
+      <direction type="absolute">0</direction>
+      <speed type="sequence">0.05</speed>
+      <bullet/>
+    </fire>
+    <repeat><times>71</times><action>
+      <fire>
+        <direction type="sequence">5</direction>
+        <speed type="sequence">0</speed>
+        <bullet/>
+      </fire>
+    </action></repeat>
+    <wait>18 - 10 * $rank</wait>
+  </action></repeat>
+
+</action>
+</bullet>
+
+</bulletml>
+
+</barrage>

@@ -1,0 +1,224 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+<filename>490danmakuno1</filename>
+ <group>user</group>
+ <title>パーフェクトフリーズちっくに固定してvol.1</title>
+ <description>東方スレ５３の４９０にヒントを得て作成。反射弾一つ一つを別の関数で記述するのは効率がよくないのだが…</description>
+ <capture>反射時に自機狙い弾を撃つようにしてある。</capture>
+</barrageInfo>
+
+<barrageStyles>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<!-- CDATA とかいうのは大事なおまじないです。 -->
+<lua>
+<![CDATA[
+pi = 3.141592
+std = pi/180
+a = 0
+b = 0
+b2 = 0
+c = 1
+c2 = 1
+k = 0
+function cal(p,q,r)
+	rr = r*std
+	pp = (p/math.sqrt(p^2+q^2))*math.cos(rr)-(q/math.sqrt(p^2+q^2))*math.sin(rr)
+	qq = (q/math.sqrt(p^2+q^2))*math.cos(rr)+(p/math.sqrt(p^2+q^2))*math.sin(rr)
+	return pp,qq
+end
+
+function nerai()
+	local aim = getPlayerAngle() - pi/2
+	for i = 1,6 do
+	speed = 0.4+i/3
+	fire(speed*math.cos(aim),speed*math.sin(aim))
+	end
+	vanish()
+end
+
+function reflect()
+	local aim = getPlayerAngle() - pi/2
+	x = getX()
+	y = getY()
+	local vx = getSpeedX()
+	local vy = getSpeedY()
+	if(b > 0)then
+	if(math.sqrt((x-px)^2+(y-py)^2) < 5)then
+	vr = math.sqrt(vx^2+vy^2)
+	cos , sin = cal(x-px,y-py, 0)
+	vcos, vsin = cal(vx,vy, 180)
+
+	cosd = cos*vcos + sin*vsin
+	sind = sin*vcos - cos*vsin
+
+	cosab = cos*cosd - sin*sind
+	sinab = sin*cosd + cos*sind
+	setSpeed(vr*cosab, vr*sinab)
+	fire(0, 0, "nerai")
+	b = 0
+	end
+	end
+	
+	if(c > 0)then
+	if(x > getMaxX()-10 or x < 10)then
+	setSpeed(-vx,vy)
+	c = 0
+	end
+	if(y > getMaxY()-10 or y < 10)then
+	setSpeed(vx,-vy)
+	c = 0
+	end
+	end
+	c = c + 1
+
+	local rank = getRank()
+	if(turn > 550+rank*600)then
+	quit()
+	end
+end
+
+function reflect2()
+	local aim = getPlayerAngle() - pi/2
+	x2 = getX()
+	y2 = getY()
+	local vx = getSpeedX()
+	local vy = getSpeedY()
+	if(b2 > 0)then
+	if(math.sqrt((x2-p2x)^2+(y2-p2y)^2) < 5)then
+	vr = math.sqrt(vx^2+vy^2)
+	cos , sin = cal(x2-p2x,y2-p2y, 0)
+	vcos, vsin = cal(vx,vy, 180)
+
+	cosd = cos*vcos + sin*vsin
+	sind = sin*vcos - cos*vsin
+
+	cosab = cos*cosd - sin*sind
+	sinab = sin*cosd + cos*sind
+	setSpeed(vr*cosab, vr*sinab)
+	fire(0, 0, "nerai")
+	b2 = 0
+	end
+	end
+	
+	if(c2 > 0)then
+	if(x2 > getMaxX()-10 or x2 < 10)then
+	setSpeed(-vx,vy)
+	c2 = 0
+	end
+	if(y2 > getMaxY()-10 or y2 < 10)then
+	setSpeed(vx,-vy)
+	c2 = 0
+	end
+	end
+	c2 = c2 + 1
+
+	local rank = getRank()
+	if(turn > 550+rank*600)then
+	quit()
+	end
+end
+
+function stop()
+	local rank = getRank()
+	local sx = getX()
+	local sy = getY()
+	
+	if(turn == 640+600*rank)then
+	quit()
+	elseif(turn > 552+600*rank)then
+	setSpeed(1.05*getSpeedX(), 1.05*getSpeedY())
+	elseif(turn == 550+600*rank)then
+	rm = math.random()*360*std
+	setSpeed(0.01*math.cos(rm), 0.01*math.sin(rm))
+	elseif(turn == 300)then
+	setSpeed(0,0)
+	end
+
+	if(turn > 300 and math.sqrt((x-sx)^2+(y-sy)^2) < 10 and b == 0)then
+	fire(0,0,"point")
+	end
+	if(turn > 300 and math.sqrt((x2-sx)^2+(y2-sy)^2) < 10 and b2 == 0)then
+	fire(0,0,"point2")
+	end
+end
+function point()
+	local rank = getRank()
+	px = getX()
+	py = getY()
+	local turn = getTurn()
+	if(turn == 1)then
+	b = b + 1
+	end
+
+	if(math.sqrt((x-px)^2+(y-py)^2) > 10)then
+	b = 0
+	vanish()
+	end
+	if(turn > 630+600*rank)then
+	vanish()
+	end
+end
+function point2()
+	local rank = getRank()
+	p2x = getX()
+	p2y = getY()
+	local turn = getTurn()
+	if(turn == 1)then
+	b2 = b2 + 1
+	end
+
+	if(math.sqrt((x2-p2x)^2+(y2-p2y)^2) > 10)then
+	b2 = 0
+	vanish()
+	end
+	if(turn > 630+600*rank)then
+	vanish()
+	end
+end
+
+function top()
+	local rank = getRank()
+	local aim = getPlayerAngle() - pi/2
+	turn = getTurn()
+	if(rank > 0.6)then 
+	k = 0
+	elseif(rank > 0.3)then
+	k = 1
+	else
+	k = 5
+	end
+	if(turn > 660+600*rank)then
+	a = 0
+	quit()
+	end
+
+	if(turn == 300)then
+	fire(math.cos(aim),math.sin(aim), "reflect")
+	fire(1.5*math.cos(aim+180*std),1.5*math.sin(aim+180*std), "reflect2")
+	elseif(turn > 200)then
+	a = 0
+	elseif(a > k)then
+
+	for j = 0,2 do
+	dirrand = (360*math.random()+j*120)*std
+	sprand = 0.1+math.random()*3
+	fire(sprand*math.cos(dirrand), sprand*math.sin(dirrand), "stop")
+	end
+	a = 0
+
+	end
+	a = a + 1
+end
+
+
+]]>
+</lua>
+
+</barrage>

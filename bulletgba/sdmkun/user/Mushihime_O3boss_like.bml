@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+  <filename>Mushihime_O3boss_like</filename>
+  <group>user</group>
+  <title>オリジナル虫姫様３ボス発狂もどき</title>
+  <description>このビットの動き良いなと思って真似してみた。でも実はこの攻撃の時じゃなかった（笑</description>
+  <capture>ばらまきに気をつけて自機狙いを避ける</capture>
+  <author>Pentan</author>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+PI2=3.1415926535*2
+cx, cy=0, 0
+cax, cay=0.0, 1.0
+topturn=0
+topR=80
+topcos=1.0
+bitR=80
+bitNum=12
+
+topFreq=117
+bitFreq=70
+
+function top()
+	local rot=0
+	topturn=getTurn()
+	rot=topturn*PI2/topFreq
+	cx=getX()-math.sin(rot)*topR
+	cy=getY()
+	topcos=math.cos(rot)
+	
+	local pvx, pvy=getPlayerX()-cx, getPlayerY()-cy
+	local pvL=1.0/math.sqrt( pvx*pvx+pvy*pvy )
+	cax, cay=pvx*pvL, pvy*pvL
+	
+	if topturn==0 then
+		for i=1, bitNum do
+			fire( 0, 0, "bitBullet", i )
+		end
+	end
+	
+	if topturn>1260 then
+		quit()
+	elseif math.mod( topturn, 4 )==0 and getRank()>0.75 then
+		local angle=topturn*0.1
+		fire( math.sin(angle)*1.5, -math.cos(angle)*1.5 )
+	end
+	
+end
+
+bitInter=30
+function bitBullet(id)
+	local rot=PI2/bitNum*id+getTurn()*PI2/bitFreq
+	local r=bitR*(0.25+0.75*(1.0+topcos )*0.5)
+	setPos( cx+math.sin(rot)*r*topcos, cy-math.cos(rot)*r )
+	
+	if topturn>1200 then
+		vanish()
+	elseif math.mod( topturn, bitInter )==0 then
+		local spd=(2.0+getRank()*1.5 )*( 0.75+0.25*( 1.0-math.cos(rot-getPlayerAngle()) )*0.5 )
+		local aim=0
+		if math.mod( topturn, bitInter*4 )==bitInter*3 then
+			aim=getPlayerAngle()+math.sin(rot-getPlayerAngle())*0.5
+			spd=spd*0.75
+		else
+			aim=getPlayerAngle()
+		end
+		fire( math.sin(aim)*spd, -math.cos(aim)*spd )
+	end
+end
+
+]]>
+</lua>
+
+</barrage>

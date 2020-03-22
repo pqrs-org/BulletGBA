@@ -1,0 +1,239 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>MDA_fasa</filename>
+	<group>MDA</group>
+	<title>かつてナイフと苦無になろうとしたもの</title>
+	<description>当初は紅魔郷5中ボス咲夜さんの弾幕をと思ったのですが、再現性を求めるときつかったので、他の要素も混ぜたりしてオリジナルになってしまいました。私の弾幕の中では難易度高めです。</description>
+	<capture>レベル要素は白弾の量と、弾源の移動速度に影響します。ランダム要素は外側の緑弾のみ。白弾青弾は自機狙いなので誘導できます。誘導で何とかなるのは誘導で何とかするといいと思います。一応外側にも行けます。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+	<fire>
+		<speed>0</speed>
+		<direction>0</direction>
+		<bullet>
+			<actionRef label="perpendi"/>
+		</bullet>
+	</fire>
+	<wait>1</wait>
+	<actionRef label="horizon"/>
+	<wait>30</wait>
+</action>
+
+<action label="horizon">
+<fire label="revision">
+	<direction type="sequence">$1</direction>
+	<speed type="absolute">0</speed>
+	<bullet>
+		<action>
+			<vanish/>
+		</action>
+	</bullet>
+</fire>
+	<actionRef label="h-shoot"><param>2</param></actionRef>
+	<actionRef label="move"><param>270</param><param>1</param></actionRef>
+	<actionRef label="h-shoot"><param>1</param></actionRef>
+	<actionRef label="move"><param>270</param><param>0</param></actionRef>
+	<actionRef label="h-shoot"><param>1</param></actionRef>
+	<actionRef label="move"><param>90</param><param>1</param></actionRef>
+	<actionRef label="h-shoot"><param>2</param></actionRef>
+	<actionRef label="move"><param>90</param><param>0</param></actionRef>
+	<actionRef label="h-shoot"><param>1</param></actionRef>
+	<actionRef label="move"><param>270</param><param>1</param></actionRef>
+	<actionRef label="h-shoot"><param>1</param></actionRef>
+	<actionRef label="move"><param>270</param><param>0</param></actionRef>
+	<actionRef label="h-shoot"><param>1</param></actionRef>
+</action>
+
+<action label="perpendi">
+	<actionRef label="p-shoot1"/>
+	<actionRef label="p-shoot2"/>
+	<actionRef label="move"><param>270</param><param>1</param></actionRef>
+	<actionRef label="p-shoot1"/>
+	<actionRef label="move"><param>270</param><param>0</param></actionRef>
+	<actionRef label="p-shoot1"/>
+	<actionRef label="move"><param>90</param><param>1</param></actionRef>
+	<actionRef label="p-shoot1"/>
+	<actionRef label="p-shoot2"/>
+	<actionRef label="move"><param>90</param><param>0</param></actionRef>
+	<actionRef label="p-shoot1"/>
+	<actionRef label="move"><param>270</param><param>1</param></actionRef>
+	<actionRef label="p-shoot1"/>
+	<actionRef label="move"><param>270</param><param>0</param></actionRef>
+	<actionRef label="p-shoot3"/>
+	<vanish/>
+</action>
+
+<action label="move">
+	<changeDirection>
+		<direction type="absolute">$1</direction>
+		<term>1</term>
+	</changeDirection>
+	<changeSpeed>
+		<speed>$2*(0.1+($rank*0.5))</speed>
+		<term>(1-$2)*60+1</term>
+	</changeSpeed>
+</action>
+
+<!-- 9way -->
+<action label="h-shoot">
+<!-- 初期射撃 -->
+	<repeat>
+		<times>10</times>
+		<action>
+			<fireRef label="sign"><param>319.9</param><param>-1</param></fireRef>
+			<fireRef label="sign"><param>40.1</param><param>1</param></fireRef>
+		</action>
+	</repeat>
+	<fireRef label="search"><param>40</param></fireRef>
+	<repeat>
+		<times>$1*3</times>
+		<action>
+<!-- 本番射撃 -->
+			<repeat>
+				<times>3+($rank*12)</times>
+				<actionRef label="9way"><param>8</param><param>10</param><param>2</param></actionRef>
+			</repeat>
+<!-- 停止／壁 -->
+			<repeat>
+				<times>29-($rank*24)</times>
+				<actionRef label="9way"><param>1</param><param>80</param><param>1</param></actionRef>
+			</repeat>
+		</action>
+	</repeat>
+</action>
+
+<!-- 緑弾 -->
+<fire label="sign">
+	<direction type="aim">$1+($2*$rand*$rand*140)</direction>
+	<speed type="absolute">1.8</speed>
+	<bulletRef label="dummy"/>
+</fire>
+<!-- ダミー弾源弾 -->
+<bullet label="dummy">
+	<action>
+		<wait>9999</wait>
+		<fire>
+			<bullet/>
+		</fire>
+	</action>
+</bullet>
+
+<!-- 照準 -->
+<fire label="search">
+	<direction type="aim">$1</direction>
+	<speed type="absolute">2</speed>
+	<bullet>
+		<action>
+			<vanish/>
+		</action>
+	</bullet>
+</fire>
+
+<!-- 白弾 -->
+<action label="9way">
+	<fireRef label="9way-2"><param>280</param></fireRef>
+	<repeat>
+		<times>$1</times>
+		<action>
+			<fireRef label="9way-2"><param>$2</param></fireRef>
+		</action>
+	</repeat>
+	<wait>$3</wait>
+</action>
+<!-- 9way-2 -->
+<fire label="9way-2">
+	<direction type="sequence">$1</direction>
+	<speed type="absolute">1.8</speed>
+	<bullet/>
+</fire>
+
+<!-- 赤苦無 -->
+<action label="p-shoot1">
+	<fireRef label="search"><param>40</param></fireRef>
+	<wait>75</wait>
+	<repeat>
+		<times>4</times>
+		<action>
+			<actionRef label="block"><param>1</param><param>6.5</param></actionRef>
+			<actionRef label="block"><param>9</param><param>1.5</param></actionRef>
+		</action>
+	</repeat>
+	<wait>30</wait>
+	<fireRef label="revision"><param>40*2</param></fireRef>
+	<repeat>
+		<times>4</times>
+		<action>
+			<actionRef label="block"><param>1</param><param>6.5</param></actionRef>
+			<actionRef label="block"><param>9</param><param>1.5</param></actionRef>
+		</action>
+	</repeat>
+</action>
+<!-- マズー1ボス？ -->
+<action label="p-shoot2">
+	<fireRef label="search"><param>25</param></fireRef>
+	<wait>60</wait>
+	<actionRef label="block"><param>20</param><param>2</param></actionRef>
+	<wait>45</wait>
+	<fireRef label="revision"><param>30</param></fireRef>
+	<actionRef label="block"><param>20</param><param>2</param></actionRef>
+</action>
+<!-- 最後のおまけ -->
+<action label="p-shoot3">
+	<fireRef label="search"><param>45</param></fireRef>
+	<wait>$1*45</wait>
+	<repeat>
+		<times>3</times>
+		<action>
+			<actionRef label="block"><param>1</param><param>8</param></actionRef>
+			<actionRef label="block"><param>19</param><param>1</param></actionRef>
+		</action>
+	</repeat>
+	<wait>$1*20</wait>
+	<fireRef label="revision"><param>35*2</param></fireRef>
+	<repeat>
+		<times>3</times>
+		<action>
+			<actionRef label="block"><param>1</param><param>8</param></actionRef>
+			<actionRef label="block"><param>19</param><param>1</param></actionRef>
+		</action>
+	</repeat>
+</action>
+
+<!-- 補正 -->
+<fire label="revision">
+	<direction type="sequence">$1</direction>
+	<speed type="absolute">0</speed>
+	<bullet>
+		<action>
+			<vanish/>
+		</action>
+	</bullet>
+</fire>
+<!-- block -->
+<action label="block">
+	<repeat>
+		<times>$1</times>
+		<action>
+			<fire>
+				<direction type="sequence">-1*$2</direction>
+				<speed type="absolute">1.1</speed>
+				<bullet/>
+			</fire>
+		</action>
+	</repeat>
+</action>
+
+</bulletml>
+
+</barrage>

@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!-- コメント -->
+
+<barrageInfo>
+ <!-- ファイル名が別の名前になっていると、
+      この名前に従ってファイル名は修正されます。
+      これは必ずつけて下さい。ブラウザから実行する場合、
+      ファイル名が変わっていることが多々あります。 -->
+ <filename>bwda03</filename>
+ <!-- グループ名は data/groups.dat から適切なものを選んでも良いですし、
+      お好きな名前を付けてもらっても結構です。
+	  存在しないグループ名をつけた場合は userグループ扱いになります。
+	  ある程度同じグループの弾幕がたまったら
+	  data/groups.dat に私が追加します。
+   -->
+ <group>bwda</group>
+ <title>Hyper Speed 3</title>
+ <description>高速弾幕シリーズその三。自機狙い探査弾のあとに全方位扇状弾が飛んできます。レベルが上がると探査弾の弾速が上がり、長くなり、扇状弾の幅が広くなります。</description>
+ <capture>探査弾は撃たれた瞬間に横移動で終わり。扇状弾は素直に隙間を通ればＯＫ。Ｌｖ１００近いときれいなパターンになりますが隙間がほとんどなくなります。扇状弾の弾速は固定ですが回転速度にランダム入っているので安置はありません。</capture>
+</barrageInfo>
+
+<!-- ここで弾の色とか形とかを指定できるようにする予定 -->
+<barrageStyle>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<actionRef label="try"></actionRef>
+<repeat>
+<times>($rank*80)+20</times>
+<actionRef label="first"></actionRef>
+<actionRef label="follow"></actionRef>
+<repeat>
+<times>($rank*4)+1</times>
+<actionRef label="second"></actionRef>
+<actionRef label="follow"></actionRef>
+</repeat>
+</repeat>
+</action>
+
+<action label="try">
+
+ <bullet>
+  <direction type="aim">0</direction>
+  <speed>($rank*3)+5</speed>
+  </bullet>
+
+</action>
+
+
+<action label="first">
+<wait>3</wait>
+ <bullet>
+  <direction type="sequence">18+($rand*9)</direction>
+  <speed>5</speed>
+  </bullet>
+</action>
+
+<action label="follow">
+<repeat>
+<times>7</times>
+<action>
+ <bullet>
+  <direction type="sequence">45</direction>
+  <speed>5</speed>
+ </bullet>
+</action>
+</repeat>
+</action>
+
+<action label="second">
+ <bullet>
+  <direction type="sequence">44</direction>
+  <speed>5</speed>
+ </bullet>
+</action>
+</bulletml>
+
+</barrage>
+

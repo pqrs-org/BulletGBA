@@ -1,0 +1,114 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>bb05-bomb</filename>
+ <group>KotuAnzenX</group>
+ <title>大爆発</title>
+ <description>１６発の弾を置き、それぞれが全方位弾に分裂します。弾が無駄に多いです。</description>
+ <capture>弾速が思いの外早いので、素早く道を見つけて突破しましょう。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <repeat>
+  <times>16</times>
+   <action>
+    <actionRef label="seed"></actionRef>
+   </action>
+ </repeat>
+ <wait>100</wait>
+</action>
+
+<action label="seed">
+ <fire>
+  <speed>4</speed>
+  <direction type="absolute">360*$rand</direction>
+  <bullet/>
+ </fire>
+ <bulletRef label="stop"></bulletRef>
+</action>
+
+<bullet label="stop">
+ <action>
+  <changeSpeed>
+   <speed>0</speed>
+   <term>10</term>
+  </changeSpeed>
+  <actionRef label="burst"></actionRef>
+ <wait>10</wait>
+ <vanish/>
+ </action>
+</bullet>
+
+<action label="burst">
+ <wait>60</wait>
+ <fire>
+  <speed>1+$rank</speed>
+  <direction type="absolute">$rand*360</direction>
+  <bullet/>
+ </fire>
+  <repeat>
+   <times>17</times>
+    <action>
+     <fire>
+      <speed>1+$rank</speed>
+      <direction type="sequence">20</direction>
+      <bullet/>
+     </fire>
+    </action>
+  </repeat>
+ <fire>
+  <speed>0.9+$rank</speed>
+  <direction type="sequence">30</direction>
+  <bullet/>
+ </fire>
+  <repeat>
+   <times>17</times>
+    <action>
+     <fire>
+      <speed>0.9+$rank</speed>
+      <direction type="sequence">20</direction>
+      <bullet/>
+     </fire>
+    </action>
+  </repeat>
+ <fire>
+  <speed>0.8+$rank</speed>
+  <direction type="sequence">30</direction>
+  <bullet/>
+ </fire>
+  <repeat>
+   <times>17</times>
+    <action>
+     <fire>
+      <speed>0.8+$rank</speed>
+      <direction type="sequence">20</direction>
+      <bullet/>
+     </fire>
+    </action>
+  </repeat>
+ <fire>
+  <speed>0.7+$rank</speed>
+  <direction type="sequence">30</direction>
+  <bullet/>
+ </fire>
+  <repeat>
+   <times>17</times>
+    <action>
+     <fire>
+      <speed>0.7+$rank</speed>
+      <direction type="sequence">20</direction>
+      <bullet/>
+     </fire>
+    </action>
+  </repeat>
+</action>
+
+</bulletml>
+</barrage>

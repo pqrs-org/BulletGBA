@@ -1,0 +1,147 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <repeat>
+      <times>3</times>
+      <action>
+        <fire>
+          <direction type="absolute">0+10*$rand</direction>
+          <speed type="absolute">1</speed>
+          <bullet>
+            <actionRef label="fireCross" />
+          </bullet>
+        </fire>
+        <repeat>
+          <times>19</times>
+          <action>
+            <wait>10</wait>
+            <fire>
+              <direction type="sequence">18</direction>
+              <speed type="absolute">1</speed>
+              <bullet>
+                <actionRef label="fireCross" />
+              </bullet>
+            </fire>
+          </action>
+        </repeat>
+        <wait>60</wait>
+        <fire>
+          <direction type="absolute">0-10*$rand</direction>
+          <speed type="absolute">1</speed>
+          <bullet>
+            <actionRef label="fireCross" />
+          </bullet>
+        </fire>
+        <repeat>
+          <times>19</times>
+          <action>
+            <wait>10</wait>
+            <fire>
+              <direction type="sequence">-18</direction>
+              <speed type="absolute">1</speed>
+              <bullet>
+                <actionRef label="fireCross" />
+              </bullet>
+            </fire>
+          </action>
+        </repeat>
+        <wait>60</wait>
+      </action>
+    </repeat>
+  </action>
+  <action label="fireCross">
+    <wait>20</wait>
+    <changeSpeed>
+      <speed type="absolute">0.1</speed>
+      <term>1</term>
+    </changeSpeed>
+    <wait>60</wait>
+    <changeSpeed>
+      <speed type="absolute">2</speed>
+      <term>1</term>
+    </changeSpeed>
+    <repeat>
+      <times>3</times>
+      <action>
+        <wait>20</wait>
+        <fire>
+          <direction type="relative">0</direction>
+          <speed type="absolute">0.1</speed>
+          <bullet>
+            <actionRef label="line" />
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="relative">90</direction>
+          <speed type="absolute">0.1</speed>
+          <bullet>
+            <actionRef label="line" />
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="relative">180</direction>
+          <speed type="absolute">0.1</speed>
+          <bullet>
+            <actionRef label="line" />
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="relative">270</direction>
+          <speed type="absolute">0.1</speed>
+          <bullet>
+            <actionRef label="line" />
+          </bullet>
+        </fire>
+      </action>
+    </repeat>
+  </action>
+  <action label="line">
+    <wait>120</wait>
+    <changeSpeed>
+      <speed type="sequence">0.1</speed>
+      <term>30</term>
+    </changeSpeed>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 3 action {
+    fire direction absolute 0 + 10 * $rand speed absolute 1 bullet actionRef fireCross();
+    repeat 19 action {
+      wait 10;
+      fire direction sequence 18 speed absolute 1 bullet actionRef fireCross();
+    }
+    wait 60;
+
+    fire direction absolute 0 - 10 * $rand speed absolute 1 bullet actionRef fireCross();
+    repeat 19 action {
+      wait 10;
+      fire direction sequence -18 speed absolute 1 bullet actionRef fireCross();
+    }
+    wait 60;
+  }
+}
+
+action fireCross {
+  wait 20;
+  changeSpeed absolute 0.1 term 1;
+  wait 60;
+  changeSpeed absolute 2 term 1;
+  repeat 3 action {
+    wait 20;
+    fire direction relative 0 speed absolute 0.1 bullet actionRef line();
+    fire direction relative 90 speed absolute 0.1 bullet actionRef line();
+    fire direction relative 180 speed absolute 0.1 bullet actionRef line();
+    fire direction relative 270 speed absolute 0.1 bullet actionRef line();
+  }
+}
+
+action line {
+  wait 120;
+  changeSpeed sequence 0.1 term 30;
+}
+-->

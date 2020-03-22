@@ -1,0 +1,139 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_kohaku_first</filename>
+ <group>KotuAnzenX</group>
+ <title>ケツイ４面ボス：第一形態開幕</title>
+ <description>ケツイの中で紅一点（？）のシンデレラアンバーの開幕弾幕。</description>
+ <capture>自機狙い弾は正確にこちらを狙っています。よって絶えず左右に切り返しながら機銃の隙間を縫うことになります。上に逃げれば機銃については問題ないので大幅に楽になります。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <fireRef label="aim"><param>4</param><param>1</param></fireRef>
+ <fireRef label="aim"><param>2</param><param>1</param></fireRef>
+ <fireRef label="aim"><param>-2</param><param>-1</param></fireRef>
+ <fireRef label="aim"><param>-4</param><param>-1</param></fireRef>
+ <fireRef label="shotA"/>
+ <fireRef label="shotB"/>
+ <wait>610</wait>
+</action>
+
+<fire label="aim">
+ <speed>$1</speed>
+ <direction type="absolute">90</direction>
+ <bullet>
+  <action>
+   <wait>9</wait>
+   <changeSpeed>
+    <speed>0</speed>
+    <term>1</term>
+   </changeSpeed>
+   <wait>1</wait>
+   <repeat><times>30</times>
+    <action>
+     <fire>
+      <speed>1.5+$rank*2</speed>
+      <direction type="aim">0</direction>
+      <bullet/>
+     </fire>
+     <fire>
+      <speed type="sequence">0</speed>
+      <direction type="sequence">$2</direction>
+      <bullet/>
+     </fire>
+     <wait>20</wait>
+    </action>
+   </repeat>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<fire label="shotA">
+ <speed>2</speed>
+ <direction type="absolute">180</direction>
+ <bullet>
+  <action>
+   <wait>9</wait>
+   <changeSpeed>
+    <speed>0</speed>
+    <term>1</term>
+   </changeSpeed>
+   <wait>1</wait>
+   <repeat><times>20</times>
+    <action>
+     <fire>
+      <speed>0.0001</speed>
+      <direction type="absolute">180</direction>
+      <bulletRef label="upper"><param>0</param><param>0</param></bulletRef>
+     </fire>
+     <wait>30</wait>
+    </action>
+   </repeat>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<fire label="shotB">
+ <speed>2</speed>
+ <direction type="absolute">180</direction>
+ <bullet>
+  <action>
+   <wait>9</wait>
+   <changeSpeed>
+    <speed>0</speed>
+    <term>1</term>
+   </changeSpeed>
+   <wait>1</wait>
+   <repeat><times>20</times>
+    <action>
+     <fire>
+      <speed>0.0001</speed>
+      <direction type="absolute">120+$rand*60</direction>
+      <bulletRef label="upper"><param>-0.1</param><param>0.1</param></bulletRef>
+     </fire>
+     <fire>
+      <speed>0.0001</speed>
+      <direction type="absolute">180+$rand*60</direction>
+      <bulletRef label="upper"><param>0.1</param><param>0.1</param></bulletRef>
+     </fire>
+     <wait>30</wait>
+    </action>
+   </repeat>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<bullet label="upper">
+ <action>
+  <fire>
+   <speed>0.8+$rank*1.6</speed>
+   <direction type="relative">0</direction>
+   <bullet/>
+  </fire>
+  <wait>2</wait>
+  <repeat><times>9</times>
+   <action>
+    <fire>
+     <speed type="sequence">$2</speed>
+     <direction type="sequence">$1</direction>
+     <bullet/>
+    </fire>
+    <wait>2</wait>
+   </action>
+  </repeat>
+  <vanish/>
+ </action>
+</bullet>
+
+</bulletml>
+</barrage>

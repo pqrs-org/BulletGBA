@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <group>shinichiro_h</group>
+ <title>OKG</title>
+ <description>殺す気まんまんのガラさんです。</description>
+ <capture>避けれるかどうかとかは深く考えていません。</capture>
+</barrageInfo>
+
+<barrageStyles>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<!-- CDATA とかいうのは大事なおまじないです。 -->
+<lua>
+<![CDATA[
+count = 0
+angle = 0
+amount = 60
+
+function child_gara(x)
+	if (getX() < 10 or getX() > getMaxX() - 10 or
+		getY() < 10 or getY() > getMaxY() - 10) then
+		local pa = getPlayerAngle()
+		for i=1,20 do
+			local spd = 0.6 + i * 0.2
+			fire(math.sin(pa)*spd, -math.cos(pa)*spd)
+		end
+		vanish()
+	end
+end
+
+function top()
+	local turn = getTurn()
+	if (turn > 700) then
+		quit()
+	elseif (turn > 495) then
+		return
+	end
+
+	local c = math.mod(turn, 100)
+	if (c == 99) then
+		amount = amount + 8
+	end
+	if (c < amount) then
+		if (c == amount - 1) then
+			count = count + 1
+			setSpeed(0, 0)
+			return
+		end
+
+		local pa = getPlayerAngle()
+		setSpeed(math.sin(pa), -math.cos(pa))
+
+		if (math.mod(c, 5) == 0) then
+			if (math.mod(count, 2) == 1) then
+				for i=1,20 do
+					local spd = 0.6 + i * 0.2
+					fire(math.sin(pa)*spd, -math.cos(pa)*spd)
+				end
+			else
+				if (c == 0) then
+					angle = pa + (count-1) * 1
+				else
+					angle = angle - (count-1) * 0.2
+				end
+				for i=1,20 do
+					local spd = 0.2 + i * 0.2
+					fire(math.sin(angle)*spd, -math.cos(angle)*spd)
+				end
+				if (count == 4) then
+					fire(math.sin(angle)*1, -math.cos(angle)*1, "child_gara")
+				end
+			end
+		end
+	end
+end
+]]>
+</lua>
+
+</barrage>

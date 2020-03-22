@@ -1,0 +1,101 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>mou_test1</filename>
+	<group>user</group>
+	<title>夜雀の歌 *風味*</title>
+	<description>5Way弾が定期的に設置弾を置き、一定時間後に広がります。東方永夜抄が元ネタ…だったらいいなあ。ちなみに$rankは設定してません。</description>
+	<capture>5Way弾は自機狙いです。重なったら置かない等と言った親切設計ではないので必死で避けてください。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+  <repeat><times>3</times>
+    <actionRef label="aimwide">
+    </actionRef>
+  <wait>200</wait>
+  </repeat>
+</action>
+
+<action label="aimwide">
+  <repeat><times>20</times>
+    <action>
+      <fire>
+        <direction type="aim">0-120/2</direction>
+        <bullet>
+          <actionRef label="zenhouabs">
+            <param>50</param>
+            <param>0.001</param>
+            <param> 0</param>
+            <param>120</param>
+            <param> 25</param>
+          </actionRef>
+        </bullet>
+      </fire>
+      <repeat><times>4</times>
+        <action>
+          <fire>
+            <direction type="sequence">30</direction>
+            <bullet>
+              <actionRef label="zenhouabs">
+                <param>50</param>
+                <param>0.001</param>
+                <param> 0</param>
+                <param>120</param>
+                <param> 25</param>
+              </actionRef>
+            </bullet>
+          </fire>
+        </action>
+      </repeat>
+    </action>
+    <wait>120</wait>
+  </repeat>
+</action>
+
+<action label="zenhouabs">
+  <repeat><times>$1</times>
+    <action>
+      <fire>
+        <speed>$2</speed>
+        <bullet>
+          <direction type="absolute">$3</direction>
+          <action>
+            <wait>60</wait>
+            <changeSpeed>
+              <speed>3</speed>
+              <term>1200</term>
+            </changeSpeed>
+          </action>
+        </bullet>
+        <repeat><times>(360/$4)-1</times>
+          <action>
+            <bullet>
+              <direction type="sequence">$4</direction>
+              <action>
+                <wait>60</wait>
+                <changeSpeed>
+                  <speed>3</speed>
+                  <term>1200</term>
+                </changeSpeed>
+              </action>
+            </bullet>
+          </action>
+        </repeat>
+      </fire>
+    </action>
+    <wait>$5</wait>
+  </repeat>
+</action>
+
+</bulletml>
+
+</barrage>

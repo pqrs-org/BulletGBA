@@ -1,0 +1,130 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="lib_spread">
+    <fire>
+      <direction type="aim">0</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <action>
+          <wait>1</wait>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <repeat>
+      <times>20</times>
+      <action>
+        <fire>
+          <direction type="sequence">18</direction>
+          <speed type="absolute">3</speed>
+          <bullet>
+            <action>
+              <wait>3</wait>
+              <changeSpeed>
+                <speed type="absolute">0.2</speed>
+                <term>1</term>
+              </changeSpeed>
+              <wait>20</wait>
+              <changeSpeed>
+                <speed type="absolute">$1</speed>
+                <term>1</term>
+              </changeSpeed>
+            </action>
+          </bullet>
+        </fire>
+      </action>
+    </repeat>
+  </action>
+  <action label="top">
+    <fire form="root">
+      <direction type="absolute">0</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <action>
+          <actionRef label="cycle">
+            <param>2</param>
+            <param>150</param>
+          </actionRef>
+          <actionRef label="cycle">
+            <param>4</param>
+            <param>75</param>
+          </actionRef>
+          <actionRef label="cycle">
+            <param>8</param>
+            <param>37</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+    <fire form="root">
+      <direction type="absolute">0</direction>
+      <speed type="absolute">0.1</speed>
+      <bullet>
+        <action>
+          <actionRef label="cycle">
+            <param>-2</param>
+            <param>150</param>
+          </actionRef>
+          <actionRef label="cycle">
+            <param>-4</param>
+            <param>75</param>
+          </actionRef>
+          <actionRef label="cycle">
+            <param>-8</param>
+            <param>37</param>
+          </actionRef>
+          <vanish />
+        </action>
+      </bullet>
+    </fire>
+  </action>
+  <action label="cycle">
+    <changeDirection>
+      <direction type="sequence">$1</direction>
+      <term>$2</term>
+    </changeDirection>
+    <repeat>
+      <times>$2/3</times>
+      <action>
+        <fire>
+          <direction type="relative">-5+10*$rand</direction>
+          <speed type="absolute">4</speed>
+          <bullet />
+        </fire>
+        <wait>3</wait>
+      </action>
+    </repeat>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/spread.bnml"
+
+action top {
+  fire form root direction absolute 0 speed absolute 0.1 bullet action {
+    actionRef cycle(2, 150);
+    actionRef cycle(4, 75);
+    actionRef cycle(8, 37);
+    vanish;
+  }
+  fire form root direction absolute 0 speed absolute 0.1 bullet action {
+    actionRef cycle(-2, 150);
+    actionRef cycle(-4, 75);
+    actionRef cycle(-8, 37);
+    vanish;
+  }
+}
+
+// $1: sequence-direction, $2: term
+action cycle {
+  changeDirection sequence $1 term $2;
+  repeat $2 / 3 action {
+    fire direction relative -5 + 10 * $rand speed absolute 4 bullet;
+    wait 3;
+  }
+}
+-->

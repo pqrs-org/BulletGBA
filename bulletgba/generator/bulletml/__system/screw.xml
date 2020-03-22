@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <repeat>
+      <times>10</times>
+      <action>
+        <fire>
+          <direction type="absolute">0</direction>
+          <speed type="absolute">0.1</speed>
+          <bullet>
+            <action>
+              <changeDirection>
+                <direction type="sequence">10</direction>
+                <term>60</term>
+              </changeDirection>
+              <repeat>
+                <times>60</times>
+                <action>
+                  <fire form="middle">
+                    <direction type="relative">0</direction>
+                    <speed type="absolute">2</speed>
+                    <bullet>
+                      <action>
+                        <wait>30</wait>
+                        <fire>
+                          <direction type="relative">180</direction>
+                          <speed type="absolute">1</speed>
+                          <bullet>
+                            <action>
+                              <wait>30</wait>
+                              <fire>
+                                <direction type="aim">0</direction>
+                                <speed type="absolute">3</speed>
+                                <bullet />
+                              </fire>
+                            </action>
+                          </bullet>
+                        </fire>
+                      </action>
+                    </bullet>
+                  </fire>
+                  <wait>1</wait>
+                </action>
+              </repeat>
+              <vanish />
+            </action>
+          </bullet>
+        </fire>
+        <wait>60</wait>
+      </action>
+    </repeat>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 10 action {
+    fire direction absolute 0 speed absolute 0.1 bullet action {
+      changeDirection sequence 10 term 60;
+      repeat 60 action {
+        fire form middle direction relative 0 speed absolute 2 bullet action {
+          wait 30;
+          fire direction relative 180 speed absolute 1 bullet action {
+            wait 30;
+            fire direction aim 0 speed absolute 3 bullet;
+          }
+        }
+        wait 1;
+      }
+      vanish;
+    }
+    wait 60;
+  }
+}
+-->

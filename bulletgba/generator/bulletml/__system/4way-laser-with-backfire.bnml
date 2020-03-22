@@ -1,0 +1,17 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+#include "lib/laser-with-backfire.bnml"
+
+action top {
+  repeat 5 action {
+    fire direction aim 0 + (5 - 10 * $rand) speed absolute 0.1 bullet action {
+      fire form root direction relative 5 speed absolute 0.1 bullet actionRef lib_laser_with_backfire(10);
+      fire form root direction relative 15 speed absolute 0.1 bullet actionRef lib_laser_with_backfire(10);
+      fire form root direction relative -5 speed absolute 0.1 bullet actionRef lib_laser_with_backfire(10);
+      fire form root direction relative -15 speed absolute 0.1 bullet actionRef lib_laser_with_backfire(10);
+      vanish;
+    }
+    wait 90;
+  }
+}

@@ -1,0 +1,124 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>katam</filename>
+ <group>user</group>
+ <title>‹Ö’eu‚P‚O‚”v</title>
+ <description>‚‘¬’e‚ª‚ ‚È‚½‚ğ‰Ÿ‚µ‚Â‚Ô‚·BE‚µ‘¹‚Ë‚½–¢—û‚ª‚ ‚È‚½‚ğ’Ç‚¢‚©‚¯‚éB</description>
+ <capture>‚b‚o‚t‚Ì‚Ü‚Ë‚Í‚â‚ß‚Ü‚µ‚å‚¤B</capture>
+</barrageInfo>
+
+<barrageStyle>
+        <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<wait>10</wait>
+<repeat><times>4+$rank*4</times><action><!--  -->
+
+<fire>
+<direction type="absolute">-90+180*$rand</direction>
+<speed type="absolute">2</speed>
+<bullet><actionRef label="neroun"></actionRef></bullet>
+</fire>
+</action>
+</repeat>
+</action>
+
+<action label="neroun">
+<wait>20+$rand*5</wait>
+<changeSpeed>
+<speed type="absolute">0</speed>
+<term>1</term>
+</changeSpeed>
+<wait>3+$rand*10</wait>
+
+<fire>
+<direction type="aim">-10</direction>
+<speed type="absolute">4</speed>
+<bulletRef label="faster"/>
+</fire>
+<repeat><times>10</times><action>
+<fire>
+<direction type="sequence">2</direction>
+<speed type="absolute">4</speed>
+<bulletRef label="faster"/>
+</fire>
+</action>
+</repeat>
+<wait>5</wait>
+<fire>
+<direction type="sequence">-17</direction>
+<speed type="absolute">4</speed>
+<bulletRef label="faster"/>
+</fire>
+<repeat><times>7</times><action>
+<fire>
+<direction type="sequence">2</direction>
+<speed type="absolute">4</speed>
+<bulletRef label="faster"/>
+</fire>
+</action>
+</repeat>
+<wait>5</wait>
+
+<repeat><times>1</times><action>
+<fire>
+<direction type="sequence">-17</direction>
+<speed type="absolute">4</speed>
+<bulletRef label="faster"/>
+</fire>
+<repeat><times>5</times><action>
+<fire>
+<direction type="sequence">4</direction>
+<speed type="absolute">4</speed>
+<bulletRef label="faster"/>
+</fire>
+</action>
+</repeat>
+<wait>5</wait>
+<fire>
+<direction type="sequence">-17</direction>
+<speed type="absolute">4</speed>
+<bulletRef label="faster"/>
+</fire>
+<repeat><times>7</times><action>
+<fire>
+<direction type="sequence">2</direction>
+<speed type="absolute">4</speed>
+<bulletRef label="faster"/>
+</fire>
+</action>
+</repeat>
+<wait>5</wait>
+</action>
+</repeat>
+<vanish/>
+</action>
+
+<bullet label="faster">
+<action>
+<repeat><times>200</times><action>
+<changeSpeed>
+<speed type="sequence">-0.03-$rank*0.005</speed><term>1</term></changeSpeed><wait>1</wait>
+</action></repeat>
+<wait>2</wait>
+
+<changeDirection>
+<direction type="aim">0</direction><term>1</term>
+</changeDirection>
+<changeSpeed>
+<speed type="absolute">3</speed><term>100</term>
+</changeSpeed>
+
+</action>
+</bullet>
+</bulletml>
+
+</barrage>

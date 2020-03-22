@@ -1,0 +1,38 @@
+------------------------------------------------------------
+[Normal build]
+
+    % make clean all
+    % ./makerom.sh
+
+------------------------------------------------------------
+[extra]
+
+* convert image resource to C++-code.
+
+    % cd images/
+    % ./conv.sh
+
+
+* convert save data (BulletGBA.sav) to C++-code.
+
+    % cd demoplay
+    % ./conv.sh
+
+
+------------------------------------------------------------
+Note: build from svn repository
+
+    % svn export file:///home/tekezo/local/svn/gba/release/bulletgba-5.0
+    % cd bulletgba-5.0
+    % cp -r ~/gba/boost* .
+
+    % cd bulletgba
+    % make -C audio clean all
+
+    % cd generator
+    % chmod 755 php/*
+    % make clean copy all
+    % rm -r tmp
+
+    % cd ..
+    % make

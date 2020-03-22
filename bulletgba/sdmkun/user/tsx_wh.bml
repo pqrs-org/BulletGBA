@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_wh</filename>
+ <group>KotuAnzenX</group>
+ <title>ホワイトホール</title>
+ <description>単調な弾をひたすら避けまくる持久力試し。</description>
+ <capture>弾速が遅く、かなりパターンな弾幕ですが、密度は尋常ではありません。集中力を切らさないように。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <fire>
+  <speed>0</speed>
+  <bulletRef label="shot"><param>0</param></bulletRef>
+ </fire>
+ <fire>
+  <speed>0</speed>
+  <bulletRef label="shot"><param>45</param></bulletRef>
+ </fire>
+ <fire>
+  <speed>0</speed>
+  <bulletRef label="shot"><param>90</param></bulletRef>
+ </fire>
+ <fire>
+  <speed>0</speed>
+  <bulletRef label="shot"><param>135</param></bulletRef>
+ </fire>
+ <fire>
+  <speed>0</speed>
+  <bulletRef label="shot"><param>180</param></bulletRef>
+ </fire>
+ <fire>
+  <speed>0</speed>
+  <bulletRef label="shot"><param>225</param></bulletRef>
+ </fire>
+ <fire>
+  <speed>0</speed>
+  <bulletRef label="shot"><param>270</param></bulletRef>
+ </fire>
+ <fire>
+  <speed>0</speed>
+  <bulletRef label="shot"><param>315</param></bulletRef>
+ </fire>
+ <wait>800+$rank*1200</wait>
+</action>
+
+<bullet label="shot">
+ <action>
+ <wait>30</wait>
+ <fire>
+  <speed>4</speed>
+  <direction type="absolute">$1</direction>
+  <bulletRef label="ban"/>
+ </fire>
+ <wait>6</wait>
+ <repeat><times>99+$rank*200</times>
+ <action>
+  <fire>
+   <speed>4</speed>
+   <direction type="sequence">7</direction>
+   <bulletRef label="ban"/>
+  </fire>
+ <wait>6</wait>
+ </action>
+ </repeat>
+ <vanish/>
+ </action>
+</bullet>
+
+<bullet label="ban">
+ <action>
+  <changeSpeed>
+   <speed>0.1</speed>
+   <term>15</term>
+  </changeSpeed>
+  <wait>15</wait>
+  <fire>
+   <speed>0.5</speed>
+   <direction type="relative">90</direction>
+   <bullet/>
+  </fire>
+  <wait>20-$rank*10</wait>
+  <repeat><times>1+$rank*2</times>
+   <action>
+    <fire>
+     <speed>0.5</speed>
+     <direction type="sequence">3</direction>
+     <bullet/>
+    </fire>
+    <wait>20-$rank*10</wait>
+   </action>
+  </repeat>
+ <vanish/>
+ </action>
+</bullet>
+     
+
+</bulletml>
+</barrage>

@@ -1,0 +1,154 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_proto01</filename>
+ <group>KotuAnzenX</group>
+ <title>試作品０１：ワインダー＋ばら撒き</title>
+ <description>シンデレラアンバーのワインダーと再セセリ開幕のばら撒き弾を合体。ワインダーを辿りながらばら撒き弾を避けます。</description>
+ <capture>下の方にいるとワインダーに轢かれます。少し上の方で避けましょう。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <fireRef label="winder2"><param>1.55</param></fireRef>
+ <fireRef label="winder2"><param>1.65</param></fireRef>
+ <fireRef label="winder2"><param>-1.55</param></fireRef>
+ <fireRef label="winder2"><param>-1.65</param></fireRef>
+ <wait>101</wait>
+ <fireRef label="side"><param>6</param><param>90</param></fireRef>
+ <fireRef label="side"><param>6</param><param>-90</param></fireRef>
+ <fireRef label="side"><param>5</param><param>60</param></fireRef>
+ <fireRef label="side"><param>5</param><param>-60</param></fireRef>
+ <fireRef label="side"><param>4</param><param>30</param></fireRef>
+ <fireRef label="side"><param>4</param><param>-30</param></fireRef>
+ <wait>60</wait>
+ <fire>
+  <speed>0</speed>
+  <direction type="absolute">180</direction>
+  <bullet>
+   <action>
+    <vanish/>
+   </action>
+  </bullet>
+ </fire>
+ <actionRef label="winder"><param>1</param></actionRef>
+ <actionRef label="winder"><param>-1</param></actionRef>
+ <actionRef label="winder"><param>-1</param></actionRef>
+ <actionRef label="winder"><param>1</param></actionRef>
+</action>
+
+<fire label="winder2">
+ <speed>0</speed>
+ <bullet>
+  <action>
+   <fire>
+    <speed>4</speed>
+    <direction type="absolute">0</direction>
+    <bullet/>
+   </fire>
+   <wait>1</wait>
+   <repeat><times>100</times>
+    <action>
+     <fire>
+      <speed type="sequence">0</speed>
+      <direction type="sequence">$1</direction>
+      <bullet/>
+     </fire>
+     <wait>1</wait>
+    </action>
+   </repeat>
+   <repeat><times>60</times>
+    <action>
+     <fire>
+      <speed type="sequence">0</speed>
+      <direction type="sequence">0</direction>
+      <bullet/>
+     </fire>
+     <wait>1</wait>
+    </action>
+   </repeat>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<action label="winder">
+ <repeat><times>150</times>
+  <action>
+   <fire>
+    <speed>4</speed>
+    <direction type="sequence">$1/3</direction>
+    <bullet>
+     <action>
+      <fire>
+       <speed type="relative">0</speed>
+       <direction type="relative">25</direction>
+       <bullet/>
+      </fire>
+      <fire>
+       <speed type="relative">0</speed>
+       <direction type="relative">15</direction>
+       <bullet/>
+      </fire>
+      <fire>
+       <speed type="relative">0</speed>
+       <direction type="relative">-15</direction>
+       <bullet/>
+      </fire>
+      <fire>
+       <speed type="relative">0</speed>
+       <direction type="relative">-25</direction>
+       <bullet/>
+      </fire>
+      <vanish/>
+     </action>
+    </bullet>
+   </fire>
+   <wait>1</wait>
+  </action>
+ </repeat>
+</action>
+
+<fire label="side">
+ <speed>$1</speed>
+ <direction type="absolute">$2</direction>
+ <bullet>
+  <action>
+   <wait>9</wait>
+   <changeSpeed>
+    <speed>0</speed>
+    <term>1</term>
+   </changeSpeed>
+   <wait>1</wait>
+   <repeat><times>13+$rank*20</times>
+    <action>
+     <fire>
+      <speed>1</speed>
+      <direction type="absolute">120+$rand*60</direction>
+      <bullet/>
+     </fire>
+     <repeat><times>2</times>
+      <action>
+       <fire>
+        <speed type="sequence">0</speed>
+        <direction type="sequence">30</direction>
+        <bullet/>
+       </fire>
+      </action>
+     </repeat>
+    </action>
+    <wait>20</wait>
+   </repeat>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+</bulletml>
+</barrage>

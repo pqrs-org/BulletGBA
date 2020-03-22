@@ -1,0 +1,237 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+<filename>starmaker9</filename>
+ <group>user</group>
+ <title>回転星</title>
+ <description>回転する星。残骸が残るのは大目に見てほしい。</description>
+ <capture></capture>
+</barrageInfo>
+
+<barrageStyles>
+ <!-- bulletml か lua が使えます。 -->
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<!-- CDATA とかいうのは大事なおまじないです。 -->
+<lua>
+<![CDATA[
+pi = 3.141592
+std = pi/180
+a = 0
+ra = 0
+spa = 0
+ -- 全角スペースに注意
+
+function cal(p,q,r)
+	rr = r*std
+	pp = (p/math.sqrt(p^2+q^2))*math.cos(rr)-(q/math.sqrt(p^2+q^2))*math.sin(rr)
+	qq = (q/math.sqrt(p^2+q^2))*math.cos(rr)+(p/math.sqrt(p^2+q^2))*math.sin(rr)
+	return pp,qq
+end
+
+function top()
+	local turn = getTurn()
+	local rank = getRank()
+	local rand = math.random()
+	local aim = getPlayerAngle() - pi/2
+	pdira = aim-0*std
+	if(turn == 1)then
+	fire(0, 0, "beforeca" , pdira) -- 以下、星製作
+
+	spa = 1
+	for i = 1,5 do
+	fire(spa*math.cos(pdira+ra*std),spa*math.sin(pdira+ra*std), "rota1")
+	ra = 0+i*72
+	end
+
+	ra = 13
+	spa = 1.16
+	for i = 1,5 do
+	fire(spa*math.cos(pdira+ra*std),spa*math.sin(pdira+ra*std), "rota2")
+	ra = 13+i*72
+	end
+	ra = -13
+	for i = 1,5 do
+	fire(spa*math.cos(pdira+ra*std),spa*math.sin(pdira+ra*std), "rota2")
+	ra = -13+i*72
+	end
+
+	ra = 23
+	spa = 1.36
+	for i = 1,5 do
+	fire(spa*math.cos(pdira+ra*std),spa*math.sin(pdira+ra*std), "rota3")
+	ra = 23+i*72
+	end
+	ra = -23
+	for i = 1,5 do
+	fire(spa*math.cos(pdira+ra*std),spa*math.sin(pdira+ra*std), "rota3")
+	ra = -23+i*72
+	end
+
+	ra = 30
+	spa = 1.6
+	for i = 1,5 do
+	fire(spa*math.cos(pdira+ra*std),spa*math.sin(pdira+ra*std), "rota4")
+	ra = 30+i*72
+	end
+	ra = -30
+	for i = 1,5 do
+	fire(spa*math.cos(pdira+ra*std),spa*math.sin(pdira+ra*std), "rota4")
+	ra = -30+i*72
+	end
+
+	ra = 35
+	spa = 1.84
+	for i = 1,5 do
+	fire(spa*math.cos(pdira+ra*std),spa*math.sin(pdira+ra*std), "rota5")
+	ra = 35+i*72
+	end
+	ra = -35
+	for i = 1,5 do
+	fire(spa*math.cos(pdira+ra*std),spa*math.sin(pdira+ra*std), "rota5")
+	ra = -35+i*72
+	end
+
+	elseif(turn > 30 and a > 20-rank*16)then
+	for i = 0,20 do
+	fire((0.5+0.8*rank)*math.cos(aim+(i*6-60)*std), (0.5+0.8*rank)*math.sin(aim+(i*6-60)*std))
+	end
+	a = 0
+	elseif(turn > 120+rank*30)then
+	quit()
+	end
+	a = a + 1
+end
+
+function beforeca()
+	local turn = getTurn()
+	local rank = getRank()
+	if(turn == 10)then
+	fire((0.5+rank*0.8)*math.cos(pdira),(0.5+rank*0.8)*math.sin(pdira), "centera")
+	vanish()
+	end
+end
+
+
+function centera()
+	local turn = getTurn()
+	local rank = getRank()
+	local rand = math.random()
+	local aim = getPlayerAngle() - pi/2
+	cvxa = getSpeedX()
+	cvya = getSpeedY()
+	cxa = getX()-4
+	cya = getY()-4
+end
+
+
+function rota1()
+	local xa = getX()-4
+	local ya = getY()-4
+	local vxa = getSpeedX()
+	local vya = getSpeedY()
+	local turn = getTurn()
+	local rank = getRank()
+	speeda = (0.1+rank*1)*1
+	if(turn > 10)then
+	sxa = xa-cxa
+	sya = ya-cya
+	rdirxa,rdirya = cal(sxa,sya,90)
+	svxa = speeda*rdirxa
+	svya = speeda*rdirya
+	setSpeed(svxa + cvxa, svya + cvya)
+	end
+	if(turn > 500)then
+	vanish()
+	end 
+end
+function rota2()
+	local xa = getX()-4
+	local ya = getY()-4
+	local vxa = getSpeedX()
+	local vya = getSpeedY()
+	local turn = getTurn()
+	local rank = getRank()
+	speeda = (0.1+rank*1)*1.16
+	if(turn > 10)then
+	sxa = xa-cxa
+	sya = ya-cya
+	rdirxa,rdirya = cal(sxa,sya,90)
+	svxa = speeda*rdirxa
+	svya = speeda*rdirya
+	setSpeed(svxa + cvxa, svya + cvya)
+	end
+	if(turn > 500)then
+	vanish()
+	end 
+end
+function rota3()
+	local xa = getX()-4
+	local ya = getY()-4
+	local vxa = getSpeedX()
+	local vya = getSpeedY()
+	local turn = getTurn()
+	local rank = getRank()
+	speeda = (0.1+rank*1)*1.36
+	if(turn > 10)then
+	sxa = xa-cxa
+	sya = ya-cya
+	rdirxa,rdirya = cal(sxa,sya,90)
+	svxa = speeda*rdirxa
+	svya = speeda*rdirya
+	setSpeed(svxa + cvxa, svya + cvya)
+	end
+	if(turn > 500)then
+	vanish()
+	end 
+end
+function rota4()
+	local xa = getX()-4
+	local ya = getY()-4
+	local vxa = getSpeedX()
+	local vya = getSpeedY()
+	local turn = getTurn()
+	local rank = getRank()
+	speeda = (0.1+rank*1)*1.6
+	if(turn > 10)then
+	sxa = xa-cxa
+	sya = ya-cya
+	rdirxa,rdirya = cal(sxa,sya,90)
+	svxa = speeda*rdirxa
+	svya = speeda*rdirya
+	setSpeed(svxa + cvxa, svya + cvya)
+	end
+	if(turn > 500)then
+	vanish()
+	end 
+end
+function rota5()
+	local xa = getX()-4
+	local ya = getY()-4
+	local vxa = getSpeedX()
+	local vya = getSpeedY()
+	local turn = getTurn()
+	local rank = getRank()
+	speeda = (0.1+rank*1)*1.84
+	if(turn > 10)then
+	sxa = xa-cxa
+	sya = ya-cya
+	rdirxa,rdirya = cal(sxa,sya,90)
+	svxa = speeda*rdirxa
+	svya = speeda*rdirya
+	setSpeed(svxa + cvxa, svya + cvya)
+	end
+	if(turn > 500)then
+	vanish()
+	end 
+end
+
+
+]]>
+</lua>
+
+</barrage>

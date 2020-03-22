@@ -1,0 +1,246 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml>
+  <action label="top">
+    <repeat>
+      <times>20</times>
+      <action>
+        <fire>
+          <direction type="aim">-30</direction>
+          <speed type="absolute">1</speed>
+          <bullet>
+            <actionRef label="crossHoming" />
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="aim">30</direction>
+          <speed type="absolute">1</speed>
+          <bullet>
+            <actionRef label="crossHoming" />
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="aim">-60</direction>
+          <speed type="absolute">1</speed>
+          <bullet>
+            <actionRef label="crossHoming" />
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="aim">60</direction>
+          <speed type="absolute">1</speed>
+          <bullet>
+            <actionRef label="crossHoming" />
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="aim">120</direction>
+          <speed type="absolute">1</speed>
+          <bullet>
+            <actionRef label="crossHoming" />
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="aim">-120</direction>
+          <speed type="absolute">1</speed>
+          <bullet>
+            <actionRef label="crossHoming" />
+          </bullet>
+        </fire>
+        <wait>20</wait>
+      </action>
+    </repeat>
+    <repeat>
+      <times>10</times>
+      <action>
+        <fire>
+          <direction type="aim">-30</direction>
+          <speed type="absolute">1</speed>
+          <bullet>
+            <actionRef label="crossOnly" />
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="aim">30</direction>
+          <speed type="absolute">1</speed>
+          <bullet>
+            <actionRef label="crossOnly" />
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="aim">-60</direction>
+          <speed type="absolute">1</speed>
+          <bullet>
+            <actionRef label="crossOnly" />
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="aim">60</direction>
+          <speed type="absolute">1</speed>
+          <bullet>
+            <actionRef label="crossOnly" />
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="aim">120</direction>
+          <speed type="absolute">1</speed>
+          <bullet>
+            <actionRef label="crossOnly" />
+          </bullet>
+        </fire>
+        <fire>
+          <direction type="aim">-120</direction>
+          <speed type="absolute">1</speed>
+          <bullet>
+            <actionRef label="crossOnly" />
+          </bullet>
+        </fire>
+        <wait>20</wait>
+      </action>
+    </repeat>
+  </action>
+  <action label="crossHoming">
+    <fire>
+      <direction type="relative">0</direction>
+      <speed type="absolute">1</speed>
+      <bullet>
+        <actionRef label="homing" />
+      </bullet>
+    </fire>
+    <repeat>
+      <times>10</times>
+      <action>
+        <fire>
+          <direction type="relative">0</direction>
+          <speed type="sequence">0.3</speed>
+          <bullet>
+            <actionRef label="homing" />
+          </bullet>
+        </fire>
+      </action>
+    </repeat>
+    <vanish />
+  </action>
+  <action label="homing">
+    <wait>10</wait>
+    <changeSpeed>
+      <speed type="absolute">0.1</speed>
+      <term>1</term>
+    </changeSpeed>
+    <wait>40</wait>
+    <changeSpeed>
+      <speed type="absolute">2</speed>
+      <term>1</term>
+    </changeSpeed>
+    <wait>10</wait>
+    <fire>
+      <direction type="aim">0</direction>
+      <speed type="absolute">1</speed>
+      <bullet>
+        <action>
+          <changeSpeed>
+            <speed type="sequence">0.1</speed>
+            <term>60</term>
+          </changeSpeed>
+        </action>
+      </bullet>
+    </fire>
+  </action>
+  <action label="crossOnly">
+    <fire>
+      <direction type="relative">0</direction>
+      <speed type="absolute">1</speed>
+      <bullet>
+        <actionRef label="crossOnlyNode" />
+      </bullet>
+    </fire>
+    <repeat>
+      <times>10</times>
+      <action>
+        <fire>
+          <direction type="relative">0</direction>
+          <speed type="sequence">0.3</speed>
+          <bullet>
+            <actionRef label="crossOnlyNode" />
+          </bullet>
+        </fire>
+      </action>
+    </repeat>
+    <vanish />
+  </action>
+  <action label="crossOnlyNode">
+    <wait>10</wait>
+    <changeSpeed>
+      <speed type="absolute">0.1</speed>
+      <term>1</term>
+    </changeSpeed>
+    <wait>40</wait>
+    <changeSpeed>
+      <speed type="absolute">2</speed>
+      <term>1</term>
+    </changeSpeed>
+  </action>
+</bulletml>
+<!--
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+action top {
+  repeat 20 action {
+    fire direction aim -30 speed absolute 1 bullet actionRef crossHoming();
+    fire direction aim 30 speed absolute 1 bullet actionRef crossHoming();
+    fire direction aim -60 speed absolute 1 bullet actionRef crossHoming();
+    fire direction aim 60 speed absolute 1 bullet actionRef crossHoming();
+
+    fire direction aim 120 speed absolute 1 bullet actionRef crossHoming();
+    fire direction aim -120 speed absolute 1 bullet actionRef crossHoming();
+
+    wait 20;
+  }
+  repeat 10 action {
+    fire direction aim -30 speed absolute 1 bullet actionRef crossOnly();
+    fire direction aim 30 speed absolute 1 bullet actionRef crossOnly();
+    fire direction aim -60 speed absolute 1 bullet actionRef crossOnly();
+    fire direction aim 60 speed absolute 1 bullet actionRef crossOnly();
+
+    fire direction aim 120 speed absolute 1 bullet actionRef crossOnly();
+    fire direction aim -120 speed absolute 1 bullet actionRef crossOnly();
+
+    wait 20;
+  }
+}
+
+action crossHoming {
+  fire direction relative 0 speed absolute 1 bullet actionRef homing();
+  repeat 10 action {
+    fire direction relative 0 speed sequence 0.3 bullet actionRef homing();
+  }
+  vanish;
+}
+
+action homing {
+  wait 10;
+  changeSpeed absolute 0.1 term 1;
+  wait 40;
+  changeSpeed absolute 2 term 1;
+  wait 10;
+  fire direction aim 0 speed absolute 1 bullet action {
+    changeSpeed sequence 0.1 term 60;
+  }
+}
+
+action crossOnly {
+  fire direction relative 0 speed absolute 1 bullet actionRef crossOnlyNode();
+  repeat 10 action {
+    fire direction relative 0 speed sequence 0.3 bullet actionRef crossOnlyNode();
+  }
+  vanish;
+}
+
+action crossOnlyNode {
+  wait 10;
+  changeSpeed absolute 0.1 term 1;
+  wait 40;
+  changeSpeed absolute 2 term 1;
+}
+-->

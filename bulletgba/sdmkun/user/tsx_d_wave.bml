@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_d_wave</filename>
+ <group>KotuAnzenX</group>
+ <title>二連波紋</title>
+ <description>速度が微妙に違う二種類の広角弾を連射します。シンプルイズベスト。</description>
+ <capture>弾源にある程度接近してひたすら左右に往復。もしも隙間を抜けられたのならあとはその場で停止すれば全弾回避可能です。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <fireRef label="wave"><param>22.5</param><param>1.5+$rank*0.5</param></fireRef>
+ <fireRef label="wave"><param>0</param><param>1+$rank*0.5</param></fireRef>
+ <wait>600</wait>
+</action>
+
+<fire label="wave">
+ <speed>0</speed>
+ <bullet>
+  <action>
+   <repeat><times>20</times>
+    <action>
+     <fire>
+      <speed>$2</speed>
+      <direction type="absolute">$1</direction>
+      <bulletRef label="wave2"/>
+     </fire>
+     <repeat><times>7</times>
+      <action>
+       <fire>
+        <speed>$2</speed>
+        <direction type="sequence">45</direction>
+        <bulletRef label="wave2"/>
+       </fire>
+      </action>
+     </repeat>
+     <wait>30</wait>
+    </action>
+   </repeat>
+  </action>
+ </bullet>
+</fire>
+
+<bullet label="wave2">
+ <action>
+  <fire>
+   <speed type="relative">0</speed>
+   <direction type="relative">11</direction>
+   <bullet/>
+  </fire>
+  <repeat><times>22</times>
+   <action>
+    <fire>
+     <speed type="relative">0</speed>
+     <direction type="sequence">-1</direction>
+     <bullet/>
+    </fire>
+   </action>
+  </repeat>
+  <vanish/>
+ </action>
+</bullet>
+
+</bulletml>
+</barrage>

@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+	<filename>MDA_winder_q</filename>
+	<group>MDA</group>
+	<title>乱数と累乗の昆布汁</title>
+	<description>変則的な回廊状ワインダーを作ろうと思ったら、変態的な全方位弾幕になりました。毎回割と姿を変え、且つ刻々と変化します。長いです（50レベルで20秒、100レベルで30秒）。これ作ってた時、酔いました。</description>
+	<capture>きれいな全方位で始まると、終盤きついワインダーのような状態になるのでその時注意です。レベルアップすると微妙に弾速が上がり、弾幕がギュンギュンからギューンギューンギューンになります（わかりにくくてすいません）。</capture>
+</barrageInfo>
+
+<barrageStyle>
+	<bulletLanguage name="lua"/>
+</barrageStyle>
+<!-- w:本数 r:発射角度 t:時間 q:回転累乗 s:弾速 -->
+<lua>
+<![CDATA[
+w = 6
+r = math.random(90,630)
+t = 2
+
+function top()
+	local turn = getTurn()
+	if (turn == 1) then
+		X = getMaxX()/2
+		Y = getMaxY()/3
+		setPos(X, Y)
+		rank = getRank()
+		t = 1200*(rank+0.5)
+		q = 1.465-(rank^0.42*0.04)
+		s = 1.55+(rank*0.1)
+	end
+	if (turn > t+60) then
+		quit()
+	end
+	if (turn <= t) then
+		if (math.mod(turn,2) == 1) then
+			for i=1,w do
+				fire(math.sin( math.pi*((turn^q)+(i*r/w))/180)*s, -math.cos(math.pi*((turn^q)+(i*r/w))/180)*s)
+			end
+		end
+	end
+end
+
+]]>
+</lua>
+
+
+</barrage>

@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<!--
+2003/11/25 by Oohara Yuuma (oohara@libra.interq.or.jp)
+* welcome back
+* iron stomack
+* divide and conquer
+-->
+
+<barrageInfo>
+  <filename>side_job_of_dark_lord</filename>
+  <group>Oohara</group>
+  <title>魔王の副業</title>
+  <description>かなり遅くなりましたが、某TRPGマンガ続編開始記念。これを作っていて、オブジェクトの位置をスプライトの左上隅で記憶しているのではと思いました。左と上がみょうに甘いです。</description>
+  <capture>全速で左端を上に、上端を右に走ります。上端の中央に来たあたりで弾幕の中央にスキができるので、これまた全速で左下隅へ。あとは同じコースをもう一度走れば終わります。</capture>
+</barrageInfo>
+
+<barrageStyle>
+  <bulletLanguage name="lua"/>
+</barrageStyle>
+
+<lua>
+<![CDATA[
+dir = 0
+cnt = 0
+
+function snake(id)
+	local x = getX()-4
+	local y = getY()-4
+	theta = 0.011
+	local dx = getPlayerX() - x - 4
+	local dy = getPlayerY() - y - 4
+	local distance = math.sqrt(dx^2 + dy^2)
+	if (getTurn() > 690) then
+		vanish()
+	end
+	if (x < 10 or x > getMaxX() - 10) then
+		setSpeed(-getSpeedX(), getSpeedY())
+		fire(1.5 * dx / distance, 1.5 * dy / distance)
+	end
+	if (y < 10 or y > getMaxY() - 10) then
+		setSpeed(getSpeedX(), -getSpeedY())
+		fire(1.5 * dx / distance, 1.5 * dy / distance)
+	end
+	setSpeed(getSpeedX() * math.cos(theta)
+		- getSpeedY() * math.sin(theta),
+		getSpeedX() * math.sin(theta)
+		+ getSpeedY() * math.cos(theta))
+end
+
+function top()
+	local turn = getTurn()
+	local rank = getRank()
+	if (turn == 0) then
+		setSpeed(0, 4)
+	elseif (turn == 10) then
+		setSpeed(0, 0)
+	elseif (turn > 800) then
+		quit()
+	elseif (turn > 30+rank*100) then
+	elseif (turn > 10 and cnt > 14-rank*8) then
+		for d=0,3 do
+			local dt = d * math.pi * 0.5
+			fire(math.cos(dt+0.15), math.sin(dt+0.15), "snake")
+			fire(math.cos(dt-0.15), math.sin(dt-0.15), "snake")
+		end
+		dir = 0.04 + dir
+		cnt = 0
+	end
+	cnt = cnt + 1
+end
+]]>
+</lua>
+
+</barrage>

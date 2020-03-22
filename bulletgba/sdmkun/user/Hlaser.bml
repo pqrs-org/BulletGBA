@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+
+<filename>Hlaser</filename>
+<group>original</group>
+<title>蜻蛉レーザー</title>
+<description>左右にウェイ弾を撃ちつつホーミングしてくるレーザー。虫姫さまの中型機っぽい感じがする。</description>
+<capture>ウェイ弾に注意しつつ動き回る。ランダム要素はないのでパターン化すると良いのかなぁ。あと画面端で引きつけてから素速くかわすという荒技も。</capture>
+
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/">
+
+<action label="top">
+ <fire>
+  <speed>1+$rank</speed>
+  <bulletRef label="laser"/>
+ </fire>
+ <wait>300</wait>
+</action>
+
+<bullet label="laser">
+ <action>
+  <repeat><times>5+$rank*15</times>
+  <action>
+   <changeDirection>
+    <direction>0</direction>
+    <term>40-$rank*30</term>
+   </changeDirection>
+  <actionRef label="tail"/>
+   <fire>
+    <direction type="relative">0</direction>
+    <speed>0.000001</speed>
+    <bulletRef label="way"/>
+   </fire>
+  <actionRef label="tail"/>
+ </action>
+ </repeat>
+  <repeat><times>100000</times>
+  <action>
+  <actionRef label="tail"/>
+   <fire>
+    <direction type="relative">0</direction>
+    <speed>0.000001</speed>
+    <bulletRef label="way"/>
+   </fire>
+  <actionRef label="tail"/>
+  </action>
+  </repeat>
+ </action>
+</bullet>
+
+<action label="tail">
+ <repeat><times>20-$rank*15</times>
+ <action>
+  <fire>
+   <speed>0</speed>
+   <bullet><action><wait>30+$rank*30</wait><vanish/></action></bullet>
+  </fire>
+ </action>
+ <wait>1</wait>
+ </repeat>
+</action>
+
+<bullet label="way">
+ <action>
+ <wait>10</wait>
+   <fire>
+    <direction type="relative">80-$rank*20</direction>
+    <speed>1+$rank</speed>
+    <bullet/>
+   </fire>
+   <fire>
+    <direction type="sequence">180</direction>
+    <speed type="sequence">0</speed>
+    <bullet/>
+   </fire>
+  <repeat><times>2+$rank*4</times>
+  <action>
+   <fire>
+    <direction type="sequence">10</direction>
+    <speed type="sequence">0</speed>
+    <bullet/>
+   </fire>
+   <fire>
+    <direction type="sequence">180</direction>
+    <speed type="sequence">0</speed>
+    <bullet/>
+   </fire>
+  </action>
+  </repeat>
+ <vanish/>
+ </action>
+</bullet>
+
+
+</bulletml>
+
+</barrage>

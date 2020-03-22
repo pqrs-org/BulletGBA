@@ -1,0 +1,156 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>bb10-doublebody</filename>
+ <group>KotuAnzenX</group>
+ <title>ラスボスっぽい弾幕２「ダブルバディ」</title>
+ <description>一つずつならとっても簡単なのに、二つ組み合わされるととっても難しくなる不思議な弾幕。ラスボス仕様はＬＶ１００です。</description>
+ <capture>扇弾は帰りが高速のため、下で待っていると潰されます。５方向＋４方向弾は弾源が近過ぎるため上部でのこんこん避けはかなりキツイです。大きく切り返すと吉。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <actionRef label="side"><param>70</param></actionRef>
+ <actionRef label="side"><param>290</param></actionRef>
+ <wait>30</wait>
+ <fire>
+  <speed>1</speed>
+  <direction type="absolute">270</direction>
+  <bullet/>
+ </fire>
+ <repeat><times>5</times>
+ <action>
+ <repeat><times>5</times>
+ <action>
+ <repeat><times>17</times>
+ <action>
+  <fire>
+   <speed>1</speed>
+   <direction type="sequence">-1</direction>
+   <bullet/>
+  </fire>
+ </action>
+ </repeat>
+ <wait>10</wait>
+ <fire>
+  <speed>1</speed>
+  <direction type="sequence">-18</direction>
+  <bullet/>
+ </fire>
+ </action>
+ </repeat>
+ <repeat><times>5</times>
+ <action>
+ <repeat><times>17</times>
+ <action>
+  <fire>
+   <speed>1+0.4*$rank</speed>
+   <direction type="sequence">1</direction>
+   <bullet/>
+  </fire>
+ </action>
+ </repeat>
+ <wait>10</wait>
+ <fire>
+  <speed>1+0.4*$rank</speed>
+  <direction type="sequence">18</direction>
+  <bullet/>
+ </fire>
+ </action>
+ </repeat>
+ </action>
+ </repeat>
+</action>
+
+<action label="side">
+ <fire>
+  <speed>4</speed>
+  <direction type="absolute">$1</direction>
+  <bulletRef label="stop"/>
+ </fire>
+</action>
+
+<bullet label="stop">
+ <action>
+  <changeSpeed>
+   <speed>0</speed>
+   <term>30</term>
+  </changeSpeed>
+  <wait>30</wait>
+  <actionRef label="way"/>
+ </action>
+</bullet>
+
+<action label="way">
+ <repeat><times>3+4*$rank</times>
+  <action>
+ <repeat><times>1+4*$rank</times>
+  <action>
+   <fire>
+    <speed>0.7+$rank</speed>
+    <direction type="aim">-20</direction>
+    <bullet/>
+   </fire>
+   <fire>
+    <speed>0.7+$rank</speed>
+    <direction type="aim">-10</direction>
+    <bullet/>
+   </fire>
+   <fire>
+    <speed>0.7+$rank</speed>
+    <direction type="aim">0</direction>
+    <bullet/>
+   </fire>
+   <fire>
+    <speed>0.7+$rank</speed>
+    <direction type="aim">10</direction>
+    <bullet/>
+   </fire>
+   <fire>
+    <speed>0.7+$rank</speed>
+    <direction type="aim">20</direction>
+    <bullet/>
+   </fire>
+   <wait>2</wait>
+  </action>
+ </repeat>
+ <wait>20</wait>
+ <repeat><times>1+4*$rank</times>
+  <action>
+   <fire>
+    <speed>0.7+$rank*1.4</speed>
+    <direction type="aim">-15</direction>
+    <bullet/>
+   </fire>
+   <fire>
+    <speed>0.7+$rank*1.4</speed>
+    <direction type="aim">-5</direction>
+    <bullet/>
+   </fire>
+   <fire>
+    <speed>0.7+$rank*1.4</speed>
+    <direction type="aim">5</direction>
+    <bullet/>
+   </fire>
+   <fire>
+    <speed>0.7+$rank*1.4</speed>
+    <direction type="aim">15</direction>
+    <bullet/>
+   </fire>
+   <wait>2</wait>
+  </action>
+ </repeat>
+ <wait>40</wait>
+ </action>
+ </repeat>
+ <vanish/>
+</action>
+
+</bulletml>
+</barrage>

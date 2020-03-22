@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+<barrageInfo>
+ <filename>tsx_proto04</filename>
+ <group>KotuAnzenX</group>
+ <title>試作品０４：ミミズ</title>
+ <description>レイストームのラスボス、ユグドラシルの蛍光灯ビットを作ろうとして失敗。もはやミミズ。</description>
+ <capture>弾源を引き付けて切り返し。弾源の攻撃範囲に入るのはリスク大。</capture>
+</barrageInfo>
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+ <repeat><times>60</times>
+  <action>
+   <fire>
+    <speed>0.5+$rand*0.5</speed>
+    <direction type="aim">-80+$rand*160</direction>
+    <bulletRef label="4way"><param>1.5</param></bulletRef>
+   </fire>
+   <wait>10</wait>
+   <fire>
+    <speed>0.5+$rand*0.5</speed>
+    <direction type="aim">-80+$rand*160</direction>
+    <bulletRef label="4way"><param>-1.5</param></bulletRef>
+   </fire>
+   <wait>10</wait>
+  </action>
+ </repeat>
+</action>
+
+<bullet label="4way">
+ <action>
+  <repeat><times>600</times>
+   <action>
+    <repeat><times>2</times>
+     <action>
+      <fire>
+       <speed type="absolute">4</speed>
+       <direction type="sequence">180+$1</direction>
+       <bulletRef label="wip"/>
+      </fire>
+     </action>
+    </repeat>
+    <wait>1</wait>
+   </action>
+  </repeat>
+ </action>
+</bullet>
+
+<bullet label="wip">
+ <action>
+  <wait>6</wait>
+  <vanish/>
+ </action>
+</bullet>
+
+</bulletml>
+</barrage>

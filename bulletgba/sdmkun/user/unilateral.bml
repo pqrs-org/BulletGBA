@@ -1,0 +1,1366 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../bulletml.dtd">
+<barrage>
+<barrageInfo>
+
+<filename>unilateral</filename>
+<group>original</group>
+<title>式弾「ユーニラタルコンタクト」らしき弾幕</title>
+<description>構造はともかく雰囲気は大分似せられたかと。それにしても無茶苦茶やってんなあ。</description>
+<capture>敵の周辺に弾が入ってこない区域はあるものの危険。普通に離れて避けるしかないのか？</capture>
+
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+<action label="top">
+<fire>
+ <direction type="absolute">0</direction>
+ <speed>0</speed>
+ <bulletRef label="ensure"/>
+</fire>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3.5</speed>
+ <bulletRef label="3.5"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3</speed>
+ <bulletRef label="3"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2.5</speed>
+ <bulletRef label="2.5"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2</speed>
+ <bulletRef label="2"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1.5</speed>
+ <bulletRef label="1.5"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1</speed>
+ <bulletRef label="1"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1.25</speed>
+ <bulletRef label="1.25"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1.75</speed>
+ <bulletRef label="1.75"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2.25</speed>
+ <bulletRef label="2.25"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2.75</speed>
+ <bulletRef label="2.75"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3.25</speed>
+ <bulletRef label="3.25"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3.75</speed>
+ <bulletRef label="3.75"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1.125</speed>
+ <bulletRef label="1.125"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1.375</speed>
+ <bulletRef label="1.375"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1.625</speed>
+ <bulletRef label="1.625"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1.875</speed>
+ <bulletRef label="1.875"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2.125</speed>
+ <bulletRef label="2.125"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2.375</speed>
+ <bulletRef label="2.375"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2.625</speed>
+ <bulletRef label="2.625"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2.875</speed>
+ <bulletRef label="2.875"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3.125</speed>
+ <bulletRef label="3.125"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3.375</speed>
+ <bulletRef label="3.375"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3.625</speed>
+ <bulletRef label="3.625"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3.875</speed>
+ <bulletRef label="3.875"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>4</speed>
+ <bulletRef label="4"/>
+</fire>
+</action>
+</repeat>
+<wait>300</wait>
+<fire>
+ <direction type="absolute">0</direction>
+ <speed>0</speed>
+ <bulletRef label="ensure"/>
+</fire>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3.5</speed>
+ <bulletRef label="-3.5"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3</speed>
+ <bulletRef label="-3"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2.5</speed>
+ <bulletRef label="-2.5"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2</speed>
+ <bulletRef label="-2"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1.5</speed>
+ <bulletRef label="-1.5"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1</speed>
+ <bulletRef label="-1"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1.25</speed>
+ <bulletRef label="-1.25"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1.75</speed>
+ <bulletRef label="-1.75"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2.25</speed>
+ <bulletRef label="-2.25"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2.75</speed>
+ <bulletRef label="-2.75"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3.25</speed>
+ <bulletRef label="-3.25"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3.75</speed>
+ <bulletRef label="-3.75"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1.125</speed>
+ <bulletRef label="-1.125"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1.375</speed>
+ <bulletRef label="-1.375"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1.625</speed>
+ <bulletRef label="-1.625"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>1.875</speed>
+ <bulletRef label="-1.875"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2.125</speed>
+ <bulletRef label="-2.125"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2.375</speed>
+ <bulletRef label="-2.375"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2.625</speed>
+ <bulletRef label="-2.625"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>2.875</speed>
+ <bulletRef label="-2.875"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3.125</speed>
+ <bulletRef label="-3.125"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3.375</speed>
+ <bulletRef label="-3.375"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3.625</speed>
+ <bulletRef label="-3.625"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>3.875</speed>
+ <bulletRef label="-3.875"/>
+</fire>
+</action>
+</repeat>
+<repeat><times>7</times>
+<action>
+<fire>
+ <direction type="absolute">360*$rand</direction>
+ <speed>4</speed>
+ <bulletRef label="-4"/>
+</fire>
+</action>
+</repeat>
+<wait>200</wait>
+</action>
+
+
+<bullet label="ensure">
+<action>
+<repeat><times>6</times>
+<action>
+<fire>
+ <direction type="aim">-69</direction>
+ <speed>3</speed>
+ <bullet/>
+</fire>
+<repeat><times>6</times>
+<action>
+<fire>
+ <direction type="sequence">23</direction>
+ <speed>2</speed>
+ <bullet/>
+</fire>
+</action>
+</repeat>
+<wait>8</wait>
+</action>
+</repeat>
+<wait>1</wait>
+<vanish/>
+</action>
+</bullet>
+
+<bullet label="4">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">166</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+
+<bullet label="3.5">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">163</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="3">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">161</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="2.5">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">156</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="2">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">150</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="1.5">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">138</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="1">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">90</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="1.25">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">127</direction>
+  <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="1.75">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">145</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="2.25">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">153.5</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="2.75">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">159</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="3.25">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">162</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="3.75">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">164.5</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="1.125">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">118</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="1.375">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">134</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="1.625">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">142</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="1.875">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">148</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="2.125">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">151</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="2.375">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">155</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="2.625">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">157.9</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="2.875">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">159.9</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="3.125">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">161.1</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="3.375">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">162.9</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="3.625">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">164</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="3.875">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">165</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-4">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-166</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+
+<bullet label="-3.5">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-163</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-3">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-161</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-2.5">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-156</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-2">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-150</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-1.5">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-138</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-1">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-90</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-1.25">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-127</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-1.75">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-145</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-2.25">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-153.5</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-2.75">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-159</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-3.25">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-162</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-3.75">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-164.5</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-1.125">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-118</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-1.375">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-134</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-1.625">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-142</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-1.875">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-148</direction>
+  <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-2.125">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-151</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-2.375">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-155</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-2.625">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-157.9</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-2.875">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-159.9</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-3.125">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-161.1</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-3.375">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-162.9</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-3.625">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-164</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+</action>
+</bullet>
+<bullet label="-3.875">
+<action>
+ <changeSpeed>
+  <speed>0.01</speed>
+  <term>50</term>
+ </changeSpeed>
+<wait>50</wait>
+<changeDirection>
+ <direction type="relative">-165</direction>
+ <term>80</term>
+</changeDirection>
+ <changeSpeed>
+  <speed>2</speed>
+  <term>250</term>
+ </changeSpeed>
+
+</action>
+</bullet>
+</bulletml>
+</barrage>

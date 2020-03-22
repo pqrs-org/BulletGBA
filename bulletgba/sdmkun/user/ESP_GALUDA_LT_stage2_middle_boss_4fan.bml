@@ -1,0 +1,126 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>ESP_GALUDA_LT_stage2_middle_boss_4fan</filename>
+ <group>ESP_GALUDA_LT</group>
+ <title>エスプガルーダのロケテから、二面ボスの扇4つ</title>
+ <description>ほとんど記憶にありません。難易度調整が難しくて放棄。</description>
+ <capture>かなり簡単な弾幕だからなんとでも。</capture>
+</barrageInfo>
+
+<barrageStyle>
+        <bulletLanguage name="bulletml"/>
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+	<action label="fanSrc">
+		<changeSpeed>
+			<speed>
+				0
+			</speed>
+			<term>
+				10
+			</term>
+		</changeSpeed>
+		<wait>
+			10
+		</wait>
+		<repeat>
+			<times>
+				40
+			</times>
+			<action>
+				<fire>
+					<direction type="sequence">
+						6
+					</direction>
+					<speed>
+						1.2+$rank*0.4
+					</speed>
+					<bullet/>
+				</fire>
+				<repeat>
+					<times>
+						3
+					</times>
+					<action>
+						<fire>
+							<direction type="sequence">
+								2
+							</direction>
+							<speed type="sequence">
+								0.12
+							</speed>
+							<bullet/>
+						</fire>
+					</action>
+				</repeat>
+			</action>
+		</repeat>
+		<vanish/>
+	</action>
+	<action label="top">
+		<fire>
+			<direction type="absolute">
+				135
+			</direction>
+			<speed>
+				11.6
+			</speed>
+			<bullet>
+				<actionRef label="fanSrc"/>
+			</bullet>
+		</fire>
+		<wait>
+			15-$rank*10
+		</wait>
+		<fire>
+			<direction type="absolute">
+				90
+			</direction>
+			<speed>
+				8
+			</speed>
+			<bullet>
+				<actionRef label="fanSrc"/>
+			</bullet>
+		</fire>
+		<wait>
+			15-$rank*10
+		</wait>
+		<fire>
+			<direction type="absolute">
+				-90
+			</direction>
+			<speed>
+				8
+			</speed>
+			<bullet>
+				<actionRef label="fanSrc"/>
+			</bullet>
+		</fire>
+		<wait>
+			15-$rank*10
+		</wait>
+		<fire>
+			<direction type="absolute">
+				-135
+			</direction>
+			<speed>
+				11.6
+			</speed>
+			<bullet>
+				<actionRef label="fanSrc"/>
+			</bullet>
+		</fire>
+		<wait>
+			90
+		</wait>
+	</action>
+</bulletml>
+</barrage>
+

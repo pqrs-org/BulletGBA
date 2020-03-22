@@ -1,0 +1,11 @@
+//-*- Mode: c; indent-tabs-mode: nil; Coding: utf-8; -*-
+// BulletNotML code (http://www.notava.org/notavacc/bullet/index.html)
+
+// $1: length, $2: initial-speed
+action lib_line {
+  fire direction relative 0 speed absolute $2 bullet;
+  repeat $1 action {
+    fire direction relative 0 speed sequence 0.1 bullet;
+  }
+  vanish;
+}

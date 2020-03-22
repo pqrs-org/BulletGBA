@@ -1,0 +1,175 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+<filename>
+otk2-forgotten2
+</filename>
+<group>
+OtakuTwo
+</group>
+<title>
+Ç†Ç»ÇΩÇÕÇ‡Ç§ñYÇÍÇΩÇ©ÇµÇÁ Part2
+</title>
+<description>
+é©ï™ÇÕÇ«ÇÒÇ»ïóÇ…ÇŒÇÁéTÇ´ÇîÇØÇƒÇ¢ÇÈÇ©ÅcÇ†Ç»ÇΩÇÕÇªÇÍÇâØÇ¶ÇƒÇ‹Ç∑Ç©ÅH
+</description>
+<capture>
+åÉÇµÇ≠ìÆÇ©Ç»Ç¢Ç±Ç∆ÅB
+</capture>
+</barrageInfo>
+
+<barrageStyle>
+ <bulletLanguage name="bulletml" />
+</barrageStyle>
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+
+
+<action label="top">
+ <fireRef label="lr"><param> 90</param><param>1.5</param></fireRef>
+ <fireRef label="lr"><param>-90</param><param>1.5</param></fireRef>
+ <accel>
+  <vertical>-50</vertical>
+  <term>10</term>
+ </accel>
+ <wait>72</wait>
+ <changeSpeed>
+  <speed>0</speed>
+  <term>10</term>
+ </changeSpeed>
+ <wait>200</wait>
+ <repeat><times>50+$rank*50</times>
+  <action>
+   <fireRef label="bara"><param> 1</param></fireRef>
+   <wait>800/(50+$rank*50)</wait>
+   <fireRef label="bara"><param>-1</param></fireRef>
+   <wait>800/(50+$rank*50)</wait>
+  </action>
+ </repeat>
+ <wait>120</wait>
+</action>
+
+<fire label="lr">
+ <direction type="absolute">0</direction>
+ <speed>0</speed>
+ <bullet>
+  <action>
+   <actionRef label="move"><param>$1</param><param>$2</param></actionRef>
+   <fireRef label="tb"><param>  0</param><param>0.9</param></fireRef>
+   <fireRef label="tb"><param>180</param><param>3.0</param></fireRef>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<fire label="tb">
+ <speed>0</speed>
+ <bullet>
+  <action>
+   <actionRef label="move"><param>$1</param><param>$2</param></actionRef>
+   <wait>20</wait>
+    <changeDirection><direction type="aim">0</direction><term>5</term></changeDirection>
+    <wait>10</wait>
+    <fireRef label="winder"/>
+   <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<action label="move">
+ <changeDirection><direction type="absolute">$1</direction><term>10</term></changeDirection>
+ <wait>12</wait>
+ <changeSpeed><speed>$2</speed><term>50</term></changeSpeed>
+ <wait>55</wait>
+ <changeSpeed><speed> 0</speed><term>50</term></changeSpeed>
+ <wait>55</wait>
+</action>
+
+<fire label="bara">
+ <direction type="absolute">(90+$rand*30)*$1</direction>
+ <speed>1+$rand*7</speed>
+ <bullet>
+  <action>
+       <wait>10</wait>
+       <fire>
+        <direction type="aim">(30-$rank*20)*$rand-(30-$rank*20)*$rand</direction>
+        <speed>(0.8+$rand*0.4)*(1+$rank*0.5)</speed>
+        <bullet/>
+       </fire>
+       <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<fire label="winder">
+ <direction type="absolute">0</direction>
+ <speed>0</speed>
+ <bullet>
+  <action>
+      <fireRef label="winderseed"/>
+      <repeat><times>740</times>
+       <action>
+        <fireRef label="delay"><param> 1</param></fireRef>
+        <wait>2</wait>
+       </action>
+      </repeat>
+      <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<fire label="winderseed">
+ <direction type="aim">0</direction>
+ <speed>0.00000000000000000000000001</speed>
+ <bullet>
+  <action>
+       <repeat><times>30+$rank*$rank*30</times>
+        <action>
+            <fire>
+             <direction type="relative"> 20-$rank*10</direction>
+             <speed>6</speed>
+             <bullet/>
+            </fire>
+            <fire>
+             <direction type="relative">-20+$rank*10</direction>
+             <speed>6</speed>
+             <bullet/>
+            </fire>
+            <wait>2</wait>
+        </action>
+       </repeat>
+       <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+<fire label="delay">
+ <direction type="aim">0</direction>
+ <speed>0.00000000000000000000000001</speed>
+ <bullet>
+  <action>
+       <wait>60+$rank*$rank*60</wait>
+       <fire>
+        <direction type="relative"> 20-$rank*10</direction>
+        <speed>6</speed>
+        <bullet/>
+       </fire>
+       <fire>
+        <direction type="relative">-20+$rank*10</direction>
+        <speed>6</speed>
+        <bullet/>
+       </fire>
+       <vanish/>
+  </action>
+ </bullet>
+</fire>
+
+
+
+</bulletml>
+
+</barrage>

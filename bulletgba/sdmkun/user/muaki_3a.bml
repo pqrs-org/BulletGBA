@@ -1,0 +1,132 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "../barrage.dtd">
+
+<barrage>
+
+<barrageInfo>
+ <filename>muaki_3a</filename>
+ <group>user</group>
+ <title>真アキ発狂（アレンジ版）</title>
+ <description>ランク50以下だと別弾幕。大往生スキンでやるのがオススメ。</description>
+ <capture>誰か実戦で通用するか試せ。</capture>
+</barrageInfo>
+
+<barrageStyles>
+ <bulletLanguage name="lua" />
+</barrageStyles>
+
+<lua>
+<![CDATA[
+
+----------------------------------
+-- 汎用
+----------------------------------
+function getVectorX(dir, speed)
+	dir = dir + 64
+	return -math.cos(math.pi/128*dir)*speed
+end
+
+function getVectorY(dir, speed)
+	dir = dir + 64
+	return math.sin(math.pi/128*dir)*speed
+end
+
+----------------------------------
+-- ショット
+----------------------------------
+function shot(dir, speed, color)
+	if(color == 2) then
+		fire(dir, speed*rank, "shot2_sub")
+	elseif(color == 3) then
+		fire(getVectorX(dir, speed*rank), getVectorY(dir, speed*rank), "shot3_sub")
+	else
+		fire(getVectorX(dir, speed*rank), getVectorY(dir, speed*rank))
+	end
+	
+	return
+end
+
+function shot2_sub()
+	shot(getSpeedX(), getSpeedY())
+	setSpeed(0, 0)
+	vanish()
+	return
+end
+
+function shot3_sub()
+end
+
+----------------------------------
+-- メイン
+----------------------------------
+
+rank = 1
+
+function top()
+	local cnt = math.mod(getTurn(), 520)
+	
+	if(getTurn() < 520*2) then
+		if(cnt==0) then
+	    	num = math.floor(27 * math.min(1, getRank()*2) + 5)
+	    	create_uchu(num)
+		end
+		
+		if(cnt<160) then
+			uchu_size = uchu_size-0.65
+		elseif(cnt<235) then
+			uchu_y = uchu_y + 0.5
+			uchu_size = uchu_size-0.266
+		elseif(cnt<310) then
+			uchu_y = uchu_y + 0.4
+		else
+			uchu_size = uchu_size+0.75
+		end
+		
+		uchu_rot = uchu_rot-0.805
+	end
+	
+	if(getTurn()==1150) then
+		quit()
+	end
+end
+
+----------------------------------
+-- 弾源
+----------------------------------
+function create_uchu()
+	uchu_x = 150
+	uchu_y = 120
+	uchu_size = 124
+	uchu_rot = -0.8
+	
+	for i=1,num do
+		fire(0, 0, "uchu", i)
+	end
+end
+
+function uchu(id)
+	local cnt = getTurn()
+	local dir = id*(256/num)+uchu_rot
+	setPos(uchu_x+getVectorX(dir, uchu_size), uchu_y+getVectorY(dir, uchu_size/1.5))
+	
+	if(cnt>30) then
+		if(math.mod(cnt, 18)==0) then
+			shot(dir, 0.8, 2)
+			shot(dir+74.7, 0.8, 2)
+			shot(dir-74.7, 0.8, 2)
+		end
+		if(math.mod(cnt, 18)==9) then
+			shot(dir+101.3, 0.8, 2)
+			shot(dir-101.3, 0.8, 2)
+		end
+	end
+	
+	if(cnt==510) then
+		vanish()
+	end
+end
+
+]]>
+</lua>
+
+</barrage>
